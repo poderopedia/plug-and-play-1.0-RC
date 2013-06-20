@@ -1,0 +1,70 @@
+{{response.title='Podersearch/'+searchquery+ '- Poderopedia'}}
+{{extend 'visualizacionLayout.html'}}
+
+
+{{block breadcrumbs}}
+
+{{end}}
+
+
+{{block sidebar}}
+{{ include 'includes/sidebar-filtro.html' }}
+{{end}}
+
+{{block socialBar}}
+
+{{end}}
+<hgroup class="search-results clearfix">
+    <p class="search-awnser">Hemos encontrado <strong>{{=hits.total_found}}/{{=hits.total}}</strong> Resultados en <strong>{{=hits.time}} segundos</strong> de: <span class="word-result">{{=searchquery}}</span></p>
+
+</hgroup>
+<div class="row-division clearfix ancho">
+<!--hgroup-->
+<hgroup class="box-heading clearfix">
+    <h3>Resultados de la Búsqueda ({{=hits.total_found}}) &darr;</h3>
+</hgroup>
+<!--hgroup-->
+
+ 
+    <div id="orderMenu">
+        <div id="listDisplay">
+            <a href="#" id="list">
+                <img src="{{ =URL('static','img/ico-list.gif') }}" />
+            </a>
+            <a href="#" id="box">
+                <img src="{{ =URL('static','img/ico-block.gif') }}" />
+            </a>
+        </div>
+    </div>
+     
+
+<ul class="people-list">
+    {{for org in addEmpresa:}}
+    <li class="span3_3">
+        <a class="avatar" href="{{=URL('visualizacion','caso_organizacion',args=org['id'])}}">
+            {{=org['picture']}}
+        </a>
+        <h5><a href="{{=URL('visualizacion','caso_organizacion',args=org['id'])}}" title="{{=org['alias']}}">{{=org['alias']}}</a></h5>
+
+    </li>
+    {{pass}}
+    {{for match in hits:}}
+    {{if '@hit' in match:}}
+    <li class="span3_3">
+        <a class="avatar" href="{{=URL('visualizacion','caso_perfil',args=match['@hit']['id'])}}">
+            {{=person[match['@hit']['id']]}}
+        </a>
+        <h5><a href="{{=URL('visualizacion','caso_perfil',args=match['@hit']['id'])}}" title="{{=match['@hit']['alias']}}">{{=match['@hit']['alias']}}</a></h5>
+        <p>{{if match['@hit']['shortBio']:}}
+            {{
+            sub=p.sub('',match['@hit']['shortBio'])
+            =XML(sub)[:25]}} ...{{pass}}</p>
+    </li>
+    {{pass}}
+    {{pass}}
+</ul>
+
+
+<!--Pagination-->
+{{ include 'includes/pagination.html' }}
+<!--Pagination end-->

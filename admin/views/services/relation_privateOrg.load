@@ -1,0 +1,44 @@
+{{from conversion import convert_latin_chars}}
+<hgroup class="widget-heading widget-filter widget-persona heading clearfix">
+    <h5>&darr;<a href="{{=URL(controller,function, args=alias, extension=False)}}"> <span>{{=total}} {{=Organizationtype}}</span> Relacionadas</a></h5>
+</hgroup>
+<div class="widget widget-sources clearfix">
+  <ul class="widget-images">
+    {{for i,private in enumerate(Org):}}
+    {{if i==items_per_page: break}}
+        {{if private.tipoOrg==2:}}
+            <li><a href="{{=URL('empresas','conexiones',args=convert_latin_chars(private.alias),extension=False)}}" >
+        {{else:}}
+            <li><a href="{{=URL('organizaciones','conexiones',args=convert_latin_chars(private.alias),extension=False)}}" >
+        {{pass}}
+    {{if (private.haslogo!=None)&(private.haslogo!=''):}}
+        <img src="{{ =URL('default','fast_download',args=private.haslogo) }}" rel="tooltip" title="{{=private.alias}}"/>
+    {{else:}}
+        {{if private.tipoOrg==2:}}
+            <img src="{{ =URL('static','tmp/avatar-empresa45.gif') }}" rel="tooltip" title="{{=private.alias}}" />
+        {{else:}}
+            <img src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}" rel="tooltip" title="{{=private.alias}}" />
+        {{pass}}
+    {{pass}}
+    </a></li>
+    {{pass}}
+  </ul>
+  <a href="#Lightbox_sugerirconexion" data-toggle="modal" class="modales sugest" id="sugerir_{{=target}}">[Sugerir otra {{=Organizationtype}}]</a>
+  <!--  {{if page:}}
+    <div href="#" class="sugest" id="prevpage{{=target}}">Anterior</div>
+    {{pass}}-->
+  {{if len(Org)>items_per_page:}}
+    <!--<div class="sugest-right" id="addpage{{=target}}">Ver más &gt;</div>-->
+    <a href="{{=URL(controller,function, args=alias, extension=False)}}"><span class="sugest-right">Ver más &gt; </span></a>
+  {{pass}}
+</div>
+
+<script type="text/javascript">
+  $('#sugerir_{{=target}}').click(function() {
+        {{ if (target=='persona_empresa') | (target=='persona_organizacion'):}}
+         web2py_component("{{=URL('persona','sugerir_persona.load',args=_id)}}","sugerir_persona")
+        {{else:}}
+         web2py_component("{{=URL('organizacion','sugerir_persona.load',args=_id)}}","sugerir_persona_organizacion")
+        {{pass}}
+      });
+</script>

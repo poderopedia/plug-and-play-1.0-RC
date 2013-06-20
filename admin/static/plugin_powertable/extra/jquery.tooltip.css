@@ -1,0 +1,24 @@
+#tooltip{
+	position: absolute;
+	display: none;
+	border: 1px solid #333;
+	background: #FAFAFA;
+	padding: 5px 20px;
+	color: #333;
+	font-size:12px !important;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+#tooltip h3{
+	
+	font-size:9px;
+}
+
+#tooltip span{
+	
+	font-size:10px;
+	margin:0;padding:0;
+	text-align:left;
+}

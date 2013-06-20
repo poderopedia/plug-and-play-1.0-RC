@@ -1,0 +1,249 @@
+{{from conversion import convert_latin_chars}}
+{{if principal:}}
+<hgroup class="box-heading clearfix">
+    <h3><span>&darr;</span> Destacados</h3>
+			</hgroup>
+			
+			<div id="central_news" class="row-division clearfix"><!-- #central_news -->
+				<div class="span6">
+					<div class="thumb">
+                        <img src="{{=URL('default','fast_download', args=principal.imagen)}}" width="610" height="300">
+                        <span>{{=principal.tag}}</span>
+					</div>
+                    <h2><a href="{{=principal.url}}">{{=principal.titulo}}</a></h2>
+                    <date><a href="javascript: void(0);" onclick="window.open('http://www.facebook.com/sharer.php?u={{=principal.url}}','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');"><img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a><a href="http://twitter.com/share?url={{=principal.url}}&text={{=principal.tag}}&via=Poderopedia&lang=en" target="_blank"><img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a>{{=principal.fecha.strftime('%d-%m-%Y')}}</date>
+                    <p>{{=principal.contenido}} <a href="{{=principal.url}}">Más &gt;</a></p>
+				</div>
+
+                                <div class="span2">
+                                {{for news in secundarios:}}
+                                        <div class="thumb">
+                                                <img src="{{=URL('default','fast_download', args=news.imagen)}}" width="150" height="110">
+                                                <span>{{=news.tag}}</span>
+                                        </div>
+                                        <h4><a href="{{=news.url}}">{{=news.titulo}}</a></h4>
+                                        <date><a href="javascript: void(0);" onclick="window.open('http://www.facebook.com/sharer.php?u={{=news.url}}','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');"><img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a><a href="http://twitter.com/share?url={{=news.url}}&text={{=news.tag}}&via=Poderopedia&lang=en" target="_blank"><img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a>{{=news.fecha.strftime('%d-%m-%Y')}}</date>
+                                {{pass}}
+                                </div>
+                    </div><!-- /#central_news -->      
+                    
+		
+<div id="mas_destacados" class="row-division clearfix"><!-- #mas_destacados -->
+            <h3><span>&darr;</span> Más Destacados</h3>
+                <div class="carr"><!-- .carr -->
+
+                {{for news in carrusel:}}
+
+					<a href="{{=news.url}}">
+						<img src="{{=URL('default','fast_download', args=news.imagen)}}" width="115" height="90">
+						<span>
+                            {{=news.alias}}
+                            <b>&rarr; {{=news.tag}}</b>
+						</span>
+                    </a>
+
+                {{pass}}
+
+				</div><!-- /.carr -->
+				<div class="carr_aux"><!-- .carr_aux -->
+
+					<a href="#" class="btn prev">&larr;</a>
+					<a href="#" class="btn next">&rarr;</a>
+
+					<a href="{{=direccion}}" class="btn random">Random</a>
+
+				</div><!-- /.carr_aux -->
+			</div><!-- /#mas_destacados -->
+
+		<div class="tabbable"><!-- .tabbable -->
+		    	<ul class="nav nav-tabs">
+		    		<li class="active"><a href="#tab1" data-toggle="tab">Lo Último</a></li>
+		    		<li><a href="#tab2" data-toggle="tab">Lo Más Popular</a></li>
+					<!--<li><a href="#tab3" data-toggle="tab">Lo Más Compartido</a></li>-->
+		    	</ul>
+
+		    	<div class="tab-content"><!-- .tab-content -->
+		    		<div class="tab-pane active" id="tab1"><!-- #tab1 -->
+						<div class="row-division clearfix ancho">
+
+                                <ul class="faces-ul">
+                                    {{for news in personas:}}
+
+                                                  <li class="listas">
+                                                        <img src="{{=URL('default','fast_download',args=news.depiction)}}" width="160" height="115">
+                                                        <ul class="info ancholistas">
+                                                            <li class="listas">
+                                                                <h3><a href="{{=URL('personas','conexiones',args=convert_latin_chars(news.alias),extension=False)}}">{{=news.alias}}</a></h3>
+                                                            </li>
+                                                            <li class="listas">
+
+                                                                <p>
+                                                                {{
+
+                                                                  =XML(news.shortBio[:184])
+
+
+
+                                                                }}...
+                                                                <a href="{{=URL('personas','conexiones',args=convert_latin_chars(news.alias),extension=False)}}">más &gt;</a>
+                                                                </p>
+                                                            </li>
+                                                            <li class="listas">
+                                                                <date><a href="javascript: void(0);" onclick="window.open('http://www.facebook.com/sharer.php?u={{=request.env.http_host+URL('personas','conexiones',args=convert_latin_chars(news.alias),extension=False)}}','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');">
+                                                                <img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a>
+                                                                <a href="http://twitter.com/share?url={{=request.env.http_host+URL('personas','conexiones',args=convert_latin_chars(news.alias),extension=False)}}&text={{=news.alias+' '+request.env.http_host+URL('personas','conexiones',args=convert_latin_chars(news.alias),extension=False)}}&via=Poderopedia&lang={{=T.accepted_language or 'es'}}" target="_blank">
+                                                                <img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a>
+                                                                {{=news.created_on.strftime('%d-%m-%Y')}}</date>
+                                                            </li>
+                                                        </ul>
+                                                  </li>
+
+                                    {{pass}}
+                                    {{for news in organizacion:}}
+
+                                                  <li class="listas">
+                                                        <img src="{{=URL('default','fast_download',args=news.haslogo)}}" width="160" height="115">
+                                                        <ul class="info ancholistas">
+                                                            <li class="listas">
+                                                                <h3><a href="{{=XML(url[news.id])}}">{{=news.alias}}</a></h3>
+                                                            </li>
+
+                                                            <li class="listas">
+
+                                                                <p>
+                                                                {{
+
+                                                                  =XML(news.shortBio[:184])
+
+
+
+                                                                }}...
+                                                                <a href="{{=XML(url[news.id])}}">más &gt;</a>
+                                                                </p>
+                                                            </li>
+                                                            <li class="listas">
+                                                                <date><a href="javascript: void(0);" onclick="window.open('http://www.facebook.com/sharer.php?u={{=request.env.http_host+url[news.id]}}','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');">
+                                                                <img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a>
+                                                                <a href="http://twitter.com/share?url={{=request.env.http_host+url[news.id]}}&text={{=news.alias +' '+request.env.http_host+url[news.id]}}&via=Poderopedia&lang={{=T.accepted_language or 'es'}}" target="_blank">
+                                                                <img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a>
+                                                                {{=news.created_on.strftime('%d-%m-%Y')}}</date>
+                                                            </li>
+                                                        </ul>
+                                                  </li>
+
+                                    {{pass}}
+                                </ul>
+
+						</div>
+		    		</div><!-- /#tab1 -->
+		    		<div class="tab-pane" id="tab2"><!-- #tab2 -->
+
+		    			<div class="row-division clearfix ancho">
+						{{=LOAD('services','mas_popular',args='portada',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+                        </div>
+		    		</div><!-- /#tab2 -->
+		    		<div class="tab-pane" id="tab3"><!-- #tab3 -->
+						CONTENIDO3
+		    		</div><!-- /#tab3 -->
+		    	</div><!-- /.tab-content -->
+		    </div><!-- /.tabbable -->
+
+						
+{{else:}}
+
+<hgroup class="box-heading clearfix" style="height:483px">
+				<h3><span>&darr;</span> Destacados</h3> 
+			</hgroup>
+		
+	<div id="central_news" class="row-division clearfix"><!-- #central_news -->
+				<div class="span6">
+					<div class="thumb">
+                        
+					</div>
+				</div>
+				<div class="span2">
+					<div class="thumb">
+						
+					</div>
+					
+					<div class="thumb">
+						
+					</div>
+					
+				</div>
+			</div><!-- /#central_news -->
+			<div id="mas_destacados" class="row-division clearfix"><!-- #mas_destacados -->
+				<h3><span>&darr;</span> Más Destacados</h3>
+                
+				<div class="carr"><!-- .carr -->
+                    
+					<a href="#">
+						
+				
+                    </a>
+                    
+
+			</div><!-- /.carr -->
+				<div class="carr_aux"><!-- .carr_aux -->
+					<a href="#" class="btn prev">&larr;</a>
+					<a href="#" class="btn next">&rarr;</a>
+					<a href="#" class="btn random" onclick="cargarRandom();">Random</a>
+				</div><!-- /.carr_aux -->
+			</div><!-- /#mas_destacados -->
+	
+	
+<div class="tabbable"><!-- .tabbable -->
+		    	<ul class="nav nav-tabs">
+		    		<li class="active"><a href="#tab1" data-toggle="tab">Lo Último</a></li>
+		    		<li><a href="#tab2" data-toggle="tab">Lo Más Popular</a></li>
+					<li><a href="#tab3" data-toggle="tab">Lo Más Compartido</a></li>
+		    	</ul>
+				<ul class="btns_aux">
+					<li><a href="#" class="active" onclick="cargarHoy();">Hoy</a></li>
+		    		<li><a href="#" onclick="cargarSemana();">Semana</a></li>
+					<li><a href="#" onclick="cargarMes();">Mes</a></li>
+				</ul>
+		    	<div class="tab-content"><!-- .tab-content -->
+		    		<div class="tab-pane active" id="tab1"><!-- #tab1 -->
+						<div class="row-division clearfix ancho">
+
+						</div>
+		    		</div><!-- /#tab1 -->
+		    		<div class="tab-pane" id="tab2"><!-- #tab2 -->
+						{{=LOAD('services','mas_popular',args='portada',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+		    		</div><!-- /#tab2 -->
+		    		<div class="tab-pane" id="tab3"><!-- #tab3 -->
+						CONTENIDO3
+		    		</div><!-- /#tab3 -->
+		    	</div><!-- /.tab-content -->
+		    </div><!-- /.tabbable -->
+
+{{pass}}
+
+	<!-- scripts solo para index -->
+
+	<script>
+	// carrusel
+	$("#mas_destacados .carr").carouFredSel({
+		width: 475,
+		height: 90,
+		align: false,
+		items: {
+			width: 120,
+			height: 90
+		},
+		scroll: 1,
+		prev: ".btn.prev",
+		next: ".btn.next"
+});
+	
+	// btn video
+	$('#btn_cerrar').click(function(e){
+		e.preventDefault();
+	$('#intro').slideUp();
+	});
+	</script>
+	<!-- fin scripts solo para index -->
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

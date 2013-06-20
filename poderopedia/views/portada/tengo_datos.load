@@ -1,0 +1,67 @@
+<div id="thanksDato">
+<h2>¿Tienes un dato? Cuentanos</h2><h4>Gracias por tu colaboración. es muy importante para mantener y <br> mejorar la calidad de nuestros contenidos.  Poderopedia lo hacemos todos.</h4>
+              {{=response.flash}}
+
+              {{=form.custom.begin}}
+              <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Tengo datos importantes sobre:</label>
+                    <div class="controls">
+                        {{=form.custom.widget.nombre}}
+                        <!--<input type="text" class="span4" id="tengoDato_nombre" name="nombre" placeholder="Ej: Michelle Bachellet">-->
+
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">
+                
+                        Si tienes información exclusiva sobre una Persona, Empresa, Organización o Caso que ya incluimos en Poderopedia o aún no está agregado aquí. 
+                    <br>
+                    Respetamos tu anonimato.<br>
+                    Siéntete libre de escribirnos a <a href="mailto:datos@poderopedia.org">datos@poderopedia.org</a><br /><span>Máximo 1000 caracteres</span></label>
+                    <div class="controls">
+                        {{=form.custom.widget.contenido}}
+                        <p id="tengoDato_num" class="help-block">Quedan 1000 caracteres</p>
+                        <p></p><br>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Obtuve esta información de</label>
+                    <div class="controls input-prepend">
+                        <span class="add-on">http://</span>{{=form.custom.widget.URL}}
+                        <!--<span class="add-on">http://</span><input type="text" class="span3" id="tengoDato_URL" name="URL" placeholder="Ingresa url" size="16">-->
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+            {{=form.custom.end}}
+</div>
+
+<script type="text/javascript">
+var res = '{{=request.vars.success}}';
+if (res=='ok') {
+              htmlThanks=$('#thanks').html();
+              htm='<img src="{{=URL('static','img/icon_gracias.png')}}" class="thanksIco"><h2>¡Gracias!</h2><p class="text-thanks">Tu información fue recibida satisfactoriamente</p>'
+              $('#thanksDato').html(htm);
+
+
+ }
+
+
+</script>
+
+<script type="text/javascript">
+$('#tengoDato_contenido').keyup(function(){
+        var max = 1000;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#tengoDato_num').text(' Ha alcanzado el límite');
+            $(this).val($(this).val().slice(0, max));
+        }else {
+            var char = max - len;
+            $('#tengoDato_num').text('Quedan ' + char + ' caracteres');
+        }
+    });
+</script>

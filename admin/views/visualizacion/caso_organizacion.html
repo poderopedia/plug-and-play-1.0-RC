@@ -1,0 +1,231 @@
+{{from conversion import convert_latin_chars}}
+{{if Organizacion!= None: response.title = Organizacion.alias+' | Poderopedia' }}
+{{if (Organizacion.shortBio!=None) & (Organizacion.shortBio!=''): response.meta.description = Organizacion.shortBio[:200]}}{{pass}}
+{{pass}}
+{{response.files.append(URL('static','js/jquery.zclip.min.js'))}}
+{{extend 'visualizacionLayout.html'}}
+
+{{block modales}}
+<script type="text/javascript">
+    $('#sugerirconexionButton').click(function() {
+        web2py_component("{{=URL('organizacion','sugerir_persona.load',args=_id)}}","sugerir_persona_organizacion")
+    });
+    $('#sugerirPerfilButton').click(function() {
+        web2py_component("{{=URL('visualizacion','sugerir_perfil.load',args=_id)}}","sugerir_perfil")
+    });
+    $('#reportarErrorButton').click(function() {
+        web2py_component("{{=URL('visualizacion','tipoerror.load',args=[_id,'organizacion'])}}","reportarError")
+    });
+    $('#contenidoInadecuadoButton').click(function() {
+        web2py_component("{{=URL('visualizacion','tipoinadecuado.load',args=[_id,'organizacion'])}}","contenidoInadecuado")
+    });
+
+    $('#republicarButton').click(function() {
+        web2py_component("{{=URL('republicar','entity.load',args=[_id,'organizacion'])}}","republicar")
+    });
+     $('#actualizacionButton').click(function() {
+        web2py_component("{{=URL('colaboracion','actualizacion.load',args=[_id,'organizacion'])}}","actualizacion")
+    });
+    // Javascript to enable link to tab
+    var hash = document.location.hash;
+    var prefix = "tab_";
+    if (hash) {
+        $('.nav-tabs a[href='+hash.replace(prefix,"")+']').tab('show');
+    }
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown', function (e) {
+        window.location.hash = e.target.hash.replace("#", "#" + prefix);
+    });
+
+
+</script>
+{{end}}
+
+{{block sidebar }}
+{{ include 'includes/sidebar_organizacion.html' }}
+{{end}}
+
+{{block breadcrumbs}}
+<!--<span>Búsqueda general</span>-->
+{{end}}
+{{
+
+d = Organizacion.modified_on
+pretty_d = d.strftime('%d-%m-%Y')
+}}
+
+
+<hgroup class="search-results clearfix">
+
+    {{if (Organizacion.haslogo!=None)&(Organizacion.haslogo!=''):}}<img src="{{ =URL('default','fast_download',args=Organizacion.haslogo) }}" class="imagen-perfil-ch" />{{elif Organizacion.tipoOrg != 2:}}<img src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}" width="120" class="imagen-perfil-ch" />{{else:}}<img src="{{=URL('static','tmp/avatar-empresa45.gif')}} "  width="120" class="imagen-perfil-ch" />{{pass}}
+
+
+    <h3 class="perfil-name ">{{=XML(Organizacion.alias)}}</h3> 
+        {{if (Organizacion.birth==None)|(Organizacion.birth==''):}} {{else:}}<h5 class="perfil-details">{{=Organizacion.birth}}</h5>{{pass}}
+    {{if (Organizacion.shortBio == None)|(Organizacion.shortBio==''):}} {{else:}}<p class="perfil-details">{{=XML(Organizacion.shortBio)}}</p>{{pass}}
+    <div class="botonera-perfil">
+        <div class="botonera-perfil">
+            <a href="#Lightbox_sugerirperfil" data-toggle="modal" id="sugerirPerfilButton">[ <span>sugerir otro perfil</span> ]</a>
+            <a href="#Lightbox_sugerirconexion" data-toggle="modal" id="sugerirconexionButton">[ <span>sugerir conexiones</span> ]</a>
+            <a href="#Lightbox_reportarerror" data-toggle="modal" id="reportarErrorButton">[ <span>reportar error</span> ] </a>
+         	<a href="#Lightbox_contenidoinadecuado" data-toggle="modal" id="contenidoInadecuadoButton">[ <span>reportar contenido inadecuado</span> ]</a>
+            <a href="#Lightbox_actualizacion" data-toggle="modal" id="actualizacionButton">[ <span>requiere actualizacion</span> ]</a>
+            {{if Organizacion.longBio:}}<a href="#Lightbox_republicar" data-toggle="modal" id="republicarButton">[ <span>republicar</span> ]</a>{{pass}}
+            <a href="{{=URL('visualizacion','historial',args=[_id,'caso_organizacion'])}}">[ <span>ver historial</span> ] </a>
+            <!--<a href="#" class="vermas"><span>Ver todo en una página ></span></a>-->
+            {{if Organizacion.modified_on!=None:}}
+            <br><span class="actualizado">Actualizado {{=pretty_d}}</span>{{pass}}
+        </div>
+    </div>
+</hgroup>
+                
+          <!-- centerCol -->
+<div class="row-division clearfix">
+    <!--Tabs-->
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#conexiones" data-toggle="tab">Conexiones</a></li>
+            {{if (Organizacion.longBio != '')&(Organizacion.longBio != None):}}<li><a href="#perfil" data-toggle="tab">Perfil</a></li>{{pass}}
+            {{if Organizacion.tipoOrg==2:}}
+            <li><a href="{{=URL('empresas','mapa_relaciones',args=convert_latin_chars(Organizacion.alias))}}" target="_blank">Mapa de Relaciones</a></li>
+            {{else:}}
+            <li><a href="{{=URL('organizaciones','mapa_relaciones',args=convert_latin_chars(Organizacion.alias))}}" target="_blank">Mapa de Relaciones</a></li>
+            {{pass}}
+            <li><a href="#documentos" data-toggle="tab">Documentos</a></li>
+            <li><a href="#fuentes" data-toggle="tab">Fuentes</a></li>
+            <li><a href="#rionoticias" data-toggle="tab">Rio de Noticias</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="conexiones">
+              {{ include 'visualizacion/datos_duros_organizacion.html' }}  
+            </div>
+            <div class="tab-pane" id="perfil">
+                <h4>{{=T('Perfil')}}</h4>
+                <p>{{=XML(Organizacion.longBio)}}</p>
+            </div>
+
+            <div class="tab-pane" id="documentos">
+                {{ include 'includes/Documentos_organizacion.html' }}
+            </div>
+            <div class="tab-pane" id="fuentes">
+                <!--TODO Fuentes Organizacion -->
+                <div class="editor-perfil fuente-perfil clearfix">
+                    <h5>Fuentes de {{=Organizacion.alias}}</h5>
+                    <!--<a href="#" class="boton-corchete">[ <span>editar</span> ]</a>-->
+                </div>
+
+                {{=LOAD('services','Org_relation_fuentes.load',args=_id,target='fuentesPersona',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+            </div>
+            <div class="tab-pane" id="rionoticias">
+                {{=LOAD('medios','entity.load',args=Organizacion.alias,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+            </div>
+        </div>
+    </div>
+    <!--Fin de Tabs-->
+</div>
+
+
+<!--Reporte de error-->
+<script type="text/javascript">
+jQuery('#Lightbox_reportarerror').on('hidden', function () {
+  // ajax call to refresh data grid
+})
+</script>
+
+<div class="modal hide fade" id="Lightbox_reportarerror">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+        <div id="reportarError"></div>
+    </div>
+</div>
+<!--Fin Reporte de Error-->
+
+<!--Sugerir Conexion-->
+<script type="text/javascript">
+jQuery('#Lightbox_sugerirconexion').on('hidden', function () {
+  // ajax call to refresh data grid
+})
+</script>
+
+<!--Lightbox_sugerirconexion-->
+<div class="modal hide fade" id="Lightbox_sugerirconexion">
+<div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+	<div class="modal-body">
+        <div id="sugerir_persona_organizacion"></div>
+    </div>
+ </div>
+<!--Fin Sugerir Conexion--> 
+
+<!--Contenido Inadecuado-->
+<script type="text/javascript">
+jQuery('#Lightbox_contenidoinadecuado').on('hidden', function () {
+  // ajax call to refresh data grid
+})
+</script>
+  
+<div class="modal hide fade" id="Lightbox_contenidoinadecuado">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+          <div id="contenidoInadecuado"></div>
+    </div>
+</div>
+<!--Fin Contenido Inadecuado-->
+
+
+<!--Sugerir Perfil-->
+<script type="text/javascript">
+
+jQuery('#Lightbox_sugerirperfil').on('hidden', function () {
+  // ajax call to refresh data grid
+})
+</script>
+<!--Lightbox_sugerirconexion-->
+<div class="modal hide fade" id="Lightbox_sugerirperfil">
+<div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+          <div id="sugerir_perfil"></div>
+    </div>
+</div>
+<!--Fin Sugerencia Perfil-->
+<script type="text/javascript">
+
+jQuery('#Lightbox_republicar').on('hidden', function () {
+  // ajax call to refresh data grid
+})
+</script>
+<!--Lightbox_republicar -->
+<div class="modal hide fade" id="Lightbox_republicar">
+<div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+        <div id="republicar"></div>
+    </div>
+</div>
+<!--Fin Republicar-->
+
+<script type="text/javascript">
+
+jQuery('#Lightbox_actualizacion').on('hidden', function () {
+  // ajax call to refresh data grid
+})
+</script>
+<!--Lightbox_actualizacion-->
+<div class="modal hide fade" id="Lightbox_actualizacion">
+<div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+        <div id="actualizacion"></div>
+    </div>
+</div>
+<!--Fin Actualizacion-->

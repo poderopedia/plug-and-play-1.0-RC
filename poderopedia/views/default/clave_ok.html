@@ -1,0 +1,19 @@
+{{extend 'visualizacionLayoutCuentas.html'}}
+
+{{block sidebar}}
+{{=LOAD('default','sidebar_cuenta.load',target='sidebar_cuenta',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+{{end}}
+
+
+
+ <!-- centerCol -->
+
+<div class="row-division-center"><!-- .row-division -->
+
+<div class="modal-body">
+    <img src="{{ =URL('static','img/img-ok.gif') }}" class="thanksIco" /><p></p>
+            <h2>¡Gracias!
+            <p class="text-thanks">Tu clave ha sido cambiada con éxito.</p></h2>
+      </div>
+    <a href="{{=URL('default','index')}}" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Continuar</a>
+</div><!-- .row-division -->

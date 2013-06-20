@@ -1,0 +1,26 @@
+{{ include 'includes/botones-list-documentosFuentes.html' }}
+
+<ul class="faces-ul referen-ul clearfix fuentes">
+    {{for i,document in enumerate(documentSource):}}
+    {{if i==items_per_page: break}}
+	<li class="listas">
+		<div class="box-docref">
+			<h4><span class="number">{{=i+1+(page*items_per_page)}}</span><a href="{{=document.documentURL}}" title="{{=document.name}}" target="_blank">"{{=document.name}}"</a></h4> <p>{{=document.fecha}}</p>
+			
+		</div>
+	</li>
+	{{pass}}
+</ul>
+
+<div class="pagination">
+	<ul>
+	    {{if page:}}
+
+    	<li id="prevpage{{=target}}">&larr; {{=A('  Anterior',_href=URL(args=[_id,page-1,sort]),cid=request.cid)}}</li>
+    	{{pass}}
+    	{{if len(documentSource)>items_per_page:}}
+	    <li id="addpage{{=target}}">{{=A('Siguiente  ',_href=URL(args=[_id,page+1,sort]),cid=request.cid)}}&rarr;</li>
+	    {{pass}}
+    </ul>
+</div>
+

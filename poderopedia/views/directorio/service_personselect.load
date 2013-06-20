@@ -1,0 +1,32 @@
+<!--hgroup-->
+      <hgroup class="box-heading clearfix">
+        <h3><A name="{{=chr(ord('a')+key)}}"><span>{{=chr(ord('a')+key)}}</span> ({{=total}}) &darr;</a></h3>
+        {{if alphapage:}}
+        {{=A('  Anterior',_href=URL(args=[alphapage-1,key]),cid=request.cid)}}
+        {{pass}}
+        {{if len(personas)>alpha_length:}}
+            {{=A('Ver Más ',_href=URL(args=[alphapage+1,key]),cid=request.cid,_class="hint")}}
+        {{pass}}
+      </hgroup>
+      <!--hgroup-->
+
+      <ul class="faces-ul">
+            {{for i,persona in enumerate(personas):}}
+            {{if i==alpha_length: break}}
+              <li>{{if persona.depiction!=None:}}<img src="{{ =URL('default','fast_download',args=persona.depiction) }}" width="45" ></img>{{else:}} <img src="{{ =URL('static','tmp/avatar-45.gif') }}" ></img>{{pass}}
+                <ul class="info">
+                  <li>
+                    <h4><a href="{{=URL('visualizacion','caso_perfil',args=persona.id,extension=False)}}" title="{{=persona.alias}}">{{=persona.alias}}</a></h4>
+                  </li>
+                <!--  <li>
+                        <p><span>Padre (1922 - 2011)</span></p>
+                  </li>-->
+                  <li class="vermas">
+                    <p><a href="{{=URL('visualizacion','caso_perfil',args=persona.id,extension=False)}}">ver m&aacute;s &gt;</a></p>
+                  </li>
+                </ul>
+              </li>
+            {{pass}}
+      </ul>
+
+

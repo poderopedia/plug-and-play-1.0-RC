@@ -1,0 +1,42 @@
+<hgroup class="search-results clearfix">
+    <h3 class="search-awnser">
+                    {{if organizacion.haslogo != None:}}<img src="{{=URL('default','fast_download', args=organizacion.haslogo)}}" class="imagen-perfil-ch" />
+                    {{else:}}
+        				{{if organizacion.tipoOrg != 2:}}<img src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}" class="imagen-perfil-ch" />
+        				{{else:}}<img src="{{ =URL('static','tmp/avatar-empresa45.gif') }}" class="imagen-perfil-ch" />{{pass}}
+                    {{pass}}
+                    <span class="perfil-results">{{if organizacion!=None:}}{{if(request.function=='Org_relation_empresa'):}}Empresas{{else:}}Organizaciones{{pass}} Relacionadas a <a href="{{=URL('visualizacion','caso_organizacion',args=organizacion.id, extension=False)}}">{{=organizacion.alias}}</a>{{else:}}Organizacion no existe{{pass}}</span></h3>
+                    <!--botones de selección-->
+                    {{ include 'includes/botones-list-personas.html' }}
+                    <!--boones de selección-->
+                    <!--menu-abecedario
+                    {{ include 'includes/menu-abecedario.html' }}-->
+                    <!--menu-abecedario-->
+         </hgroup>
+         <div class="row-division clearfix ancho">
+            <ul class="faces-ul" id="relatedToPerson">
+                {{for i,org in enumerate(organizaciones):}}
+                    {{if i==items_per_page: break}}
+                        <li>
+                            <a href="{{=URL('visualizacion','caso_organizacion',args=org.id,extension=False)}}" title="{{=org.alias}}">
+                                {{if org.haslogo!=None:}}<img src="{{ =URL('default','fast_download',args=org.haslogo) }}" />
+                                {{else:}}
+                                	{{if organizacion.tipoOrg != 2:}}<img src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}" class="imagen-perfil-ch"  width="120" />
+        							{{else:}}<img src="{{ =URL('static','tmp/avatar-empresa45.gif') }}" class="imagen-perfil-ch"  width="120"/>{{pass}}
+                                {{pass}}
+                            </a>
+                            <ul class="info">
+                                <li><h4><a href="{{=URL('visualizacion','caso_organizacion',args=org.id,extension=False)}}" title="{{=org.alias}}">{{=org.alias}}</a></h4></li>
+                                <li class="relation"><p style="text-align: center">{{=relationship[org.id]}} </p></li>
+                                <!--<li><p><a href="#">[ Editar ]</a></p></li>-->
+                                <li class="vermas"><p><a href="#">ver m&aacute;s &gt;</a></p></li>
+                            </ul>
+                        </li>
+                {{pass}}
+            </ul>
+         </div>
+
+
+         <!--Pagination-->
+             {{ include 'includes/pagination.html' }}
+         <!--Pagination end-->

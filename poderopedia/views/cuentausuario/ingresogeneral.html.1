@@ -1,0 +1,66 @@
+{{extend 'visualizacionLayoutCuentas2.html'}}
+
+{{block header}}
+{{ include 'includes/header-login.html' }}
+{{end}}
+
+{{block sidebar}}
+
+{{end}}
+
+{{block leftcol}}
+
+{{end}}
+
+<div class="row-division-center"><!-- .row-division -->
+                        
+                        <hgroup class="search-results historial-head clearfix">
+                          <h3 class="search-awnser">
+                            <span class="perfil-results">Ingresar a Poderopedia</span>
+                         </h3>
+                        </hgroup>
+                        
+                        <div class="preguntas_registro">
+                            ¿Ya estas registrado? <a href="#">Ingresa acá</a>
+                        </div>
+                        
+                        <ul class="btns_sociales">
+                            <li><a href="#" class="btn_facebook">Facebook</a></li>
+                            <li><a href="#" class="btn_twitter">Twitter</a></li>
+                        </ul>
+                        
+                        <form class="form-horizontal">
+                            <fieldset class="ingresogeneral">
+
+                              <div class="control-group">
+                                <label for="focusedInput" class="control-label">Email<span class="req">*</span></label>
+                                <div class="controls">
+                                  <input type="text" value="" id="focusedInput" class="input-xlarge focused">
+                                </div>
+                              </div>
+                    
+                              <div class="control-group">
+                                <label for="focusedInput" class="control-label">Contraseña<span class="req">*</span></label>
+                                <div class="controls">
+                                  <input type="password" value="" id="focusedInput" class="input-xlarge focused">
+                                </div>
+                              </div>
+                    
+                              <div class="control-group">
+                                <div class="controls">
+                                    <label class="checkbox inline">
+                                    <input type="checkbox" value="option1" id="inlineCheckbox1"> Recordar mi ingreso
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="soporte-accion">
+                                <button href="#" class="btn btn-primary btn_save">Regístrate</button>
+                                
+                              </div>
+                            <a href="#Lightbox_cuentausuario1" data-toggle="modal" class="modales btn_lostpass">¿Olvidaste tu contraseña?</a>
+                            </fieldset>
+                        </form>                        
+                        
+
+                    </div><!-- .row-division -->

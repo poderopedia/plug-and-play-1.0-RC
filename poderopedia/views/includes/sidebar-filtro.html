@@ -1,0 +1,37 @@
+<hgroup class="widget-heading widget-filter">
+                        <h5>&darr; Filtrar información por</h5>
+                    </hgroup>
+                  	<div class="widget widget-sources">
+
+
+                            {{for i,f in enumerate(facets):}}
+                            {{if f.results.total_found>0:}}
+                          <div class="accordion-group">
+                              <div class="accordion-heading clearfix">
+                                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseF{{=i}}">
+                                      {{=nomFacetas[i]}} <span>({{=f.results.total_found}})</span>
+                                  </a>
+                                  <div class="buttonsColapse">
+                                      <!--TODO requiere permiso de administracion-->
+                                      <!--<a href="#">Editar</a>-->
+                                      <!--<a href="#" class="showIco">Mostrar</a>-->
+                                  </div>
+                              </div>
+                              <div id="collapseF{{=i}}" class="accordion-body collapse">
+                                  <div class="accordion-inner">
+
+                                      <ul class="websites-sources">
+                                      {{for g in f:}}
+
+                                      {{if '@term' in g:}}<li><a href="{{=URL(vars=dict(search=searchquery,filter=f.name,term=g['@term'].encode('utf8')))}}">{{=g['@term']}} <span class="badgeNum">({{=g['@count']}})</span></a></li>{{pass}}
+                                      {{pass}}
+                                        </ul>
+
+                                  </div>
+                              </div>
+                          </div>
+
+                            {{pass}}
+                            {{pass}}
+                    </div>
+                    <!-- /sourcesWidget -->

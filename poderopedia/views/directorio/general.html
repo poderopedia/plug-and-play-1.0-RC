@@ -1,0 +1,68 @@
+{{response.title = 'Directorio | Poderopedia' }}
+{{extend 'visualizacionLayout.html'}}
+
+{{block sidebar}}
+
+{{end}}
+
+
+{{block script_footer}}
+
+{{end}}
+{{block breadcrumbs}}
+<!--<span>Búsqueda general</span>-->
+{{end}}
+
+        
+    <hgroup class="search-results historial-head clearfix">
+        <h3 class="search-awnser">
+            <span class="perfil-results">Busca publicaciones dentro de nuestro directorio</span>
+        </h3>
+    </hgroup>
+
+        <div class="row-division clearfix"><!-- .row-division -->
+            
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <!--<li {{if tab=='general':}} class="active" {{pass}}><a href="#tab1" data-toggle="tab">Todas las publicaciones</a></li>-->
+                <li {{if (tab=='persona')|(tab=='general'):}} class="active" {{pass}}><a href="#tab2" data-toggle="tab">Personas</a></li>
+                <li {{if tab=='empresa':}} class="active" {{pass}}><a href="#tab3" data-toggle="tab">Empresas</a></li>
+                <li {{if tab=='organizacion':}} class="active" {{pass}}><a href="#tab4" data-toggle="tab">Organizaciones</a></li>
+                <!--<li><a href="#tab5" data-toggle="tab">Mapas</a></li>
+                <li><a href="#tab5" data-toggle="tab">Casos</a></li>-->
+            </ul>
+            <div class="tab-content">
+                <!--<div class="tab-pane {{if tab=='general':}}active{{pass}}" id="tab1"><!-- #tab1 -->
+<!--TODO cargar componente de servicio, Directorio General                     
+                        CONTENIDO GENERAL
+
+                </div>--><!-- /#tab1 -->
+    
+                <div class="tab-pane {{if (tab=='persona')|(tab=='general'):}}active{{pass}}" id="tab2"><!-- #tab2 -->
+<!--TODO cargar componente de servicio, Directorio Persona -->
+                    {{=LOAD('directorio','service_persona.load',vars=dict(target='service_persona'),target='service_persona',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+                </div><!-- /#tab2 -->
+    
+                <div class="tab-pane {{if tab=='empresa':}}active{{pass}}" id="tab3"><!-- #tab3 -->
+<!--TODO cargar componente de servicio, Directorio Empresa -->
+                    {{=LOAD('directorio','service_persona.load',vars=dict(target='service_empresa'),target='service_empresa',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+                </div><!-- /#tab3 -->
+    
+                <div class="tab-pane {{if tab=='organizacion':}}active{{pass}}" id="tab4"><!-- #tab4 -->
+<!--TODO cargar componente de servicio, Directorio Organizaciones -->
+                    {{=LOAD('directorio','service_persona.load',vars=dict(target='service_organizacion'),target='service_organizacion',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+                </div><!-- /#tab4 -->
+
+                <div class="tab-pane" id="tab5"><!-- #tab5 -->
+<!--TODO cargar componente de servicio, Directorio Mapas -->  
+                        CONTENIDO5
+                </div><!-- /#tab5 -->
+
+                <div class="tab-pane" id="tab6"><!-- #tab6 -->
+<!--TODO cargar componente de servicio, Directorio Casos -->  
+                        CONTENIDO6
+                </div><!-- /#tab6 -->
+            </div>
+        </div>
+
+        </div><!-- /.row-division -->

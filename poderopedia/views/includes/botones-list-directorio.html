@@ -1,0 +1,33 @@
+<div id="botonmesano" class="clearfix">
+	<span class="tit_orden">Ordenar por:</span>
+	<div class="btn-group">
+	  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">A / Z</a>
+	</div>
+
+	<div id="orderMenu">
+
+		<div id="listDisplay">
+			<a href="#">
+				<img src="{{ =URL('static','img/ico-list.gif') }}" id="listDirectorio_{{=target}}" />
+			</a>
+			<a href="#" id="boxDirectorio_{{=target}}">
+				<img src="{{ =URL('static','img/ico-block.gif') }}" />
+			</a>
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+    $('#listDirectorio_{{=target}}').click(function(event){
+        event.preventDefault();
+        $('.faces-ul li').addClass('listas');
+        $('.imagen-perfil').css('display','none');
+    });
+
+    $('#boxDirectorio_{{=target}}').click(function(event){
+        event.preventDefault();
+        $('.faces-ul li').removeClass('listas');
+        $('.imagen-perfil').css('display','block');
+    });
+</script>

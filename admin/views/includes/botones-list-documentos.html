@@ -1,0 +1,33 @@
+<div id="botonmesano" class="clearfix">
+    <p class="order-frase">Ordenar por</p>
+    {{if sort=='true':}}
+      {{=A('Fecha',_href=URL(args=[_id,page,'true']),_class="btn btn-primary",cid=request.cid, **{'_data-toggle':'button'})}}
+        <div class="btn-group">
+            {{=A('A / Z',_href=URL(args=[_id,page,'false']),_class="btn",cid=request.cid)}}
+            <!--<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="{{=URL(args=[_id, page, 'false'])}}">
+              A / Z
+              <span class="caret"></span>
+            </a>-->
+        </div>
+    {{else:}}
+      {{=A('Fecha',_href=URL(args=[_id,page,'true']),_class="btn",cid=request.cid, **{'_data-toggle':'button'})}}
+        <div class="btn-group">
+            {{=A('A / Z',_href=URL(args=[_id,page,'false']),_class="btn btn-primary",cid=request.cid)}}
+            <!--<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="{{=URL(args=[_id, page, 'false'])}}">
+              A / Z
+              <span class="caret"></span>
+            </a>-->
+        </div>
+    {{pass}}
+	<div id="orderMenu">
+		<!--<a href="#" class="sugest">[ Editar documentos ]</a>-->
+		<div id="listDisplay">
+			<a href="#" id="list">
+				<img src="{{ =URL('static','img/ico-list.gif') }}" />
+			</a>
+			<a href="#" id="box">
+				<img src="{{ =URL('static','img/ico-block.gif') }}" />
+			</a>
+		</div>
+	</div>
+</div>

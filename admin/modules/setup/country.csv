@@ -1,0 +1,232 @@
+country.id,country.name,country.iso2,country.iso3,country.iso_id
+1,AALAND ISLANDS                                 , AX     , ALA    ,248
+2,AFGHANISTAN                                    , AF     , AFG    ,4
+3,ALBANIA                                        , AL     , ALB    ,8
+4,ALGERIA                                        , DZ     , DZA    ,12
+5,AMERICAN SAMOA                                 , AS     , ASM    ,16
+6,ANDORRA                                        , AD     , AND    ,20
+7,ANGOLA                                         , AO     , AGO    ,24
+8,ANGUILLA                                       , AI     , AIA    ,660
+9,ANTARCTICA                                     , AQ     , ATA    ,10
+10,ANTIGUA AND BARBUDA                            , AG     , ATG    ,28
+11,ARGENTINA                                      , AR     , ARG    ,32
+12,ARMENIA                                        , AM     , ARM    ,51
+13,ARUBA                                          , AW     , ABW    ,533
+14,AUSTRALIA                                      , AU     , AUS    ,36
+15,AUSTRIA                                        , AT     , AUT    ,40
+16,AZERBAIJAN                                     , AZ     , AZE    ,31
+17,BAHAMAS                                        , BS     , BHS    ,44
+18,BAHRAIN                                        , BH     , BHR    ,48
+19,BANGLADESH                                     , BD     , BGD    ,50
+20,BARBADOS                                       , BB     , BRB    ,52
+21,BELARUS                                        , BY     , BLR    ,112
+22,BELGIUM                                        , BE     , BEL    ,56
+23,BELIZE                                         , BZ     , BLZ    ,84
+24,BENIN                                          , BJ     , BEN    ,204
+25,BERMUDA                                        , BM     , BMU    ,60
+26,BHUTAN                                         , BT     , BTN    ,64
+27,BOLIVIA                                        , BO     , BOL    ,68
+28,BOSNIA AND HERZEGOWINA                         , BA     , BIH    ,70
+29,BOTSWANA                                       , BW     , BWA    ,72
+30,BOUVET ISLAND                                  , BV     , BVT    ,74
+31,BRAZIL                                         , BR     , BRA    ,76
+32,BRITISH INDIAN OCEAN TERRITORY                 , IO     , IOT    ,86
+33,BRUNEI DARUSSALAM                              , BN     , BRN    ,96
+34,BULGARIA                                       , BG     , BGR    ,100
+35,BURKINA FASO                                   , BF     , BFA    ,854
+36,BURUNDI                                        , BI     , BDI    ,108
+37,CAMBODIA                                       , KH     , KHM    ,116
+38,CAMEROON                                       , CM     , CMR    ,120
+39,CANADA                                         , CA     , CAN    ,124
+40,CAPE VERDE                                     , CV     , CPV    ,132
+41,CAYMAN ISLANDS                                 , KY     , CYM    ,136
+42,CENTRAL AFRICAN REPUBLIC                       , CF     , CAF    ,140
+43,CHAD                                           , TD     , TCD    ,148
+44,CHILE                                          , CL     , CHL    ,152
+45,CHINA                                          , CN     , CHN    ,156
+46,CHRISTMAS ISLAND                               , CX     , CXR    ,162
+47,COCOS (KEELING) ISLANDS                        , CC     , CCK    ,166
+48,COLOMBIA                                       , CO     , COL    ,170
+49,COMOROS                                        , KM     , COM    ,174
+50,COOK ISLANDS                                   , CK     , COK    ,184
+51,COSTA RICA                                     , CR     , CRI    ,188
+52,COTE D'IVOIRE                                  , CI     , CIV    ,384
+53,CROATIA (local name: Hrvatska)                 , HR     , HRV    ,191
+54,CUBA                                           , CU     , CUB    ,192
+55,CYPRUS                                         , CY     , CYP    ,196
+56,CZECH REPUBLIC                                 , CZ     , CZE    ,203
+57,DENMARK                                        , DK     , DNK    ,208
+58,DJIBOUTI                                       , DJ     , DJI    ,262
+59,DOMINICA                                       , DM     , DMA    ,212
+60,DOMINICAN REPUBLIC                             , DO     , DOM    ,214
+61,ECUADOR                                        , EC     , ECU    ,218
+62,EGYPT                                          , EG     , EGY    ,818
+63,EL SALVADOR                                    , SV     , SLV    ,222
+64,EQUATORIAL GUINEA                              , GQ     , GNQ    ,226
+65,ERITREA                                        , ER     , ERI    ,232
+66,ESTONIA                                        , EE     , EST    ,233
+67,ETHIOPIA                                       , ET     , ETH    ,231
+68,FALKLAND ISLANDS (MALVINAS)                    , FK     , FLK    ,238
+69,FAROE ISLANDS                                  , FO     , FRO    ,234
+70,FIJI                                           , FJ     , FJI    ,242
+71,FINLAND                                        , FI     , FIN    ,246
+72,FRANCE                                         , FR     , FRA    ,250
+73,FRENCH GUIANA                                  , GF     , GUF    ,254
+74,FRENCH POLYNESIA                               , PF     , PYF    ,258
+75,FRENCH SOUTHERN TERRITORIES                    , TF     , ATF    ,260
+76,GABON                                          , GA     , GAB    ,266
+77,GAMBIA                                         , GM     , GMB    ,270
+78,GEORGIA                                        , GE     , GEO    ,268
+79,GERMANY                                        , DE     , DEU    ,276
+80,GHANA                                          , GH     , GHA    ,288
+81,GIBRALTAR                                      , GI     , GIB    ,292
+82,GREECE                                         , GR     , GRC    ,300
+83,GREENLAND                                      , GL     , GRL    ,304
+84,GRENADA                                        , GD     , GRD    ,308
+85,GUADELOUPE                                     , GP     , GLP    ,312
+86,GUAM                                           , GU     , GUM    ,316
+87,GUATEMALA                                      , GT     , GTM    ,320
+88,GUINEA                                         , GN     , GIN    ,324
+89,GUINEA-BISSAU                                  , GW     , GNB    ,624
+90,GUYANA                                         , GY     , GUY    ,328
+91,HAITI                                          , HT     , HTI    ,332
+92,HEARD AND MC DONALD ISLANDS                    , HM     , HMD    ,334
+93,HONDURAS                                       , HN     , HND    ,340
+94,HONG KONG                                      , HK     , HKG    ,344
+95,HUNGARY                                        , HU     , HUN    ,348
+96,ICELAND                                        , IS     , ISL    ,352
+97,INDIA                                          , IN     , IND    ,356
+98,INDONESIA                                      , ID     , IDN    ,360
+99,IRAN (ISLAMIC REPUBLIC OF)                     , IR     , IRN    ,364
+100,IRAQ                                           , IQ     , IRQ    ,368
+101,IRELAND                                        , IE     , IRL    ,372
+102,ISRAEL                                         , IL     , ISR    ,376
+103,ITALY                                          , IT     , ITA    ,380
+104,JAMAICA                                        , JM     , JAM    ,388
+105,JAPAN                                          , JP     , JPN    ,392
+106,JORDAN                                         , JO     , JOR    ,400
+107,KAZAKHSTAN                                     , KZ     , KAZ    ,398
+108,KENYA                                          , KE     , KEN    ,404
+109,KIRIBATI                                       , KI     , KIR    ,296
+110,KUWAIT                                         , KW     , KWT    ,414
+111,KYRGYZSTAN                                     , KG     , KGZ    ,417
+112,LAO PEOPLE'S DEMOCRATIC REPUBLIC               , LA     , LAO    ,418
+113,LATVIA                                         , LV     , LVA    ,428
+114,LEBANON                                        , LB     , LBN    ,422
+115,LESOTHO                                        , LS     , LSO    ,426
+116,LIBERIA                                        , LR     , LBR    ,430
+117,LIBYAN ARAB JAMAHIRIYA                         , LY     , LBY    ,434
+118,LIECHTENSTEIN                                  , LI     , LIE    ,438
+119,LITHUANIA                                      , LT     , LTU    ,440
+120,LUXEMBOURG                                     , LU     , LUX    ,442
+121,MACAU                                          , MO     , MAC    ,446
+122,MADAGASCAR                                     , MG     , MDG    ,450
+123,MALAWI                                         , MW     , MWI    ,454
+124,MALAYSIA                                       , MY     , MYS    ,458
+125,MALDIVES                                       , MV     , MDV    ,462
+126,MALI                                           , ML     , MLI    ,466
+127,MALTA                                          , MT     , MLT    ,470
+128,MARSHALL ISLANDS                               , MH     , MHL    ,584
+129,MARTINIQUE                                     , MQ     , MTQ    ,474
+130,MAURITANIA                                     , MR     , MRT    ,478
+131,MAURITIUS                                      , MU     , MUS    ,480
+132,MAYOTTE                                        , YT     , MYT    ,175
+133,MEXICO                                         , MX     , MEX    ,484
+134,MONACO                                         , MC     , MCO    ,492
+135,MONGOLIA                                       , MN     , MNG    ,496
+136,MONTSERRAT                                     , MS     , MSR    ,500
+137,MOROCCO                                        , MA     , MAR    ,504
+138,MOZAMBIQUE                                     , MZ     , MOZ    ,508
+139,MYANMAR                                        , MM     , MMR    ,104
+140,NAMIBIA                                        , NA     , NAM    ,516
+141,NAURU                                          , NR     , NRU    ,520
+142,NEPAL                                          , NP     , NPL    ,524
+143,NETHERLANDS                                    , NL     , NLD    ,528
+144,NETHERLANDS ANTILLES                           , AN     , ANT    ,530
+145,NEW CALEDONIA                                  , NC     , NCL    ,540
+146,NEW ZEALAND                                    , NZ     , NZL    ,554
+147,NICARAGUA                                      , NI     , NIC    ,558
+148,NIGER                                          , NE     , NER    ,562
+149,NIGERIA                                        , NG     , NGA    ,566
+150,NIUE                                           , NU     , NIU    ,570
+151,NORFOLK ISLAND                                 , NF     , NFK    ,574
+152,NORTHERN MARIANA ISLANDS                       , MP     , MNP    ,580
+153,NORWAY                                         , NO     , NOR    ,578
+154,OMAN                                           , OM     , OMN    ,512
+155,PAKISTAN                                       , PK     , PAK    ,586
+156,PALAU                                          , PW     , PLW    ,585
+157,PANAMA                                         , PA     , PAN    ,591
+158,PAPUA NEW GUINEA                               , PG     , PNG    ,598
+159,PARAGUAY                                       , PY     , PRY    ,600
+160,PERU                                           , PE     , PER    ,604
+161,PHILIPPINES                                    , PH     , PHL    ,608
+162,PITCAIRN                                       , PN     , PCN    ,612
+163,POLAND                                         , PL     , POL    ,616
+164,PORTUGAL                                       , PT     , PRT    ,620
+165,PUERTO RICO                                    , PR     , PRI    ,630
+166,QATAR                                          , QA     , QAT    ,634
+167,REUNION                                        , RE     , REU    ,638
+168,ROMANIA                                        , RO     , ROU    ,642
+169,RUSSIAN FEDERATION                             , RU     , RUS    ,643
+170,RWANDA                                         , RW     , RWA    ,646
+171,SAINT HELENA                                   , SH     , SHN    ,654
+172,SAINT KITTS AND NEVIS                          , KN     , KNA    ,659
+173,SAINT LUCIA                                    , LC     , LCA    ,662
+174,SAINT PIERRE AND MIQUELON                      , PM     , SPM    ,666
+175,SAINT VINCENT AND THE GRENADINES               , VC     , VCT    ,670
+176,SAMOA                                          , WS     , WSM    ,882
+177,SAN MARINO                                     , SM     , SMR    ,674
+178,SAO TOME AND PRINCIPE                          , ST     , STP    ,678
+179,SAUDI ARABIA                                   , SA     , SAU    ,682
+180,SENEGAL                                        , SN     , SEN    ,686
+181,SERBIA AND MONTENEGRO                          , CS     , SCG    ,891
+182,SEYCHELLES                                     , SC     , SYC    ,690
+183,SIERRA LEONE                                   , SL     , SLE    ,694
+184,SINGAPORE                                      , SG     , SGP    ,702
+185,SLOVAKIA                                       , SK     , SVK    ,703
+186,SLOVENIA                                       , SI     , SVN    ,705
+187,SOLOMON ISLANDS                                , SB     , SLB    ,90
+188,SOMALIA                                        , SO     , SOM    ,706
+189,SOUTH AFRICA                                   , ZA     , ZAF    ,710
+190,SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS   , GS     , SGS    ,239
+191,SPAIN                                          , ES     , ESP    ,724
+192,SRI LANKA                                      , LK     , LKA    ,144
+193,SUDAN                                          , SD     , SDN    ,736
+194,SURINAME                                       , SR     , SUR    ,740
+195,SVALBARD AND JAN MAYEN ISLANDS                 , SJ     , SJM    ,744
+196,SWAZILAND                                      , SZ     , SWZ    ,748
+197,SWEDEN                                         , SE     , SWE    ,752
+198,SWITZERLAND                                    , CH     , CHE    ,756
+199,SYRIAN ARAB REPUBLIC                           , SY     , SYR    ,760
+200,TAIWAN                                         , TW     , TWN    ,158
+201,TAJIKISTAN                                     , TJ     , TJK    ,762
+202,THAILAND                                       , TH     , THA    ,764
+203,TIMOR-LESTE                                    , TL     , TLS    ,626
+204,TOGO                                           , TG     , TGO    ,768
+205,TOKELAU                                        , TK     , TKL    ,772
+206,TONGA                                          , TO     , TON    ,776
+207,TRINIDAD AND TOBAGO                            , TT     , TTO    ,780
+208,TUNISIA                                        , TN     , TUN    ,788
+209,TURKEY                                         , TR     , TUR    ,792
+210,TURKMENISTAN                                   , TM     , TKM    ,795
+211,TURKS AND CAICOS ISLANDS                       , TC     , TCA    ,796
+212,TUVALU                                         , TV     , TUV    ,798
+213,UGANDA                                         , UG     , UGA    ,800
+214,UKRAINE                                        , UA     , UKR    ,804
+215,UNITED ARAB EMIRATES                           , AE     , ARE    ,784
+216,UNITED KINGDOM                                 , GB     , GBR    ,826
+217,UNITED STATES                                  , US     , USA    ,840
+218,UNITED STATES MINOR OUTLYING ISLANDS           , UM     , UMI    ,581
+219,URUGUAY                                        , UY     , URY    ,858
+220,UZBEKISTAN                                     , UZ     , UZB    ,860
+221,VANUATU                                        , VU     , VUT    ,548
+222,VATICAN CITY STATE (HOLY SEE)                  , VA     , VAT    ,336
+223,VENEZUELA                                      , VE     , VEN    ,862
+224,VIET NAM                                       , VN     , VNM    ,704
+225,VIRGIN ISLANDS (BRITISH)                       , VG     , VGB    ,92
+226,VIRGIN ISLANDS (U.S.)                          , VI     , VIR    ,850
+227,WALLIS AND FUTUNA ISLANDS                      , WF     , WLF    ,876
+228,WESTERN SAHARA                                 , EH     , ESH    ,732
+229,YEMEN                                          , YE     , YEM    ,887
+230,ZAMBIA                                         , ZM     , ZMB    ,894
+231,ZIMBABWE                                       , ZW     , ZWE    ,716

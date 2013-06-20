@@ -1,0 +1,35 @@
+<div class="modal hide fade" id="Lightbox_sugerirperfil">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+            
+      </div>
+      <div class="modal-body">
+            <div class="modal-body">
+                    <h2>Sugerir una Persona</h2><h4>Gracias por tu colaboración. es muy importante para mantener y <br> mejorar la calidad de nuestros contenidos.  Poderopedia lo hacemos todos.</h4>
+                    <form class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">Quiero sugerir el perfil de:</label>
+                            <div class="controls">
+                                <!--<input type="text" class="span4" name="nombre-perfil" placeholder="Ej: Michelle Bachellet">-->
+                                {{=form.custom.widget.nombre}}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">¿Por qué es importante? <br><span>Opcional máximo 500 caracteres</span></label>
+                            <div class="controls">
+                                <!--<textarea class="input-xlarge span4" rows="3"></textarea>-->
+                                {{=form.custom.widget.contenido}}
+                                <p class="help-block">Quedan 500 caracteres</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Obtuve esta información de</label>
+                            <div class="controls input-prepend">
+                                <span class="add-on">http://</span><!--<input type="text" class="span2" placeholder="Ingresa url" size="16">-->{{=form.custom.widget.URL}}
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+              </div>
+      </div>

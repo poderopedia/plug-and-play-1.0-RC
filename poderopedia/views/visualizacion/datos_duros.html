@@ -1,0 +1,23 @@
+<div class="accordion-group">
+    <div class="accordion-heading clearfix">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse1">
+            Datos Básicos <span></span>
+        </a>
+        <div class="buttonsColapse">
+            <!--TODO requiere permiso de administracion-->
+            <!--<a href="#">Editar</a>-->
+            <a href="#collapse1" class="showIco" data-toggle="collapse" data-parent="#accordion2">Mostrar</a>
+        </div>
+    </div>
+    <div id="collapse1" class="accordion-body collapse" data-parent=".showIco">
+        <div class="accordion-inner">
+            <p></p>
+            {{=form}}
+        </div>
+    </div>
+</div>
+{{=LOAD('visualizacion','familia.load',args=_id,target='familiy',_class='accordion-group',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{=LOAD('visualizacion','conyuge.load',args=_id,target='conyuge',ajax=True,_class='accordion-group',content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{=LOAD('visualizacion','relPersona.load',args=_id,ajax=True,target='P2P',content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{=LOAD('visualizacion','comp_estudios.load',args=_id,ajax=True,target='P2P_comp',content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{=LOAD('visualizacion','relOrgs.load',args=_id,ajax=True,target='P2O',content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}

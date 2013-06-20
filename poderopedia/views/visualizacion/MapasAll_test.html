@@ -1,0 +1,104 @@
+{{response.files.append(URL('static','js/d3.v2.min.js'))}}
+{{response.files.append(URL('static','css/reset.css'))}}
+{{response.files.append(URL('static','css/style3.css'))}}
+{{extend 'visualizacionLayoutDocument.html'}}
+
+{{block imprimir}}
+<li><a href="#Lightbox_compartir" args="[_id,url1,url2]" data-toggle="modal" class="btn_compartir">Compartir</a></li>
+<li><a href="#" onclick="window.print();return false;" class="btn_imprimir">Imprimir</a></li>
+{{url1=request.controller}}
+{{url2=request.function}}
+
+{{end}}
+
+{{block header}}
+<nav class="primary-nav">
+    <div class="quien">
+
+        {{if person!=None:}}
+        {{=imagen}} <h3>{{=person.alias}}</h3> <a href="{{=URL('visualizacion','caso_perfil',args=_id)}}">Ver Perfil &#9654;</a>
+        {{pass}}
+    </div>
+</nav>
+{{end}}
+{{block tittle}}<title>Poderopedia - {{=person.alias}}</title>{{end}}
+<script type="text/javascript">
+    window.mapaURL='{{=URL('visualizacion','call/json/persona2all',args=_id)}}';
+    window.heightW=$(window).height();
+    window.widthW=$(window).width();
+    $.getJSON(mapaURL, function(data) {
+        var items = [];
+
+        $.each(data.nodes, function(key, val) {
+            items.push('<option value="' + val.id + '">' + val.name + '('+val.relevance/100+')</option>');
+        });
+
+        $('<select/>', {
+            'class': 'my-new-list',
+            html: items.join('')
+        }).appendTo('#search_form');
+    });
+
+</script>
+<script defer src="{{=URL('static','js/plugins.js')}}"></script>
+<script defer src="{{=URL('static','js/script.js')}}"></script>
+<script src="{{=URL('static','js/libs/coffee-script.js')}}"></script>
+<script src="{{=URL('static','js/d3.v2.min.js')}}"></script>
+<script src="{{=URL('static','js/Tooltip.js')}}"></script>
+<script type="text/coffeescript" src="{{=URL('static','coffee/vis.coffee')}}"></script>
+
+
+<div id="controls">
+    <div id="layouts" class="control"><h3><br></h3>
+        <a id="force" class="active">Reestablecer</a>
+        <a id="radial">Agrupar por Tipo de Entidad</a>
+    </div>
+    <div id="filters" class="control"><h3><br></h3>
+        <a id="all" class="active">Todos</a>
+        <a id="relevante">Relevancia</a>
+    </div>
+    <div id="groups" class="control"><h3><br></h3>
+        <a id="P201">Estudios</a>
+        <a id="P202">Cargos en Empresas</a>
+    </div>
+    <!--    <div id="sorts" class="control"><h3><br></h3>
+            <a id="songs" class="active">Nodos</a>
+            <a id="links">Enlaces</a>
+        </div>-->
+    <div id="search_section" class="control">
+        <form id="search_form" action=""  method="post">
+            <p class="search_title">Buscar en Visualización <input type="text" class="text-input" id="search" value="" /></p>
+        </form>
+    </div>
+</div>
+<div class="row-fluid">
+    <!--  <section id="sideCollapsible" class="span3">
+         tertiaryNav -->
+    <!--<a href="#" class="btn_filtrar">Filtrar Conexiones</a>
+    <nav class="tertiary-nav">
+        <ul>
+            <li><span class="box-heading">&darr; <b>Personas</b></span>
+                        <ul>
+                            <li><input type="checkbox"> Familia (12)</li>
+                            <li><input type="checkbox"> Cónyuge o Pareja (2)</li>
+                            <li><input type="checkbox"> Amigos (63)</li>
+                            <li><input type="checkbox"> Conocidos (44)</li>
+                        </ul>
+                    </li>
+                    <li><span class="box-heading">&darr; <b>Otra Categoría</b></span>
+                        <ul>
+                            <li><input type="checkbox"> Participación y vínculo a empresa (12)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>-->
+    <!-- /tertiaryNav
+</section>-->
+    <!-- /leftCol -->
+</div>
+
+<center>
+    <div id="main" role="main">
+        <div id="vis"></div>
+    </div>
+</center>

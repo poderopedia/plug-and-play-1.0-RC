@@ -1,0 +1,19 @@
+<!--botones de selección-->
+{{ include 'includes/botones-list-directorio.html' }}
+<!--boones de selección-->
+
+<!--menu-abecedario-->
+{{ include 'includes/menu-abecedario.html' }}
+<!--menu-abecedario-->
+
+<div class="row-division directorio clearfix">
+{{for number in xrange(begin, end): }}
+    {{=LOAD('directorio','service_empresaselect.load',args=[alphapage,number],target='service_empresaselect_'+chr(ord('a')+number),ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+{{pass}}
+</div>
+
+<!--Pagination-->
+{{block pagination}}
+{{ include 'includes/pagination.html'}}
+{{end}}
+<!--Pagination end-->

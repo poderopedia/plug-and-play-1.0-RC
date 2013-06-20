@@ -1,0 +1,36 @@
+<!--Lightbox_reportarcontenidoinadecuado-->
+
+
+<div class="modal hide fade" id="Lightbox_reportarcontenidoinadecuado">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+            <h4>{{if item.depiction == None:}}<img src="{{ =URL('static','tmp/avatar-36.gif') }}" class="modal-avatar" />{{pass}}{{else:}}<img src="{{=URL('default','fast_download', args=item.depiction)}}" class="modal-avatar" />{{pass}} {{=item.alias}}</h4>
+      </div>
+      <div class="modal-body">
+            <h2>Reportar Contenido inadecuado</h2><h4>Gracias por tu colaboración. es muy importante para mantener y <br> mejorar la calidad de nuestros contenidos.  Poderopedia lo hacemos todos.</h4>
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Reportar Contenido inadecuado en:</label>
+                    <div class="controls">
+                       <strong>{{=item.alias}}</strong>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">¿Cual es el contenido inadecuado? <br><span>Opcional máximo 500 caracteres</span></label>
+                    <div class="controls">
+                        <!--<textarea class="input-xlarge span4" rows="3"></textarea>-->
+                        {{=form.custom.widget.contenido}}
+                        <p class="help-block">Quedan 500 caracteres</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Obtuve esta información de</label>
+                    <div class="controls input-prepend">
+                        <span class="add-on">http://</span><!--<input type="text" class="span3" placeholder="Ingresa url" size="16">-->{{=form.custom.widget.URL}}
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+      </div>
+</div>

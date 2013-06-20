@@ -1,0 +1,34 @@
+<!--botones de selección-->
+{{ include 'includes/botones-list-personas-alternativa-az.html' }}
+<div class="toogleabc">
+    {{ include 'includes/menu-abecedario.html' }}
+</div>
+<!--boones de selección-->
+
+<div class="row-division clearfix">
+<ul class="faces-ul">
+{{for i,persona in enumerate(personas):}}
+{{if i==items_per_page: break}}
+<li>{{if persona.depiction!=None:}} <img src="{{ =URL('default','fast_download',args=persona.depiction) }}" />{{else:}}<img src="{{ =URL('static','tmp/imagen-face.gif') }}" />{{pass}}
+    <ul class="info">
+        <li>
+            <h4><a href="" title="{{=persona.alias}}">{{=persona.alias}}</a></h4>
+        </li>
+        <li>
+            <p><span>(creado {{=persona.created_on}})</span></p>
+        </li>
+        <li>
+            <span class="publicado">Publicado</span> <a href="#">[ Editar ]</a>
+        </li>
+        <li class="vermas">
+            <p><a href="#">ver m&aacute;s &gt;</a></p>
+        </li>
+    </ul>
+</li>
+{{pass}}
+{{pass}}
+</ul>
+</div>
+<!--Pagination-->
+     {{ include 'includes/pagination.html' }}
+<!--Pagination end-->

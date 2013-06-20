@@ -1,0 +1,66 @@
+{{for key,value in seleccionP20.items():}}
+<div class="accordion-group">
+    {{if len(P2O[key])>0:}}
+    <div class="accordion-heading clearfix">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseP2O{{=key}}">
+            {{=T(value)}} <span>( {{=len(P2O[key])}} Items )</span>
+        </a>
+        <div class="buttonsColapse">
+            <!--TODO requiere permiso de administracion-->
+            <!--<a href="#">Editar</a>-->
+            <a href="#collapseP2O{{=key}}" class="showIco" data-toggle="collapse" data-parent="#accordion2">Mostrar</a>
+        </div>
+    </div>
+    <div id="collapseP2O{{=key}}" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <p></p>
+            <table class="table table-striped">
+                {{for conexion in P2O[key]:}}
+                <tr id="orgs{{=conexion.RelPersOrg.id}}">
+                    <td>{{=A(conexion.persona.alias, _href=URL('caso_perfil', args=conexion.RelPersOrg.origenP, extension=False))}}</td>
+                    <td>{{if conexion.RelPersOrg.isPast==True:}}Fue
+                        {{elif (conexion.RelPersOrg.fhasta == None)|(conexion.RelPersOrg.fhasta ==''):}}Es
+                        {{elif (conexion.RelPersOrg.fhasta < str(hoy)):}}Fue
+                        {{elif (conexion.RelPersOrg.fin==None):}}Es
+                        {{elif (conexion.RelPersOrg.fin < hoy):}}Fue
+                        {{else:}}Es
+                        {{pass}}
+                    </td>
+                    <td>{{if conexion.tipoRelacionP20.relationship=='Otro':}}{{=conexion.RelPersOrg.extraLabel}}
+                        {{elif conexion.RelPersOrg.extraLabel:}}{{=conexion.tipoRelacionP20.relationship}} ({{=conexion.RelPersOrg.extraLabel}})
+                        {{else:}}{{=conexion.tipoRelacionP20.relationship}}{{pass}}</td>
+
+                      <td>
+                         {{if conexion.RelPersOrg.fdesde:}}
+                         Desde:{{=conexion.RelPersOrg.fdesde}}
+                         {{pass}}
+                         {{if conexion.RelPersOrg.fhasta:}}
+                         Hasta: {{=conexion.RelPersOrg.fhasta}}
+                         {{pass}}
+                         {{if conexion.RelPersOrg.isPast==True:}}
+                         {{=T('(Es pasado)')}}
+                         {{pass}}
+                     </td>
+                    {{if borrar:}}
+                        <td>{{=A('editar conexión', _class='btn btn-mini',_href=URL('relorgs_edit', args=conexion.RelPersOrg.id,extension=False))}}</td>
+                        {{=TAG.BUTTON(T('Eliminar'),_class='btn btn-mini',_onclick='deleteRow(event,"RelPersOrg",%s);' % conexion.RelPersOrg.id,extension=False)}}
+                    {{pass}}
+                    {{if conexion.RelPersOrg.documentSource!=None:}}
+                        <td>
+                        {{for doc in conexion.RelPersOrg.documentSource:}}
+                             <a href="{{=documentSource[doc].documentURL}}" target="_blank" class="fuente" rel="popover" data-original-title="Fuente" data-content="{{=documentSource[doc].name}}<br>
+                             {{=documentSource[doc].documentURL}}{{if documentSource[doc].fecha:}}<br>Fecha:{{=documentSource[doc].fecha}}{{pass}}">[Fuente]</a>
+                        {{pass}}
+                        </td>
+                    {{pass}}
+                </tr>
+                {{pass}}
+            </table>
+        </div>
+    </div>
+    {{pass}}
+</div>
+{{pass}}
+<script type="text/javascript">
+ $('a[rel="popover"]').popover();
+</script>

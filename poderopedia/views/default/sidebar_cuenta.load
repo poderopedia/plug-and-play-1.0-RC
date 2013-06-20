@@ -1,0 +1,41 @@
+{{ if (auth.has_membership('administrator')) | (auth.has_membership('editor')):}}
+<hgroup class="widget-heading widget-filter widget-persona heading clearfix">
+  <h5>&darr; Mis Notificaciones</h5>
+</hgroup>
+<div class="widget widget-sources clearfix">
+  <a href="#" class="notify"><span class="baloon">23</span>Nuevas notificaciones</a>
+</div>
+
+
+
+
+
+<hgroup class="widget-heading widget-filter widget-persona heading clearfix">
+  <h5>&darr; He Creado</h5>
+</hgroup>
+<div class="widget widget-sources clearfix">
+  <ul class="websites-sources">
+      <li><a href="{{=URL('default','mis_publicaciones',args='personas', extension=False)}}">Personas <span class="badgeNum">({{=persona}})</span></a></li>
+      <li><a href="{{=URL('default','mis_publicaciones',args='empresas', extension=False)}}">Empresas <span class="badgeNum">({{=empresa}})</span></a></li>
+      <li><a href="{{=URL('default','mis_publicaciones',args='organizaciones', extension=False)}}">Organizaciones <span class="badgeNum">({{=organizacion}})</span></a></li>
+      <li><a href="#">Mapas <span class="badgeNum">(12)</span></a></li>
+      <li><a href="#">Casos <span class="badgeNum">(12)</span></a></li>
+  </ul>
+ </div>
+
+
+<hgroup class="widget-heading widget-filter widget-persona heading clearfix">
+  <h5>&darr; Mis Colaboraciones</h5>
+</hgroup>
+<div class="widget widget-sources clearfix">
+  <ul class="websites-sources">
+      <li><a href="#">Personas<span class="badgeNum">({{=persona_histo}})</span></a></li>
+      <li><a href="#">Empresas <span class="badgeNum">({{=empresa_histo}})</span></a></li>
+      <li><a href="#">Organizaciones <span class="badgeNum">({{=organizacion_histo}})</span></a></li>
+      <li><a href="#">Mapas <span class="badgeNum">(12)</span></a></li>
+      <li><a href="#">Casos <span class="badgeNum">(12)</span></a></li>
+  </ul>
+ </div>
+{{else:}}
+{{pass}}
+<!-- /sourcesWidget -->

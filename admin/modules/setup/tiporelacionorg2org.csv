@@ -1,0 +1,25 @@
+tipoRelacionOrg2Org.id,tipoRelacionOrg2Org.parent,tipoRelacionOrg2Org.name,tipoRelacionOrg2Org.inverse
+1,0,Propiedad,Propiedad
+2,0,Financiamiento,Recibe financiamiento
+3,1,Matriz,Filial
+4,1,Filial,Matriz
+5,1,Asociada,Asociada
+6,1,Oficina de representación,Oficina Principal
+8,1,Accionista,Tiene como accionista
+9,1,Controlador,Controlada
+10,1,Empresa Socia,Empresa Socia
+11,1,Subsidaria,tiene como Subsidiaria
+12,0,Comercial,Comercial
+13,12,Proveedora Servicios,Compra Servicios
+14,1,Fusionada,Fusiona
+15,1,Coligada,Coligada
+16,0,Dependencia,Dependencia
+17,16,Organismo Principal,Organismo Dependiente
+18,16,Organismo Dependiente,Organismo Principal
+19,12,Compra Servicios,Proveedora
+20,0,Donaciones,Donaciones
+21,0,Subvenciones,Subvenciones
+22,20,Recibe Donación,Otorga Donación
+23,20,Otorga Donación,Recibe Donación
+24,21,Otorga Subvención,Recibe Subvención
+25,21,Recibe Subvención,Otorga Subvención

@@ -1,0 +1,181 @@
+{{from conversion import convert_latin_chars}}
+{{if caso is not None: response.title = caso.name+' | Poderopedia' }}
+{{if (caso.description is not None) & (caso.description!=''): response.meta.description = caso.description[:200]}}{{pass}}
+{{pass}}
+{{extend 'visualizacionLayout.html'}}
+
+{{block modales}}
+<script type="text/javascript">
+    $('#sugerirconexionButton').click(function() {
+        web2py_component("{{=URL('caso','sugerir_persona.load',args=_id)}}","sugerir_persona_caso")
+    });
+    $('#sugerirPerfilButton').click(function() {
+        web2py_component("{{=URL('visualizacion','sugerir_perfil.load',args=_id)}}","sugerir_perfil")
+    });
+    $('#reportarErrorButton').click(function() {
+        web2py_component("{{=URL('visualizacion','tipoerror.load',args=[_id,'caso'])}}","reportarError")
+    });
+    $('#contenidoInadecuadoButton').click(function() {
+        web2py_component("{{=URL('visualizacion','tipoinadecuado.load',args=[_id,'caso'])}}","contenidoInadecuado")
+    });
+    // Javascript to enable link to tab
+    var hash = document.location.hash;
+    var prefix = "tab_";
+    if (hash) {
+        $('.nav-tabs a[href='+hash.replace(prefix,"")+']').tab('show');
+    }
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown', function (e) {
+        window.location.hash = e.target.hash.replace("#", "#" + prefix);
+    });
+
+
+</script>
+{{end}}
+
+{{block sidebar }}
+{{ include 'include/sidebar_caso.html' }}
+{{end}}
+
+{{block breadcrumbs}}
+<!--<span>Búsqueda general</span>-->
+{{end}}
+{{
+
+d = caso.modified_on
+pretty_d = d.strftime('%d-%m-%Y')
+}}
+
+
+<hgroup class="search-results clearfix">
+
+    {{if (caso.depiction is not None)&(caso.depiction!=''):}}<img src="{{ =URL('default','fast_download',args=caso.haslogo) }}" class="imagen-perfil-ch" />{{else:}}<img src="{{=URL('static','tmp/avatar-empresa45.gif')}} "  width="120" class="imagen-perfil-ch" />{{pass}}
+
+
+    <h3 class="perfil-name ">{{=XML(caso.name)}}</h3>
+    {{if (caso.birth==None)|(caso.birth==''):}} {{else:}}<h5 class="perfil-details">{{=caso.birth}}</h5>{{pass}}
+    {{if (caso.description is None)|(caso.shortBio==''):}} {{else:}}<p class="perfil-details">{{=XML(caso.shortBio)}}</p>{{pass}}
+    <div class="botonera-perfil">
+        <div class="botonera-perfil">
+            <a href="#Lightbox_sugerirperfil" data-toggle="modal" id="sugerirPerfilButton">[ <span>sugerir otro perfil</span> ]</a>
+            <a href="#Lightbox_sugerirconexion" data-toggle="modal" id="sugerirconexionButton">[ <span>sugerir conexiones</span> ]</a>
+            <a href="#Lightbox_reportarerror" data-toggle="modal" id="reportarErrorButton">[ <span>reportar error</span> ] </a>
+            <a href="#Lightbox_contenidoinadecuado" data-toggle="modal" id="contenidoInadecuadoButton">[ <span>reportar contenido inadecuado</span> ]</a>
+            <a href="{{=URL('visualizacion','historial',args=[_id,'caso_caso'])}}">[ <span>ver historial</span> ] </a>
+            <!--<a href="#" class="vermas"><span>Ver todo en una página ></span></a>-->
+            {{if caso.modified_on is not None:}}
+            <br><span class="actualizado">Actualizado {{=pretty_d}}</span>{{pass}}
+        </div>
+    </div>
+</hgroup>
+
+<!-- centerCol -->
+<div class="row-division clearfix">
+    <!--Tabs-->
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#conexiones" data-toggle="tab">Conexiones</a></li>
+            {{if (caso.description is not None)&(caso.description!= ''):}}<li><a href="#perfil" data-toggle="tab">Perfil</a></li>{{pass}}
+            <li><a href="{{=URL('casos','mapa_relaciones',args=convert_latin_chars(caso.alias))}}" target="_blank">Mapa de Relaciones</a></li>
+            {{pass}}
+            <li><a href="#documentos" data-toggle="tab">Documentos</a></li>
+            <li><a href="#fuentes" data-toggle="tab">Fuentes</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="conexiones">
+                {{ include 'visualizacion/datos_duros_caso.html' }}
+            </div>
+            <div class="tab-pane" id="perfil">
+                <h4>{{=T('Perfil')}}</h4>
+                <p>{{=XML(caso.longBio)}}</p>
+            </div>
+
+            <div class="tab-pane" id="documentos">
+                {{ include 'includes/Documentos_caso.html' }}
+            </div>
+            <div class="tab-pane" id="fuentes">
+                <!--TODO Fuentes caso -->
+                <div class="editor-perfil fuente-perfil clearfix">
+                    <h5>Fuentes de {{=caso.alias}}</h5>
+                    <!--<a href="#" class="boton-corchete">[ <span>editar</span> ]</a>-->
+                </div>
+
+                {{=LOAD('services','Org_relation_fuentes.load',args=_id,target='fuentesPersona',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+            </div>
+        </div>
+    </div>
+    <!--Fin de Tabs-->
+</div>
+
+
+<!--Reporte de error-->
+<script type="text/javascript">
+    jQuery('#Lightbox_reportarerror').on('hidden', function () {
+        // ajax call to refresh data grid
+    })
+</script>
+
+<div class="modal hide fade" id="Lightbox_reportarerror">
+    <div class="modal-header clearfix">
+        <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+    </div>
+    <div class="modal-body">
+        <div id="reportarError"></div>
+    </div>
+</div>
+<!--Fin Reporte de Error-->
+
+<!--Sugerir Conexion-->
+<script type="text/javascript">
+    jQuery('#Lightbox_sugerirconexion').on('hidden', function () {
+        // ajax call to refresh data grid
+    })
+</script>
+
+<!--Lightbox_sugerirconexion-->
+<div class="modal hide fade" id="Lightbox_sugerirconexion">
+    <div class="modal-header clearfix">
+        <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+    </div>
+    <div class="modal-body">
+        <div id="sugerir_persona_caso"></div>
+    </div>
+</div>
+<!--Fin Sugerir Conexion-->
+
+<!--Contenido Inadecuado-->
+<script type="text/javascript">
+    jQuery('#Lightbox_contenidoinadecuado').on('hidden', function () {
+        // ajax call to refresh data grid
+    })
+</script>
+
+<div class="modal hide fade" id="Lightbox_contenidoinadecuado">
+    <div class="modal-header clearfix">
+        <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+    </div>
+    <div class="modal-body">
+        <div id="contenidoInadecuado"></div>
+    </div>
+</div>
+<!--Fin Contenido Inadecuado-->
+
+
+<!--Sugerir Perfil-->
+<script type="text/javascript">
+
+    jQuery('#Lightbox_sugerirperfil').on('hidden', function () {
+        // ajax call to refresh data grid
+    })
+</script>
+<!--Lightbox_sugerirconexion-->
+<div class="modal hide fade" id="Lightbox_sugerirperfil">
+    <div class="modal-header clearfix">
+        <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+    </div>
+    <div class="modal-body">
+        <div id="sugerir_perfil"></div>
+    </div>
+</div>
+<!--Fin Sugerencia Perfil-->

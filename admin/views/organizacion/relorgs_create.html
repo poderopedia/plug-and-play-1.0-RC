@@ -1,0 +1,73 @@
+{{response.files.append(URL('static','js/jquery.optionTree.js'))}}
+{{response.files.append(URL('static','css/smoothness/jquery-ui-1.10.3.custom.min.css'))}}
+{{response.files.append(URL('static','js/jquery-ui-1.10.3.custom.min.js'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.css'))}}
+{{response.files.append(URL('static','js/jquery.multiselect.js'))}}
+{{response.files.append(URL('static','js/jquery.multiselect.filter.js'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.css'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.filter.css'))}}
+{{extend 'layout.html'}}
+<h1>{{=T('Conexiones')}}</h1>
+{{=form.custom.begin}}
+<table>
+    <tr>
+        <td>{{=T('Organizacion')}}</td>
+        <td>{{=T('Conexion')}}</td>
+        <td>{{=T('Persona')}}</td>
+    </tr>
+    
+    <tr>
+        <td>{{=form.custom.widget.destinoO}}</td>
+        <td><input type="hidden" id="RelPersOrg_specificRelation" name="specificRelation"  /></td>
+        <td>{{=form.custom.widget.origenP}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>{{=db.RelPersOrg.extraLabel.label}}<br>{{=form.custom.widget.extraLabel}} </td>
+    </tr>
+    <tr><td colspan="3">{{=T('Desde')}}</td></tr>
+    <tr>
+        <td>{{=form.custom.widget.iniDay}}</td>
+        <td>{{=form.custom.widget.iniMonth}}</td>
+        <td>{{=form.custom.widget.iniYear}}</td>
+    </tr>
+    <tr><td colspan="3">{{=T('Hasta')}}</td></tr>
+    <tr>
+        <td>{{=form.custom.widget.finDay}}</td>
+        <td>{{=form.custom.widget.finMonth}}</td>
+        <td>{{=form.custom.widget.finYear}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>{{=db.RelPersOrg.isPast.label}}{{=form.custom.widget.isPast}}</td>
+    </tr>
+    <tr>
+        <td colspan="3">{{=db.RelPersOrg.documentSource.label}}{{=form.custom.widget.documentSource}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td> {{=form.custom.submit}} </td>
+    </tr>
+    
+</table>
+{{=form.custom.end}}
+
+{{=back_button}}
+
+<script type="text/javascript">
+    $("#RelPersOrg_documentSource").multiselect({minWidth:800}).multiselectfilter({width:300});
+    $("#RelPersOrg_documentCloud").multiselect({minWidth:800}).multiselectfilter({width:300});
+
+$(function() {
+    var options = {indexed: true, select_class: 'vertical', on_each_change: "{{=URL('default','call',args=['json','get_specificRelation'])}}", preselect: {'specificRelation': [{{ response.write(default, escape=False) }}] },};
+    var option_tree = {{ response.write(option_tree+";", escape=False) }};
+
+    $('input[name=specificRelation]').optionTree(option_tree, options);
+
+
+
+});
+</script>

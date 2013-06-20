@@ -1,0 +1,9 @@
+tipoParentesco.id,tipoParentesco.name,tipoParentesco.nameInverso,tipoParentesco.description
+1,Padre /Madre,Hijo/ Hija,<NULL>
+2,Hijo/ Hija,Padre /Madre,<NULL>
+3,Hermano /Hermana,Hermano /Hermana,<NULL>
+4,Sobrino /Sobrina,Tío / Tía,<NULL>
+5,Tío / Tía,Sobrino /Sobrina,<NULL>
+6,Primo/Prima,Primo/Prima,<NULL>
+7,Abuelo/Abuela,Nieto/Nieta,<NULL>
+8,Nieto/Nieta,Abuelo/Abuela,<NULL>

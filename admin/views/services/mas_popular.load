@@ -1,0 +1,5 @@
+<ul class="popular">
+    {{for vistos in popular:}}
+    <li><a href="{{=URL(vistos['c'],vistos['f'],args=vistos['args'],extension=False)}}">{{=vistos['alias']}}  </a></li>
+    {{pass}}
+</ul>

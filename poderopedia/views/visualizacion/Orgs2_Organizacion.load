@@ -1,0 +1,52 @@
+{{for relacion,listtupla in relationship.items():}}
+{{if len(listtupla)>0:}}
+<div class="accordion-group">
+    <div class="accordion-heading clearfix">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseP2P{{=relacion}}">
+            {{=T(relacion)}} <span>( {{=len(listtupla)}} Items )</span>
+        </a>
+        <div class="buttonsColapse">
+            <!--TODO requiere permiso de administracion-->
+            <!--<a href="#">Editar</a>-->
+            <a href="#collapseP2P{{=relacion}}" class="showIco" data-toggle="collapse" data-parent="#accordion2">Mostrar</a>
+        </div>
+    </div>
+    <div id="collapseP2P{{=relacion}}" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <p></p>
+            <table class="table table-striped">
+                {{for orgID,relation,document,fdesde,fhasta,isPast in listtupla:}}
+                <tr>
+                    <td>{{=relation}}</td>
+                    <td>de</td>
+                    <td>{{=A(organizacion[orgID], _href=URL('caso_organizacion', args=orgID,extension=False))}}</td>
+                    {{if document!=None:}}
+                        <td>
+                        {{for doc in document:}}
+                             <a href="{{=documentSource[doc].documentURL}}" target="_blank" class="fuente" rel="popover" data-original-title="Fuente" data-content="{{=documentSource[doc].name}}<br>
+                             {{=documentSource[doc].documentURL}}{{if documentSource[doc].fecha:}}<br>Fecha:{{=documentSource[doc].fecha}}{{pass}}">[Fuente]</a>
+                        {{pass}}
+                        </td>
+                    {{pass}}
+                     <td>
+                         {{if fdesde:}}
+                         Desde:{{=fdesde}}
+                         {{pass}}
+                         {{if fhasta:}}
+                         Hasta: {{=fhasta}}
+                         {{pass}}
+                         {{if isPast==True:}}
+                         {{=T('(Es pasado)')}}
+                         {{pass}}
+                     </td>
+                </tr>
+                {{pass}}
+            </table>
+        </div>
+    </div>
+</div>
+{{pass}}
+{{pass}}
+<script type="text/javascript">
+ $('a[rel="popover"]').popover();
+</script>

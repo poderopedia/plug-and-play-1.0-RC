@@ -1,0 +1,48 @@
+<!--botones de selección-->
+<!- TODO cargar via LOAD botones pasar target a la función -->
+{{ include 'includes/botones-list-directorio.html' }}
+<!--boones de selección-->
+<!--menu-abecedario-->
+{{ include 'includes/menu-abecedario-directorio.html' }}
+<!--menu-abecedario-->
+<div class="row-division directorio clearfix">
+<!--hgroup-->
+      <hgroup class="box-heading clearfix">
+        <h3><A name="{{=letter}}"><span>{{=letter}}</span> ({{=total}}) &darr;</a></h3>
+        {{if page:}}
+        <a href="#{{=letter}}"  id="prevpage{{=target}}">&larr; Anterior</a>
+        {{pass}}
+        {{if len(personas)>items_per_page:}}
+            <a href="#{{=letter}}" class="hint" id="addpage{{=target}}">Ver más &gt;</a>
+        {{pass}}
+      </hgroup>
+      <!--hgroup-->
+
+      <ul class="faces-ul">
+            {{for i,persona in enumerate(personas):}}
+            {{if i==items_per_page: break}}
+              <li>{{if persona.depiction!=None:}}<img src="{{ =URL('default','fast_download',args=persona.depiction) }}" width="45" />{{else:}} <img src="{{ =URL('static','tmp/avatar-45.gif') }}" />{{pass}}
+                <ul class="info">
+                  <li>
+                    <h4><a href="{{=URL('visualizacion','caso_perfil',args=persona.id,extension=False)}}" title="{{=persona.alias}}">{{=persona.alias}}</a></h4>
+                  </li>
+                  <li>
+                        <!--<p><span>Padre (1922 - 2011)</span></p>-->
+                  </li>
+                  <li class="vermas">
+                    <p><a href="#">ver m&aacute;s &gt;</a></p>
+                  </li>
+                </ul>
+              </li>
+            {{pass}}
+      </ul>
+
+
+
+</div>
+
+<!--Pagination-->
+{{block pagination}}
+{{ include 'includes/pagination.html'}}
+{{end}}
+<!--Pagination end-->

@@ -1,0 +1,71 @@
+{{response.files.append(URL('static','css/smoothness/jquery-ui-1.10.3.custom.min.css'))}}
+{{response.files.append(URL('static','js/jquery-ui-1.10.3.custom.min.js'))}}
+{{response.files.append(URL('static','js/jquery.optionTree.js'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.css'))}}
+{{response.files.append(URL('static','js/jquery.multiselect.js'))}}
+{{response.files.append(URL('static','js/jquery.multiselect.filter.js'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.css'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.filter.css'))}}
+
+{{extend 'layout.html'}}
+<h1>{{=T('Conexiones Personales')}}</h1>
+
+{{=form.custom.begin}}
+<table>
+    <tr><td>{{=T('Persona')}}</td><td></td><td>{{=T('Relación')}}</td><td></td><td>{{=T('Persona')}}</td></tr>
+    
+    <tr><td>{{=form.custom.widget.origenP}}</td><td>{{=T('es')}}</td><td><input type="hidden" id="relPersona_relacion" name="relacion"  /></td><td>{{=T('de')}}</td><td>{{=form.custom.widget.destinoP}}</td></tr>
+    <tr><td></td><td></td><td>{{=db.relPersona.extraO.label}}<br>{{=form.custom.widget.extraO}}</td><td></td><td>{{=db.relPersona.extraLabel.label}}<br>{{=form.custom.widget.extraLabel}} </td></tr>
+    <tr><td colspan="5">{{=T('Desde')}}</td></tr>
+    <tr>
+        <td>{{=form.custom.widget.iniDay}}</td>
+        <td></td>
+        <td>{{=form.custom.widget.iniMonth}}</td>
+        <td></td>
+        <td>{{=form.custom.widget.iniYear}}</td>
+    </tr>
+    <tr><td colspan="5">{{=T('Hasta')}}</td></tr>
+    <tr>
+        <td>{{=form.custom.widget.finDay}}</td>
+        <td></td>
+        <td>{{=form.custom.widget.finMonth}}</td>
+        <td></td>
+        <td>{{=form.custom.widget.finYear}}</td>
+    </tr>
+    <tr><td colspan="4"></td><td>{{=db.relPersona.isPast.label}}{{=form.custom.widget.isPast}}</td></tr>
+    <tr><td colspan="5">{{=db.relPersona.documentSource.label}}{{=form.custom.widget.documentSource}}</td></tr>
+
+    <tr><td colspan="3"></td><td colspan="2"> {{=form.custom.submit}} </td></tr>
+    
+</table>
+{{=form.custom.end}}
+
+
+{{=back_button}}
+
+<script type="text/javascript">
+
+
+    $("#relPersona_documentSource").multiselect({minWidth:800}).multiselectfilter({width:300});
+    $("#persona_documentCloud").multiselect({minWidth:800}).multiselectfilter({width:300});
+
+    $(function() {
+    var options = {
+        indexed: true,
+        select_class: 'vertical',
+        on_each_change: "{{=URL('default','call',args=['json','get_relacion'])}}",
+        preselect: {
+            'relacion': [{{ response.write(default, escape=False) }}]
+        },
+    };
+    var option_tree = {{response.write(option_tree+";", escape=False)}};
+
+    $('input[name=relacion]').optionTree(option_tree, options);
+
+
+
+
+
+    });
+</script>
+

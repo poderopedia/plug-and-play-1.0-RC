@@ -1,0 +1,14 @@
+<div class="row-division-center"><!-- .row-division -->
+
+<div class="modal-body">
+    <p></p>
+            <h2>Error 404 - Página no encontrada</h2><br>
+    <span class="text-thanks"><p>¡Uuuups! No pudimos encontrar lo que buscabas</p>
+
+                <p>La página que estás buscando no se pudo encontrar.</p> Comprueba la barra
+de direcciones para asegurarte de que la dirección esté escrita
+correctamente. Si todo lo demás falla, puedes visitar nuestra página
+                de inicio en el siguiente <a href="{{=URL('default','index')}}">enlace</a>.</span>
+      </div>
+
+</div><!-- .row-division -->

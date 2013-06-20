@@ -1,0 +1,30 @@
+<ul class="btns_aux">
+    <li>{{=A('Hoy',_href=URL(args=['portada','day']),cid=request.cid,_class=active['hoy'])}}</li>
+    <li>{{=A('Semana',_href=URL(args=['portada','week']),cid=request.cid, _class=active['semana'])}}</li>
+    <li>{{=A('Mes',_href=URL(args=['portada','month']),cid=request.cid, _class=active['mes'])}}</li>
+</ul>
+<ul class="faces-ul">
+    {{for vistos in popular:}}
+    {{url=request.env.http_host+URL(vistos['c'],vistos['f'],args=vistos['args'],extension=False)}}
+   <li class="listas">
+        {{=vistos['imagen']}}
+        <ul class="info ancholistas">
+        	<li class="listas">
+        		<h3><a href="{{=URL(vistos['c'],vistos['f'],args=vistos['args'],extension=False)}}">{{=vistos['alias']}}</a></h3>
+            </li>
+         	
+            <li class="listas">
+                {{if vistos['shortBio']!=None:}}{{=XML(vistos['shortBio'][:184])}}... <a href="{{=URL(vistos['c'],vistos['f'],args=vistos['args'],extension=False)}}">más &gt;</a>{{pass}}
+            </li>
+            
+            <li class="listas">
+                <a href="javascript: void(0);" onclick="window.open('http://www.facebook.com/sharer.php?u={{=url}}','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');">
+                <img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a>
+                <a href="https://twitter.com/share" data-url="{{=url}}" class="twitter-share-button" data-dnt="true" data-count="none" data-via="Poderopedia">
+                <img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a>
+
+            </li>
+       	  </ul> 
+       	</li>    
+{{pass}}
+   </ul>

@@ -1,0 +1,59 @@
+{{if len(parientes)+len(parientesD) != 0:}}
+<div class="accordion-heading clearfix">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse2">
+            Familia <span>( {{=len(parientes)+len(parientesD)}} Items )</span>
+        </a>
+        <div class="buttonsColapse">
+            <!--TODO requiere permiso de administracion-->
+            <!--<a href="#">Editar</a>-->
+            <a href="#collapse2" class="showIco" data-toggle="collapse" data-parent="#accordion2">Mostrar</a>
+        </div>
+    </div>
+    <div id="collapse2" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <p></p>
+            <table class="table table-striped">
+                {{for pariente in parientes:}}
+                <tr id="fam{{=pariente.relFamiliar.id}}">
+                    <td>es</td>
+                    <td>{{=pariente.tipoParentesco.name}}</td>
+                    <td>de</td>
+                    <td>{{=A(pariente.persona.alias, _href=URL('visualizacion','caso_perfil', args=pariente.relFamiliar.destinoP,extension=False))}}</td>
+                    {{if editar:}}
+                        <td>{{=A('editar conexión',_class='btn btn-mini',_title='View  Post', _href=URL('relFamiliar_edit', args=pariente.relFamiliar.id,extension=False))}}</td>
+                    {{pass}}
+                    {{if borrar:}}<td>{{=TAG.BUTTON(T('Eliminar'),_class='btn btn-mini',_onclick='deleteRow(event,"relFamiliar",%s);' % pariente.relFamiliar.id)}}</td>{{pass}}
+                    {{if pariente.relFamiliar.documentSource!=None:}}
+                        <td>
+                        {{for doc in pariente.relFamiliar.documentSource:}}
+                             <a href="{{=documentSource[doc].documentURL}}" target="_blank" class="fuente" rel="popover" data-original-title="Fuente" data-content="{{=documentSource[doc].name}}<br>
+                             {{=documentSource[doc].documentURL}}{{if documentSource[doc].fecha:}}<br>Fecha:{{=documentSource[doc].fecha}}{{pass}}">[Fuente]</a>
+                        {{pass}}
+                        </td>
+                    {{pass}}
+                </tr>
+                {{pass}}
+                {{for pariente in parientesD:}}
+                <tr id="fam{{=pariente.relFamiliar.id}}">
+                    <td>es</td>
+                    <td>{{=pariente.tipoParentesco.nameInverso}}</td>
+                    <td>de</td>
+                    <td>{{=A(pariente.persona.alias, _href=URL('visualizacion','caso_perfil', args=pariente.relFamiliar.origenP,extension=False))}}</td>
+                    {{if editar:}}
+                        <td>{{=A('editar conexión', _href=URL('relFamiliar_edit', args=pariente.relFamiliar.id))}}</td>
+                    {{pass}}
+                    {{if borrar:}}<td>{{=TAG.BUTTON(T('Eliminar'),_class='btn btn-mini',_onclick='deleteRow(event,"relFamiliar",%s);' % pariente.relFamiliar.id)}}</td>{{pass}}
+                    {{if pariente.relFamiliar.documentSource!=None:}}
+                        <td>
+                        {{for doc in pariente.relFamiliar.documentSource:}}
+                             <a href="{{=documentSource[doc].documentURL}}" target="_blank" class="fuente" rel="popover" data-original-title="Fuente" data-content="{{=documentSource[doc].name}}<br>
+                             {{=documentSource[doc].documentURL}}{{if documentSource[doc].fecha:}}<br>Fecha:{{=documentSource[doc].fecha}}{{pass}}">[Fuente]</a>
+                        {{pass}}
+                        </td>
+                    {{pass}}
+                </tr>
+                {{pass}}
+            </table>
+        </div>
+    </div>
+{{pass}}

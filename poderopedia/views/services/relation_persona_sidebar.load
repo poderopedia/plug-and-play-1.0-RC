@@ -1,0 +1,28 @@
+{{from conversion import convert_latin_chars}}
+<hgroup class="widget-heading widget-filter widget-persona heading clearfix">
+    <h5><a href="{{=URL(controller,'personasrelacionadas',args=alias,extension=False)}}">&darr; <span>{{=total}} Personas</span> Relacionadas</a></h5>
+</hgroup>
+<div class="widget widget-sources clearfix">
+    <ul class="widget-images">
+        {{for i,private in enumerate(personas):}}
+            {{if i==items_per_page: break}}
+            <li><a href="{{=URL('personas','conexiones',args=convert_latin_chars(private.alias),extension=False)}}" >
+            {{if (private.depiction!=None)&(private.depiction!=''):}}<img src="{{ =URL('default','fast_download',args=private.depiction) }}" rel="tooltip" title="{{=private.alias}}" />{{else:}}<img src="{{ =URL('static','tmp/avatar-45.gif') }}" rel="tooltip" title="{{=private.alias}}" />{{pass}}</a></li>
+        {{pass}}
+    </ul>
+   <a href="#Lightbox_sugerirconexion" data-toggle="modal" class="modales sugest" id="sugerirconexion_sidebarpersona">[Sugerir otra Persona]</a>
+<!--  {{if page:}}
+    <div href="#" class="sugest" id="prevpage{{=target}}">Anterior</div>
+    {{pass}}-->
+  {{if len(personas)>items_per_page:}}
+    <!--<div class="sugest-right" id="addpage{{=target}}">Ver más &gt;</div>-->
+    <a href="{{=URL(controller,'personasrelacionadas',args=alias,extension=False)}}"><span class="sugest-right">Ver más &gt; </span></a>
+  {{pass}}
+</div>
+
+<script>
+
+    $('#sugerirconexion_sidebarpersona').click(function() {
+        web2py_component("{{=URL('persona','sugerir_persona.load',args=_id)}}","sugerir_persona")
+    });
+</script>

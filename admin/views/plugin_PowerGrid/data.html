@@ -1,0 +1,10 @@
+{{if (isinstance(form, SQLFORM) and form.errors): response.flash=T('Hay errores en el formulario')}}
+{{extend 'plugin_PowerGrid/layout.html'}}
+{{if (isinstance(form, SQLFORM) and form.errors):}}
+    <script type='text/javascript'>
+    $(document).ready(function () {
+     //add java script here  
+    });
+    </script>
+{{pass}}
+{{=form}}

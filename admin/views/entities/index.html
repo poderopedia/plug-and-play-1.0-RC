@@ -1,0 +1,28 @@
+{{extend 'layout.html'}}
+
+<ul class="nav nav-tabs" id="entitiesTab">
+  <li><a href="#person" {{if active=='person':}}class="active"{{pass}}>Personas</a></li>
+  <li><a href="#companies" {{if active=='companies':}}class="active"{{pass}}>Empresas</a></li>
+  <li><a href="#organizations" {{if active=='organizations':}}class="active"{{pass}}>Organizaciones</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane {{if active=='person':}}active{{pass}}" id="person">
+    {{=LOAD('personas','index.load',ajax=True,user_signature=True)}}
+  </div>
+  <div class="tab-pane {{if active=='companies':}}active{{pass}}" id="companies">
+    {{=LOAD('companies','index.load',ajax=True,user_signature=True)}}
+  </div>
+  <div class="tab-pane {{if active=='organizations':}}active{{pass}}" id="organizations">
+    {{=LOAD('organizations','index.load',ajax=True,user_signature=True)}}
+  </div>
+</div>
+
+
+<script>
+  $('#entitiesTab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+</script>
+

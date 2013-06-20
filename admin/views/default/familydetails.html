@@ -1,0 +1,175 @@
+<h4>{{=T('Familia')}}</h4>
+{{=A(T('Agregar Conexión'), _href=URL('default','relFamiliar_create', args=_id ))}}
+<table class="table table-striped table-bordered">
+    {{for pariente in parientes:}}
+    <tr id="fam{{=pariente.relFamiliar.id}}" class="success">
+        <td>{{=T('es')}}</td>
+        <td>{{=T(pariente.tipoParentesco.name)}}</td>
+        <td>{{=T('de')}}</td>
+        <td>{{=A(pariente.persona.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=pariente.relFamiliar.destinoP))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','relFamiliar_edit', args=pariente.relFamiliar.id))}}</td>
+        {{if borrar:}}
+        <td>{{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relFamiliar",%s);' % pariente.relFamiliar.id)}}</td>
+        {{pass}}
+    </tr>
+    {{pass}}
+    {{for pariente in parientesD:}}
+    <tr id="fam{{=pariente.relFamiliar.id}}" class="success">
+        <td>{{=T('es')}}</td>
+        <td>{{=T(pariente.tipoParentesco.nameInverso)}}</td>
+        <td>{{=T('de')}}</td>
+        <td>{{=A(pariente.persona.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=pariente.relFamiliar.origenP))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','relFamiliar_edit', args=pariente.relFamiliar.id))}}</td>
+        {{if borrar:}}
+        <td>{{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relFamiliar",%s);' % pariente.relFamiliar.id)}}</td>
+        {{pass}}
+    </tr>
+    {{pass}}
+</table>
+<h4>{{=T('Conyuges')}}</h4>
+{{=A(T('Agregar Conexión'), _href=URL('default','relPersona_create', args=[_id,1] ))}}
+<table class="table table-striped table-bordered">
+    {{for conyuge in conyugesO:}}
+    <tr id="pers{{=conyuge.relPersona.id}}" class="success">
+        <td>{{=T('es')}}</td>
+        <td>{{=T(conyuge.tipoRelacionP2P.name)}}</td>
+        <td>{{=T('con')}}</td>
+        <td>{{=A(conyuge.persona.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=conyuge.relPersona.destinoP))}}</td>
+        <td>
+            {{if conyuge.relPersona.fdesde:}}
+            {{=conyuge.relPersona.fdesde}}
+            {{pass}}
+            {{if conyuge.relPersona.fhasta:}}
+            -{{=conyuge.relPersona.fhasta}}
+            {{pass}}
+            {{if conyuge.relPersona.isPast=='T':}}
+            {{=T('es pasado')}}
+            {{pass}}
+        </td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','relPersona_edit', args=conyuge.relPersona.id))}}</td>
+        {{if borrar:}}
+        <td>{{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relPersona",%s);' % conyuge.relPersona.id)}}</td>
+        {{pass}}
+    </tr>
+    {{pass}}
+    {{for conyuge in conyugesD:}}
+    <tr id="pers{{=conyuge.relPersona.id}}" class="success">
+        <td>{{=T('es')}}</td>
+        <td>{{=T(conyuge.tipoRelacionP2P.name)}}</td>
+        <td>{{=T('con')}}</td>
+        <td>{{=A(conyuge.persona.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=conyuge.relPersona.origenP))}}</td>
+        <td>
+            {{if conyuge.relPersona.fdesde:}}
+            {{=conyuge.relPersona.fdesde}}
+            {{pass}}
+            {{if conyuge.relPersona.fhasta:}}
+            -{{=conyuge.relPersona.fhasta}}
+            {{pass}}
+            {{if conyuge.relPersona.isPast=='T':}}
+            {{=T('es pasado')}}
+            {{pass}}
+        </td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','relPersona_edit', args=conyuge.relPersona.id))}}</td>
+        {{if borrar:}}
+        <td>{{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relPersona",%s);' % conyuge.relPersona.id)}}</td>
+        {{pass}}
+    </tr>
+    {{pass}}
+</table>
+
+{{for key,value in selectP2P.items():}}
+<h4>{{=T(value)}}</h4>
+{{=A(T('Agregar Conexión'), _href=URL('default','relPersona_create', args=[_id,key] ))}}
+<table class="table table-striped table-bordered">
+    {{for conyuge in conexionO[value]:}}
+    <tr id="pers{{=conyuge.relPersona.id}}" class="success">
+        <td>{{=T('con')}}</td>
+        <td>{{=A(conyuge.persona.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=conyuge.relPersona.destinoP))}}</td>
+        <td>{{=T('por')}}</td>
+        <td>{{=T(conyuge.tipoRelacionP2P.name)}}</td>
+        {{if conyuge.relPersona.extraO>0:}}
+            <td>{{=A(Org[conyuge.relPersona.extraO],_href=URL('default','Organizacion_edit',args=conyuge.relPersona.extraO))}}</td>
+        {{else:}}
+            <td></td>
+        {{pass}}
+        <td>{{=A(T('editar conexión'), _href=URL('default','relPersona_edit', args=[conyuge.relPersona.id,key]))}}</td>
+        {{if borrar:}}
+            <td>{{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relPersona",%s);' % conyuge.relPersona.id)}}</td>
+        {{pass}}
+    </tr>
+    {{pass}}
+
+    {{for conyuge in conexionD[value]:}}
+    <tr id="pers{{=conyuge.relPersona.id}}" class="success">
+        <td>{{=T('con')}}</td>
+        <td>{{=A(conyuge.persona.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=conyuge.relPersona.origenP))}}</td>
+        <td>{{=T('por')}}</td>
+        <td>{{=T(conyuge.tipoRelacionP2P.name)}}</td>
+        {{if conyuge.relPersona.extraO>0:}}
+            <td>{{=A(Org[conyuge.relPersona.extraO],_href=URL('default','Organizacion_edit',args=conyuge.relPersona.extraO))}}</td>
+        {{else:}}
+            <td></td>
+        {{pass}}
+        <td>{{=A(T('editar conexión'), _href=URL('default','relPersona_edit', args=[conyuge.relPersona.id,key]))}}</td>
+        {{if borrar:}}
+            <td>{{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relPersona",%s);' % conyuge.relPersona.id)}}</td>
+        {{pass}}
+    </tr>
+    {{pass}}
+</table>
+{{pass}}
+
+
+{{if companeros:}}
+<h4>{{=T('Relaciones con Personas en Organizacion o Empresa')}}</h4>
+<table class="table table-striped table-bordered">
+    {{for compas in companeros:}}
+    <tr class="success">
+        <td>{{=T(compas.companeros.nexo)}} de</td>
+        <td>{{=A(str(compas.persona.alias)+T(' (editar Perfil)'), _href=URL('default','persona', args=compas.companeros.destinoP))}}</td>
+        <td>en</td>
+        <td>{{=A(str(compas.Organizacion.alias)+T(' (editar Grupo)'), _href=URL('default','Organizacion_edit', args=compas.RelPersOrg.destinoO))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','companeros_edit', args=compas.companeros.id))}}</td>
+    </tr>
+    {{pass}}
+    {{for compas in companerosD:}}
+    <tr class="success">
+        <td>{{=A(str(compas.persona.alias)+T(' (editar Perfil)'), _href=URL('default','persona', args=compas.companeros.destinoP))}}</td>
+        <td>{{=T('es/fue')}} {{=T(compas.companeros.nexo)}}</td>
+        <td>{{=T('en')}}</td>
+        <td>{{=A(str(compas.Organizacion.alias)+T(' (editar Grupo)'), _href=URL('default','Organizacion_edit', args=compas.RelPersOrg.destinoO))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','companeros_edit', args=compas.companeros.id))}}</td>
+    </tr>
+    {{pass}}
+</table>
+{{pass}}
+
+
+{{for key,value in seleccionP20.items():}}
+<h4>{{=T(value)}}</h4>
+{{=A(T('Agregar Conexión'), _href=URL('default','relorgs_create', args=[_id,key] ))}}
+<table class="table table-striped table-bordered">
+    {{for conexion in P2O[value]:}}
+    <tr id="orgs{{=conexion.RelPersOrg.id}}" class="success">
+        <td>
+            {{=T(conexion.tipoRelacionP20.relationship)}}
+            {{ if conexion.tipoRelacionP20.relationship=="Otro":}}
+            | {{ =T(conexion.RelPersOrg.extraLabel)}}
+            {{pass}}
+        </td>
+        <td>{{=T('en')}}</td>
+        <td>{{=A(str(conexion.Organizacion.alias)+T(' (editar Grupo)'), _href=URL('default','Organizacion_edit', args=conexion.RelPersOrg.destinoO))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','relorgs_edit', args=conexion.RelPersOrg.id))}}</td>
+        <!--<td>{{=A(T('Agregar Persona a Relacion'), _href=URL('default','companeros_create', args=[conexion.RelPersOrg.id,key] ))}}</td>-->
+        {{if borrar:}}
+        <td>
+            {{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"RelPersOrg",%s);' % conexion.RelPersOrg.id)}}
+        </td>
+        {{pass}}
+    </tr>
+    {{pass}}
+</table>
+{{pass}}
+
+
+

@@ -1,0 +1,60 @@
+{{if largo>0:}}
+<div class="accordion-group">
+    <div class="accordion-heading clearfix">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#comp_estudios" href="#comp">
+            Compañeros de Estudios <span>( {{=largo}} Items )</span>
+        </a>
+        <div class="buttonsColapse">
+            <!--TODO requiere permiso de administracion-->
+            <!--<a href="#">Editar</a>-->
+            <a href="#collapse3" class="showIco" data-toggle="collapse" data-parent="#accordion2">Mostrar</a>
+        </div>
+    </div>
+    <div id="comp" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <p></p>
+            <table class="table table-striped">
+                {{for relation in conexiones:}}
+                {{if persona[relation.relPersona.id]!=None:}}
+                <tr id="pers{{=relation.relPersona.id}}">
+
+                    <td>con</td>
+                    <td>{{=A(persona[relation.relPersona.id].alias, _href=URL('caso_perfil', args=persona[relation.relPersona.id].id,extension=False))}}</td>
+                    <td>en</td>
+                    <td>{{=A(relation.Organizacion.alias, _href=URL('caso_organizacion', args=relation.relPersona.extraO,extension=False))}}</td>
+                    <td>
+                        {{if relation.relPersona.fdesde:}}
+                        Desde:{{=relation.relPersona.fdesde}}
+                        {{pass}}
+                        {{if relation.relPersona.fhasta:}}
+                        hasta:{{=relation.relPersona.fhasta}}
+                        {{pass}}
+                        {{if relation.relPersona.isPast==True:}}
+                        ({{=T('Es pasado')}})
+                        {{pass}}
+                    </td>
+                    {{if editar:}}
+                    <td>{{=A('editar conexión',_class='btn btn-mini', _href=URL('relPersona_edit', args=relation.relPersona.id))}}</td>
+                    {{pass}}
+                    {{if borrar:}}
+                        <td>{{=TAG.BUTTON(T('Eliminar'),_class='btn btn-mini',_onclick='deleteRow(event,"relPersona",%s);' % relation.relPersona.id)}}</td>
+                    {{pass}}
+                    {{if relation.relPersona.documentSource!=None:}}
+                        <td>
+                        {{for doc in relation.relPersona.documentSource:}}
+                            <a href="{{=documentSource[doc].documentURL}}" target="_blank" class="fuente" rel="popover" data-original-title="Fuente" data-content="{{=documentSource[doc].name}}<br>
+                            {{=documentSource[doc].documentURL}}{{if documentSource[doc].fecha:}}<br>Fecha:{{=documentSource[doc].fecha}}{{pass}}">[Fuente]</a>
+                        {{pass}}
+                        </td>
+                    {{pass}}
+                </tr>
+                {{pass}}
+                {{pass}}
+            </table>
+        </div>
+    </div>
+</div>
+{{pass}}
+<script type="text/javascript">
+ $('a[rel="popover"]').popover();
+</script>

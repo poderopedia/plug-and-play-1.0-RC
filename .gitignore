@@ -45,6 +45,12 @@ private/auth.key
 uploads/
 databases/sql.log
 databases/
+*/databases/*
+*/sessions/*
+*/errors/*
+*/cache/*
+*/uploads/*
+*/*.py[oc]
 *.pyc
 *.orig
 *~

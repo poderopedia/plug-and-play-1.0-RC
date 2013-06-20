@@ -1,0 +1,25 @@
+
+{{response.files.append('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js')}}
+{{response.files.append('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/themes/base/jquery-ui.css')}}
+{{extend 'layout.html'}}
+<h1>{{=T('Perfiles')}}</h1>
+{{=table}}
+<script>
+    function deleteRow(event,table,id) {
+        if(confirm(' {{ =T('Está seguro de querer borrar la conexión o perfil?') }} ')) {
+            jQuery.ajax({
+                url: "{{=URL('default','call',args=['json','delete'])}}/"+table+"/"+id,
+                success: function(data) {
+                    if(data!="") {
+                        if(data==""+id) {
+                            $('.datatabledetail').fadeOut().hide();
+                        }
+                        $('#'+data).fadeOut().hide();
+                    }
+                }
+            });
+        }
+
+    }
+
+</script>

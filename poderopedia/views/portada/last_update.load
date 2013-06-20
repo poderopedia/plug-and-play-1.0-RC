@@ -1,0 +1,33 @@
+<hgroup class="widget-heading heading clearfix">
+    <h5>↓ Últimas Actualizaciones</h5>
+</hgroup>
+<div class="widget clearfix">
+    <ul class="recent">
+        {{for item in lista:}}
+        
+        {{if item[4] == 'Organizacion':}}
+        	<li>{{if (item[3]!=None)&(item[3]!=''):}}<img src="{{ =URL('default','fast_download',args=item[3]) }}" width="45" />
+        		{{else:}}<img src="{{=URL('static','tmp/avatar-organizacion45.gif')}}" />{{pass}}
+        <a href="{{=URL('visualizacion','caso_organizacion',args=item[0],extension=False)}}">{{=item[1]}} </a>{{=item[4]}} - {{=item[5]}}</li>
+        
+        {{elif item[4] == 'Empresa':}}
+        <li>{{if (item[3]!=None)&(item[3]!=''):}}<img src="{{ =URL('default','fast_download',args=item[3]) }}" width="45" />
+            {{else:}}<img src="{{=URL('static','tmp/avatar-empresa45.gif')}}" />{{pass}}
+        <a href="{{=URL('visualizacion','caso_organizacion',args=item[0],extension=False)}}">{{=item[1]}} </a>{{=item[4]}} - {{=item[5]}}</li>
+        
+        {{elif item[4] == 'Caso':}}
+        <li>{{if (item[3]!=None)&(item[3]!=''):}}<img src="{{ =URL('default','fast_download',args=item[3]) }}" width="45" />
+            {{else:}}<img src="{{=URL('static','tmp/avatar-mapa45.gif')}}" />{{pass}}
+        <a href="{{=URL('visualizacion','caso_caso',args=item[0],extension=False)}}">{{=item[1]}} </a>{{=item[4]}} - {{=item[5]}}</li>
+        
+        {{else:}}
+       	<li>{{if (item[3]!=None)&(item[3]!=''):}}<img src="{{ =URL('default','fast_download',args=item[3]) }}" width="45" />
+        	{{else:}}<img src="{{=URL('static','tmp/avatar-45.gif')}}" />{{pass}}
+        	<a href="{{=URL('visualizacion','caso_perfil',args=item[0],extension=False)}}">{{=item[1]}} </a>{{=item[4]}} - {{=item[5]}}</li>
+        	{{pass}}
+        
+		{{pass}}
+        
+     {{pass}}
+    </ul>
+</div>

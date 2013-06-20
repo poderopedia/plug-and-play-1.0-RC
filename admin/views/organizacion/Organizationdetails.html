@@ -1,0 +1,79 @@
+<h4>{{=T('Conexión con Personas')}}</h4>
+
+{{=A(T('Agregar Conexión'), _href=URL('organizacion','relPersona_create', args=[_id,1] ))}}
+
+<table class="table table-striped table-bordered">
+    {{for relpersona in aRelPersonas:}}
+    <tr id="pers{{=relpersona.relPersona.id}}" class="success">
+        <td>{{=A(relpersona.origenP.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=relpersona.relPersona.origenP))}}</td>
+        <td>{{=T('y')}}</td>
+        <td>{{=A(relpersona.destinoP.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=relpersona.relPersona.destinoP))}}</td>
+        <td>{{=T('son')}}</td>
+        <td>{{=T(relpersona.relacion.name)}}</td>
+        <td>{{=T('en')}}</td>
+        <td>{{=T(relpersona.tipoRelacionP2P.name)}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','relPersona_edit', args=relpersona.relPersona.id))}}</td>
+        {{if borrar:}}
+        <td>
+            {{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relPersona",%s);' % relpersona.relPersona.id)}}
+        </td>
+        {{pass}}
+    </tr>
+    {{pass}}
+</table>
+
+<h4>{{=T('Personas')}}</h4>
+{{=A(T('Agregar Conexión'), _href=URL('organizacion','relorgs_create', args=[_id,1] ))}}
+<table class="table table-striped table-bordered">
+    {{for persona in aPersonas:}}
+    <tr id="orgs{{=persona.RelPersOrg.id}}" class="success">
+        <td>{{=T('tiene de')}}</td>
+        <td>
+            {{=T(persona.tipoRelacionP20.relationship)}}
+            {{ if persona.tipoRelacionP20.relationship=="Otro":}}
+            | {{ =T(persona.RelPersOrg.extraLabel)}}
+            {{pass}}
+        </td>
+        <td>a</td>
+        <td>{{=A(persona.persona.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=persona.RelPersOrg.origenP))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','relorgs_edit', args=[persona.RelPersOrg.id,'org']))}}</td>
+        {{if borrar:}}
+        <td>
+            {{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"RelPersOrg",%s);' % persona.RelPersOrg.id)}}
+        </td>
+        {{pass}}
+    </tr>
+    {{pass}}
+</table>
+<h4>{{=T('Organizaciones')}}</h4>
+{{=A(T('Agregar Conexión'), _href=URL('organizacion','relOrg2Org_create', args=[_id,1] ))}}
+<table class="table table-striped table-bordered">
+    {{for organizacion in aOrganizaciones:}}
+    <tr id="relOrg2Org{{=organizacion.relOrg2Org.id}}" class="success">
+        <td>{{T('es')}}</td>
+        <td>{{=T(organizacion.tipoRelacionOrg2Org.name)}}</td>
+        <td>{{T('de')}}</td>
+        <td>{{=A(organizacion.Organizacion.alias+T(' (editar Perfil)'), _href=URL('default','Organizacion_edit', args=organizacion.relOrg2Org.destinoO))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('organizacion','relOrg2Org_edit', args=organizacion.relOrg2Org.id))}}</td>
+        {{if borrar:}}
+        <td>
+            {{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relOrg2Org",%s);' % organizacion.relOrg2Org.id)}}
+        </td>
+        {{pass}}
+    </tr>
+    {{pass}}
+    {{for organizacion in aOrganizacionesD:}}
+    <tr id="relOrg2Org{{=organizacion.relOrg2Org.id}}" class="success">
+        <td>{{=T('tiene como')}}</td>
+        <td>{{=T(organizacion.tipoRelacionOrg2Org.name)}}</td>
+        <td>{{=T('a')}}</td>
+        <td>{{=A(organizacion.Organizacion.alias+T(' (editar Perfil)'), _href=URL('default','Organizacion_edit', args=organizacion.relOrg2Org.origenO))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('organizacion','relOrg2Org_edit', args=organizacion.relOrg2Org.id))}}</td>
+        {{if borrar:}}
+        <td>
+            {{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relOrg2Org",%s);' % organizacion.relOrg2Org.id)}}
+        </td>
+        {{pass}}
+    </tr>
+    {{pass}}
+</table>

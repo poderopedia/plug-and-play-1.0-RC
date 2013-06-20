@@ -1,0 +1,24 @@
+<ul class="websites-sources AlphabeticResourse">
+    <li>
+        Filtrar por letra:
+    </li>
+    {{for i in range(26):}}
+        {{if letter==chr(ord('a')+i):}}
+    <li class="selected">
+        {{else:}}
+    <li>
+        {{pass}}
+        {{=A(chr(ord('A')+i),_href=URL(function+"_letter",args=[_id,0,sort,chr(ord('a')+i),target]),cid=request.cid)}}
+
+    </li>
+    {{pass}}
+    {{if letter=='0':}}
+    <li class="selected">
+        {{else:}}
+    <li>
+        {{pass}}
+        {{=A('sin filtro',_href=URL('service_persona',args=[_id,0,sort,'a',target],vars=dict(target=target)),cid=request.cid)}}
+    </li>
+</ul>
+
+

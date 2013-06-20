@@ -1,0 +1,506 @@
+<!--[if HTML5]><![endif]-->
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]><html class="ie ie6 ie-lte9 ie-lte8 ie-lte7 no-js" lang="{{=T.accepted_language or 'es'}}"> <![endif]-->
+<!--[if IE 7]><html class="ie ie7 ie-lte9 ie-lte8 ie-lte7 no-js" lang="{{=T.accepted_language or 'es'}}"> <![endif]-->
+<!--[if IE 8]><html class="ie ie8 ie-lte9 ie-lte8 no-js" lang="{{=T.accepted_language or 'es'}}"> <![endif]-->
+<!--[if IE 9]><html class="ie9 ie-lte9 no-js" lang="{{=T.accepted_language or 'es'}}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{=T.accepted_language or 'es'}}"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1"><![endif]-->
+
+    <title>{{=response.title or request.application}}</title>
+
+    <link rel="icon" type="image/x-icon" href="{{=URL('static','img/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{=URL('static','img/favicon.ico')}}" />
+
+    <!-- other head content -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        var pluginUrl =
+                '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+        _gaq.push(['_setAccount', 'UA-34219926-1']);
+        _gaq.push(['_setDomainName', 'poderopedia.org']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    <!-- end other head content -->
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ =URL('static','css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ =URL('static','lib/ui-smoothness/jquery-ui-1.8.22.css') }}" />
+    <link rel="stylesheet/less" href="{{ =URL('static','css/structure.less') }}" />
+    <!-- /styles -->
+
+    <!-- scripts -->
+    <script src="{{ =URL('static','js/jquery-1.7.1.min.js') }}"></script>
+    <script src="{{ =URL('static','js/jquery-ui-1.8.22.min.js') }}"></script>
+    <script src="{{ =URL('static','js/bootstrap.js') }}"></script>
+    <script src="{{ =URL('static','js/less-1.3.0.min.js') }}"></script>
+    <script src="{{ =URL('static','js/jquery.media.js') }}"></script>
+    <script src="{{= URL('static','js/web2py.js')}}"></script>
+
+
+    <!--[if lt IE 9 ]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <link rel="stylesheet" href="{{ =URL('static','css/iex.css') }}" />
+    <![endif]-->
+    <!--[if lt IE 7 ]>
+    <script src="{{ =URL('static','js/dd_belatedpng.js?v=1') }}"></script>
+    <![endif]-->
+    <!-- /scripts -->
+    {{response.include_meta()}}
+    {{response.include_files()}}
+</head>
+
+
+<body class>
+   
+
+    <!-- header -->
+    <header>
+        {{block header}}
+        {{if (auth.has_membership('editor')) | (auth.has_membership('administrator')):}}
+        <!-- top -->
+        <div class="container">
+            <h1 class="logo">
+                <a href="{{=URL('default','index')}}">Poderopedia</a>
+            </h1>
+
+            !-- primaryNav -->
+            <nav id="desplegable1" class="primary-nav">
+                <div class="btn-group">
+                    <a href="#" class="ddown-toggle con-drop" data-toggle="dropdown">Explorar <span class="caret"></span></a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="{{=URL('directorio','general',args='persona')}}">Personas</a></li>
+                        <li><a href="{{=URL('directorio','general',args='empresa')}}">Empresas</a></li>
+                        <li><a href="{{=URL('directorio','general',args='organizacion')}}">Organizaciones</a></li>
+                        <li><a href="#">Casos</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a href="#" class="ddown-toggle con-drop" data-toggle="dropdown">Crear <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><span class="icono persona"></span> Persona</a></li>
+                        <li><a href="#"><span class="icono empresa"></span> Empresa</a></li>
+                        <li><a href="#"><span class="icono organizacion"></span> Organización</a></li>
+                        <li><a href="#"><span class="icono caso"></span> Caso</a></li>
+                        <li><a href="#"><span class="icono dato"></span> Enviar un Dato</a></li>
+                        <li><a href="#"><span class="icono perfil"></span> Sugerir Perfil</a></li>
+                        <li><a href="#"><span class="icono conexion"></span> Sugerir conexión</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- /primaryNav -->
+
+            <!-- loginPreview -->
+            <div id="desplegable" class="login-preview">
+                <a href="#" class="avatar">
+                    <div id="avatar">
+                       
+                    </div>
+                </a>
+                <div class="bubble">23</div>
+                <div class="btn-group">
+                    <a href="#" rel="tooltip" data-original-title="23" class="username ddown-toggle" data-toggle="dropdown">{{=auth.user.username}}<span class="caret"></span></a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="{{=URL('default','mis_publicaciones',args='todas')}}">Mis Publicaciones</a></li>
+                        <li><a href="#">Mis Colaboraciones</a></li>
+                        <li><a href="{{=URL('default','notificacionesgenerales')}}">Mis Notificaciones</a></li>
+                        <li>{{=A(T('Mi Cuenta'), _href=URL('default', 'configuracion'))}}</li>
+                        <li><a href="{{=URL('default','logout')}}">Salir</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /loginPreview -->
+
+            <!-- about -->
+            <div class="about">
+                <a href="{{=URL('acercade','index')}}" class="ddown-toggle last-nav" >Sobre Poderopedia</a>
+            </div>
+            <!-- /about -->
+
+
+        </div>
+
+        <!-- sub-tool -->
+        <div class="sub-tool">
+            <div class="container">
+
+                <!-- search -->
+                <form class="form-inline" method="get" action="{{=URL('search','podersearch')}}">
+                    <div class="input-append">
+                        <input class="span4" id="appendedInputButton" size="16" name="q" type="text" placeholder="Buscar en todo Poderopedia"><button class="btn" type="button" onclick="this.form.submit"></button>
+                    </div>
+                </form>
+                <!-- /search -->
+
+                <!-- popular -->
+                <span class="tit-sub">Popular Ahora:</span>
+
+                <!-- /popular -->
+
+            </div>
+        </div>
+        <!-- /sub-tool -->
+        <!-- /top -->
+        {{elif me:}}
+        {{ include 'includes/header-publico.html'}}
+        {{else:}}
+        {{ include 'includes/header-login.html'}}
+        {{pass}}
+            <!-- /top -->
+
+
+
+
+        {{end}}
+    </header>
+    <!-- /header -->
+     
+    
+            
+    <!-- container -->
+    <div id="content" class="container">
+        <div class="quick-breadcrumbs">
+            {{block breadcrumbs}}
+           <!-- <span>B&uacute;squeda general</span>-->
+            {{end}}
+        </div>
+        <div class="row width-complete">
+			 <!-- leftCol -->
+               
+                {{block leftcol}}
+                 
+                {{end}}
+             <!-- /leftCol -->
+            <!-- centerCol -->
+             <section class="center-col span8">
+                {{include}}
+                {{block socialBar}}
+
+               {{end}}
+             </section>
+            <!-- /centerCol -->
+
+            <!-- rightCol -->
+            <section class="right-col span3 persona-col">
+                {{block sidebar}}
+                {{ include 'includes/sidebar-persona.html' }}
+                {{end}}
+            </section>
+            <!-- /rightCol -->
+        </div>
+
+    </div>
+    <!-- /container -->
+    
+    <!-- inlineScripts -->
+
+
+    
+    <!--Estos son los script que estaban en footer -->
+    {{block script_footer}}
+            
+	<!-- globalScripts -->
+       <script>
+          /*
+         * This Page Related
+         */
+        $('body').addClass('page-person page-person-profile');
+
+        /*
+         * Append 'other' input field when specific
+         * option selected (in dropdown).
+         *
+         * Change root selector for more accuracy.
+         */
+        $('select[data-interact-id="person-sector"]').change(function() {
+            var target = $(this).attr('data-interact-append-id');
+
+            if($(this).val() === 'Otro') {
+                $('div[data-interact-id="' + target + '"]').fadeIn();
+            }
+            else {
+                $('div[data-interact-id="' + target + '"]').fadeOut();
+            }
+
+        }).change();
+
+
+            /*modales*/
+			
+			$('.modales').modal({
+				backdrop:true,
+				show:false
+			});
+			/*
+            * Tertiary navigation depth control.
+            */
+            $('.tertiary-nav > ul > li a').toggle(
+                function() {
+                    $(this).parent().find('ul').slideDown();
+                },
+                function() {
+                    $(this).parent().find('ul').slideUp();
+                }
+            );
+            
+
+			/*
+			Boton abecedario
+			*/
+			
+			if($('.toogleabc').length > 0){
+				
+				if($('#btn_abc').is('.btn-primary')){
+					$('.toogleabc').addClass('normalheight');
+				}else if($('#btn_fecha').is('.btn-primary')){
+					$('.toogleabc').removeClass('normalheight');	
+				}
+			}
+			
+			$('.abcOrden .btn').click(function(){
+				$('.abcOrden .btn').removeClass('btn-primary');
+				$(this).addClass('btn-primary');
+				if($(this).attr('id') == 'btn_abc'){
+					$('.toogleabc').addClass('normalheight');
+				}else if($(this).attr('id') == 'btn_fecha'){
+					$('.toogleabc').removeClass('normalheight');	
+				}
+			});
+			
+            /*
+            * Date picker control.
+            */
+            $('button[rel="date-picker"], a[rel="date-picker"]').prev().attr('readonly', 'readonly');
+            
+            $('button[rel="date-picker"], a[rel="date-picker"]').toggle(
+                function() {
+                    var inputTarget = $(this).prev();
+                    
+                    $(inputTarget).datepicker().datepicker('show');
+                    
+                    return false;
+                },
+                function() {
+                    var inputTarget = $(this).prev();
+                    
+                    $(inputTarget).datepicker().datepicker('destroy');
+                    
+                    return false;
+                }
+            );
+
+			if($('a.media').length > 0){
+				$('a.media').media({width:1005, height:688});
+			}
+			
+			/*Botones Lista*/
+            	$('#list').click(function(event){
+					event.preventDefault();
+					$('#documentosPersona li').addClass('listas');
+					$('.imagen-perfil').css('display','none');
+				});
+				
+				$('#box').click(function(event){
+					event.preventDefault();
+					$('#documentosPersona li').removeClass('listas');
+					$('.imagen-perfil').css('display','block');
+				});
+
+                /*Botones List Personas*/
+                $('#listPersonas').click(function(event){
+                    event.preventDefault();
+                    $('#relatedToPerson li').addClass('listas');
+                    $('.imagen-perfil').css('display','none');
+                });
+
+                $('#boxPersonas').click(function(event){
+                    event.preventDefault();
+                    $('#relatedToPerson li').removeClass('listas');
+                    $('.imagen-perfil').css('display','block');
+                });
+
+				/*Botones Fuentes*/
+	            	$('#listFuentes').click(function(event){
+						event.preventDefault();
+						$('#fuentesPersona li').addClass('listas');
+					});
+
+					$('#boxFuentes').click(function(event){
+						event.preventDefault();
+						$('#fuentesPersona li').removeClass('listas');
+					});
+				
+				/*Botones Lista2*/
+	            	$('#list2').click(function(event){
+						event.preventDefault();
+						$('.documents-ul li').addClass('listas');
+					});
+
+					$('#box2').click(function(event){
+						event.preventDefault();
+						$('.documents-ul li').removeClass('listas');
+					});
+				
+					/*Botones Lista3*/
+		            	$('#list3').click(function(event){
+							event.preventDefault();
+							$('.referen-ul li').addClass('listas');
+						});
+
+						$('#box3').click(function(event){
+							event.preventDefault();
+							$('.referen-ul li').removeClass('listas');
+						});
+						
+            /*Botones colapsables*/
+				$('a.accordion-toggle').click(function(){
+					if($(this).parent().hasClass('open')){
+						$('.accordion-heading').removeClass('open');
+						$('.showIco').text('Mostrar');
+					}else{
+						$('.accordion-heading').removeClass('open');
+						$('.showIco').text('Mostrar');
+						$(this).parent().addClass('open');
+						$('.open .showIco').text('Cerrar');
+					}
+				});
+			/*MODALES*/
+			
+			
+				
+				$('input[name="nombre-conexion"], input[name="institucion-conexion"]').live('focusout',function(){
+					console.log('hola');
+					if(($('input[name="nombre-conexion"]').val() !=='')&&($('input[name="institucion-conexion"]').val() !=='')){
+						var valor1 = $('input[name="nombre-conexion"]').val();
+						var valor2 = $('input[name="institucion-conexion"]').val();
+						$('#Lightbox_sugerirconexion .classCambio1 option:selected').val(valor1).text(valor1+' es:');
+						$('#Lightbox_sugerirconexion .classCambio2 option:selected').val(valor2).text(valor2+' es:');
+						
+						
+						$('#Lightbox_sugerirconexion .alternate').slideDown('slow');
+					}
+				});
+				
+		
+			
+		
+				$('input[name="nombre-perfil"]').live('focusout',function(){
+					console.log('hola');
+					if($('input[name="nombre-perfil"]').val() !==''){
+						var valor = $('input[name="nombre-perfil"]').val();
+						$('#Lightbox_sugerirperfil .classCambio').text(valor+' es:');
+						$('#Lightbox_sugerirperfil .alternate').slideDown('slow');
+					}
+				});
+				
+		
+			
+	
+			
+				$('input[name="nombre-dato"]').live('focusout',function(){
+					console.log('hola');
+					if($('input[name="nombre-dato"]').val() !==''){
+						var valor = $('input[name="nombre-dato"]').val();
+						$('#Lightbox_tengoundato .classCambio').text(valor+' es:');
+						$('#Lightbox_tengoundato .alternate').slideDown('slow');
+					}
+				});
+				
+		
+			
+		
+            
+				
+
+            var cloneIndex = 2;
+            
+            $('.clone-add').live('click', function() {
+                var mainParent = $(this).parent().parent().parent();
+                
+                $(this).parent().parent().each(function(i, e){
+                    var clone = $(this).clone().fadeIn('fast');
+                    
+                    clone.addClass('cloned-field-' + cloneIndex).appendTo(mainParent);
+                    clone.find('input[type="text"]').attr('name', ''); // Add name[index] attr in order to save the form data
+                    clone.find('.clone-add').remove();
+                    clone.find('.clone-remove').show();
+                    clone.find('input[type="text"]').attr('value', '');
+                    
+                    cloneIndex++;
+                });
+                
+                return false;
+            });
+            
+            $('.clone-remove').live('click', function() {
+                $(this).parent().parent().remove().fadeOut('fast');
+                
+                return false;
+            });
+            
+            /*
+            * Clone fields
+            * Case: Combo/pack fields (Ej: select + input)
+            */
+            var packIndex = 2;
+            
+            $('.person-add').live('click', function() {
+                var mainParent = $(this).parent();
+                var lastChild = $(this).parent().parent().find('.cloned:first-child');
+                
+                lastChild.each(function(i, e) {
+                    var clonePack = $(this).clone().fadeIn('fast');
+                    
+                    clonePack.addClass('cloned-field-' + packIndex).appendTo(mainParent).insertBefore('.add-more');
+                    clonePack.find('input[type="text"]').attr('name', ''); // Add name[index] attr in order to save the form data
+                    clonePack.find('input[type="text"]').attr('value', '');
+                    
+                    packIndex++;
+                });
+                
+                return false;
+            });
+            
+            $('.clone-pack-remove').live('click', function() {
+                $(this).parent().remove().fadeOut('fast');
+                
+                return false;
+            });
+            
+            /*
+            * Etc.
+            */
+            $('a[rel="popover"]').popover();
+        </script>
+        <!-- /globalScripts -->
+    
+    {{end}}
+    
+    
+    
+
+
+    {{block modales}}
+
+	{{end}}
+
+    <!-- /inlineScripts -->
+    {{ include 'includes/footer.html' }}
+    <script type="text/javascript"> var uvOptions = {}; (function() { var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true; uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/kMY34WqQ9ISn7U4rHocGSA.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s); })(); </script>
+</body>
+</html>

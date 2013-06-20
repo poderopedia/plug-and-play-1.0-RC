@@ -1,0 +1,80 @@
+{{response.files.append(URL('static','css/smoothness/jquery-ui-1.10.3.custom.min.css'))}}
+{{response.files.append(URL('static','js/jquery-ui-1.10.3.custom.min.js'))}}
+{{response.files.append(URL('static','js/jquery.multiselect.js'))}}
+{{response.files.append(URL('static','js/jquery.multiselect.filter.js'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.css'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.filter.css'))}}
+{{extend 'layout.html'}}
+<h4>{{=T('Empresas')}}</h4>
+{{=companies_grid}}
+{{=DIV(_id='t')}}
+
+
+{{if response.new_window:}}
+   <script type="text/javascript">
+    jQuery(document).ready(function() {
+        window.open("{{=response.new_window}}","_blank","width=200,height=100");
+    });
+    </script>
+{{pass}}
+
+<script>
+
+
+    $("#Organizacion_documentSource").multiselect({minWidth:600}).multiselectfilter({width:200});
+    $("#Organizacion_documentCloud").multiselect({minWidth:600}).multiselectfilter({width:200});
+
+
+
+
+    function addConnections(event,id) {
+
+            var texto = jQuery('#data'+id).text();
+            if (jQuery('#LoadingImage'+id).html()==undefined) {
+                var loading ='<div id="LoadingImage'+id+'" style="display: none"><img src="{{=URL('static','loading.gif')}}" /></div>';
+                $(loading).insertAfter("#"+id);
+            }
+            var $img=$("#image"+id);
+            if ($img.attr('src').indexOf("{{=URL('static','plugin_powertable/images/details_open.png')}}") >-1) {
+                $img.attr('src', $img.attr('src').replace('open', 'close'));
+            } else {
+                $img.attr('src', $img.attr('src').replace('close', 'open'));
+            }
+
+            if ( texto !='') {
+                $("#LoadingImage"+id).show();
+                jQuery('#data'+id).slideToggle();
+                $("#LoadingImage"+id).hide();
+            } else {
+                $("#LoadingImage"+id).show();
+                jQuery.ajax({
+                url: "{{=URL('companies','conexiones')}}/"+id,
+                success: function(data) {
+                    if(data!="") {
+                        $("#LoadingImage"+id).hide();
+                        $('<tr id="data'+id+'"><td colspan="8">'+data+'</td></tr>').insertAfter("#"+id);
+                        }
+                    }
+                });
+            }
+
+
+    }
+
+    function deleteRow(event,table,id) {
+        if(confirm(' {{ =T('Está seguro de querer borrar la conexión o perfil?') }} ')) {
+            jQuery.ajax({
+                url: "{{=URL('default','call',args=['json','delete'])}}/"+table+"/"+id,
+                success: function(data) {
+                    if(data!="") {
+                        if(data==""+id) {
+                            $('.datatabledetail').fadeOut().hide();
+                        }
+                        $('#'+data).fadeOut().hide();
+                    }
+                }
+            });
+        }
+    }
+
+</script>

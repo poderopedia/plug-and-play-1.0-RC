@@ -1,0 +1,133 @@
+{{extend 'visualizacionLayoutCuentas.html'}}
+{{block sidebar}}
+{{=LOAD('default','sidebar_cuenta.load',target='sidebar_cuenta',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+{{end}}
+
+{{block leftcol}}
+{{include 'includes/tertiary-nav-conf.html'}}
+{{end}}
+{{=form.custom.begin}}
+ 
+<style>
+
+div .counter{
+color: #999;
+display: block;
+font-size: 10px;
+font-style: italic;
+line-height: 140%;
+position:relative;
+left:80px;
+top:130px;       
+    }
+
+div .warning{color:#600;font-weight:bold;}	
+div .exceeded{color:#e00;font-weight:bold;}	
+
+</style>
+ 
+ <hgroup class="search-results historial-head clearfix">
+
+                      <h3 class="search-awnser">
+                        <img src="{{ =URL('static','tmp/avatar-45.gif') }}" class="imagen-perfil-ch" />
+                        <span class="perfil-results">{{=auth.user.user_name}}</span>
+                        <button href="#" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Guardar</button>
+                     </h3>
+                    </hgroup>
+                    <div class="row-division clearfix forms"><!-- .row-division -->
+
+                        <!--hgroup-->
+                        <hgroup class="box-heading clearfix">
+                            <h3>Información Básica de mi Perfil ↓</h3>
+                        </hgroup>
+                        <!--hgroup-->
+
+                        <div class="form-horizontal">
+
+
+                                <fieldset>
+                                  <div class="control-group">
+                                    <label for="focusedInput" class="control-label">Nombre(s)<span class="req">*</span></label>
+                                    <div class="controls">
+                                      {{=form.custom.widget.first_name}}
+
+                                    </div>
+                                  </div>
+                        
+                                  <div class="control-group">
+                                    <label for="focusedInput" class="control-label">Apellido</label>
+                                    <div class="controls">
+                                        {{=form.custom.widget.last_name}}
+
+                                    </div>
+                                  </div>
+
+                                <div class="control-group">
+                                    <label for="textarea" class="control-label">Bio o Perfil
+                                    <span>Máximo 200 cars.</span>
+                                    <br><br><br><br><br><br><span id="auth_user_shortbioNum">Quedan 200 carácteres</span>
+                                    </label>
+                                    <div class="controls">
+                                        {{=form.custom.widget.shortbio}}
+
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label for="select01" class="control-label">País de Residencia</label>
+                                    <div class="controls">
+                                        {{=form.custom.widget.country}}
+
+                                    </div>
+                                </div>
+
+                              <div class="control-group">
+                                <label for="focusedInput" class="control-label">Ciudad</label>
+                                <div class="controls">
+                                    {{=form.custom.widget.city}}
+
+                                </div>
+                              </div>                               
+
+                                <div class="control-group">
+                                    <label for="select02" class="control-label">Sector</label>
+                                    <div class="controls">
+                                        {{=form.custom.widget.sector}}
+
+                                    </div>
+                                </div>
+
+
+                            
+                            <div class="control-group">
+                                <label for="prependedInput" class="control-label">Sitio Web</label>
+                                <div class="controls">
+                                  <div class="input-prepend">
+                                    <span class="add-on">http://</span>{{=form.custom.widget.web}}
+                                    </div>
+                                </div>
+                            </div>                 
+                        
+                                  <div class="soporte-accion">
+                                    <button href="#" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Guardar</button>
+                                  </div>
+                                </fieldset>
+
+                              </div>
+
+                    </div><!-- .row-division -->
+{{=form.custom.end}}
+
+<script type="text/javascript">
+    $('#auth_user_shortbio').keyup(function(){
+        var max = 200;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#auth_user_shortbioNum').text(' Ha alcanzado el límite');
+            $(this).val($(this).val().slice(0, max));
+        }else {
+            var char = max - len;
+            $('#auth_user_shortbioNum').text('Quedan ' + char + ' caracteres');
+        }
+    });
+</script>

@@ -1,0 +1,63 @@
+<!-- tertiaryNav -->
+                    <nav class="tertiary-nav">
+                        <ul id="estatica" >
+                            <li{{if general=='acercade':}} class="current"{{pass}}><a href="#">ACERCA DE</a>
+                                <ul class="expanded" {{if general=='acercade':}}style="display: block;"{{else:}}style="display: none;"{{pass}}>
+                                    <li><a href="{{=URL('acercade','index')}}" {{if conf=='poderopedia':}} style="font-weight:bold;"{{pass}}>Qué es Poderopedia</a></li>
+                                    <li><a href="{{=URL('acercade','equipo')}}" {{if conf=='equipo':}} style="font-weight:bold;"{{pass}}>Equipo</a></li>
+                                    <li><a href="{{=URL('acercade','prensa')}}" {{if conf=='prensa':}} style="font-weight:bold;"{{pass}}>Prensa</a></li>
+                                    <li><a href="http://blog.poderopedia.org">Blog</a></li>
+                                    <li><a href="{{=URL('acercade','contactanos')}}" {{if conf=='contacto':}} style="font-weight:bold;"{{pass}}>Contacto</a></li>
+                                    <li><a href="{{=URL('acercade','condiciones_de_uso')}}" {{if conf=='condiciones':}} style="font-weight:bold;"{{pass}}>Términos de uso</a></li>
+                                    <li><a href="{{=URL('acercade','politica_de_privacidad')}}" {{if conf=='politica':}} style="font-weight:bold;"{{pass}}>Política de privacidad</a></li>
+                                </ul>
+                            </li>
+                            <li {{if general=='desarrollo':}} class="current"{{pass}}><a href="#">DESARROLLADORES</a>
+                                <ul class="expanded"{{if general=='desarrollo':}}style="display: block;"{{else:}}style="display: none;"{{pass}}>
+                                    <li><a href="{{=URL('desarrolladores','index')}}" {{if conf=='api':}} style="font-weight:bold;"{{pass}}>API</a></li>
+                                    <li><a href="{{=URL('desarrolladores','ontologia')}}" {{if conf=='ontologia':}} style="font-weight:bold;"{{pass}}>Ontología</a></li>
+                                    <li><a href="{{=URL('desarrolladores','usa_nuestro_codigo')}}" {{if conf=='codigo':}} style="font-weight:bold;"{{pass}}>Usa nuestro código</a></li>
+                                    <li><a href="{{=URL('desarrolladores','documentacion')}}" {{if conf=='document':}} style="font-weight:bold;"{{pass}}>Documentación</a></li>
+                                    <li><a href="{{=URL('desarrolladores','foro_dev')}}" {{if conf=='foro':}} style="font-weight:bold;"{{pass}}>Foro Dev</a></li>
+                                </ul>
+                            </li>
+
+                            <li {{if general=='comunidad':}} class="current"{{pass}}><a href="#">COMUNIDAD</a>
+                            	<ul class="expanded" {{if general=='comunidad':}}style="display: block;"{{else:}}style="display: none;"{{pass}}>
+                                    <li><a href="{{=URL('comunidad','index')}}" {{if conf=='pais':}} style="font-weight:bold;"{{pass}}>Crea Poderopedia en tu país</a></li>
+                                    <li><a href="{{=URL('comunidad','sumate_a_nosotros')}}" {{if conf=='sumate':}} style="font-weight:bold;"{{pass}}>Súmate a nosotros</a></li>
+                                    <li><a href="{{=URL('comunidad','sugiere_perfil')}}" {{if conf=='perfil':}} style="font-weight:bold;"{{pass}}>Sugiere un perfil</a></li>
+                                    <li><a href="{{=URL('comunidad','sugiere_conexion')}}" {{if conf=='conexion':}} style="font-weight:bold;"{{pass}}>Sugiere una conexión </a></li>
+                                    <li><a href="{{=URL('comunidad','apoyanos')}}" {{if conf=='apoyanos':}} style="font-weight:bold;"{{pass}}>Apóyanos</a></li>
+
+								</ul>
+                            </li>
+
+                            <li {{if general=='ayuda':}} class="current"{{pass}}><a href="#">AYUDA</a>
+                                <ul class="expanded" {{if general=='ayuda':}}style="display: block;"{{else:}}style="display: none;"{{pass}}>
+                                    <li><a href="{{=URL('ayuda','index')}}" {{if conf=='guia':}} style="font-weight:bold;"{{pass}}>Guía paso a paso</a></li>
+                                    <li><a href="{{=URL('ayuda','preguntas_frecuentes')}}" {{if conf=='preguntas':}} style="font-weight:bold;"{{pass}}>Preguntas Frecuentes</a></li>
+                                    <li><a href="{{=URL('ayuda','lineamientos_editoriales')}}" {{if conf=='editorial':}} style="font-weight:bold;"{{pass}}>Lineamientos editoriales</a></li>
+                                    <li><a href="{{=URL('ayuda','reportar_error')}}" {{if conf=='error':}} style="font-weight:bold;"{{pass}}>Reportar errores</a></li>
+                                    <li><a href="{{=URL('ayuda','reportar_contenido_inadecuado')}}" {{if conf=='inadecuado':}} style="font-weight:bold;"{{pass}}>Reportar contenido inadecuado</a></li>
+                                </ul>
+                            </li>
+                          </ul>
+                    </nav>
+
+                    <!-- /tertiaryNav -->
+
+
+
+<script type="text/javascript" charset="utf-8">
+$(function(){
+	$('#estatica li a').click(function(event){
+		var elem = $(this).next();
+		if(elem.is('ul')){
+			event.preventDefault();
+			$('#estatica ul:visible').not(elem).slideUp();
+			elem.slideToggle();
+		}
+	});
+});
+</script>

@@ -1,0 +1,10 @@
+{{extend 'layout.html'}}
+<b>{{=parent}}</b>
+{{=form}}
+<script type="text/javascript">
+    function abreVentana(){
+        miPopup = window.open("{{=URL('document_create')}}","miwin","width=500,height=400,scrollbars=yes");
+        miPopup.focus();
+    }
+</script>
+<input type='button' value='añadir Fuente' class='link' onclick="abreVentana();" >

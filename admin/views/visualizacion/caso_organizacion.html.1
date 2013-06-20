@@ -1,0 +1,68 @@
+{{extend 'visualizacionLayout.html'}}
+
+{{=LOAD('visualizacion','notificaciones.load',args=[_id,'reportarError','organizacion'],target='reportarError', ajax=True)}}
+{{=LOAD('visualizacion','notificaciones.load',args=[_id,'contenidoInadecuado','organizacion'],target='contenidoInadecuado',ajax=True)}} 
+
+{{block sidebar }}
+{{ include 'include/sidebar_organizacion.html' }}
+{{end}}
+
+<hgroup class="search-results clearfix">
+
+    {{if Organizacion.haslogo!=None:}}<img src="{{ =URL('download',args=Organizacion.haslogo) }}" class="imagen-perfil-ch" />{{else:}}<img src="{{ =URL('static','tmp/imagen-face.gif') }}" class="imagen-perfil-ch" />{{pass}}
+
+    <h3 class="perfil-name ">{{=Organizacion.alias}}</h3>
+    <h5 class="perfil-details">birthplace, {{=Organizacion.birth}} | titulo</h5>
+    <p class="perfil-details">{{=Organizacion.shortBio}}</p>
+    <div class="botonera-perfil">
+        <div class="botonera-perfil">
+            <a href="#Lightbox_sugerirperfil" data-toggle="modal">[ <span>sugerir otro perfil</span> ]</a>
+            <a href="#Lightbox_sugerirconexion" data-toggle="modal">[ <span>sugerir conexiones</span> ]</a>
+            <a href="#Lightbox_reportarerror" data-toggle="modal">[ <span>reportar error</span> ] </a>
+         	<a href="#Lightbox_contenidoinadecuado" data-toggle="modal">[ <span>reportar contenido inadecuado</span> ]</a>
+            <a href="#">[ <span>ver historial</span> ] </a>
+            <a href="#" class="vermas"><span>Ver todo en una página ></span></a>
+            <br><span class="actualizado">Actualizado el 20 /11/ 2012</span>
+        </div>
+    </div>
+</hgroup>
+                
+          <!-- centerCol -->
+<div class="row-division clearfix">
+    <!--Tabs-->
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+            <li><a href="#tab1" data-toggle="tab">Mapa de Relaciones</a></li>
+            <li class="active"><a href="#tab2" data-toggle="tab">Perfil</a></li>
+            <li><a href="#tab3" data-toggle="tab">Ficha de datos Duros</a></li>
+            <li><a href="#tab4" data-toggle="tab">Documentos</a></li>
+            <li><a href="#tab5" data-toggle="tab">Fuentes</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane" id="tab1">
+                {{ include 'visualizacion/relaciones.html' }}
+            </div>
+            <div class="tab-pane active" id="tab2">
+                <h4>{{=T('Perfil')}}</h4>
+                <p>{{=Organizacion.longBio}}</p>
+            </div>
+            <div class="tab-pane" id="tab3">
+                <!--TODO Datos Duros Organizacion -->
+                {{ include 'visualizacion/datos_duros_organizacion.html' }}
+            </div>
+            <div class="tab-pane" id="tab4">
+                {{ include 'includes/perfDocumentos.html' }}
+            </div>
+            <div class="tab-pane" id="tab5">
+                <!--TODO Fuentes Organizacion -->
+                <div class="editor-perfil fuente-perfil clearfix">
+                    <h5>Fuentes de {{=Organizacion.alias}}</h5>
+                    <a href="#" class="boton-corchete">[ <span>editar</span> ]</a>
+                </div>
+                {{ include 'includes/botones-list-documentosFuentes.html' }}
+                {{=LOAD('services','Org_relation_fuentes.load',args=_id,target='fuentesPersona',ajax=True)}}
+            </div>
+        </div>
+    </div>
+    <!--Fin de Tabs-->
+</div>

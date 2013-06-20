@@ -1,0 +1,63 @@
+{{if organizacion!= None: response.title = organizacion.alias+' | Personas Relacionadas | Poderopedia' }} {{pass}}
+{{if (organizacion.shortBio!=None)&(organizacion.shortBio!=''): response.meta.description = organizacion.shortBio[:200]}} {{pass}}
+{{extend 'visualizacionLayout.html'}}
+
+{{block sidebar }}
+{{ include 'include/sidebar_organizacion.html' }}
+{{end}}
+
+{{block modales}}
+<!--Lightbox_sugerirconexion-->
+<div class="modal hide fade" id="Lightbox_sugerirconexion">
+<div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+	<div class="modal-body">
+        <div id="sugerir_persona_organizacion"></div>
+    </div>
+ </div>
+<!--Fin Sugerir Conexion--> 
+
+{{end}}
+
+{{=LOAD('services','Org_relation_persona.load',args=_id,target='persona',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+
+
+
+
+
+<!-- inlineScripts -->
+
+
+<script>
+
+
+    /*
+     * This Page Related
+     */
+    $('body').addClass('page-person page-person-profile');
+
+    /*
+     * Append 'other' input field when specific
+     * option selected (in dropdown).
+     *
+     * Change root selector for more accuracy.
+     */
+    $('select[data-interact-id="person-sector"]').change(function() {
+        var target = $(this).attr('data-interact-append-id');
+
+        if($(this).val() === 'Otro') {
+            $('div[data-interact-id="' + target + '"]').fadeIn();
+        }
+        else {
+            $('div[data-interact-id="' + target + '"]').fadeOut();
+        }
+
+    }).change();
+
+    /*
+     * WYSIWYG
+     */
+
+</script>
+<!-- /inlineScripts -->

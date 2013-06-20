@@ -1,0 +1,13 @@
+{{extend 'visualizacionLayoutCuentas.html'}}
+
+
+
+{{block sidebar}}
+{{=LOAD('default','sidebar_cuenta.load',target='sidebar_cuenta',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{end}}
+
+{{block leftcol}}
+{{ include 'includes/tertiary-nav-conf.html' }}
+{{end}}
+
+{{=LOAD('default','notificaciones.load',content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}

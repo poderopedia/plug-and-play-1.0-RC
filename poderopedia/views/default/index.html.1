@@ -1,0 +1,257 @@
+{{extend 'visualizacionLayoutIndex.html'}}
+
+{{block breadcrumbs}}
+{{end}}
+
+{{block socialBar}}
+{{end}}
+
+{{block sidebar}}
+{{end}}
+
+
+  <div id="index" class="width-complete"><!-- .width-complete -->
+
+	<div id="intro" class="clearfix"><!-- #intro -->
+		<div class="inner"><!-- .inner -->
+			<h2>Bienvenido a Poderopedia - Quién es Quién en los negocios y la política en Chile</h2>
+			<div class="vid">
+				<iframe src="http://player.vimeo.com/video/50626558?badge=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			</div>
+			<div class="cont">
+				<p>Poderopedia es una plataforma colaborativa que ayuda a entender las relaciones entre las personas, empresas y organizaciones que se convierten en noticia e influyen en nuestra vida diaria. Usando visualizaciones de datos y tecnología semántica, muestra quién es quién en los negocios y la política.</p>
+				<a href="#" class="enlace">&rarr; Revisa los mapas de relaciones de políticos y empresarios</a>
+				<a href="#" class="enlace">&rarr; Descubre información relevante de manera fácil y rápida</a>
+				<a href="#" class="enlace">&rarr; Sugiere nuevos perfiles, conexiones y datos</a>
+				<a href="#" class="btn">Así es como trabajamos &rarr;</a>
+			</div>
+		</div><!-- /.inner -->
+		<span class="cierre"></span>
+		<a href="#" id="btn_cerrar">X</a>
+	</div><!-- /#intro -->
+
+	<section class="center-col span7"><!-- .center-col -->
+
+		<div class="row-division clearfix"><!-- .row-division -->
+
+			{{=LOAD('news','news.load',target='news',ajax=True)}}
+
+	    	<div class="tabbable"><!-- .tabbable -->
+		    	<ul class="nav nav-tabs">
+		    		<li class="active"><a href="#tab1" data-toggle="tab">Lo Último</a></li>
+		    		<li><a href="#tab2" data-toggle="tab">Lo Más Popular</a></li>
+					<li><a href="#tab3" data-toggle="tab">Lo Más Compartido</a></li>
+		    	</ul>
+				<ul class="btns_aux">
+					<li><a href="#" class="active" onclick="cargarHoy();">Hoy</a></li>
+		    		<li><a href="#" onclick="cargarSemana();">Semana</a></li>
+					<li><a href="#" onclick="cargarMes();">Mes</a></li>
+				</ul>
+		    	<div class="tab-content"><!-- .tab-content -->
+		    		<div class="tab-pane active" id="tab1"><!-- #tab1 -->
+						<div class="row-division clearfix ancho">
+							<ul class="faces-ul">
+							    <li class="listas">
+									<img src="{{=URL('static','tmp/foto.png')}}" width="160" height="115" class="thumb_lista">
+							      	<ul class="info ancholistas">
+							        	<li class="listas">
+							          		<h3><a href="#">Andróniko Luksic, una de las cinco fortunas más grandes de Chile</a></h3>
+							        	</li>
+							        	<li class="listas">
+							          		<p>Etiam scelerisque, nunc ac egestas consequat, Mauris vel neque sit amet nunc gravida congue sed sit amet. <a href="#">más &gt;</a></p>
+							        	</li>
+							        	<li class="listas">
+							          		<date><a href="#"><img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a><a href="#"><img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a> 01/12/2012</date>
+							        	</li>
+							      	</ul>
+							   	</li>
+								<li class="listas">
+									<img src="{{=URL('static','tmp/foto.png')}}" width="160" height="115" class="thumb_lista">
+							      	<ul class="info ancholistas">
+							        	<li class="listas">
+							          		<h3><a href="#">Andróniko Luksic, una de las cinco fortunas más grandes de Chile</a></h3>
+							        	</li>
+							        	<li class="listas">
+							          		<p>Etiam scelerisque, nunc ac egestas consequat, odio nibh euismod nulla electioum. <a href="#">más &gt;</a></p>
+							        	</li>
+							        	<li class="listas">
+							          		<date><a href="#"><img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a><a href="#"><img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a> 01/12/2012</date>
+							        	</li>
+							      	</ul>
+							   	</li>
+								<li class="listas">
+									<img src="{{=URL('static','tmp/foto.png')}}" width="160" height="115" class="thumb_lista">
+							      	<ul class="info ancholistas">
+							        	<li class="listas">
+							          		<h3><a href="#">Andróniko Luksic, una de las cinco fortunas más grandes de Chile</a></h3>
+							        	</li>
+							        	<li class="listas">
+							          		<p>Eget auctor orci nibh vel nisi. Aliquam erat volutpat. Mauris vel neque sit amet nunc gravida congue sed sit amet. <a href="#">más &gt;</a></p>
+							        	</li>
+							        	<li class="listas">
+							          		<date><a href="#"><img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a><a href="#"><img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a> 01/12/2012</date>
+							        	</li>
+							      	</ul>
+							   	</li>
+								<li class="listas">
+									<img src="{{=URL('static','tmp/foto.png')}}" width="160" height="115" class="thumb_lista">
+							      	<ul class="info ancholistas">
+							        	<li class="listas">
+							          		<h3><a href="#">Andróniko Luksic, una de las cinco fortunas más grandes de Chile</a></h3>
+							        	</li>
+							        	<li class="listas">
+							          		<p>Eget auctor orci nibh vel nisi. Aliquam erat volutpat. Mauris vel neque sit amet nunc gravida congue sed sit amet. <a href="#">más &gt;</a></p>
+							        	</li>
+							        	<li class="listas">
+							          		<date><a href="#"><img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a><a href="#"><img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a> 01/12/2012</date>
+							        	</li>
+							      	</ul>
+							   	</li>
+								<li class="listas">
+									<img src="{{=URL('static','tmp/foto.png')}}" width="160" height="115" class="thumb_lista">
+							      	<ul class="info ancholistas">
+							        	<li class="listas">
+							          		<h3><a href="#">Andróniko Luksic, una de las cinco fortunas más grandes de Chile</a></h3>
+							        	</li>
+							        	<li class="listas">
+							          		<p>Eget auctor orci nibh vel nisi. Aliquam erat volutpat. Mauris vel neque sit amet nunc gravida congue sed sit amet. <a href="#">más &gt;</a></p>
+							        	</li>
+							        	<li class="listas">
+							          		<date><a href="#"><img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a><a href="#"><img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a> 01/12/2012</date>
+							        	</li>
+							      	</ul>
+							   	</li>
+							</ul>
+						</div>
+		    		</div><!-- /#tab1 -->
+		    		<div class="tab-pane" id="tab2"><!-- #tab2 -->
+						CONTENIDO2
+		    		</div><!-- /#tab2 -->
+		    		<div class="tab-pane" id="tab3"><!-- #tab3 -->
+						CONTENIDO3
+		    		</div><!-- /#tab3 -->
+		    	</div><!-- /.tab-content -->
+		    </div><!-- /.tabbable -->
+
+		</div><!-- /.row-division -->
+
+  </section><!-- /.center-col -->
+
+  <!-- rightCol -->
+  <section class="right-col span3">
+     <hgroup class="widget-heading heading clearfix">
+    <h5>↓ Colaborar</h5>
+</hgroup>
+<div class="widget widget-sources clearfix">
+    <p>Poderopedia lo hacemos todos. Tu también puedes aportar información:</p>
+    <a href="#" class="btn wide">¿Tienes un dato? Cuéntanos</a>
+    <a href="#" class="btn wide">Sugiere una relación</a>
+    <a href="#" class="btn wide">Sugiere un perfil</a>
+    <p>¿Tienes Dudas? Revisa la <a href="#">Guía Paso a Paso</a></p>
+</div>
+
+<hgroup class="widget-heading heading clearfix">
+    <h5>↓ Suscríbete a Poderopedia</h5>
+</hgroup>
+<div class="widget widget-sources clearfix">
+    <!-- facebook -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb-like" data-href="http://www.poderopedia.com/" data-send="false" data-width="300" data-show-faces="true"></div>
+    <!-- twitter -->
+    <hr>
+    <a href="https://twitter.com/poderopedia" class="twitter-follow-button" data-show-count="true" data-lang="es">Seguir a @poderopedia</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <hr>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <g:plusone size="medium"></g:plusone>
+    <hr>
+    <p>Poderopedia en tu email 1 vez por semana:</p>
+    <div class="input-append">
+      <input class="span2" id="appendedInputButton" size="16" type="text"><button class="btn" type="button">Ahora</button>
+    </div>
+</div>
+
+      {{=LOAD('portada','last_inserts.load',target='last_inserts',ajax=True)}}
+      {{=LOAD('portada','count_entity.load',target='count_entity',ajax=True)}}
+      {{=LOAD('portada','last_update.load',target='last_update',ajax=True)}}
+
+
+  </section>
+  <!-- /rightCol -->
+</div><!-- /.width-complete -->
+
+<div id="subindex" class="width-complete"><!-- .width-complete -->
+	<div class="row-complete clearfix"><!-- .row-complete -->
+		<hgroup class="box-heading clearfix">
+			<h3><span>&darr;</span> Poderopedia en la Prensa</h3>
+		</hgroup>
+		<blockquote class="span4">
+			<img src="{{=URL('static','img/tnw_logo.png')}}">
+			<p>Poderopedia puede ayudar a los medios y el público a entender las conexiones entre políticos, sus intereses y las decisiones que toman. Su audiencia puede incluir... <a href="http://thenextweb.com/media/2012/03/16/poderopedia-a-data-journalism-project-to-map-the-chilean-elite/" target="_blank">Más &gt;</a></p>
+		</blockquote>
+		<blockquote class="span4">
+			<img src="{{=URL('static','img/logo_fayerwayer.png')}}">
+			<p>Proyecto chileno “Poderopedia” está entre los más innovadores del observatorio Netexplo. Cada año, el observatorio de innovaciones digitales Netexplo identifica a los últimos ... <a href="http://www.fayerwayer.com/2012/02/poderopedia-fue-incluida-entre-los-proyectos-digitales-innovadores-de-netexplo/" target="_blank">Más &gt;</a></p>
+		</blockquote>
+		<blockquote class="span4">
+			<img src="{{=URL('static','img/TwitterNgood.png')}}" width="95"> <!--solo para esta imagen se agrego el width para dejarla a razon de las demas-->
+			<p>Piensa Wikipedia + Klout para el gobierno: Poderopedia es un índice de los más poderosos de Chile. <a href="http://www.niemanlab.org/2011/06/think-wikipedia-klout-for-government-poderopedia-is-an-index-of-chiles-most-powerful/" target="_blank">Más &gt;</a></p>
+		</blockquote>
+		<blockquote class="span4">
+			<img src="{{=URL('static','img/elmercurio.jpg')}}">
+			<p>Poderopedia es uno de los dos casos “muy destacables” de la “armada chilena” en SXSW Interactive. <a href="http://poderopedia.tumblr.com/post/19783843037/el-mercurio-dice-que-poderopedia-es-uno-de-los-dos" target="_blank">Más &gt;</a></p>
+		</blockquote>
+	</div><!-- /.row-complete -->
+
+	<div class="row-complete clearfix"><!-- .row-complete -->
+		<div class="span6">
+			<hgroup class="box-heading clearfix">
+				<h3><span>&darr;</span> Nos Apoyan</h3>
+			</hgroup>
+			<div class="span2 apoyan">
+                <a href="http://www.knightfoundation.org/grants/20110953/" target="_blank"><img src="{{=URL('static','img/index-logo_knight.png')}}" width="210" height="110"></a>
+				<!--<p>Lorem ipsum dolor sit amet.</p>
+				<p><a href="#">www.com</a></p>-->
+			</div>
+			<div class="span2 apoyan">
+                <a href="http://startupchile.org/congrats-ya%C2%B4ll/" target="_blank"><img src="{{=URL('static','img/index-logo_startupchile.png')}}" width="210" height="110"></a>
+				<!--<p>Lorem ipsum dolor sit amet.</p>
+				<p><a href="#">www.com</a></p>-->
+			</div>
+		</div>
+		<div class="span6">
+			<hgroup class="box-heading clearfix">
+				<h3><span>&darr;</span> Reconocimientos</h3>
+			</hgroup>
+			<div class="span2 apoyan">
+                <a href="http://en.www.netexplo.org/laureat/poderopedia" target="_blank"><img src="{{=URL('static','img/index-logo_netexplo.png')}}" width="210" height="110"></a>
+				<!--<p>Lorem ipsum dolor sit amet.</p>
+				<p><a href="#">www.com</a></p>-->
+			</div>
+			<div class="span2 apoyan">
+                <a href="http://awards.thenextweb.com/chile" target="_blank"><img src="{{=URL('static','img/index-logo_tnw.png')}}" width="210" height="110"></a>
+				<!--<p>Lorem ipsum dolor sit amet.</p>
+				<p><a href="#">www.com</a></p>-->
+			</div>
+		</div>
+		<div class="span11">
+			<form id="registrocorreo"><!-- #registrocorreo -->
+				<h3>¡Quiero más Poderopedia!</h3>
+				<p>Registra tu correo y recibe actualizaciones semanales y novedades</p>
+				<div class="input-append">
+				  <input class="span4" id="appendedInputButton" size="16" type="text" placeholder="Ingresa tu dirección de e-mail"><button class="btn" type="button">Registrarme Ahora &rarr;</button>
+				</div>
+			</form><!-- /#registrocorreo -->
+		</div>
+	</div><!-- /.row-complete -->
+
+</div><!-- /.width-complete -->
+
+<!-- /container -->

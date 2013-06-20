@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    $('#sugerirconexionButton').click(function() {
+        web2py_component("{{=URL('persona','sugerir_persona.load',args=_id)}}","sugerir_persona")
+    });
+
+</script>
+<div id="botonmesano" class="clearfix">
+    <h4>Ordenar por</h4>
+    <div class="btn-group">
+        <a class="btn btn-primary" data-toggle="collapse" data-parent="#accordion1" href="#collapse1" id="sort">A / Z</a>
+        <a href="#" class="btn" id="relation">TIPO DE VÍNCULO</a>
+    </div>
+
+
+    <div id="orderMenu">
+        <a href="#Lightbox_sugerirconexion" data-toggle="modal" class="modales sugest" id="sugerirconexionButton">[ sugerir otra Conexion ]</a>
+        <div id="listDisplay">
+            <a href="#" id="listPersonas">
+                <img src="{{ =URL('static','img/ico-list.gif') }}" />
+            </a>
+            <a href="#" id="boxPersonas">
+                <img src="{{ =URL('static','img/ico-block.gif') }}" />
+            </a>
+        </div>
+    </div>
+</div>
+{{ include 'includes/menu-abecedario.html' }}
+<script type="text/javascript">
+    $("#sort").click(function () {
+        sort=(sort==true)?false:true;
+        $.ajax({
+            url: '{{=URL(args=[_id,page])}}/'+sort,
+            success: function(data) {
+                $('#{{=target}}').html(data);
+            }
+        })
+    });
+    var showOrHide=false;
+    $("#relation").click(function () {
+        $('.relation').toggle(showOrHide);
+        showOrHide=(showOrHide==true)?false:true;
+        if (showOrHide==true){
+            $("#relation").addClass('btn-primary');
+            $("#sort").removeClass('btn-primary');}
+        else{
+            $("#relation").removeClass('btn-primary ');
+            $("#sort").addClass('btn-primary');}
+
+    });
+</script>

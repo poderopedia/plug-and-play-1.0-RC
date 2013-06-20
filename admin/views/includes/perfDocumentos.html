@@ -1,0 +1,7 @@
+<div class="row-division clearfix ancho" id="documentosPersona">
+{{=LOAD('services','relation_documentos.load',args=_id,vars=dict(target='persona'),target='documentos_persona_',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50'))}}
+</div>
+
+<!--Pagination-->
+{{ ##include 'includes/pagination.html' }}
+<!--Pagination end-->

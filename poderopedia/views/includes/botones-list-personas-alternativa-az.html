@@ -1,0 +1,23 @@
+<div id="botonmesano" class="clearfix abcOrden">
+	<h4>Ordenar por</h4>
+	<a id="btn_abc" class="btn btn-primary" href="#"> A / Z</a>
+	<a id="btn_fecha" class="btn" href="#">Fecha</a>
+	<div id="orderMenu">
+		<a href="#Lightbox_sugerirperfil" data-toggle="modal" class="sugest" id="sugerirPerfilButton">[ sugerir perfil ]</a>
+		<div id="listDisplay">
+			<a href="#" id="list">
+				<img src="{{ =URL('static','img/ico-list.gif') }}" />
+			</a>
+			<a href="#" id="box">
+				<img src="{{ =URL('static','img/ico-block.gif') }}" />
+			</a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+    $('#sugerirPerfilButton').click(function() {
+        web2py_component("{{=URL('visualizacion','sugerir_perfil.load')}}","sugerir_perfil")
+    });
+
+</script>

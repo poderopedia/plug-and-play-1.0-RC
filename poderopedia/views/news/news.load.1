@@ -1,0 +1,126 @@
+{{if lista != None:}}
+<hgroup class="box-heading clearfix">
+				<h3><span>&darr;</span> Destacados</h3> 
+			</hgroup>
+			
+			<div id="central_news" class="row-division clearfix"><!-- #central_news -->
+				<div class="span6">
+					<div class="thumb">
+                        <img src="{{=URL('download', args=lista[0].imagen)}}" width="610" height="300">
+                        <span>{{=lista[0].tag}}</span>
+					</div>
+                    <h2><a href="{{=lista[0].url}}">{{=lista[0].titulo}}</a></h2>
+                    <date><a href="#"><img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a><a href="https://twitter.com/share" class="twitter-share-button" data-dnt="true" data-count="none" data-via="twitterapi"><img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a>{{=lista[0].fecha}}</date>
+                    <p>{{=lista[0].contenido}} <a href="{{=lista[0].url}}">Más &gt;</a></p>
+				</div>
+				<div class="span2">
+					<div class="thumb">
+						<img src="{{=URL('download', args=lista[1].imagen)}}" width="150" height="110">
+						<span>{{=lista[1].tag}}</span>
+					</div>
+					<h4><a href="{{=lista[1].url}}">{{=lista[1].titulo}}</a></h4>
+					<date><a href="#"><img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a><a href="#"><img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a>{{=lista[1].fecha}}</date>
+					<div class="thumb">
+						<img src="{{=URL('download', args=lista[2].imagen)}}" width="150" height="110">
+						<span>{{=lista[2].tag}}</span>
+					</div>
+					<h4><a href="{{=lista[2].url}}">{{=lista[2].titulo}}</a></h4>
+					<date><a href="#"><img src="{{=URL('static','img/index_icon_fb.gif')}}" width="20" height="20"></a><a href="#"><img src="{{=URL('static','img/index_icon_tw.gif')}}" width="20" height="20"></a> {{=lista[2].fecha}}</date>
+				</div>
+			</div><!-- /#central_news -->
+			<div id="mas_destacados" class="row-division clearfix"><!-- #mas_destacados -->
+				<h3><span>&darr;</span> Más Destacados</h3>
+                
+				<div class="carr"><!-- .carr -->
+                    {{for item in lista[3:9]:}}
+					<a href="{{=item.url}}">
+						<img src="{{=URL('download', args=item.imagen)}}" width="115" height="90">
+						<span>
+                            {{=item.titulo}}
+                            <b>&rarr; {{=item.tag}}</b>
+						</span>
+                    </a>
+                    {{pass}}
+
+				</div><!-- /.carr -->
+				<div class="carr_aux"><!-- .carr_aux -->
+					<a href="#" class="btn prev">&larr;</a>
+					<a href="#" class="btn next">&rarr;</a>
+					<a href="#" class="btn random" onclick="cargarRandom();">Random</a>
+				</div><!-- /.carr_aux -->
+			</div><!-- /#mas_destacados -->
+
+{{else:}}
+<hgroup class="box-heading clearfix" style="height:483px">
+				<h3><span>&darr;</span> Destacados</h3> 
+			</hgroup>
+						
+ 
+<!--<div class="custom-tweet-button">
+  <a href="https://twitter.com/share?url=https%3A%2F%2Fdev.twitter.com%2Fpages%2Ftweet-button" target="_blank"></a>
+</div>-->
+
+			<div id="central_news" class="row-division clearfix"><!-- #central_news -->
+				<div class="span6">
+					<div class="thumb">
+                        
+					</div>
+				</div>
+				<div class="span2">
+					<div class="thumb">
+						
+					</div>
+					
+					<div class="thumb">
+						
+					</div>
+					
+				</div>
+			</div><!-- /#central_news -->
+			<div id="mas_destacados" class="row-division clearfix"><!-- #mas_destacados -->
+				<h3><span>&darr;</span> Más Destacados</h3>
+                
+				<div class="carr"><!-- .carr -->
+                    
+					<a href="#">
+						
+				
+                    </a>
+                    
+
+			</div><!-- /.carr -->
+				<div class="carr_aux"><!-- .carr_aux -->
+					<a href="#" class="btn prev">&larr;</a>
+					<a href="#" class="btn next">&rarr;</a>
+					<a href="#" class="btn random" onclick="cargarRandom();">Random</a>
+				</div><!-- /.carr_aux -->
+			</div><!-- /#mas_destacados -->
+	<!-- fin scripts solo para index -->
+
+{{pass}}
+
+
+	<!-- scripts solo para index -->
+	<script src="assets/js/jquery.carouFredSel-5.6.4-packed.js"></script>
+	<script>
+	// carrusel
+	$("#mas_destacados .carr").carouFredSel({
+		width: 475,
+		height: 90,
+		align: false,
+		items: {
+			width: 120,
+			height: 90
+		},
+		scroll: 1,
+		prev: ".btn.prev",
+		next: ".btn.next"
+});
+	
+	// btn video
+	$('#btn_cerrar').click(function(e){
+		e.preventDefault();
+	$('#intro').slideUp();
+	});
+	</script>
+	<!-- fin scripts solo para index -->

@@ -1,0 +1,154 @@
+{{response.files.append(URL('static','js/d3.v2.min.js'))}}
+{{response.files.append(URL('static','css/reset.css'))}}
+{{response.files.append(URL('static','css/style3.css'))}}
+{{extend 'visualizacionLayoutDocument.html'}}
+
+<style>
+     #textos {   cursor: -webkit-grab; cursor: -moz-grab; }
+     #links { cursor: -webkit-grab; cursor: -moz-grab;}
+     #filters {
+        position: relative;
+        cursor: pointer;
+    }
+    #controls2 .page {
+        display: inline-block;
+        margin: 0px;
+        position: relative;
+        z-index: 1;
+    }
+    #controls2 .zoom-in, #controls2 .zoom-out, #controls2 .zoom-reset {
+        left: 0;
+        position: absolute;
+    }
+    #controls2 .zoom-in {
+        top: 140px;
+    }
+    #controls2 .zoom-out {
+        top: 180px;
+    }
+    #controls2 .zoom-reset {
+        top: 220px;
+    }
+
+    #filters form {
+        margin: 0;
+        height: auto;
+    }
+    .zoom-in {
+        cursor: -moz-zoom-in; cursor: -webkit-zoom-in;
+    }
+    .zoom-out {
+        cursor: -moz-zoom-out; cursor: -webkit-zoom-out;
+    }
+</style>
+
+{{block imprimir}}
+<li><a href="#Lightbox_compartir" data-toggle="modal" class="btn_compartir">Compartir</a></li>
+<li><a href="#Lightbox_republicar" class="btn_compartir" id="republicarButton" data-toggle="modal">Republicar</a></li>
+<li><a href="#" onclick="window.print();return false;" class="btn_imprimir">Imprimir</a></li>
+{{end}}
+
+{{block header}}
+{{from conversion import convert_latin_chars}}
+<nav class="primary-nav">
+    <div class="quien">
+
+        {{if person!=None:}}
+        {{=imagen}} <h3>{{=person.alias}}</h3> <a href="{{=URL('personas','conexiones',args=convert_latin_chars(person.alias))}}">Ver Perfil &#9654;</a>
+        {{pass}}
+    </div>
+</nav>
+{{end}}
+
+<script type="text/javascript">
+    window.mapaURL='http://api.poderopedia.org/visualizacion/connection/persona/{{=_id}}/7a112787f390e0d0abdb50ce04ff5551';
+    window.heightW=$(window).height()-140;
+    window.widthW=$(window).width();
+
+
+
+    $('#republicarButton').click(function() {
+        web2py_component("{{=URL('republicar','mapa_lightbox.load',args=[request.args(0),'persona'])}}","republicar")
+    });
+
+    $('#republicarButtonVIS').click(function() {
+        web2py_component("{{=URL('republicar','mapa_lightbox.load',args=[request.args(0),'persona'])}}","republicar")
+    });
+
+
+</script>
+<script defer src="{{=URL('static','js/plugins.js')}}"></script>
+<script defer src="{{=URL('static','js/script.js')}}"></script>
+<script src="{{=URL('static','js/libs/coffee-script.js')}}"></script>
+<script src="{{=URL('static','js/d3.v2.min.js')}}"></script>
+<script src="{{=URL('static','js/Tooltip.js')}}"></script>
+<script type="text/coffeescript" src="{{=URL('static','coffee/vis.coffee')}}"></script>
+
+
+
+ <h3><br></h3>
+
+<div id="filters">
+            <div id="controls">
+            <h4 data-target="#filters form" data-toggle="collapse" class="collapsed">
+                <i class="icon-filter"></i>Filtros</h4>
+            <form class="form-inline collapse" style="height: 0px;">
+                <div id="groups" class="control">
+                    Filtrar:
+                </div>
+                <div id="search_section" class="control">
+
+                    <p class="search_title">Buscar en Visualización <input type="text" class="text-input" id="search" value="" /></p>
+
+                </div>
+                <div id="layouts" class="control"><h3><br></h3>
+                    <a id="force">Desagrupar</a>
+                    <a id="radial">Agrupar por Tipo de Entidad</a>
+                </div>
+                <div id="data" class="control"><h3><br></h3>
+                    <a id="init">Restablecer</a>
+                </div>
+                <div id="blue" class="control"><h3><br></h3>
+                <div style="border-radius: 50%;width: 20px;height: 20px; margin-left:15px;">
+                    <img src="{{=URL('static','img/icono-persona56.png')}}" width="20" height="20">
+                </div><p class="search_title">Personas</p>
+                </div>
+                <div id="green" class="control"><h3><br></h3>
+                    <div style="border-radius: 50%;width: 20px;height: 20px; margin-left:17px;">
+                        <img src="{{=URL('static','img/icono-empresas56.png')}}" width="20" height="20">
+                    </div><p class="search_title">Empresas</p>
+                </div>
+                <div id="orange" class="control"><h3><br></h3>
+                    <div style="border-radius: 50%;width: 20px;height: 20px; margin-left:30px;">
+                        <img src="{{=URL('static','img/icono-organizaciones56.png')}}" width="20" height="20">
+                    </div><p class="search_title">Organizaciones</p>
+                </div>
+             </form>
+            </div>
+</div>
+
+<div id="controls2" class="page">
+    <button class="btn zoom-in" data-toggle="tooltip" title="Zoom In" data-original-title="zoom in"><i class="icon-plus"></i></button>
+    <button class="btn zoom-out" data-toggle="tooltip" title="Zoom Out" data-original-title="zoom out"><i class="icon-minus"></i></button>
+    <button class="btn zoom-reset" data-toggle="tooltip" title="Reset" data-original-title="reset zoom"><i class="icon-refresh"></i></button>
+</div>
+
+<center>
+<div id="main" role="main">
+    <div id="vis"></div>
+</div>
+</center>
+
+
+
+
+<!--Lightbox_republicar -->
+<div class="modal hide fade" id="Lightbox_republicar">
+<div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+        <div id="republicar"></div>
+    </div>
+</div>
+<!--Fin Republicar-->

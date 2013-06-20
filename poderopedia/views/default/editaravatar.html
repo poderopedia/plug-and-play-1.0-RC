@@ -1,0 +1,134 @@
+{{response.files.append(URL(request.application,'static','js/fileuploader.js'))}}
+{{response.files.append(URL(request.application,'static','css/fileuploader.css'))}}
+{{extend 'visualizacionLayoutCuentas.html'}}
+{{block sidebar}}
+{{=LOAD('default','sidebar_cuenta.load',target='sidebar_cuenta',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+{{end}}
+
+{{block leftcol}}
+{{include 'includes/tertiary-nav-conf.html'}}
+{{end}}
+
+{{=form.custom.begin}}
+<hgroup class="search-results historial-head clearfix">
+                      <h3 class="search-awnser">
+                        <img src="{{ =URL('static','tmp/avatar-45.gif') }}" class="imagen-perfil-ch" />
+                        <span class="perfil-results">{{=auth.user.user_name}}</span>
+                        <button href="#" class="btn btn-primary btn_save" onclick="this.form.submit()"><i class="icon-check icon-white"></i> Guardar</button>
+                     </h3>
+                    </hgroup>
+                    <div class="row-division clearfix forms"><!-- .row-division -->
+
+                    <!--hgroup-->
+                   <hgroup class="box-heading clearfix">
+                    <h3>Imagen de Perfil ↓</h3>
+                   </hgroup>
+                   <!--hgroup-->
+                        {{if form.errors:}}
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="alert">
+                                    <img src="{{ =URL('static','img/img_warning.gif') }}" class="img_warning"/>
+                                <span class="txt_alert">
+                                    {{=T('Se han encontado errores al procesar su Regitro')}}
+
+                                        {{for fieldname in form.errors:}}
+                                         <p>{{=fieldname}} error: {{=form.errors[fieldname]}}</p>
+                                        {{pass}}
+
+
+
+                                </span>
+                                </div>
+                            </div>
+                            <div class="controls">
+                            </div>
+                        </div>
+                        {{pass}}
+                
+                                    <div class="cambio_img">
+
+                                        <div class="form-search">
+                                            <fieldset>
+                                                
+                                                <div class="soporte_imgp">
+                                                    <div class="soporte_borde">
+                                                    
+                                                    <div class="detalle_img">
+                                                        <h6>Cargar una foto </h6>
+                                                        <p>Fotografí,a JPG, GIF o PNG</p>
+                                                        <p> Tamaño máximo de 4MB.</p>
+                                                    </div>
+                                                    <span class="soporte_img_perfil">
+                                                        <div id="avatar">{{if auth.user.thumbnail: }}<img class="thumb_perfil" src="{{=URL('default','fast_download',args=auth.user.thumbnail)}}"  />{{else:}}<img class="thumb_perfil" src="{{ =URL('static','tmp/imagen-face-72.gif') }}"  />{{pass}}</div>
+                                                    </span>
+                                                <div id="file-uploader">
+                                                    <noscript>
+                                                        <p>Please enable JavaScript to use file uploader.</p>
+                                                        <!-- or put a simple form for upload here -->
+                                                    </noscript>
+                                                </div>
+
+
+                                                    <div class="alerta" id="msg">No se ha seleccionado ningún archivo</div>
+                                                    <div class="controles">
+                                                        <!-- <button type="submit" class="btn btn-base">Cargar otra foto</button>-->
+                                                        <span class="sop_condiciones">Acepto las <a>Condiciones de uso</a></span>
+                                                    </div>
+                                                </div>
+
+                                                </div>
+                                                
+                                          <div class="soporte-accion">
+                                          <button href="#" class="btn btn-primary btn_save" onclick="this.form.submit()"><i class="icon-check icon-white"></i> Guardar</button>
+                                          </div>
+                                            </fieldset>
+                                    </div>
+                                
+                                
+                                    </div>
+
+
+                    </div><!-- .row-division -->
+{{=form.custom.end}}
+
+<script>
+    jQuery(document).ready(function() {
+        var uploader = new qq.FileUploader({
+            // pass the dom node (ex. jQuery(selector)[0] for jQuery users)
+            element: document.getElementById('file-uploader'),
+            uploadButtonText: "{{=T('Seleccionar Foto')}}",
+            // path to server-side upload script
+            action: '{{=URL("upload_callback")}}',
+            sizeLimit: 1500000,
+            minSizeLimit: 0,
+            allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+            // set to true to output server response to console
+            debug: true,
+
+            // events
+            // you can return false to abort submit
+            onSubmit: function(id, fileName){},
+            onProgress: function(id, fileName, loaded, total){},
+            onComplete: function(id, fileName, responseJSON){
+                data='<img src="{{=URL('default','fast_download')}}/'+responseJSON.filename+'">';
+                $('#avatar').html(data);
+                $('.avatar').html(data);
+                $('#msg').html('Archivo Cargado con Exito');
+            },
+            onCancel: function(id, fileName){},
+
+            messages: {
+                // error messages, see qq.FileUploaderBasic for content
+                typeError: "{file} {{=T('has invalid extension.')}} {{=T('Only')}} {extensions} {{=T('are allowed.')}}",
+                sizeError: "{file} {{=T('is too large, maximum file size is')}} {sizeLimit}.",
+                minSizeError: "{file} {{=T('is too small, minimum file size is')}} {minSizeLimit}.",
+                emptyError: "{file} {{=T('is empty, please select files again without it.')}}",
+                onLeave: "{{=T('The files are being uploaded, if you leave now the upload will be cancelled.')}}"
+            },
+            showMessage: function(message){
+                alert(message);
+            }
+        });
+    });
+</script>

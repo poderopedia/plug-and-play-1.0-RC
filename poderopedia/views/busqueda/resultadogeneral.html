@@ -1,0 +1,422 @@
+{{extend 'visualizacionLayout.html'}}
+
+{{block header}}
+{{if me:}}
+    {{ include 'includes/header-privado.html' }}
+{{else:}}
+    {{ include 'includes/header-login.html'}}
+{{pass}}
+{{end}}
+
+{{block sidebar}}
+{{ include 'includes/sidebar-filtro.html' }}
+{{end}}
+
+{{block socialBar}}
+
+{{end}}
+					<hgroup class="search-results clearfix">
+	                	<p class="search-awnser">Hemos encontrado <strong>1.234.567</strong> resultados de: <span class="word-result">Joaquin Brunner</span></p>
+						<!--p class="Order-menu">Ordenar por: <a href="#" class="selected">Relevancia</a>  <a href="#">Fecha</a></p>-->
+							
+							<ul class="websites-sources">
+								<li>
+									<a href="#">
+										Personas
+										<span class="badgeNum">(12)</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										Empresas
+										<span class="badgeNum">(12)</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										Organizaciones
+										<span class="badgeNum">(12)</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										Casos
+										<span class="badgeNum">(12)</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										Mapas
+										<span class="badgeNum">(12)</span>
+									</a>
+								</li>
+							</ul>
+							<!--botones de selección-->
+						      {{ include 'includes/botones-list-resultados-vinculo.html' }}
+						      <!--boones de selección--> 
+						      <!--menu-abecedario-->
+						      {{ include 'includes/menu-abecedario.html' }}
+						      <!--menu-abecedario-->
+	                </hgroup>
+                    <div class="row-division clearfix">
+                    	<!--hgroup-->
+	                    <hgroup class="box-heading clearfix">
+	                    	<h3><span>Personas</span> (03) &darr;</h3>
+	                        <a href="#" class="hint">Ver más &gt;</a>
+	                    </hgroup>
+	                    <!--hgroup-->
+	                    <ul class="people-list">
+	                    	<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-45.gif') }}">
+								</a>
+								<h5><a href="#" title"Juan Pablo Barrientos">Juan Pablo Barrientos</a></h5>
+								<p>Sacerdote (1911- 1955)</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-45.gif') }}">
+								</a>
+								<h5><a href="#" title"Juan Pablo Barrientos">Juan Pablo Barrientos</a></h5>
+								<p>Sacerdote (1911- 1955)</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-45.gif') }}">
+								</a>
+								<h5><a href="#" title"Juan Pablo Barrientos">Juan Pablo Barrientos</a></h5>
+								<p>Sacerdote (1911- 1955)</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-45.gif') }}">
+								</a>
+								<h5><a href="#" title"Juan Pablo Barrientos">Juan Pablo Barrientos</a></h5>
+								<p>Sacerdote (1911- 1955)</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-45.gif') }}">
+								</a>
+								<h5><a href="#" title"Juan Pablo Barrientos">Juan Pablo Barrientos</a></h5>
+								<p>Sacerdote (1911- 1955)</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-45.gif') }}">
+								</a>
+								<h5><a href="#" title"Juan Pablo Barrientos">Juan Pablo Barrientos</a></h5>
+								<p>Sacerdote (1911- 1955)</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-45.gif') }}">
+								</a>
+								<h5><a href="#" title"Juan Pablo Barrientos">Juan Pablo Barrientos</a></h5>
+								<p>Sacerdote (1911- 1955)</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-45.gif') }}">
+								</a>
+								<h5><a href="#" title"Juan Pablo Barrientos">Juan Pablo Barrientos</a></h5>
+								<p>Sacerdote (1911- 1955)</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-45.gif') }}">
+								</a>
+								<h5><a href="#" title"Juan Pablo Barrientos">Juan Pablo Barrientos</a></h5>
+								<p>Sacerdote (1911- 1955)</p>
+	                        </li>
+	                    </ul>
+                    </div>
+                	<div class="row-division clearfix">
+                    	<!--hgroup-->
+	                    <hgroup class="box-heading clearfix">
+	                    	<h3><span>Empresas</span> (03) &darr;</h3>
+	                        <a href="#" class="hint">Ver más &gt;</a>
+	                    </hgroup>
+	                    <!--hgroup-->
+	                    <ul class="people-list">
+	                    	<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-empresa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Empresa">Nombre Empresa</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-empresa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Empresa">Nombre Empresa</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-empresa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Empresa">Nombre Empresa</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-empresa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Empresa">Nombre Empresa</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-empresa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Empresa">Nombre Empresa</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-empresa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Empresa">Nombre Empresa</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-empresa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Empresa">Nombre Empresa</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-empresa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Empresa">Nombre Empresa</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-empresa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Empresa">Nombre Empresa</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                    </ul>
+                    </div>
+					<div class="row-division clearfix">
+                    	<!--hgroup-->
+	                    <hgroup class="box-heading clearfix">
+	                    	<h3><span>Organizaciones</span> (03) &darr;</h3>
+	                        <a href="#" class="hint">Ver más &gt;</a>
+	                    </hgroup>
+	                    <!--hgroup-->
+	                    <ul class="people-list">
+	                    	<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Organizaci&oacute;n</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Organizaci&oacute;n</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Organizaci&oacute;n</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Organizaci&oacute;n</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Organizaci&oacute;n</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Organizaci&oacute;n</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Organizaci&oacute;n</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Organizaci&oacute;n</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Organizaci&oacute;n</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                    </ul>
+                    </div>
+					<div class="row-division clearfix">
+                    	<!--hgroup-->
+	                    <hgroup class="box-heading clearfix">
+	                    	<h3><span>Casos</span> (03) &darr;</h3>
+	                        <a href="#" class="hint">Ver más &gt;</a>
+	                    </hgroup>
+	                    <!--hgroup-->
+	                    <ul class="people-list">
+	                    	<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-caso45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Caso</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-caso45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Caso</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-caso45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Caso</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-caso45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Caso</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-caso45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Caso</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-caso45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Caso</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-caso45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Caso</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-caso45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Caso</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-caso45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre Caso">Nombre Caso</a></h5>
+								<p>Nombre Vinculo</p>
+	                        </li>
+	                    </ul>
+                    </div>
+					<div class="row-division clearfix">
+                    	<!--hgroup-->
+	                    <hgroup class="box-heading clearfix">
+	                    	<h3><span>Mapas</span> (03) &darr;</h3>
+	                        <a href="#" class="hint">Ver más &gt;</a>
+	                    </hgroup>
+	                    <!--hgroup-->
+	                    <ul class="people-list">
+	                    	<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-mapa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Juan Pablo Barrientos">Nombre del Mapa</a></h5>
+								
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-mapa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre del Mapa">Nombre del Mapa</a></h5>
+								
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-mapa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre del Mapa">Nombre del Mapa</a></h5>
+								
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-mapa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre del Mapa">Nombre del Mapa</a></h5>
+								
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-mapa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre del Mapa">Nombre del Mapa</a></h5>
+								
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-mapa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre del Mapa">Nombre del Mapa</a></h5>
+								
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-mapa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre del Mapa">Nombre del Mapa</a></h5>
+	                        </li>
+	                        <li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-mapa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre del Mapa">Nombre del Mapa</a></h5>
+	                        </li>
+							<li class="span3_3">
+	                        	<a class="avatar" href="#">
+									<img alt="Juan Pablo Barrientos" src="{{ =URL('static','tmp/avatar-mapa45.gif') }}">
+								</a>
+								<h5><a href="#" title"Nombre del Mapa">Nombre del Mapa</a></h5>
+	                        </li>
+	                    </ul>
+                    </div>

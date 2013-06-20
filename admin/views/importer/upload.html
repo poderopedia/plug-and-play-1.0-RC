@@ -1,0 +1,56 @@
+{{response.files.append(URL(request.application,'static','js/fileuploader.js'))}}
+{{response.files.append(URL(request.application,'static','css/fileuploader.css'))}}
+{{extend 'layout.html'}}
+
+<script>
+jQuery(document).ready(function() {
+  var uploader = new qq.FileUploader({
+        // pass the dom node (ex. jQuery(selector)[0] for jQuery users)
+        element: document.getElementById('file-uploader'),
+        // path to server-side upload script
+        action: '{{=URL("upload_callback")}}',
+        sizeLimit: 150000000,
+        minSizeLimit: 0,
+        allowedExtensions: ['xls','csv', 'txt','xml','xmls'],
+        // set to true to output server response to console
+        debug: true,
+
+        // events
+        // you can return false to abort submit
+        onSubmit: function(id, fileName){},
+        onProgress: function(id, fileName, loaded, total){},
+        onComplete: function(id, fileName, responseJSON){
+            var importer=responseJSON.filename;
+            alert(importer);
+            $.ajax({
+                url: '{{=URL("parser_definition")}}'+'/'+importer,
+                success: function(data) {
+                    $('.result').html(data);
+                    alert('Load was performed.');
+                }
+            });
+
+        },
+        onCancel: function(id, fileName){},
+
+        messages: {
+            // error messages, see qq.FileUploaderBasic for content
+            typeError: "{file} {{=T('has invalid extension.')}} {{=T('Only')}} {extensions} {{=T('are allowed.')}}",
+            sizeError: "{file} {{=T('is too large, maximum file size is')}} {sizeLimit}.",
+            minSizeError: "{file} {{=T('is too small, minimum file size is')}} {minSizeLimit}.",
+            emptyError: "{file} {{=T('is empty, please select files again without it.')}}",
+            onLeave: "{{=T('The files are being uploaded, if you leave now the upload will be cancelled.')}}"
+        },
+        showMessage: function(message){ alert(message); }
+    });
+    });
+</script>
+<b class="result"></b>
+<div id="file-uploader">       
+    <noscript>          
+        <p>Please enable JavaScript to use file uploader.</p>
+        <!-- or put a simple form for upload here -->
+    </noscript>         
+</div>
+<hr />
+

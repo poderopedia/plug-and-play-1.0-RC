@@ -1,0 +1,58 @@
+<!-- CSS Files -->
+<link type="text/css" href="{{=URL('static','css/base.css')}}" rel="stylesheet" />
+<link type="text/css" href="{{=URL('static','css/Hypertree.css')}}" rel="stylesheet" />
+
+<!--[if IE]><script language="javascript" type="text/javascript" src="../../Extras/excanvas.js"></script><![endif]-->
+
+<!-- JIT Library File -->
+
+<script language="javascript" type="text/javascript" src="{{=URL('static','js/jit.js')}}"></script>
+
+<!-- Example File -->
+<script language="javascript" type="text/javascript" src="{{=URL('static','js/visualization.js')}}"></script>
+
+<body>
+<script>
+    jQuery(document).ready(function(){
+            urlstring = "{{=URL('visualizacion','call',args=['json','get_persona_relfamiliar_id',_id])}}";
+            //alert(urlstring);
+            jQuery.ajax({
+                url: urlstring,
+                success: function(data) {
+                    init(urlstring);
+                }
+
+            });
+
+    });
+</script>
+<div id="container">
+
+    <div id="left-container">
+
+
+
+        <div class="text">
+
+
+        </div>
+
+        <div id="id-list"></div>
+
+
+
+    </div>
+
+    <div id="center-container">
+        <div id="infovis"></div>
+    </div>
+
+    <div id="right-container">
+
+        <div id="inner-details"></div>
+
+    </div>
+
+    <div id="log"></div>
+</div>
+</body>

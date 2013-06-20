@@ -1,0 +1,86 @@
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('a#copy-button').zclip({
+        path:'{{=URL('static','js/ZeroClipboard.swf')}}',
+        copy:function(){
+           return $('#textocopia').text();
+        },
+        beforeCopy:function(){
+            $('#textocopia').css('color','blue');
+        },
+        afterCopy:function(){
+            $('#textocopia').css('background','#2179c9');
+            $('#textocopia').css('color','white');
+            $(this).next('.check').show();
+
+        },
+    });
+    $('#sizeembed').change(function() {
+         $('#textocopia').css('color','black');
+         $('#textocopia').css('background','white');
+         switch($(this).val()) {
+             case 'XSmall':$('#textocopia').text('<iframe src="http://{{=request.env.http_host+URL('republicar','mapa_relaciones',args=[entity,alias],extension=False)}}" scrolling="auto" width="560" height="315"></iframe>'); break;
+             case 'Small':
+                $('#textocopia').text('<iframe src="http://{{=request.env.http_host+URL('republicar','mapa_relaciones',args=[entity,alias],extension=False)}}" scrolling="auto" width="640" height="360"></iframe>'); break;
+             case 'Medium':$('#textocopia').text('<iframe src="http://{{=request.env.http_host+URL('republicar','mapa_relaciones',args=[entity,alias],extension=False)}}" scrolling="auto" width="853" height="480"></iframe>'); break;
+             case 'Large':$('#textocopia').text('<iframe src="http://{{=request.env.http_host+URL('republicar','mapa_relaciones',args=[entity,alias],extension=False)}}" scrolling="auto" width="1280" height="720"></iframe>'); break;
+         }
+    });
+  });
+  </script>
+  <div class="control-group" style="text-align:left">
+          <div class="controls" style="float:left">
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png"></a>
+          </div>
+          <h2 class="title-link">Republica esta Visualización Gratis!!<br>{{=alias.replace('_',' ')}}</h2>
+
+  </div>
+      <div class="control-group" style="text-align:left">
+          <div class="controls">
+          <div class="republish-title">
+
+              <p class="byline"></p>
+          </div>
+          <p>Puedes usar nuestro contenido y publicarlo en tu medio, blog o sitio
+            web personal de manera gratuita, cumpliendo estas reglas básicas: Fundación
+            Poderomedia licencia los contenidos de Poderopedia con la licencia
+            Creative Commons 3.0. Esto significa que:</p>
+          <ol>
+            <li>Se puede copiar, distribuir y comunicar públicamente el contenido de Poderopedia.</li>
+            <li>No es posible editar los contenidos, excepto para reflejar cambios relativos a tiempo, lugar y estilo editorial.</li>
+            <li>No es posible vender los contenidos de Poderopedia</li>
+            <li>Pueden publicarse los contenidos de Poderopedia en una página web con
+                avisos comerciales pero no es posible incluir avisos comerciales que
+                hayan sido vendidos específicamente a partir de nuestro contenido.</li>
+            <li>Si se publican contenidos de Poderopedia en un sitio web, deben ser
+                enlazados a las URLs de los contenidos publicados originalmente en
+                Poderopedia. Ejemplo: si publicas el perfil de Juan Perez,
+                debes incluir un enlace a
+                http://www.poderopedia.com/personas/Juan_Perez#tab_perfil</li>
+            <li>Debe señalarse a Poderopedia como autor del contenido, al inicio del
+                mismo, idealmente de las siguientes formas: Autor: "Poderopedia" o Vía
+                Poderopedia o by Poderopedia.</li>
+            <li>No puedes republicar contenidos de Poderopedia de manera automática:
+                debes seleccionar los contenidos que desees republicar de manera
+                individual.</li>
+          </ol>
+        </div>
+        Tamano Visualización
+          <select id="sizeembed">
+            <option value="XSmall">Pequeño</option>
+            <option value="Small">Normal</option>
+            <option value="Medium">Medio</option>
+            <option value="Large" selected>Grande</option>
+          </select>
+      </div>
+
+
+  <textarea id="textocopia" style="margin: 0px 0px 9px; width: 515px; height: 30px;">{{='<iframe src="http://'+request.env.http_host+URL('republicar','mapa_relaciones',args=[entity,alias],extension=False)+'" scrolling="auto" width="1050" height="700"></iframe>'}}</textarea>
+  <a id="copy-button" href="#" class="btn btn-large btn-primary">Copiar</a>
+  <p>*Agradecemos a <a href="http://www.propublica.org">ProPublica.org</a> por liberar
+  <a href="http://documentcloud.github.io/pixel-ping/">PixelPing</a> y proponer el
+    modelo aplicado aquí de promoción y explicación de la re-utilización
+    de contenidos licenciados bajo <a href="http://creativecommons.org/">Creative Commons</a>.</p>
+
+

@@ -1,0 +1,53 @@
+<!-- top -->
+            <div class="container">
+                <h1 class="logo">
+                    <a href="{{=URL('default','index')}}">Poderopedia</a>
+                </h1>
+                
+                <!-- primaryNav -->
+                <nav class="primary-nav">
+                    <div class="btn-group">
+                        <a href="#" class="ddown-toggle" data-toggle="dropdown">Crear <span class="caret"></span></a>
+                        
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="icon-user"></i> Perfil</a></li>
+                            <li><a href="#"><i class="icon-globe"></i> Mapa</a></li>
+                            <li><a href="#"><i class="icon-inbox"></i> Caso</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <a href="#" class="ddown-toggle" data-toggle="dropdown">Administrar <span class="caret"></span></a>
+                        
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="icon-user"></i> Perfil</a></li>
+                            <li><a href="#"><i class="icon-globe"></i> Mapa</a></li>
+                            <li><a href="#"><i class="icon-inbox"></i> Caso</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- /primaryNav -->
+                
+                <!-- loginPreview -->
+                <div class="login-preview">
+                    <a href="#" class="avatar"><img src="{{=URL('static','tmp/avatar-36.png')}}" alt="{{=auth.user.user_name}}" /></a>
+                    <div class="btn-group">
+                        <a href="#" class="username ddown-toggle" data-toggle="dropdown">Juan Pablo Barrientos <span class="caret"></span></a>
+                        
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="icon-user"></i> Mi Cuenta</a></li>
+                            <li><a href="#"><i class="icon-inbox"></i> Mis Perfiles</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /loginPreview -->
+                
+                <!-- search -->
+                <form class="form-inline" method="get" action="{{=URL('search','podersearch')}}">
+                    <div class="input-append">
+                        <input class="span4" id="appendedInputButton" size="16" name="q" type="text" placeholder="Buscar en todo Poderopedia"><button class="btn" type="button" onclick="this.form.submit"></button>
+                    </div>
+                </form>
+                <!-- /search -->
+            </div>
+            <!-- /top -->

@@ -1,0 +1,25 @@
+{{extend 'visualizacionLayoutDocument.html'}}
+{{block modales}}
+{{end}}
+{{block footer}}
+{{end}}
+{{block header}}
+<nav class="primary-nav">
+    <div class="quien">
+
+        {{if entity!=None:}}
+        {{=entity.logo}}<h3>{{=entity.alias}}</h3> <a href="{{=URL(entity.controller, entity.target, args=entity.args)}}">Ver Perfil ▶</a>
+        {{pass}}
+    </div>
+</nav>
+{{end}}
+<script type="text/javascript" src="http://s3.documentcloud.org/viewer/loader.js"></script>
+<script type="text/javascript">
+    DV.load('http://www.documentcloud.org/documents/{{=dc_id}}.js', {
+        container : '#doc',
+        embedded  : true
+    });
+</script>
+<br>
+<h3>{{=title}}</h3>
+<div id="doc" style="padding-top:10px"></div>

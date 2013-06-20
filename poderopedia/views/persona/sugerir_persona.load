@@ -1,0 +1,149 @@
+<style>
+    .ui-autocomplete-loading {
+        background: white url('{{=URL('static','images/ui-anim_basic_16x16.gif',extension=False)}}') right center no-repeat;
+    }
+    #sugerirConexion_alias { width: 19em; }
+    .controls textarea {margin-left:0; width:300; height:150px;}
+    .largeHorizontal input {margin-left:0;}
+    </style>
+<script>
+    $(function() {
+        function log( message ) {
+            $( "<div>" ).text( message ).prependTo( "#log" );
+            $( "#log" ).scrollTop( 0 );
+        }
+
+        $( "#sugerirConexion_alias" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "{{=URL('persona','call/json/entity_autocomplete')}}",
+                    dataType: "json",
+                    data: {
+                        entity: $('#sugerirConexion_referenceEntity').val(),
+                        maxRows: 12,
+                        alias_startsWith: request.term
+                    },
+                    success: function( data ) {
+                        response( $.map( data, function( item ) {
+                            return {
+                                label: item.alias,
+                                value: item.alias,
+                                entity: item.id
+                            }
+                        }));
+                    }
+                });
+            },
+            minLength: 2,
+            select: function( event, ui ) {
+                this.form.sugerirConexion_reference.value=ui.item.entity;
+            },
+            open: function() {
+                $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+            },
+            close: function() {
+                $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+            }
+        });
+    });
+    </script>
+<h2>Sugerir una Conexión</h2>
+<div id="thanks">
+{{if me:}}
+
+
+
+
+            <h4>Gracias por tu colaboración, es muy importante para mantener y <br> mejorar la calidad de nuestros contenidos.  Poderopedia lo hacemos todos.</h4>
+          <!--Formulario echo con form-->
+          {{=form.custom.begin}}
+
+
+
+          {{=response.flash}}
+          <div class="form-horizontal">
+               <div class="control-group">
+                  <div class="largeHorizontal">
+                   {{if desde=='portada':}}
+                    <input id="sugerirConexion_reference" name="reference" type="hidden" value="">
+
+                       <label for="sugerirConexion_referenceEntity">{{=form.custom.label['referenceEntity']}}</label>
+                       {{=form.custom.widget.referenceEntity}}
+                       <br><input id="sugerirConexion_alias" name="alias" /> y {{=form.custom.widget.name}}
+
+
+                   {{else:}}
+
+                   {{=form.custom.widget.alias}} y {{=form.custom.widget.name}}
+               {{pass}}
+                  </div>
+                </div> 
+                <div class="control-group">
+                    <label class="control-label">¿Cómo están relacionados? <br>
+                    <span>Máximo 300 caracteres<br><br><br><br><br><br><br><br><strong><div id="charNum">Quedan 300 caractéres</div></strong></span></label>
+
+                    <div class="controls">
+                        <div class="input-xlarge span4" rows="3">
+                            {{=form.custom.widget.texto}}<p></p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="control-group">
+                    <label class="control-label">Obtuve esta información de</label>
+                    <div class="controls input-prepend">
+                        <span class="add-on">http://</span>{{=form.custom.widget.documentURL}}
+                    </div>
+                </div>
+
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+          {{=form.custom.end}}
+
+{{else:}}
+             <div class="control-group">
+                <div class="controls">
+                            <div class="alert2">
+                                <img src="{{ =URL('static','img/img_warning.gif') }}" class="img_warning"/>
+                                <span class="txt_alert">
+                                    Para Sugerir debe estar registrado<br />
+                                    <strong>Por Favor {{=A(T('Registrate'),_href=URL('default','registrogeneral',extension=False))}} o {{=A(T('accede a tu cuenta'),_href=URL('default','ingresogeneral',extension=False))}}</strong>.
+                                </span>
+                            </div>
+                </div>
+                <div class="controls">
+                </div>
+             </div>
+{{pass}}
+ </div>
+<script type="text/javascript">
+var res = '{{=request.vars.success}}';
+if (res=='ok') {
+
+              htm='<h2>¡Gracias!</h2><p class="text-thanks">Tu reporte fue recibido satisfactoriamente.<br> Será incluido una vez que haya sido confirmado y aprobado</p>'
+              $('#thanks').html(htm);
+              res='back'
+
+ }
+
+
+
+</script>
+
+
+<script type="text/javascript">
+$('#sugerirConexion_texto').keyup(function(){
+        var max = 300;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#charNum').text(' Ha alcanzado el límite');
+            $(this).val($(this).val().slice(0, max));
+        }else {
+            var char = max - len;
+            $('#charNum').text('Quedan ' + char + ' caracteres');
+        }
+    });
+</script>
+
+
+

@@ -1,0 +1,64 @@
+{{extend 'visualizacionLayoutCuentas.html'}}
+
+{{block sidebar}}
+{{ include 'includes/sidebar-cuenta.html' }}
+{{end}}
+
+{{block leftcol}}
+{{ include 'includes/tertiary-nav-conf.html' }}
+{{end}}
+
+<hgroup class="search-results historial-head clearfix">
+                      <h3 class="search-awnser">
+                        <img src="{{ =URL('static','tmp/avatar-45.gif') }}" class="imagen-perfil-ch" />
+                        <span class="perfil-results">Carolina Sandoval</span>
+                        <button href="#" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Guardar</button>
+                     </h3>
+                    </hgroup>
+                    <div class="row-division clearfix forms"><!-- .row-division -->
+
+                    <!--hgroup-->
+                   <hgroup class="box-heading clearfix">
+                    <h3>Mis conexiones con otras redes ↓</h3>
+                   </hgroup>
+                   <!--hgroup-->
+                
+                                    <div class="cambio_img">
+
+                                        <form class="form-search">
+                                            <fieldset>
+                                                
+                                                <div class="soporte_imgp">
+                                                    <div class="soporte_borde">
+                                                        
+                                                    <div class="detalle_img_social">
+                                                        <img src="{{ =URL('static','img/img-facebook.gif') }}"  />
+                                                        Facebook
+                                                    </div>
+                                                    <span class="soporte_img_perfil">
+                                                        <img class="thumb_perfil" src="{{ =URL('static','tmp/imagen-face-72.gif') }}"  />
+                                                    </span>
+                                                
+                                                    <div class="tipo_coneccion">Conectada como <strong>Carolina Sandoval</strong></div>
+
+                                                    <div class="controles">
+                                                        <label class="checkbox inline">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1"> Publicar en mi timeline mis nuevas publicaciones
+                                          </label>
+                                                        <a class="btn_desconectar"><i class="icon-remove icon-orange"></i> Desconectar</a>
+                                                    </div>
+                                                </div>
+                                                
+                                                </div>
+                                                
+                                          <div class="soporte-accion">
+                                          <button href="#" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Guardar</button>
+                                          </div>
+                                            </fieldset>
+                                    </form>
+                                
+                                
+                                    </div>
+
+
+                    </div><!-- .row-division -->

@@ -1,0 +1,79 @@
+{{for key,value in selectP2P.items():}}
+{{if len(conexionO[value])+len(conexionD[value]):}}
+<div class="accordion-group">
+    <div class="accordion-heading clearfix">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseP2P{{=key}}">
+            {{=T(value)}} <span>( {{=len(conexionO[value])+len(conexionD[value])}} Items )</span>
+        </a>
+        <div class="buttonsColapse">
+            <!--TODO requiere permiso de administracion-->
+            <!--<a href="#">Editar</a>-->
+            <a data-toggle="collapse" data-parent="#accordion2" href="#collapseP2P{{=key}}" class="showIco">Mostrar</a>
+        </div>
+    </div>
+    <div id="collapseP2P{{=key}}" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <p></p>
+            <table class="table table-striped">
+                {{for conyuge in conexionO[value]:}}
+                <tr id="pers{{=conyuge.relPersona.id}}">
+                    <td>con</td>
+                    <td>{{=A(conyuge.persona.alias, _href=URL('caso_perfil', args=conyuge.relPersona.destinoP,extension=False))}}</td>
+                    <td>por</td>
+                    <td>{{=conyuge.tipoRelacionP2P.name}}</td>
+                    {{if conyuge.relPersona.extraO!=None:}}
+                        <td>{{=A(Org[conyuge.relPersona.extraO],_href=URL('caso_organizacion',args=conyuge.relPersona.extraO, extension=False))}} </td>
+                    {{else:}}
+                        <td></td>
+                    {{pass}}
+                    <td>{{if conyuge.relPersona.fhasta:}}{{=conyuge.relPersona.fhasta}}{{pass}}</td>
+                    <!--<td>{{=TAG.BUTTON(T('Editar'),_class='btn btn-mini',_href=URL('relPersona_edit', args=[conyuge.relPersona.id,key]))}}</td>-->
+                    {{if borrar:}}
+                       <!-- <td>{{=TAG.BUTTON(T('Eliminar'),_class='btn btn-mini',_onclick='deleteRow(event,"relPersona",%s);' % conyuge.relPersona.id)}}</td>-->
+                    {{pass}}
+                    {{if conyuge.relPersona.documentSource!=None:}}
+                        <td>
+                        {{for doc in conyuge.relPersona.documentSource:}}
+                             <a href="{{=documentSource[doc].documentURL}}" target="_blank" class="fuente" rel="popover" data-original-title="Fuente" data-content="{{=documentSource[doc].name}}<br>
+                             {{=documentSource[doc].documentURL}}{{if documentSource[doc].fecha:}}<br>Fecha:{{=documentSource[doc].fecha}}{{pass}}">[Fuente]</a>
+                        {{pass}}
+                        </td>
+                    {{pass}}
+                </tr>
+                {{pass}}
+
+                {{for conyuge in conexionD[value]:}}
+                <tr id="pers{{=conyuge.relPersona.id}}">
+                    <td>con</td>
+                    <td>{{=A(conyuge.persona.alias, _href=URL('caso_perfil', args=conyuge.relPersona.origenP, extension=False))}}</td>
+                    <td>por</td>
+                    <td>{{=conyuge.tipoRelacionP2P.name}}</td>
+                    {{if conyuge.relPersona.extraO!=None:}}
+                        <td>{{=A(Org[conyuge.relPersona.extraO],_href=URL('caso_organizacion',args=conyuge.relPersona.extraO, extension=False))}}</td>
+                    {{else:}}
+                        <td></td>
+                    {{pass}}
+                     <td>{{if conyuge.relPersona.fhasta:}}{{=conyuge.relPersona.fhasta}}{{pass}}</td>
+                   {{if editar:}}<td>{{=A('Editar',_class='btn btn-mini', _href=URL('relPersona_edit', args=[conyuge.relPersona.id,key]))}}</td>{{pass}}
+                    {{if borrar:}}
+                       <td>{{=TAG.BUTTON(T('Eliminar'),_class='btn btn-mini',_onclick='deleteRow(event,"relPersona",%s);' % conyuge.relPersona.id)}}</td>
+                    {{pass}}
+                    {{if conyuge.relPersona.documentSource!=None:}}
+                        <td>
+                        {{for doc in conyuge.relPersona.documentSource:}}
+                             <a href="{{=documentSource[doc].documentURL}}" target="_blank" class="fuente" rel="popover" data-original-title="Fuente" data-content="{{=documentSource[doc].name}}<br>
+                             {{=documentSource[doc].documentURL}}{{if documentSource[doc].fecha:}}<br>Fecha:{{=documentSource[doc].fecha}}{{pass}}">[Fuente]</a>
+                        {{pass}}
+                        </td>
+                    {{pass}}
+                </tr>
+                {{pass}}
+            </table>
+        </div>
+    </div>
+</div>
+{{pass}}
+{{pass}}
+<script type="text/javascript">
+ $('a[rel="popover"]').popover();
+</script>

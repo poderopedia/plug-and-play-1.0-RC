@@ -1,0 +1,68 @@
+<!-- top -->
+            <div class="container">
+                <h1 class="logo">
+                    <a href="{{=URL('default','index')}}">Poderopedia</a>
+                </h1>
+
+                <!-- primaryNav -->
+                <nav id="desplegable" class="primary-nav">
+                    <div class="btn-group">
+                        <a href="#" class="ddown-toggle con-drop" data-toggle="dropdown">Explorar <span class="caret"></span></a>
+                        
+                        <ul class="dropdown-menu">
+                            <li><a href="{{=URL('directorio','general',args='persona')}}">Personas</a></li>
+                            <li><a href="{{=URL('directorio','general',args='empresa')}}">Empresas</a></li>
+                            <li><a href="{{=URL('directorio','general',args='organizacion')}}">Organizaciones</a></li>
+														<li><a href="#">Casos</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <a href="#" class="ddown-toggle con-drop" data-toggle="dropdown">Crear <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><span class="icono persona"></span> Persona</a></li>
+                            <li><a href="#"><span class="icono empresa"></span> Empresa</a></li>
+                            <li><a href="#"><span class="icono organizacion"></span> Organizaci&oacute;n</a></li>
+														<li><a href="#"><span class="icono caso"></span> Caso</a></li>
+														<li><a href="#"><span class="icono dato"></span> Enviar un Dato</a></li>
+														<li><a href="#"><span class="icono perfil"></span> Sugerir Perfil</a></li>
+														<li><a href="#"><span class="icono conexion"></span> Sugerir conexi&oacute;n</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- /primaryNav -->
+                
+                <!-- loginPreview -->
+                <div id="desplegable2" class="login-preview">
+                    <a href="#" class="avatar">
+                        {{ if auth.user.thumbnail:}}
+                        <img src="{{ =URL('default','fast_download',args=auth.user.thumbnail) }}" alt="{{=auth.user.user_name}}" />
+                        {{else:}}
+                        <img src="{{ =URL('static','tmp/avatar-36.gif') }}" alt="{{=auth.user.user_name}}" />
+                        {{pass}}
+                    </a>
+                    <div class="bubble"></div>
+                    <div class="btn-group">
+                        <a href="#" rel="tooltip" data-original-title="23" class="username ddown-toggle" data-toggle="dropdown">{{=auth.user.user_name}}<span class="caret"></span></a>
+                        
+                        <ul class="dropdown-menu">
+                            {{if (auth.has_membership('editor')) | (auth.has_membership('administrator')):}}
+                            <li><a href="{{=URL('default','mis_publicaciones',args='todas')}}">Mis Publicaciones</a></li>
+                            <li><a href="#">Mis Colaboraciones</a></li>
+                            {{pass}}
+							<li><a href="{{=URL('default','notificacionesgenerales')}}">Mis Notificaciones</a></li>
+							<li><a href="{{=URL('default','configuracion')}}">Mi Cuenta</a></li>
+							<li><a href="{{=URL('default','logout')}}">Salir</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /loginPreview -->
+
+								<!-- about -->    
+                <div class="about">
+                    <a href="{{=URL('acercade','index')}}" class="ddown-toggle last-nav" >Sobre Poderopedia</a>
+                </div>
+								<!-- /about -->
+                
+
+            </div>
+            <!-- /top -->

@@ -1,0 +1,106 @@
+{{if len(conyugesO)+len(conyugesD) !=0:}}
+<div class="accordion-group">
+    <div class="accordion-heading clearfix">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse3">
+            Cónyuge o Pareja <span>( {{=len(conyugesO)+len(conyugesD)}} Items )</span>
+        </a>
+        <div class="buttonsColapse">
+            <!--TODO requiere permiso de administracion-->
+            <!--<a href="#">Editar</a>-->
+            <a href="#collapse3" class="showIco" data-toggle="collapse" data-parent="#accordion2">Mostrar</a>
+        </div>
+    </div>
+    <div id="collapse3" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <p></p>
+            <table class="table table-striped">
+                {{for conyuge in conyugesO:}}
+                <tr id="pers{{=conyuge.relPersona.id}}">
+                    <td>
+                            {{if conyuge.relPersona.isPast==True:}}Fue
+                            {{elif (conyuge.relPersona.fhasta == None)|(conyuge.relPersona.fhasta ==''):}}Es
+                            {{elif (conyuge.relPersona.fin==None):}}Es
+                            {{elif (conyuge.relPersona.fin < hoy):}}Fue
+                            {{else:}}Es
+                            {{pass}}
+                    </td>
+
+                    <td>{{=conyuge.tipoRelacionP2P.name}}</td>
+                    <td>con</td>
+                    <td>{{=A(conyuge.persona.alias, _href=URL('caso_perfil', args=conyuge.relPersona.destinoP,extension=False))}}</td>
+                    <td>
+                        {{if conyuge.relPersona.fdesde:}}
+                        Desde:{{=conyuge.relPersona.fdesde}}
+                        {{pass}}
+                        {{if conyuge.relPersona.fhasta:}}
+                        hasta:{{=conyuge.relPersona.fhasta}}
+                        {{pass}}
+                        {{if conyuge.relPersona.isPast==True:}}
+                        ({{=T('Es pasado')}})
+                        {{pass}}
+                    </td>
+                    {{if editar:}}
+                    <td>{{=A('editar conexión',_class='btn btn-mini', _href=URL('relPersona_edit', args=conyuge.relPersona.id))}}</td>
+                    {{pass}}
+                    {{if borrar:}}
+                        <td>{{=TAG.BUTTON(T('Eliminar'),_class='btn btn-mini',_onclick='deleteRow(event,"relPersona",%s);' % conyuge.relPersona.id)}}</td>
+                    {{pass}}
+                    {{if conyuge.relPersona.documentSource!=None:}}
+                        <td>
+                        {{for doc in conyuge.relPersona.documentSource:}}
+                            <a href="{{=documentSource[doc].documentURL}}" target="_blank" class="fuente" rel="popover" data-original-title="Fuente" data-content="{{=documentSource[doc].name}}<br>
+                            {{=documentSource[doc].documentURL}}{{if documentSource[doc].fecha:}}<br>Fecha:{{=documentSource[doc].fecha}}{{pass}}">[Fuente]</a>
+                        {{pass}}
+                        </td>
+                    {{pass}}
+                </tr>
+                {{pass}}
+                {{for conyuge in conyugesD:}}
+                    <tr id="pers{{=conyuge.relPersona.id}}">
+                        <td>
+                            {{if conyuge.relPersona.isPast==True:}}Fue
+                            {{elif (conyuge.relPersona.fhasta == None)|(conyuge.relPersona.fhasta ==''):}}Es
+                            {{elif (conyuge.relPersona.fin==None):}}Es
+                            {{elif (conyuge.relPersona.fin < hoy):}}Fue
+                            {{else:}}Es
+                            {{pass}}
+                        </td>
+
+                        <td>{{=conyuge.tipoRelacionP2P.name}}</td>
+                        <td>con</td>
+                        <td>{{=A(conyuge.persona.alias, _href=URL('caso_perfil', args=conyuge.relPersona.origenP,extension=False))}}</td>
+                        <td>
+                            {{if conyuge.relPersona.fdesde:}}
+                            Desde:{{=conyuge.relPersona.fdesde}}
+                            {{pass}}
+                            {{if conyuge.relPersona.fhasta:}}
+                            Hasta: {{=conyuge.relPersona.fhasta}}
+                            {{pass}}
+                            {{if conyuge.relPersona.isPast==True:}}
+                            ({{=T('Es pasado')}})
+                            {{pass}}
+                        </td>
+                        {{if editar:}}
+                        <td>{{=A('editar conexión',_class='btn btn-mini', _href=URL('relPersona_edit', args=conyuge.relPersona.id))}}</td>
+                        {{pass}}
+                        {{if borrar:}}
+                            <td>{{=TAG.BUTTON(T('Eliminar'),_class='btn btn-mini',_onclick='deleteRow(event,"relPersona",%s);' % conyuge.relPersona.id)}}</td>
+                        {{pass}}
+                        {{if conyuge.relPersona.documentSource!=None:}}
+                            <td>
+                            {{for doc in conyuge.relPersona.documentSource:}}
+                                 <a href="{{=documentSource[doc].documentURL}}" target="_blank" class="fuente" rel="popover" data-original-title="Fuente" data-content="{{=documentSource[doc].name}}<br>
+                                 {{=documentSource[doc].documentURL}}{{if documentSource[doc].fecha:}}<br>Fecha:{{=documentSource[doc].fecha}}{{pass}}">[Fuente]</a>
+                            {{pass}}
+                            </td>
+                        {{pass}}
+                    </tr>
+                    {{pass}}
+            </table>
+        </div>
+    </div>
+</div>
+{{pass}}
+<script type="text/javascript">
+ $('a[rel="popover"]').popover();
+</script>

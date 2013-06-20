@@ -1,0 +1,37 @@
+{{extend 'visualizacionLayoutCuentas.html'}}
+
+{{block sidebar}}
+{{=LOAD('default','sidebar_cuenta.load',target='sidebar_cuenta',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+{{end}}
+
+
+
+ <!-- centerCol -->
+
+<div class="row-division-center"><!-- .row-division -->
+	  <div class="modal-body">
+	    	<h2>¿Olvidaste tu contrase&ntilde;a&quest; </h2>
+				<h4>Introduce tu direcci&oacute;n de correo electr&oacute;nico<br /> para ayudarnos a encontrar tu cuenta Poderopedia.</h4>
+			<form class="form-horizontal">
+			  	<div class="control-group warning">
+			  		<label class="control-label" for="inputWarning">Email:</label>
+						<div class="controls">
+							<input type="text" value="" id="focusedInput inputWarning" name="nombre-mail" class="input-xlarge focused" placeholder="usuario@mail.com">
+						</div>
+			  	</div>
+			    <div class="control-group">
+			        <div class="controls">
+								<div class="alert">
+									<img src="assets/img/img_warning.gif" class="img_warning"/>
+									<span class="txt_alert">
+								    	El e-mail que ingresas es incorrecto<br />
+                                        o no existe en nuestro registro.</span>
+								</div>
+							</div>
+          </div>
+				<button type="submit" class="btn btn-primary">Enviar Direcci&oacute;n</button>
+			</form>
+	  </div>
+
+
+</div><!-- .row-division -->

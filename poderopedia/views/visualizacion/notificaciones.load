@@ -1,0 +1,214 @@
+<style>
+
+div .counter{
+color: #999;
+display: block;
+font-size: 10px;
+font-style: italic;
+line-height: 140%;
+position:relative;
+left:80px;
+top:130px;       
+    }
+
+div .warning{color:#600;font-weight:bold;}	
+div .exceeded{color:#e00;font-weight:bold;}	
+
+</style>
+
+<script type="text/javascript">
+    /* reparar*//*
+          	$(document).ready(function(){	
+		//custom usage
+		$("#notificaciones_contenido").charCount({
+			allowed: 500,		
+			warning: 50,
+			counterText: 'Quedan '	
+		});
+	});
+*/
+</script>
+
+
+
+{{if tipo=='reportarError':}}
+
+
+<div class="modal hide fade" id="Lightbox_reportarerror">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+
+      <div class="modal-body">
+          {{if tabla == 'organizacion':}}
+                {{if item.tipoOrg != 2:}}
+                        {{if item.haslogo == None:}}<img src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}" width="45"/>
+                        {{else:}}<img src="{{=URL('default','fast_download', args=item.haslogo)}}" class="modal-avatar" width="45" />{{pass}}
+                {{else:}}
+                        {{if item.haslogo == None:}}<img src="{{ =URL('static','tmp/avatar-empresa45.gif') }}" width="45" />
+                        {{else:}}<img src="{{=URL('default','fast_download', args=item.haslogo)}}" class="modal-avatar" width="45" />{{pass}}
+                {{pass}}
+          {{else:}}
+                        {{if item.depiction == None:}}<img src="{{ =URL('static','tmp/avatar-45.gif') }}" width="45" />
+                        {{else:}}<img src="{{=URL('default','fast_download', args=item.depiction)}}" class="modal-avatar"  width="45"/>{{pass}}
+          {{pass}}
+          <h3>{{=item.alias}}</h3>
+
+      {{if me:}}            
+            <h2>Reportar un Error</h2><h4>Gracias por tu colaboración, es muy importante para mantener y <br> mejorar la calidad de nuestros contenidos.  Poderopedia lo hacemos todos.</h4>
+            {{=form.custom.begin}}
+            {{=response.flash}}
+            {{if form.errors:}}
+                    <div class="control-group">
+                        <div class="controls">
+                            <div class="alert">
+                                <img src="{{ =URL('static','img/img_warning.gif') }}" class="img_warning"/>
+                                            <span class="txt_alert">
+                                                {{=T('Se han encontado errores al procesar su Regitro')}}
+
+                                                    {{for fieldname in form.errors:}}
+                                                     <p>{{=fieldname}} error: {{=form.errors[fieldname]}}</p>
+                                                    {{pass}}
+
+
+
+                                            </span>
+                            </div>
+                        </div>
+                        <div class="controls">
+                        </div>
+                    </div>
+            {{pass}}
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Reportar Error en:</label>
+                    <div class="controls">
+                        <strong>{{=item.alias}}</strong>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">¿Cual es el Error? <br><span>Opcional máximo 500 caracteres</span></label>
+                    <div class="controls">
+                        <!--<textarea class="input-xlarge span4" rows="3"></textarea>-->
+                        {{=form.custom.widget.contenido}}
+                       
+                        <p class="help-block">Quedan 500 caracteres</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Obtuve esta Información de</label>
+                    <div class="controls input-prepend">
+                        <span class="add-on">http://</span><!--<input type="text" class="span3" placeholder="Ingresa url" size="16">-->{{=form.custom.widget.URL}}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" onclick="this.form.submit()">Enviar</button>
+            </div>
+            {{=form.custom.end}}
+            
+      </div>
+
+{{else:}}
+             <div class="control-group">
+                <div class="controls">
+                            <div class="alert2">
+                                <img src="{{ =URL('static','img/img_warning.gif') }}"/>
+                                <span class="txt_alert">
+                                    Para Reportar Error debe estar registrado<br />
+                                    <strong>Por Favor {{=A(T('Registrate'),_href=URL('default','registrogeneral',extension=False))}} o {{=A(T('accede a tu cuenta'),_href=URL('default','ingresogeneral',extension=False))}}</strong>.
+                                </span>
+                            </div>
+                </div>
+             </div>
+        {{pass}}
+</div>
+
+{{else:}}
+<div class="modal hide fade" id="Lightbox_contenidoinadecuado">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      
+      <div class="modal-body">
+          {{if tabla == 'organizacion':}}
+                {{if item.tipoOrg != 2:}}
+                        {{if item.haslogo == None:}}<img src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}" width="45" />
+                        {{else:}}<img src="{{=URL('default','fast_download', args=item.haslogo)}}" class="modal-avatar"  width="45"/>{{pass}}
+                {{else:}}
+                        {{if item.haslogo == None:}}<img src="{{ =URL('static','tmp/avatar-empresa45.gif') }}" width="45" />
+                        {{else:}}<img src="{{=URL('default','fast_download', args=item.haslogo)}}" class="modal-avatar" width="45" />{{pass}}
+                {{pass}}
+          {{else:}}
+                        {{if item.depiction == None:}}<img src="{{ =URL('static','tmp/avatar-45.gif') }}" width="45" />
+                        {{else:}}<img src="{{=URL('default','fast_download', args=item.depiction)}}" class="modal-avatar" width="45" />{{pass}}
+          {{pass}}
+          <h3>{{=item.alias}}</h3>
+
+      {{if me:}}     
+            <h2>Reportar Contenido Inadecuado</h2><h4>Gracias por tu colaboración, es muy importante para mantener y <br> mejorar la calidad de nuestros contenidos.  Poderopedia lo hacemos todos.</h4>
+            {{=form.custom.begin}}
+            {{=response.flash}}
+            {{if form.errors:}}
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="alert">
+                            <img src="{{ =URL('static','img/img_warning.gif') }}" class="img_warning"/>
+                                        <span class="txt_alert">
+                                            {{=T('Se han encontado errores al procesar su Regitro')}}
+
+                                                {{for fieldname in form.errors:}}
+                                                 <p>{{=fieldname}} error: {{=form.errors[fieldname]}}</p>
+                                                {{pass}}
+
+
+
+                                        </span>
+                        </div>
+                    </div>
+                    <div class="controls">
+                    </div>
+                </div>
+            {{pass}}
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Reportar Contenido Inadecuado en:</label>
+                    <div class="controls">
+                        <strong>{{=item.alias}}</strong>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">¿Cual es el Contenido Inadecuado? <br><span>Opcional máximo 500 caracteres</span></label>
+                    <div class="controls">
+                        <!--<textarea class="input-xlarge span4" rows="3"></textarea>-->
+                        {{=form.custom.widget.contenido}}
+                        <p class="help-block">Quedan 500 caracteres</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Obtuve esta Información de</label>
+                    <div class="controls input-prepend">
+                        <span class="add-on">http://</span><!--<input type="text" class="span3" placeholder="Ingresa url" size="16">-->{{=form.custom.widget.URL}}
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" onclick="this.form.submit()">Enviar</button>
+            </div>
+            {{=form.custom.end}}
+      </div>
+      
+
+{{else:}}
+             <div class="control-group">
+                <div class="controls">
+                            <div class="alert2">
+                                <img src="{{ =URL('static','img/img_warning.gif') }}"/>
+                                <span class="txt_alert">
+                                    Para Reportar Contenido Inadecuado debes estar registrado<br />
+                                    <strong>Por Favor {{=A(T('Registrate'),_href=URL('default','registrogeneral',extension=False))}} o {{=A(T('accede a tu cuenta'),_href=URL('default','ingresogeneral',extension=False))}}</strong>.
+                                </span>
+                            </div>
+                </div>
+             </div>
+        {{pass}}
+</div>
+{{pass}}

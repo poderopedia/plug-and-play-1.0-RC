@@ -1,0 +1,29 @@
+{{extend 'visualizacionLayoutCuentas.html'}}
+
+{{block sidebar}}
+{{=LOAD('default','sidebar_cuenta.load',target='sidebar_cuenta',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+{{end}}
+
+
+
+ <!-- centerCol -->
+
+<div class="row-division-center"><!-- .row-division -->
+
+    <hgroup class="search-results historial-head clearfix">
+        <h3 class="search-awnser">
+            <img src="{{ =URL('static','img/img-ok.gif') }}" class="imagen-ok" />
+            <span class="detail-results">¡Gracias!</span>
+            <span class="detail-results">Tu perfil ha sido cambiado con éxito.</span>
+        </h3>
+    </hgroup>
+
+    <div class="detalle_cuenta_creada">
+
+    </div>
+
+
+</div><!-- .row-division -->
+
+
+

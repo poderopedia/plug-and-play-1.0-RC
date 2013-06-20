@@ -1,0 +1,61 @@
+{{if persona!= None: response.title =persona.alias+' | Personas Relacionadas | Poderopedia' }} {{pass}}
+{{if (persona.shortBio!=None)&(persona.shortBio!=''): response.meta.description = persona.shortBio[:200]}}{{pass}}
+{{extend 'visualizacionLayout.html'}}
+
+{{block modales}}
+<!--Lightbox_sugerirconexion-->
+<div class="modal hide fade" id="Lightbox_sugerirconexion">
+<div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+	<div class="modal-body">
+        <div id="sugerir_persona"></div>
+    </div>
+ </div>
+<!--Fin Sugerir Conexion--> 
+{{end}}
+
+{{=LOAD('services','relation_persona.load',args=_id,target='persona',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+
+
+
+
+
+
+
+<script>
+
+
+    /*
+     * This Page Related
+     */
+    $('body').addClass('page-person page-person-profile');
+
+    /*
+     * Append 'other' input field when specific
+     * option selected (in dropdown).
+     *
+     * Change root selector for more accuracy.
+     */
+    $('select[data-interact-id="person-sector"]').change(function() {
+        var target = $(this).attr('data-interact-append-id');
+
+        if($(this).val() === 'Otro') {
+            $('div[data-interact-id="' + target + '"]').fadeIn();
+        }
+        else {
+            $('div[data-interact-id="' + target + '"]').fadeOut();
+        }
+
+    }).change();
+
+    /*
+     * WYSIWYG
+     */
+    $('.input-tarea').wysiwyg({
+        autoGrow: true,
+        controls: 'bold,italic,underline,strikeThrough,justifyLeft,justifyCenter,justifyRight,insertOrderedList,insertUnorderedList,insertHorizontalRule,cut,copy,paste,html,|,undo,redo',
+        initialContent: ''
+    });
+</script>
+<!-- /inlineScripts -->

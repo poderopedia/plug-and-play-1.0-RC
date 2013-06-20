@@ -1,0 +1,14 @@
+tipoOrganizacion.id,tipoOrganizacion.name,tipoOrganizacion.generalizacion
+1,Institución de Educación,1
+2,Empresa Privada,2
+3,Organismo Gobierno,3
+4,Partido Político,4
+5,Grupo Religioso,5
+6,Club Privado,6
+7,Think Tanks o Centros de Estudios,7
+8,Grupos de Apoyo a campaña Política,8
+9,ONG,9
+10,Organismos Internacionales,10
+11,Grupos Seculares,123
+12,|Por Clasificar|,<NULL>
+13,Grupo Ecónomico,<NULL>

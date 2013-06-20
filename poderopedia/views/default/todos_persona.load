@@ -1,0 +1,43 @@
+<div class="row-division clearfix">
+      <!--hgroup-->
+      <hgroup class="box-heading clearfix">
+        <h3 id="resultado_a"><span>Personas</span> ({{=total}}) ↓</h3>
+        {{if page:}}
+        <a href="#{{=target}}"  id="prevpage{{=target}}">&larr; Anterior</a>
+        {{pass}}
+        {{if len(personas)>items_per_page:}}
+            <a href="#{{=target}}" class="hint" id="addpage{{=target}}">Ver más &gt;</a>
+        {{pass}}
+      </hgroup>
+      <!--hgroup-->
+      <ul class="people-list">
+      {{for i,persona in enumerate(personas):}}
+      {{if i==items_per_page: break}}
+        <li class="span3_3">
+            <a class="avatar" href="#"> <img alt="{{=persona.alias}}" src="{{ =URL('static','tmp/avatar-45.gif') }}"> </a>
+            <h5><a href="#" title="{{=persona.alias}}">{{=persona.alias}}</a></h5>
+            <p><span class="publicado">Publicado</span> <a href="#">[ Editar ]</a></p>
+        </li>
+       {{pass}}
+      </ul>
+</div>
+
+<script>
+      $("#addpage{{=target}}").click(function () {
+        $.ajax({
+            url: '{{=URL('default','mis_personas.load',vars=dict(activo='todos'),args=[0,page+1]) }}',
+            success: function(data) {
+            $('#{{=target}}').html(data);
+        }
+      })
+      });
+
+      $("#prevpage{{=target}}").click(function () {
+          $.ajax({
+              url: '{{=URL('default','mis_personas.load',vars=dict(activo='todos'),args=[0,page-1]) }}',
+              success: function(data) {
+              $('#{{=target}}').html(data);
+          }
+        })
+        });
+</script>

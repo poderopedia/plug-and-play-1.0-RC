@@ -1,0 +1,29 @@
+{{for relacion,personas in relationship.items():}}
+<div class="accordion-group">
+    <div class="accordion-heading clearfix">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseP2P{{=relacion}}">
+            {{=relacion}} <span>( {{=len(personas)}} Items )</span>
+        </a>
+        <div class="buttonsColapse">
+            <!--TODO requiere permiso de administracion-->
+            <!--<a href="#">Editar</a>-->
+            <a href="#collapseP2P{{=relacion}}" class="showIco" data-toggle="collapse" data-parent="#accordion2">Mostrar</a>
+        </div>
+    </div>
+    <div id="collapseP2P{{=relacion}}" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <p></p>
+            <table class="table table-striped">
+                {{for relation in personas:}}
+                <tr id="pers{{=relation.id}}">
+                    <td>con</td>
+                    <td>{{=A(relation.alias, _href=URL('persona', args=relation.id))}}</td>
+                    <!--<td>por</td>-->
+
+                </tr>
+                {{pass}}
+            </table>
+        </div>
+    </div>
+</div>
+{{pass}}

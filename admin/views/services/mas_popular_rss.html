@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>{{=title}}</title>
+        <atom:link href="http://www.poderopedia.org/{{=request.controller}}/{{=request.function}}" rel="self" type="application/rss+xml" />
+        <link>http://www.poderopedia.org</link>
+        <description>{{=desc}}</description>
+        <lastBuildDate>{{=str(request.now.strftime('%d %b %Y %H:%M:%S +0000'))}}</lastBuildDate>
+        <generator>PowerPedia</generator>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        {{for entries in resultados['entries']:}}
+        <item>
+            <guid isPermaLink="false">{{=entries['link']}}</guid>
+            <title>{{=entries['title']}}</title>
+            <link>{{=entries['link']}}</link>
+            <description>{{=entries['description']}}</description>
+            <media:content xmlns:media="http://search.yahoo.com/mrss/" {{for atributes in entries['media:content']:}} {{=atributes}}="{{=entries['media:content'][atributes]}}"{{pass}} type="image/jpg" />
+            <pubDate>{{=entries['created_on']}}</pubDate>
+        </item>
+        {{pass}}
+    </channel>
+</rss>

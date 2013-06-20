@@ -1,0 +1,16 @@
+{{extend 'layout.html'}}
+<h1>{{=T('Country')}}</h1>
+{{=BEAUTIFY(response._vars)}}
+
+<h2>{{=T('Country')}}</h2>
+<table>
+  {{for country in countries:}}
+  <tr>
+    <td>{{=A(country.name, _href=URL('contacts', args=country.id))}}</td>
+    <td>{{=A('edit', _href=URL('country_edit', args=country.id))}}</td>
+  </tr>
+  {{pass}}
+  <tr>
+    <td>{{=A('add country', _href=URL('country_create'))}}</td>
+  </tr>
+</table>

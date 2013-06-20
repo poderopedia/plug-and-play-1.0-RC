@@ -1,0 +1,81 @@
+{{response.files.append(URL('static','js/jquery.optionTree.js'))}}
+{{response.files.append(URL('static','css/smoothness/jquery-ui-1.10.3.custom.min.css'))}}
+{{response.files.append(URL('static','js/jquery-ui-1.10.3.custom.min.js'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.css'))}}
+{{response.files.append(URL('static','js/jquery.multiselect.js'))}}
+{{response.files.append(URL('static','js/jquery.multiselect.filter.js'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.css'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.filter.css'))}}
+{{extend 'layout.html'}}
+{{=form.custom.begin}}
+<table>
+    <tr>
+        <td>{{=T('Organización/Empresa')}}</td>
+        <td></td>
+        <td>{{=T('Relación')}}</td>
+        <td></td>
+        <td>{{=T('Organización/Empresa')}}</td>
+    </tr>
+    <tr>
+        <td>{{=form.custom.widget.origenO}}</td>
+        <td>{{=T('es')}}</td>
+        <td><input id="relOrg2Org_relationOrg" name="relationOrg" type="hidden" value="" /></td>
+        <td>{{=T('de')}}</td>
+        <td>{{=form.custom.widget.destinoO}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{=db.relPersona.extraLabel.label}}<br>{{=form.custom.widget.extraLabel}} </td>
+    </tr>
+    <tr><td colspan="5">{{=T('Desde')}}</td></tr>
+    <tr>
+        <td>{{=form.custom.widget.iniDay}}</td>
+        <td></td>
+        <td>{{=form.custom.widget.iniMonth}}</td>
+        <td></td>
+        <td>{{=form.custom.widget.iniYear}}</td>
+    </tr>
+    <tr><td colspan="5">{{=T('Hasta')}}</td></tr>
+    <tr>
+        <td>{{=form.custom.widget.finDay}}</td>
+        <td></td>
+        <td>{{=form.custom.widget.finMonth}}</td>
+        <td></td>
+        <td>{{=form.custom.widget.finYear}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{=db.RelPersOrg.isPast.label}}{{=form.custom.widget.isPast}}</td>
+    </tr>
+    <tr><td colspan="5">{{=db.relOrg2Org.documentSource.label}}{{=form.custom.widget.documentSource}}</td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td> {{=form.custom.submit}} </td></tr>
+
+</table>
+{{=form.custom.end}}
+
+
+{{=back_button}}
+
+<script type="text/javascript">
+
+    $("#relOrg2Org_documentSource").multiselect({minWidth:800}).multiselectfilter({width:300});
+    $("#relOrg2Org_documentCloud").multiselect({minWidth:800}).multiselectfilter({width:300});
+
+    $(function() {
+        var options = {indexed: true, select_class: 'vertical', on_each_change:
+                "{{=URL('organizacion','call',args=['json','get_relacion'])}}", preselect: {'relationOrg': [{{ response.write(default, escape=False) }}] },};
+        var option_tree = {{response.write(option_tree+";", escape=False) }};
+
+        $('input[name=relationOrg]').optionTree(option_tree, options);
+        $('.hidden').show();
+
+
+
+    });
+</script>

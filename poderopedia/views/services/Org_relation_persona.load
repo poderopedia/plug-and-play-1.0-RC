@@ -1,0 +1,35 @@
+<hgroup class="search-results clearfix">
+            <h3 class="search-awnser"> {{if organizacion.haslogo != None:}}<img src="{{=URL('default','fast_download', args=organizacion.haslogo)}}" class="imagen-perfil-ch" />
+                    {{else:}}
+        				{{if organizacion.tipoOrg != 2:}}<img src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}" class="imagen-perfil-ch" />
+        				{{else:}}<img src="{{ =URL('static','tmp/avatar-empresa45.gif') }}" class="imagen-perfil-ch" />{{pass}}
+                    {{pass}}
+            <span class="perfil-results">{{if organizacion!=None:}}Personas Relacionadas a <a href="{{=URL('visualizacion','caso_organizacion',args=organizacion.id, extension=False)}}">{{=organizacion.alias}}</a>{{else:}}Organización no encontrada{{pass}}</span></h3>
+            <!--botones de selección-->
+            {{ include 'includes/botones-list-personas.html' }}
+            <!--boones de selección-->
+            <!--menu-abecedario
+            {{ include 'includes/menu-abecedario.html' }}-->
+            <!--menu-abecedario-->
+        </hgroup>
+         <div class="row-division clearfix ancho">
+            <ul class="faces-ul" id="relatedToPerson">
+            {{for i,persona in enumerate(personas):}}
+            {{if i==items_per_page: break}}
+                <li>
+                    {{if persona.depiction!=None:}}<img src="{{ =URL('default','fast_download',args=persona.depiction) }}" />{{else:}}<img src="{{ =URL('static','tmp/imagen-face.gif') }}" />{{pass}}
+                    <ul class="info">
+                        <li><h4><a href="{{=URL('visualizacion','caso_perfil',args=persona.id,extension=False)}}" title="{{=persona.alias}}">{{=persona.alias}}</a></h4></li>
+                        <li class="relation"><p style="text-align: center">{{if relationship[persona.id]!=None:}}{{=relationship[persona.id]}} {{pass}}</p></li>
+                        <!--<li><p><a href="#">[ Editar ]</a></p></li>-->
+                        <li class="vermas"><p><a href="#">ver m&aacute;s &gt;</a></p></li>
+                    </ul>
+                </li>
+            {{pass}}
+            </ul>
+         </div>
+
+
+         <!--Pagination-->
+                 {{ include 'includes/pagination.html' }}
+         <!--Pagination end-->

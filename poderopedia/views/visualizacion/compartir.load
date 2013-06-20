@@ -1,0 +1,126 @@
+<h2>¿Quieres compartir este sitio? </h2><h4>Cuéntales a tus amigos lo bueno de este sitio y envíales un correo con la información.</h4>
+<br>{{=form.custom.begin}}
+            {{=response.flash}}
+              
+              <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Introduce el mail del destinatario:</label>
+                    <div class="controls">
+                        {{=form.custom.widget.email}}
+                        <!--<input type="text" class="span4" id="tengoDato_nombre" name="nombre" placeholder="Ej: Michelle Bachellet">-->
+
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">
+                
+                        Cuentale a un amigo lo importante de este sitio. 
+                    <br><span>Máximo 1000 caracteres</span></label>
+                    <div class="controls">
+                        <!--<textarea class="input-xlarge span4" id="tengoDato_contenido" name="contenido" rows="3"></textarea>-->
+                        {{=form.custom.widget.contenido}}
+                        <!--<p class="help-block">Quedan 1000 caracteres</p>-->
+                        <p></p><br>
+                    </div>
+                </div>
+                <!--<div class="control-group">
+                    <label class="control-label">Obtuve esta información de</label>
+                    <div class="controls input-prepend">
+                        <span class="add-on">http://</span>{{=form.custom.widget.URL}}
+                        <!--<span class="add-on">http://</span><input type="text" class="span3" id="tengoDato_URL" name="URL" placeholder="Ingresa url" size="16">
+                    </div>
+</div>-->
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+            {{=form.custom.end}}
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+ var res = '{{=request.vars.success}}'
+ if (res != 'None') {
+     jQuery('#Lightbox_compartir').modal('hide');};
+
+});
+</script>
+
+<script type="text/javascript">
+(function($) {
+
+	$.fn.charCount = function(options){
+	  
+		// default configuration properties
+		var defaults = {	
+			allowed: 140,		
+			warning: 25,
+			css: 'compartir',
+			counterElement: 'span',
+			cssWarning: 'warning',
+			cssExceeded: 'exceeded',
+			counterText1: '',
+			counterText2: ''
+		}; 
+			
+		var options = $.extend(defaults, options); 
+		
+		function calculate(obj){
+			var count = $(obj).val().length;
+			var available = options.allowed - count;
+			if(available <= options.warning && available >= 0){
+				$(obj).next().addClass(options.cssWarning);
+			} else {
+				$(obj).next().removeClass(options.cssWarning);
+			}
+			if(available < 0){
+				$(obj).next().addClass(options.cssExceeded);
+			} else {
+				$(obj).next().removeClass(options.cssExceeded);
+			}
+			$(obj).next().html(options.counterText1 + available + options.counterText2);
+		};
+				
+		this.each(function() {  			
+			$(this).after('<'+ options.counterElement +' class="' + options.css + '">'+ options.counterText1 +'</'+ options.counterElement +'>');
+			calculate(this);
+			$(this).keyup(function(){calculate(this)});
+			$(this).change(function(){calculate(this)});
+		});
+	  
+	};
+
+})(jQuery);
+</script>
+<style>
+
+span.compartir{
+color: #999;
+display: block;
+font-size: 11px;
+font-style: italic;
+line-height: 140%;
+position:relative;
+width:130px;
+left:400px;
+top:80px; 
+height:1px;          
+    }
+
+span .warning{color:#600;font-weight:bold;}	
+span .exceeded{color:#e00;font-weight:bold;}	
+
+</style>
+
+<script type="text/javascript">
+
+          	$(document).ready(function(){	
+		//custom usage
+		$("#compartir_contenido").charCount({
+			allowed: 1000,		
+			warning: 100,
+			counterText1: 'Quedan ',
+			counterText2: ' Caracteres'
+		});
+	});
+
+
+</script>

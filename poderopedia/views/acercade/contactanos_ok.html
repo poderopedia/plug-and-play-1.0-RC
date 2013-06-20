@@ -1,0 +1,45 @@
+{{extend  'visualizacionLayoutEstaticas.html'}}
+{{block breadcrumbs}}
+
+<div class="quick-breadcrumbs">
+    <span><strong>Poderopedia</strong></span>
+</div>
+{{end}}
+ 
+ 
+<div class="row">
+ 	<div id="content">
+       <div class="estaticas">                    
+          
+                <!-- centerCol -->
+                <section class="center-col estaticas span9">
+                    <hgroup class="search-results historial-head clearfix">
+                      <h3 class="search-awnser"><span class="perfil-results">Contáctanos</span></h3>
+                    </hgroup>
+                    <div class="row-division clearfix"><!-- .row-division -->
+
+                        <div class="form-horizontal form-doublecolumns">
+ 							<div class="modal-body">
+    							<img src="{{ =URL('static','img/img-ok.gif') }}" class="thanksIco" /><p></p>
+	    							<h2>¡Gracias!
+										<p class="text-thanks">Tu mensaje ha sido enviado con éxito.</p></h2>
+	  						</div>
+    						<a href="{{=URL('default','index')}}" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Continuar</a>
+                        </div>
+
+
+                    </div><!-- .row-division -->
+            
+                    <div class="row-division clearfix"><!-- .row-division -->
+                        <h3>Dónde Estamos</h3>
+                        <div id="mapa">
+                            <iframe width="725" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=irene+ariztia+548+santiago+chile&aq=&sll=-33.436406,-70.648646&sspn=0.001723,0.002033&t=m&ie=UTF8&hq=&hnear=Irene+Arizt%C3%ADa+548,+Santiago,+Regi%C3%B3n+Metropolitana,+Chile&ll=-33.436384,-70.648613&spn=0.021488,0.062141&z=14&iwloc=A&output=embed"></iframe>
+                            <p>Pasaje Irene Ariztía 548, Edificio Ariztía, piso 4. Santiago Centro, Chile <small><a href="https://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=irene+ariztia+548+santiago+chile&aq=&sll=-33.436406,-70.648646&sspn=0.001723,0.002033&t=m&ie=UTF8&hq=&hnear=Irene+Arizt%C3%ADa+548,+Santiago,+Regi%C3%B3n+Metropolitana,+Chile&ll=-33.436384,-70.648613&spn=0.021488,0.062141&z=14&iwloc=A" style="color:#0000FF;text-align:left">Ver Mapa ></a></small></p>
+                        </div>
+                    </div><!-- .row-division -->   
+
+                </section>
+                <!-- /centerCol -->
+		</div>
+    </div>
+</div>

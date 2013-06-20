@@ -1,0 +1,76 @@
+<!-- top -->
+            <div class="container">
+                <h1 class="logo">
+                    <a href="{{=URL('default','index')}}">Poderopedia</a> blog
+                </h1>
+
+                <!-- primaryNav -->
+                <nav class="primary-nav">                    
+                    <div class="btn-group">
+                        <a href="#" class="ddown-toggle sin-drop" >&Iacute;tem 01</a>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <a href="#" class="ddown-toggle sin-drop" >&Iacute;tem 02</a>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <a href="#" class="ddown-toggle sin-drop" >&Iacute;tem 03</a>
+                    </div>
+                </nav>
+                <!-- /primaryNav -->
+                
+                <!-- loginPreview -->
+                <div id="desplegable" class="login-preview">
+                    <a href="#" class="avatar"><img src="{{ =URL('static','tmp/avatar-36.png') }}" alt="{{=auth.user.user_name}}" /></a>
+                    <div class="btn-group">
+                        <a href="#" rel="tooltip" data-original-title="23" class="username ddown-toggle" data-toggle="dropdown">Carolina Sandoval<span class="caret"></span></a>
+                        
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Mis Publicaciones</a></li>
+                            <li><a href="#">Mis Colaboraciones</a></li>
+							<li><a href="#">Mis Notificaciones</a></li>
+							<li><a href="#">Mis Cuenta</a></li>
+							<li><a href="#">Salir</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /loginPreview -->
+
+								<!-- about -->    
+                <div class="about">
+                    <a href="{{=URL('acercade','index')}}" class="ddown-toggle last-nav" >Sobre Poderopedia</a>
+                </div>
+								<!-- /about -->
+                
+
+            </div>
+            <!-- /top -->
+						
+						<!-- sub-tool -->
+						<div class="sub-tool">
+							<div class="container">
+								
+								<!-- search -->
+                <form class="form-inline" method="get" action="{{=URL('search','podersearch')}}">
+                    <div class="input-append">
+                        <input class="span4" id="appendedInputButton" size="16" name="q" type="text" placeholder="Buscar en todo Poderopedia"><button class="btn" type="button" onclick="this.form.submit"></button>
+                    </div>
+                </form>
+                <!-- /search -->
+
+								<!-- popular 
+								<span class="tit-sub">Otros Links:</span>
+								<ul class="popular">
+									<li><a href="#">Enlace Uno</a></li>
+									<li><a href="#">Enlace Dos</a></li>
+									<li><a href="#">Enlace Tres</a></li>
+									<li><a href="#">Enlace Cuatro</a></li>
+									<li><a href="#">Enlace Cinco</a></li>
+									<li><a href="#">Enlace Seis</a></li>
+								</ul>-->
+								<!-- /popular -->
+
+							</div>
+						</div>
+						<!-- /sub-tool -->

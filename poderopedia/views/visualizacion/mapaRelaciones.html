@@ -1,0 +1,80 @@
+{{response.files.append(URL('static','js/d3.v2.min.js'))}}
+
+
+
+<script>
+    function tick(e) {
+        var q = d3.geom.quadtree(root.nodes),
+                i = 0,
+                n = root.nodes.length;
+        while (++i < n) {
+            q.visit(collide(root.nodes[i]));
+        }
+        //do not render initialization frames because they are slow and distracting
+        if (e.alpha < 0.01 && initialized == false || initialized == true) {
+            node.call(updateNode)
+            link.call(updateLink)
+            if (initialized == false) {
+                vis.select(".loading").remove();
+                initialized = true;
+            }
+        } else {
+            loadingText.text(function(){return "Loading: " + Math.round((1 - (e.alpha * 10 - 0.1)) * 100) + "%"});
+        }
+    }
+
+            var width = 680,
+            height = 600
+
+    var svg = d3.select("#tab3").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+    var force = d3.layout.force()
+            .gravity(.06)
+            .linkDistance(0)
+            .distance(100)
+            .charge(-200)
+            .size([width, height])
+            .on("tick", tick);
+
+    d3.json("{{=URL('call/json/person2person',args=_id)}}", function(json) {
+        force
+                .nodes(json.nodes)
+                .links(json.links)
+                .start();
+
+        var link = svg.selectAll(".link")
+                .data(json.links)
+                .enter().append("line")
+                .attr("class", "link");
+
+        var node = svg.selectAll(".node")
+                .data(json.nodes)
+                .enter().append("g")
+                .attr("class", "node")
+                .call(force.drag);
+
+        node.append("image")
+                .attr("xlink:href", "{{=URL('static','img/icon_perfil.png')}}")
+                .attr("x", -8)
+                .attr("y", -8)
+                .attr("width", 18)
+                .attr("height", 18);
+
+        node.append("text")
+                .attr("dx", 12)
+                .attr("dy", ".35em")
+                .text(function(d) { return d.alias });
+
+        force.on("tick", function() {
+            link.attr("x1", function(d) { return d.source.x; })
+                    .attr("y1", function(d) { return d.source.y; })
+                    .attr("x2", function(d) { return d.target.x; })
+                    .attr("y2", function(d) { return d.target.y; });
+
+            node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        });
+    });
+
+</script>

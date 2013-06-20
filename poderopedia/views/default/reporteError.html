@@ -1,0 +1,55 @@
+{{if len(lista)!=0:}}  
+                    
+			  {{for item in lista:}}  
+                        <div class="notificaciones"><!-- .notificaciones -->
+                            <div class="caja_notifica">
+                                <h3>{{=item.tipoError}}<span class="label nuevo">Nuevo</span></h3>
+                                <span class="fecha_notifica">{{=item.created_on}}</span>
+                                <a class="btn_borra_notifica"><i class="icon-remove"></i> Borrar</a>
+                                <p>{{=item.contenido}}</p>
+                            </div>
+                        </div><!-- /.notificaciones -->
+                     
+              {{pass}} 
+<div class="accordion" id="accordion2">
+{{for item in lista:}}
+    {{if item.tipoError == 'reportarError':}}{{item.tipoError = 'Reporte de Error'}}{{else:}}{{item.tipoError = 'Contenido Inadecuado'}}{{pass}}
+<div class="notificaciones">
+  <div class="caja_notifica">
+   <div class="accordion-group">
+    <div class="accordion-heading clearfix">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{=item.id}}">
+          <h3>{{=item.tipoError}} <span class="label nuevo"><b>Nuevo</b></span><span class="fecha_notifica">{{=item.created_on}}</span> </h3>
+      </a>
+    <!--<div class="buttonsColapse">
+            <!--TODO requiere permiso de administracion-->
+            <!--<a href="#">Editar</a>
+        <a href="#" class="showIco">Mostrar</a>
+    </div>-->
+   </div>
+   <div id="{{=item.id}}" class="accordion-body collapse" data-parent=".showIco">
+     <div class="accordion-inner">
+       <p></p>
+         <a class="btn_borra_notifica"><i class="icon-remove"></i> Borrar</a>
+         <p>{{=item.contenido}}</p>
+     </div>
+    </div>
+   </div>
+ </div>
+    {{pass}}
+</div>         
+
+{{else:}}
+
+                        <div class="notificaciones"><!-- .notificaciones -->
+                            <div class="caja_notifica">
+                                <h3>No tienes Notificaciónes Pendientes<!--<span class="label nuevo">Nuevo</span>--></h3>
+                                <!--<span class="fecha_notifica">9 de Agosto</span>-->
+                                <a class="btn_borra_notifica"><i class="icon-remove"></i> Borrar</a>
+                                <!--<p>Morbi mattis condimentum risus ac varius. In fringilla, purus vel adipiscing dictum, quam sapien dictum sem, quis faucibus leo erat sed justo. Mauris non odio quam.</p>-->
+                            </div>
+                        </div><!-- /.notificaciones -->  
+              
+{{pass}}
+                      
+                    </div><!-- .row-division -->

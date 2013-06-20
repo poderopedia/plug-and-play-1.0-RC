@@ -1,0 +1,72 @@
+<hgroup class="box-heading clearfix">
+        <h3><span>Lightbox_sugerirperfil</span> ↓</h3>
+      </hgroup>
+      <!--hgroup-->
+        <div class="row-division clearfix ancho">
+            <ul class="ul-faces">
+                <li class="listas"><a href="#Lightbox_sugerirperfil" data-toggle="modal" class="modales">Formulario 1</a></li>
+                <li class="listas"><a href="#gracias-invita" data-toggle="modal" class="modales">Gracias</a></li>
+            </ul>
+        </div>
+
+
+<!--Lightbox_sugerirperfil-->
+<div class="modal hide fade" id="Lightbox_sugerirperfil">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+            
+      </div>
+      <div class="modal-body">
+            <div class="modal-body">
+                    <h2>Sugerir una Persona</h2><h4>Gracias por tu colaboración. es muy importante para mantener y <br> mejorar la calidad de nuestros contenidos.  Poderopedia lo hacemos todos.</h4>
+                    <form class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">Quiero sugerir el perfil de:</label>
+                            <div class="controls">
+                                <input type="text" class="span4" name="nombre-perfil" placeholder="Ej: Michelle Bachellet">
+                            </div>
+                        </div>
+                        <div class="control-group alternate">
+                            <label class="control-label classCambio">Patricio Frey es:</label>
+                            <div class="controls">
+                                <select class="nombre span4">
+                                    <option>ex Presidente de Chile.</option>
+                                    <option>ex Senador</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">¿Cual es el contenido inadecuado? <br><span>Opcional máximo 500 caracteres</span></label>
+                            <div class="controls">
+                                <textarea class="input-xlarge span4" rows="3"></textarea>
+                                <p class="help-block">Quedan 500 caracteres</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Obtuve esta información de</label>
+                            <div class="controls input-prepend">
+                                <span class="add-on">http://</span><input type="text" class="span2" placeholder="Ingresa url" size="16">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+              </div>
+      </div>
+</div>
+
+
+<!--Gracias-->
+<div class="modal hide fade" id="gracias_cuentausuario">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+            <img src="{{ =URL('static','img/icon_gracias.png') }}" class="thanksIco" />
+            <h2>Por favor revisa tu correo electrónico</h2>
+            <p class="text-thanks">Te enviamos un mensaje por correo electrónico que te permitirá restablecer tu contraseña de manera rápida y fácil.</p>
+      </div>
+      <div class="modal-footer">
+            <a href="#" class="btn btn-primary " data-dismiss="modal">Ir a mi correo</a>
+      </div>
+</div>

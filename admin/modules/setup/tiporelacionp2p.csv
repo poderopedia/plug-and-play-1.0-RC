@@ -1,0 +1,33 @@
+tipoRelacionP2P.id,tipoRelacionP2P.parent,tipoRelacionP2P.name,tipoRelacionP2P.description
+1,0,Cónyuge o Pareja,
+2,0,Amigos,<NULL>
+3,0,Conocidos,<NULL>
+5,1,Soltero,<NULL>
+6,1,Casado,<NULL>
+7,1,Divorciado,<NULL>
+8,1,En Pareja,<NULL>
+9,1,Viudo,<NULL>
+10,2,Colegio,<NULL>
+11,2,Universidad,<NULL>
+12,2,Trabajo,<NULL>
+13,2,Partido Político,<NULL>
+14,2,Iglesia o grupo religioso,<NULL>
+15,2,Grupo secular,<NULL>
+16,2,Clubes privados,<NULL>
+17,2,Think Tanks,<NULL>
+18,2,Grupos de apoyo a campaña política,<NULL>
+19,2,Movimiento ciudadano,<NULL>
+20,3,Colegio,<NULL>
+21,3,Universidad,<NULL>
+22,3,Trabajo,<NULL>
+23,3,Partido Político,<NULL>
+24,3,Iglesia o grupo religioso,<NULL>
+25,3,Grupo secular,<NULL>
+26,3,Clubes privados,<NULL>
+27,3,Think Tanks,<NULL>
+28,3,Grupos de apoyo a campaña política,<NULL>
+29,3,Movimiento ciudadano,<NULL>
+30,1,Anulado/a,"Previo a la existencia del Divorcio en Chile, se anulaban los vínculos de las uniones civiles"
+31,2,Infancia,
+32,0,Compañeros de Estudios,
+33,3,Infancia,

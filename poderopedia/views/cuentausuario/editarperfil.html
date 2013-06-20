@@ -1,0 +1,104 @@
+{{extend 'visualizacionLayoutCuentas.html'}}
+{{block sidebar}}
+{{include 'includes/sidebar-cuenta.html'}}
+{{end}}
+
+{{block leftcol}}
+{{include 'includes/tertiary-nav-conf.html'}}
+{{end}}
+
+ <hgroup class="search-results historial-head clearfix">
+                      <h3 class="search-awnser">
+                        <img src="{{ =URL('static','tmp/avatar-45.gif') }}" class="imagen-perfil-ch" />
+                        <span class="perfil-results">Carolina Sandoval</span>
+                        <button href="#" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Guardar</button>
+                     </h3>
+                    </hgroup>
+                    <div class="row-division clearfix forms"><!-- .row-division -->
+
+                        <!--hgroup-->
+                        <hgroup class="box-heading clearfix">
+                            <h3>Información Básica de mi Perfil ↓</h3>
+                        </hgroup>
+                        <!--hgroup-->
+                        
+                        <form class="form-horizontal">
+                                <fieldset>
+                                  <div class="control-group">
+                                    <label for="focusedInput" class="control-label">Nombre(s)<span class="req">*</span></label>
+                                    <div class="controls">
+                                      <input type="text" value="" id="focusedInput" class="input-xlarge focused">
+                                    </div>
+                                  </div>
+                        
+                                  <div class="control-group">
+                                    <label for="focusedInput" class="control-label">Apellido</label>
+                                    <div class="controls">
+                                      <input type="text" value="" id="focusedInput" class="input-xlarge focused">
+                                    </div>
+                                  </div>
+
+                                <div class="control-group">
+                                    <label for="textarea" class="control-label">Bio o Perfil<span>Máximo 200 caracteres</span></label>
+                                    <div class="controls">
+                                        <textarea rows="3" id="textarea" class="input-xlarge"></textarea>
+                                <span class="detalle">Quedan 100 caracteres</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="select01" class="control-label">País de Residencia</label>
+                                    <div class="controls">
+                                      <select id="select01" class="input-xlarge input_select">
+                                        <option>Seleccione un país</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                      </select>
+                                    </div>
+                                </div>
+
+                              <div class="control-group">
+                                <label for="focusedInput" class="control-label">Ciudad</label>
+                                <div class="controls">
+                                  <input type="text" value="Ej. Santiago, San Carlos, etc." id="focusedInput" class="input-xlarge focused">
+                                </div>
+                              </div>                               
+
+                                <div class="control-group">
+                                    <label for="select02" class="control-label">Sector</label>
+                                    <div class="controls">
+                                      <select id="select01" class="input-xlarge input_select">
+                                        <option>Otro</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                      </select>
+                                    </div>
+                                </div>
+
+                              <div class="control-group">
+                                <label for="focusedInput" class="control-label">Indicar otro Sector</label>
+                                <div class="controls">
+                                  <input type="text" value="" id="focusedInput" class="input-xlarge focused">
+                                </div>
+                              </div>
+                            
+                            <div class="control-group">
+                                <label for="prependedInput" class="control-label">Sitio Web o =URL</label>
+                                <div class="controls">
+                                  <div class="input-prepend">
+                                    <span class="add-on">http://</span><input type="text" size="16" id="prependedInput" class="span3 input_web">
+                                  </div>
+                                </div>
+                            </div>                 
+                        
+                                  <div class="soporte-accion">
+                                    <button href="#" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Guardar</button>
+                                  </div>
+                                </fieldset>
+                              </form>
+
+                    </div><!-- .row-division -->

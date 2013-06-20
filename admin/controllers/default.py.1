@@ -1,0 +1,779 @@
+# -*- coding: utf-8 -*-
+### required - do no delete
+def user(): return dict(form=auth())
+def download(): return response.download(request,db)
+def call(): return service()
+### end requires
+def index():
+    return dict()
+
+def error():
+    return dict()
+
+@auth.requires_login()
+def perfil():
+    class Virtual(object):
+        @virtualsettings(label=T('Familia'))
+        def editar(self):          
+            picture=A('editar', _href=URL('persona', args=self.persona.id))
+            return picture
+        @virtualsettings(label=T('Conexion'))
+        def conexiones(self):
+            ref=A('ver', _href=URL('conexiones', args=self.persona.id))
+            return ref
+    if(request.args(0)>0):
+        datasource=db(db.persona.id==request.args(0)).select()
+    else:
+        datasource=db(db.persona).select()
+    table = plugins.powerTable
+    table.datasource = datasource
+    table.headers = 'labels'
+    table.dtfeatures['sScrollY'] = '100%'
+    table.uitheme = 'redmond'
+    table.virtualfields = Virtual()
+    table.keycolumn = 'persona.id'
+    table.columns = ['persona.alias','virtual.editar','virtual.conexiones']
+    table.showkeycolumn = False 
+    table.extra = dict(autoresize={},
+                             tooltip={},
+                             details={'detailscolumns':'relFamiliar.id,tipoParentesco.name,persona.alias',                                                 
+                             'detailscallback':URL('default','familydetails')
+                             })
+    
+    table = table.create()
+    return dict(table=table)
+
+@auth.requires_login()
+def formwizard():
+    # STEPS: A dict with fields for each step
+    mysteps = [dict(fields=['firstName','firstLastName', 'otherLastName','alias', 'shortBio','countryofResidence', 'depiction']),
+               dict(fields=['Mainsector','birth','bio']),
+               dict(fields=['email','password'])]
+    # IMPORT: Import the module
+    from plugin_PowerFormWizard import PowerFormWizard
+    # CREATE: Create the form object just like the SQLFORM            
+    form = PowerFormWizard(db.persona, steps=mysteps) 
+    
+    # VALIDATE: web2py form validation
+    if form.accepts(request.vars, session):
+        response.flash = "Records inserted!"
+    elif form.errors: 
+        form.step_validation() # VERY IMPORTANT FOR VALIDATION!!!!
+        response.flash = "Errors in form"
+    
+    # Enjoy!
+    return dict(form=form)
+
+@auth.requires_login()
+def perfil_create():
+    db.perfiles.dueno.default=auth.user.id
+    db.perfiles.postedon.default=request.now
+    form = crud.create(db.perfiles, next='perfil')
+    form[0][-1][1].append(TAG.BUTTON('Cancel', _onclick="document.location='%s';"%URL('index')))
+    return locals()
+
+@auth.requires_login()
+def mapa():
+    mapa = db(db.mapas).select(orderby=db.mapas.label)  
+    return locals()
+
+@auth.requires_login()
+def caso():
+    caso = db(db.casos).select(orderby=db.casos.label)
+    return locals()
+
+@auth.requires_login()
+def persona():   
+    record = db.persona(request.args(0)) or redirect(URL('perfil'))
+    form = SQLFORM(db.persona, record)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+        
+    ##relaciones Familiares
+    class VirtualFam(object):
+        @virtualsettings(label=T('Editar'))
+        def editar(self):          
+            picture=A('editar', _href=URL('relFamiliar_edit', args=self.relFamiliar.id))
+            return picture
+    datasource=db((db.relFamiliar.origenP==record.id) & (db.relFamiliar.parentesco==db.tipoParentesco.id) & (db.relFamiliar.destinoP==db.persona.id)).select()
+    table = plugins.powerTable
+    table.datasource = datasource
+    table.headers = 'labels'
+    table.dtfeatures['sScrollY'] = '100%'
+    table.virtualfields = VirtualFam()
+    table.keycolumn = 'relFamiliar.id'
+    table.columns = ['relFamiliar.id','tipoParentesco.name','persona.alias','virtual.editar']
+    table.showkeycolumn = False 
+    
+    table = table.create()
+       
+    return dict(form=form,  table=table)
+
+@auth.requires_login()
+def conexiones():
+    record = db.persona(request.args(0)) or redirect(URL('perfil'))
+    form = SQLFORM(db.persona, record)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+        
+    #conexiones economicas
+    class VirtualEco(object):
+        @virtualsettings(label=T('Editar'))
+        def editar(self):          
+            picture=A('editar', _href=URL('relorgs_edit', args=self.RelPersOrg.id))
+            return picture
+    
+    datasource=db((db.RelPersOrg.origenP==record.id) & (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.RelPersOrg.destinoO==db.Organizacion.id)& (db.RelPersOrg.origenP==db.persona.id)).select()
+    table = plugins.powerTable
+    table.datasource = datasource
+    table.headers = 'labels'
+    table.dtfeatures['sScrollY'] = '100%'
+    table.virtualfields = VirtualEco()
+    table.keycolumn = 'RelPersOrg.id'
+    table.columns = ['RelPersOrg.id','persona.alias','tipoRelacionP20.relationship','Organizacion.name','virtual.editar']
+    table.showkeycolumn = False 
+    
+    table = table.create()
+    
+    return dict(form=form,table=table)
+
+
+@auth.requires_login()
+def relorgs_edit():
+    from gluon.serializers import json
+   
+    
+    record = db.RelPersOrg(request.args(0)) or redirect(URL('perfil'))
+    
+    
+    class Virtual(object):
+        @virtualsettings(label=T('Documento'))
+        def editar(self):          
+            picture=A('editar', _href=URL('document_edit', args=self.document.id))
+            return picture
+        
+    datasource=db(db.document.relPersOrg==record.id).select()
+    table = plugins.powerTable
+    table.datasource = datasource
+    table.headers = 'labels'
+    table.dtfeatures['sScrollY'] = '100%'
+    table.uitheme = 'redmond'
+    table.virtualfields = Virtual()
+    table.keycolumn = 'document.id'
+    table.columns = ['document.name','document.documentURL','virtual.editar']
+    table.showkeycolumn = False 
+    ##table.extra = dict(autoresize={},
+    ##                         tooltip={},
+    ##                         details={'detailscolumns':'relFamiliar.id,tipoParentesco.name,persona.alias',                                                 
+    ##                         'detailscallback':URL('default','familydetails')
+    ##                         })
+    
+    table = table.create()
+    
+    
+    
+    
+    form = SQLFORM(db.RelPersOrg, record)
+    if form.validate():
+        
+        if(form.vars.destinoO==""):
+            if(form.vars._autocomplete_alias_aux!=""):
+                form.vars.tipoOrg=12
+                form.vars.name=form.vars._autocomplete_alias_aux
+                form.vars.alias=form.vars._autocomplete_alias_aux
+                form.vars.countryOfResidence=44
+                idO = db.Organizacion.insert(**db.Organizacion._filter_fields(form.vars))
+                if(idO!=None):
+                    form.vars.destinoO=idO
+                    id = record.update_record(**db.RelPersOrg._filter_fields(form.vars))
+                    response.flash=T('form OK ')
+                    
+            else:
+                response.flash=T('Debe Ingresar un grupo ')  
+        else:
+            id = record.update_record(**db.RelPersOrg._filter_fields(form.vars))
+            response.flash=T('Form Accepted')
+        ##redirect(URL('perfil'))
+    elif form.errors:
+        response.flash = T('form has errors')
+        
+    tree={}
+    options=db(db.tipoRelacionP20.parent==0).select(orderby=db.tipoRelacionP20.relationship)
+    for option in options:
+        tree[str(option.id)]=option.relationship        
+    
+    ##db.RelPersOrg.hasdocument.default=1
+    default=db(db.tipoRelacionP20.id==record.specificRelation).select().first()
+    pordefecto='"'+str(default.id)+'"'
+    if(default.parent!=0):
+        ##parent=db(db.tipoRelacionP20.id==default.parent).select().first()
+        pordefecto='"'+str(default.parent)+'", "'+str(default.id)+'"'
+    
+    return dict(form=form, option_tree=json(tree), default=pordefecto, _id=record.id, record='RelPersOrg', table=table, persona=record.origenP)
+
+## agrega conexion    
+@auth.requires_login()
+def relorgs_create():
+    from gluon.serializers import json
+    
+    persona = db.persona(request.args(0)) or redirect(URL('perfil'))   
+    db.RelPersOrg.origenP.default = request.args(0)
+    default_args= request.args(1) or 11
+    
+    
+    ##form=SQLFORM.factory(db.RelPersOrg,db.document)
+    form=SQLFORM(db.RelPersOrg)
+    if form.validate():
+        
+        if(form.vars.destinoO==""):
+            if(form.vars._autocomplete_alias_aux!=""):
+                form.vars.tipoOrg=12
+                form.vars.name=form.vars._autocomplete_alias_aux
+                form.vars.alias=form.vars._autocomplete_alias_aux
+                form.vars.countryOfResidence=44
+                idO = db.Organizacion.insert(**db.Organizacion._filter_fields(form.vars))
+                if(idO!=None):
+                    form.vars.destinoO=idO
+                    id = db.RelPersOrg.insert(**db.RelPersOrg._filter_fields(form.vars))
+                    response.flash=T('form OK ')
+                    
+            else:
+                response.flash=T('Debe Ingresar un grupo ')  
+        else:
+            id = db.RelPersOrg.insert(**db.RelPersOrg._filter_fields(form.vars))
+            ##redirect(URL('default','persona'))
+        ##redirect(URL('relorgs_edit',args=record.id))
+        ##response.flash = T('form accepted'+form.vars.destinoO)
+    elif form.errors:
+        response.flash = T('form has errors')
+    tree={}
+    options=db(db.tipoRelacionP20.parent==0).select(orderby=db.tipoRelacionP20.relationship)
+    for option in options:
+        tree[str(option.id)]=option.relationship
+        
+    default=db(db.tipoRelacionP20.id==default_args).select().first()
+    pordefecto='"'+str(default.id)+'"'
+    if(default.parent!=0):
+        ##parent=db(db.tipoRelacionP20.id==default.parent).select().first()
+        pordefecto='"'+str(default.parent)+'", "'+str(default.id)+'"'
+    return dict(form=form, option_tree=json(tree), default=pordefecto, _id=persona.id)
+    
+    
+        
+
+    
+@auth.requires_login()
+def persona_create():
+   form = SQLFORM(db.persona)
+   if form.accepts(request.vars, session):
+       response.flash = 'form accepted'
+   elif form.errors:
+       response.flash = 'form has errors'
+   else:
+       response.flash = 'please fill out the form'
+   return dict(form=form)
+
+@auth.requires_login()
+def birthEvent():
+    birthEvent = db(db.birthEvent).select(orderby=db.birthEvent.fecha)
+    return locals()
+
+@auth.requires_login()
+def birthEvent_create():
+    form = crud.create(db.birthEvent,next='birthEvent')
+    return dict(form=form)
+
+@auth.requires_login()
+def document():
+    document = db(db.document).select(orderby=db.document.fecha)
+    return locals()
+
+def document_create():
+    _id=request.args(0) or redirect(URL('perfil'))
+    record=request.args(1) or redirect(URL('perfil'))
+    form = SQLFORM(db.document)
+    if(record=='RelPersOrg'):
+        form.vars.relPersOrg=_id
+    if(record=='Organizacion'):
+        form.vars.organizacion=_id
+    if(record=='persona'):
+        form.vars.persona=_id
+    
+    if form.accepts(request.vars, session):
+       response.flash = 'form accepted'
+    elif form.errors:
+       response.flash = 'form has errors'
+    else:
+       response.flash = 'please fill out the form'
+        
+    
+    return dict(form=form)
+
+@auth.requires_login()
+def place():
+    place = db(db.place).select(orderby=db.place.fecha)
+    return locals()
+
+def place_create():
+    form = crud.create(db.place,next='place')
+    return dict(form=form)
+    
+
+
+    
+
+
+@auth.requires_login()
+def relPersona():
+    persona = db.persona(request.args(0)) or redirect(URL('persona'))
+    relPersona = db(db.relPersona.origenP==persona.id).select(
+               orderby=~db.relPersona.relacion, limitby=(0, 25))
+    return locals()
+
+@auth.requires_login()
+def relPersona_create():
+    from gluon.serializers import json
+    persona = db.persona(request.args(0)) or redirect(URL('perfil')) 
+    filter_arg=request.args(1) or redirect(URL('perfil'))
+    response.view='default/relPersona_create.html' 
+    db.relPersona.origenP.default = request.args(0)
+    
+    
+    form=SQLFORM(db.relPersona)
+    
+    if form.validate():
+        
+        if(form.vars.destinoP==""):
+            if(form.vars._autocomplete_alias_aux!=""):
+                
+                form.vars.alias=form.vars._autocomplete_destinoP_alias_aux
+                form.vars.countryOfResidence=44
+                idP = db.persona.insert(**db.persona._filter_fields(form.vars))
+                if(idP!=None):
+                    form.vars.destinoP=idP
+                    id = db.relPersona.insert(**db.relPersona._filter_fields(form.vars))
+                    response.flash=T('form OK ')
+                    redirect(URL('default','persona'))
+            else:
+                response.flash=T('Debe Ingresar una Persona ')  
+        else:
+            id = db.relPersona.insert(**db.relPersona._filter_fields(form.vars))
+            ##redirect(URL('default','persona'))
+        ##redirect(URL('relorgs_edit',args=record.id))
+            ##response.flash = T('form accepted '+str(id)+"m "+form.vars.destinoP)
+    elif form.errors:
+        response.flash = T('form has errors')
+    tree={}
+    options=db(db.tipoRelacionP2P.parent==0).select(orderby=db.tipoRelacionP2P.name)
+    for option in options:
+        tree[str(option.id)]=option.name
+        
+    default=db(db.tipoRelacionP2P.id==filter_arg).select().first()
+    pordefecto='"'+str(default.id)+'"'
+    if(default.parent!=0):
+        ##parent=db(db.tipoRelacionP20.id==default.parent).select().first()
+        pordefecto='"'+str(default.parent)+'", "'+str(default.id)+'"'
+    
+    return dict(form=form, option_tree=json(tree), default=pordefecto, persona=request.args(0))
+
+@auth.requires_login()    
+def relPersona_edit():
+    from gluon.serializers import json
+    relPersona = db.relPersona(request.args(0)) or redirect(URL('perfil')) 
+    ##filter_arg=request.args(1) or redirect(URL('perfil'))
+    response.view='default/relPersona_create.html' 
+    
+    
+    
+    form=SQLFORM(db.relPersona,relPersona)
+    
+    if form.validate():
+        
+        if(form.vars.destinoP==""):
+            if(form.vars._autocomplete_alias_aux!=""):
+                
+                
+                form.vars.alias=form.vars._autocomplete_destinoP_alias_aux
+                form.vars.countryofResidence=44
+                idP = db.persona.insert(**db.persona._filter_fields(form.vars))
+                if(idP!=None):
+                    form.vars.destinoP=idP
+                    id = relPersona.update_record(**db.relPersona._filter_fields(form.vars))
+                    response.flash=T('form OK ')
+                    
+            else:
+                response.flash=T('Debe Ingresar un grupo ')  
+        else:
+            id = relPersona.update_record(**db.relPersona._filter_fields(form.vars))
+            response.flash=T('Form Accepted')
+        ##redirect(URL('perfil'))
+    elif form.errors:
+        response.flash = T('form has errors')
+        
+    tree={}
+    options=db(db.tipoRelacionP2P.parent==0).select(orderby=db.tipoRelacionP2P.name)
+    for option in options:
+        tree[str(option.id)]=option.name
+        
+    default=db(db.tipoRelacionP2P.id==relPersona.relacion).select().first()
+    pordefecto='"'+str(default.id)+'"'
+    if(default.parent!=0):
+        ##parent=db(db.tipoRelacionP20.id==default.parent).select().first()
+        pordefecto='"'+str(default.parent)+'", "'+str(default.id)+'"'
+    
+    return dict(form=form, option_tree=json(tree), default=pordefecto, persona=relPersona.origenP)
+    
+
+@auth.requires_login()
+def new():
+    form = SQLFORM.factory(db.persona,db.relFamiliar)
+
+    if form.accepts(request.vars):
+        _id_persona = db.contacts.insert(**db.persona._filter_fields(form.vars))
+        form.vars.contact = _id_persona
+        id = db.relFamiliar.insert(**db.relFamiliar._filter_fields(form.vars))
+        response.flash = 'User registered successfully'
+    return locals()
+
+@auth.requires_login()    
+def country():
+    countries = db(db.country).select(orderby=db.country.id)
+    return locals()
+
+@auth.requires_login()
+def Organizacion():
+    class Virtual(object):
+        @virtualsettings(label=T('Editar'))
+        def editar(self):          
+            picture=A('editar', _href=URL('Organizacion_edit', args=self.Organizacion.id))
+            return picture
+    datasource=db(db.Organizacion).select(orderby=db.Organizacion.alias)
+    table = plugins.powerTable
+    table.datasource = datasource
+    table.dtfeatures['sScrollY'] = '100%'
+    table.virtualfields = Virtual()
+    table.keycolumn = 'Organizacion.id'
+    table.columns = ['Organizacion.id','Organizacion.alias','virtual.editar']
+    table.showkeycolumn = False 
+    
+    table = table.create()
+    return dict(table=table)
+
+@auth.requires_login()
+def Organizacion_create():
+    form = crud.create(db.Organizacion,next='Organizacion')
+    return dict(form=form)
+
+@auth.requires_login()    
+def Organizacion_edit():
+    record = db.Organizacion(request.args(0)) or redirect(URL('Organizacion'))
+    form = SQLFORM(db.Organizacion, record)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+        
+    return dict(form=form)
+    
+@auth.requires_login()    
+def relFamiliar():
+    persona = db.persona(request.args(0)) or redirect(URL('persona'))
+    relFamiliar = db((db.relFamiliar.origenP==persona.id) | (db.relFamiliar.destinoP==persona.id)).select(
+               orderby=db.relFamiliar.parentesco, limitby=(0, 25))
+    return locals()
+
+@auth.requires_login()
+def relFamiliar_create():
+    persona = db.persona(request.args(0)) or redirect(URL('persona'))
+    db.relFamiliar.origenP.default = request.args(0)
+    form=SQLFORM(db.relFamiliar)
+    if form.validate():
+        
+        if(form.vars.destinoP==""):
+            ##response.flash=T('Maluenda ') 
+            if(form.vars._autocomplete_destinoP_alias_aux!=""):
+                
+                form.vars.alias=form.vars._autocomplete_destinoP_alias_aux
+                form.vars.countryofResidence=44
+                idP = db.persona.insert(**db.persona._filter_fields(form.vars))
+                if(idP!=None):
+                    form.vars.destinoP=idP
+                    id = db.relFamiliar.insert(**db.relFamiliar._filter_fields(form.vars))
+                    response.flash=T('form OK ')
+                    
+            else:
+                response.flash=T('Debe Ingresar una Persona ')  
+        else:
+            id = db.relFamiliar.insert(**db.relFamiliar._filter_fields(form.vars))
+            
+        ##redirect(URL('relorgs_edit',args=record.id))
+        ##response.flash = T('form accepted'+form.vars.destinoO)
+    elif form.errors:
+        response.flash = T('form has errors')
+    ##form = crud.create(db.relFamiliar,next='relFamiliar/[id]')
+    return dict(form=form, persona=persona.id) 
+    
+@auth.requires_login()
+def relFamiliar_edit():
+    record=db.relFamiliar(request.args(0)) or redirect(URL('perfil'))
+    form = SQLFORM(db.relFamiliar, record)  
+    if form.validate():
+        
+        if(form.vars.destinoP==""):
+            ##response.flash=T('Maluenda ') 
+            if(form.vars._autocomplete_destinoP_alias_aux!=""):
+                
+                form.vars.alias=form.vars._autocomplete_destinoP_alias_aux
+                form.vars.countryofResidence=44
+                idP = db.persona.insert(**db.persona._filter_fields(form.vars))
+                if(idP!=None):
+                    form.vars.destinoP=idP
+                    id = record.update_record(**db.relFamiliar._filter_fields(form.vars))
+                    response.flash=T('form OK ')
+                    
+            else:
+                response.flash=T('Debe Ingresar una Persona ')  
+        else:
+            id = record.update_record(**db.relFamiliar._filter_fields(form.vars))
+            
+        ##redirect(URL('relorgs_edit',args=record.id))
+        ##response.flash = T('form accepted'+form.vars.destinoO)
+    elif form.errors:
+        response.flash = T('form has errors')
+
+        
+    return dict(form=form, persona=record.origenP)
+
+@auth.requires_login()    
+def wizard():
+    STEPS = {0: ('firstName', 'firstLastName','otherLastName','alias','shortBio','countryofResidence','depiction'), # fields for 1st page
+             1: ('longBio', 'hasdocumentation'), # fields for 2nd page
+             ##2: ('field5', 'field6'), # fields for 2nd page
+             2: URL('persona_done')} # url when wizard completed
+    step = int(request.args(0) or 0)
+    if not step in STEPS: redirect(URL(args=0))
+    fields = STEPS[step]
+    print "Fields: " + str(fields) + " Step " + str(step)
+    if step==0: 
+        session.wizard = {}
+    if isinstance(fields,tuple):
+        form = SQLFORM.factory(*[f for f in db.persona if f.name in fields])
+        if form.accepts(request,session):
+            session.wizard.update(form.vars)
+            redirect(URL(args=step+1))            
+    else:
+        db.persona.insert(**session.wizard)
+        session.flash = T('wizard completed')
+        redirect(fields)
+    return dict(form=form,step=step)
+
+@auth.requires_login()
+def persona_done():
+    return dict(message="End of wizard", back=A("New wizard", _href=URL("wizard")))
+    
+def consumer():
+    return dict()
+    
+@service.json
+def get_visual():
+    lista = []
+    for row in db(db.persona.firstLastName!="").select():
+        listaparents=[]
+        for parents in db(db.relFamiliar.origenP==row.id).select():
+            destino = db.persona[parents.destinoP]
+            relation = db.tipoParentesco[parents.parentesco]
+            node={'id':parents.destinoP,'name':destino.alias, 'data':{'name':'isParent','relation':relation.name}}
+            listaparents.append(node)
+        children={'children':listaparents, 'data':{'name':'hasParents','relation':'Familiar'}, 'name':row.alias, 'id':row.id}
+        lista.append(children)
+    visual =  { 'name':"Senado",'children':lista, 'data':{'name':'work at','relation':'member political insitution'},'id':10000}
+    return visual
+    
+@service.json
+def get_persona_relfamiliar(alias):
+    lista = []
+    for row in db(db.persona.alias.like('%'+alias+'%')).select():
+        listaparents=[]
+        for parents in db(db.relFamiliar.origenP==row.id).select():
+            destino = db.persona[parents.destinoP]
+            relation = db.tipoParentesco[parents.parentesco]
+            node={'id':parents.destinoP,'name':destino.alias, 'data':{'name':'isParent','relation':relation.name}}
+            listaparents.append(node)
+        children={'children':listaparents, 'data':{'name':'hasParents','relation':'Familiar'}, 'name':row.alias, 'id':row.id}
+        lista.append(children)
+    visual =  { 'name':row.alias,'children':lista, 'data':{'name':'work at','relation':'member political institution'},'id':row.id}
+    return visual
+    
+@service.json
+def get_persona_relEconomica(alias):
+    lista = []
+    for row in db(db.persona.alias.like('%'+alias+'%')).select():
+        listaparents=[]
+        for parents in db(db.RelPersOrg.origenP==row.id).select():
+            destino = db.Organizacion[parents.destinoO]
+            relation = db.tipoRelacionP20[parents.specificRelation]
+            node={'id':parents.destinoO,'name':destino.alias, 'data':{'name':'EconomicRelation','relation':relation.relationship}}
+            listaparents.append(node)
+        children={'children':listaparents, 'data':{'name':'hasParents','relation':'Familiar'}, 'name':row.alias, 'id':row.id}
+        lista.append(children)
+    visual =  { 'name':row.alias,'children':lista, 'data':{'name':'work at','relation':'member political institution'},'id':row.id}
+    return visual
+    
+@service.json
+def get_relacion(id):
+    tree={}
+    options=db(db.tipoRelacionP2P.parent==id).select(orderby=db.tipoRelacionP2P.name)
+    for option in options:
+        tree[str(option.id)]=option.name
+    return tree
+
+@service.json
+def get_specificRelation(id):
+    tree={}
+    options=db(db.tipoRelacionP20.parent==id).select(orderby=db.tipoRelacionP20.relationship)
+    for option in options:
+        tree[str(option.id)]=option.relationship
+    return tree
+
+@service.json
+def get_familyRelations(id):
+    record=db.persona(id)
+    relation={}
+    rows = db((db.relFamiliar.origenP==id) & (db.relFamiliar.parentesco==db.tipoParentesco.id) & (db.relFamiliar.destinoP==db.persona.id)).select()   
+    for row in rows:
+        relation[row.id]={'parentesco':row.name,'destino':row.alias}
+    return relation
+    
+def familydetails():
+    _id=""; parientes=None; conexiones=None; conyuges=None
+    if(request.ajax):
+        datas=request.vars
+        data=datas.keys()
+        _id=data[0] 
+        data,_id=_id.split('_')
+        if(_id!=None):
+            ##Origen
+            parientes=db((db.relFamiliar.origenP==_id) & (db.relFamiliar.parentesco==db.tipoParentesco.id) & (db.relFamiliar.destinoP==db.persona.id)).select(db.relFamiliar.id,db.tipoParentesco.name,db.persona.alias,db.relFamiliar.destinoP)
+            ##Destino
+            parientesD=db((db.relFamiliar.destinoP==_id) & (db.relFamiliar.parentesco==db.tipoParentesco.id) & (db.relFamiliar.origenP==db.persona.id)).select(db.relFamiliar.id,db.tipoParentesco.nameInverso,db.persona.alias,db.relFamiliar.origenP)
+            ## Conyuges Origen
+            conyuges=db((db.relPersona.origenP==_id) & (db.relPersona.relacion==db.tipoRelacionP2P.id) & (db.tipoRelacionP2P.parent==1) & (db.relPersona.destinoP==db.persona.id)).select()
+            ## Conyuges Destino
+            conyugesD=db((db.relPersona.destinoP==_id) & (db.relPersona.relacion==db.tipoRelacionP2P.id) & (db.tipoRelacionP2P.parent==1) & (db.relPersona.origenP==db.persona.id)).select()
+            ## amigos Origen
+            amigos=db((db.relPersona.origenP==_id) & (db.relPersona.relacion==db.tipoRelacionP2P.id) & (db.tipoRelacionP2P.parent==2) & (db.relPersona.destinoP==db.persona.id)).select() 
+            ## amigos Destino
+            amigosD=db((db.relPersona.destinoP==_id) & (db.relPersona.relacion==db.tipoRelacionP2P.id) & (db.tipoRelacionP2P.parent==2) & (db.relPersona.origenP==db.persona.id)).select() 
+            ## Conocidos Origen           
+            conocidos=db((db.relPersona.origenP==_id) & (db.relPersona.relacion==db.tipoRelacionP2P.id) & (db.tipoRelacionP2P.parent==3) & (db.relPersona.destinoP==db.persona.id)).select()
+            ## Conocidos Destino          
+            conocidosD=db((db.relPersona.destinoP==_id) & (db.relPersona.relacion==db.tipoRelacionP2P.id) & (db.tipoRelacionP2P.parent==3) & (db.relPersona.origenP==db.persona.id)).select()
+                     
+            ## Estudios
+            estudios=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==1)).select()
+            
+            ##Companeros de Estudios
+            
+            ## Participación y Cargos en Empresas
+            cargosEmpresas=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==2)).select()
+            
+            ## Cargos de Gobierno
+            cargosGobierno=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==3)).select()
+            
+            ## Partídos Políticos
+            partidos=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==4)).select()
+            
+            ## Grupos de apoyo a Campana Política
+            gruposApoyo=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==8)).select()
+            
+            ## Cargos en Organismos Internacionales
+            cargosOrgInt=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==10)).select()
+            
+            ## Think Tanks
+            thinks=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==7)).select()
+            
+            ## Grupos Religiosos
+            greligiosos=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==5)).select()
+            
+            ## Participación y Cargos en ONG
+            cargosONG=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==9)).select()
+
+            ## Clubes Privados
+            clubes=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==6)).select()
+
+            ## Movimientos Ciudadanos o Sociales
+            movimientos=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) &  (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.parent==120)).select()
+
+            conexiones=db((db.RelPersOrg.origenP==_id) & (db.RelPersOrg.destinoO==db.Organizacion.id) & (db.RelPersOrg.specificRelation==db.tipoRelacionP20.id) & (db.tipoRelacionP20.id==11)).select(db.RelPersOrg.id,db.tipoRelacionP20.relationship, db.Organizacion.alias, db.RelPersOrg.destinoO)
+            
+            borrar=auth.has_membership('Administrator')
+            
+    return dict(parientes=parientes, parientesD=parientesD, _id=_id, conexiones=conexiones, conyuges=conyuges,
+        conyugesD=conyugesD, amigosD=amigosD, amigos=amigos, conocidos=conocidos, conocidosD=conocidosD,
+        estudios=estudios, cargosEmpresas=cargosEmpresas, cargosGobierno=cargosGobierno, partidos=partidos,
+        gruposApoyo=gruposApoyo, thinks=thinks, cargosOrgInt=cargosOrgInt, cargosONG=cargosONG, greligiosos=greligiosos,
+        clubes=clubes, movimientos=movimientos
+    )
+    
+def conyuge_create():
+    from gluon.serializers import json
+    persona = db.persona(request.args(0)) or redirect(URL('perfil')) 
+    filter_args = request.args(1) or redirect(URL('perfil')) 
+    response.view='default/relPersona_create.html' 
+    db.relPersona.origenP.default = request.args(0)
+    
+    
+    
+    ##form=SQLFORM.factory(db.RelPersOrg,db.document)
+    form=SQLFORM(db.relPersona)
+    ##relPers= db((db.tipoRelacionP2P.parent==1) & (db.relPersona.origenP==request.args(0)) & (db.relPersona.relacion==db.tipoRelacionP2P) & (db.relPersona.destinoP==db.persona.id) ).select()  
+    ##db.relPersona.origenP.default = request.args(0)
+    ##category_options = [OPTION(cat.name,_value=cat.id) for cat in
+    ##db(db.tipoRelacionP2P.parent==1).select(db.tipoRelacionP2P.ALL,cache=(cache.ram,3600))]
+    
+    ##options=db(db.tipoRelacionP2P.parent==1).select(db.tipoRelacionP2P.id, db.tipoRelacionP2P.name)
+    ##form = FORM(TABLE(
+    ##    TR('Estado Conyugal', SELECT(*category_options,**dict(_name="relPersona_relacion", requires=IS_IN_DB(db,'tipoRelacionP2P.id')))),
+    ##    TR('Persona',INPUT(_name='persona_alias')),
+    ##   TR("",INPUT(_type="submit",_value="SEARCH")),
+    ##    ))
+    
+    ##form=SQLFORM.factory(db.relPersona,db.document)
+    ##form.vars.opciones=options
+    if form.validate():
+        
+        if(form.vars.destinoP==""):
+            if(form.vars._autocomplete_alias_aux!=""):
+                
+                form.vars.alias=form.vars._autocomplete_destinoP_alias_aux
+                form.vars.countryOfResidence=44
+                idP = db.persona.insert(**db.persona._filter_fields(form.vars))
+                if(idP!=None):
+                    form.vars.destinoP=idP
+                    id = db.relPersona.insert(**db.relPersona._filter_fields(form.vars))
+                    response.flash=T('form OK ')
+                    redirect(URL('default','persona'))
+            else:
+                response.flash=T('Debe Ingresar una Persona ')  
+        else:
+            id = db.relPersona.insert(**db.relPersona._filter_fields(form.vars))
+            redirect(URL('default','persona'))
+        ##redirect(URL('relorgs_edit',args=record.id))
+        ##response.flash = T('form accepted'+form.vars.destinoO)
+    elif form.errors:
+        response.flash = T('form has errors')
+    tree={}
+    options=db(db.tipoRelacionP2P.parent==0).select(orderby=db.tipoRelacionP2P.name)
+    for option in options:
+        tree[str(option.id)]=option.name
+        
+    default=db(db.tipoRelacionP2P.id==filter_args).select().first()
+    pordefecto='"'+str(default.id)+'"'
+    if(default.parent!=0):
+        ##parent=db(db.tipoRelacionP20.id==default.parent).select().first()
+        pordefecto='"'+str(default.parent)+'", "'+str(default.id)+'"'
+    return dict(form=form, option_tree=json(tree), default=pordefecto, persona=persona.id)

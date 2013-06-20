@@ -1,0 +1,183 @@
+<hgroup class="search-results historial-head clearfix">
+                      <h3 class="search-awnser">
+                        <!--<img src="{{ =URL('static','tmp/avatar-45.gif') }}" class="imagen-perfil-ch" />-->
+                        <span class="perfil-results">Mis Notificaciones</span>
+                        <!--<button href="#" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Guardar</button>-->
+                     </h3>
+                    </hgroup>
+
+<div class="row-division clearfix">
+    <!--Tabs-->
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1" data-toggle="tab">Errores</a></li>
+            <li><a href="#tab2" data-toggle="tab">Contenido Inadecuado</a></li>
+            <li><a href="#tab3" data-toggle="tab">Perfil</a></li>
+            <li><a href="#tab4" data-toggle="tab">Persona</a></li>
+            <li><a href="#tab5" data-toggle="tab">Organizacion</a></li>
+
+        </ul>
+
+        
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab1">
+                <h3 align = "center">Contenidos con Error</h3>
+                {{if len(lista)!=0:}}
+                	{{for item in lista:}}
+                <div class="accordion-heading clearfix caja_notifica">
+        				<a class="accordion-toggle" data-toggle="collapse" data-parent="#error{{=item['id']}}" href="#error{{=item['id']}}">
+           				<h3>En {{=item['alias']}} <span class="label nuevo">Nuevo</span><span class="fecha_notifica">{{=item['creado']}}</span></h3>
+        				</a> 
+					</div>
+                 	<div id="error{{=item['id']}}" class="accordion-body collapse">
+                        <div class="accordion-inner"><br>
+                            <p>{{=item['contenido']}}</p>
+               			</div>
+               		</div>
+
+                     {{pass}}
+              
+                         
+                {{else:}}                             
+                         <div class="notificaciones"><!-- .notificaciones -->
+                            <div class="caja_notifica">
+                                <h3>No tienes Notificaciónes Pendientes<!--<span class="label nuevo">Nuevo</span>--></h3>
+                                <!--<span class="fecha_notifica">9 de Agosto</span>-->
+                                <a class="btn_borra_notifica"><i class="icon-remove"></i> Borrar</a>
+                                <!--<p>Morbi mattis condimentum risus ac varius. In fringilla, purus vel adipiscing dictum, quam sapien dictum sem, quis faucibus leo erat sed justo. Mauris non odio quam.</p>-->
+                            </div>
+                        </div><!-- /.notificaciones -->  
+              
+		 {{pass}}
+            </div>
+            
+            
+            <div class="tab-pane" id="tab2">
+                <h3 align = "center">Contenidos Inadecuados</h3>
+                {{if len(lista2)!=0:}}
+                	{{for item in lista2:}}
+                <div class="accordion-heading clearfix caja_notifica">
+        				<a class="accordion-toggle" data-toggle="collapse" data-parent="#inadecuados{{=item['id']}}" href="#inadecuados{{=item['id']}}">
+           				<h3>En {{=item['alias']}} <span class="label nuevo">Nuevo</span><span class="fecha_notifica">{{=item['creado']}}</span></h3>
+        				</a> 
+					</div>
+                 	<div id="inadecuados{{=item['id']}}" class="accordion-body collapse">
+                        <div class="accordion-inner"><br>
+                            <p>{{=item['contenido']}}</p>
+               			</div>
+               		</div>
+
+                     {{pass}}
+             
+       {{else:}}
+
+                        <div class="notificaciones"><!-- .notificaciones -->
+                            <div class="caja_notifica">
+                                <h3>No tienes Notificaciónes Pendientes<!--<span class="label nuevo">Nuevo</span>--></h3>
+                                <!--<span class="fecha_notifica">9 de Agosto</span>-->
+                                <a class="btn_borra_notifica"><i class="icon-remove"></i> Borrar</a>
+                                <!--<p>Morbi mattis condimentum risus ac varius. In fringilla, purus vel adipiscing dictum, quam sapien dictum sem, quis faucibus leo erat sed justo. Mauris non odio quam.</p>-->
+                            </div>
+                        </div><!-- /.notificaciones -->  
+              
+		{{pass}} 
+
+            </div>
+            
+            <div class="tab-pane" id="tab3">
+                <h3 align = "center">Sugerencias de Perfil</h3>            
+       {{if len(lista3)!=0:}}              
+			  {{for item in lista3:}}
+                      <div class="accordion-heading clearfix caja_notifica">
+        				<a class="accordion-toggle" data-toggle="collapse" data-parent="#perfil{{=item.id}}" href="#perfil{{=item.id}}">
+           				<h3>El perfil de {{=item.name}} <span class="label nuevo">Nuevo</span><span class="fecha_notifica">{{=item.created_on}}</span></h3>
+        				</a> 
+					</div>
+                 	<div id="perfil{{=item.id}}" class="accordion-body collapse">
+                        <div class="accordion-inner">
+            				<p>{{=item.texto}}</p>
+               			</div>
+               		</div>
+
+              {{pass}}
+       {{else:}}
+
+                        <div class="notificaciones"><!-- .notificaciones -->
+                            <div class="caja_notifica">
+                                <h3>No tienes Notificaciónes Pendientes<!--<span class="label nuevo">Nuevo</span>--></h3>
+                                <!--<span class="fecha_notifica">9 de Agosto</span>-->
+                                <a class="btn_borra_notifica"><i class="icon-remove"></i> Borrar</a>
+                                <!--<p>Morbi mattis condimentum risus ac varius. In fringilla, purus vel adipiscing dictum, quam sapien dictum sem, quis faucibus leo erat sed justo. Mauris non odio quam.</p>-->
+                            </div>
+                        </div><!-- /.notificaciones -->  
+              
+		{{pass}} 
+
+            </div>
+            
+            
+            <div class="tab-pane" id="tab4">
+                <h3 align = "center">Sugerencias de Conexion con Personas</h3>
+                {{if len(lista4)!=0:}}
+                 {{for item in lista4:}}
+                              
+       				<div class="accordion-heading clearfix caja_notifica">
+        				<a class="accordion-toggle" data-toggle="collapse" data-parent="#persona{{=item.sugerirConexion.id}}" href="#persona{{=item.sugerirConexion.id}}">
+           				<h3>Sujerencia de {{=item.persona.alias}} con {{=item.sugerirConexion.name}} <span class="label nuevo">Nuevo</span><span class="fecha_notifica">{{=item.sugerirConexion.created_on}}</span></h3>
+        				</a> 
+					</div>
+                 	<div id="persona{{=item.sugerirConexion.id}}" class="accordion-body collapse">
+                        <div class="accordion-inner">
+            				<p>{{=item.sugerirConexion.texto}}</p>
+               			</div>
+               		</div>
+               		{{pass}}
+       {{else:}}
+
+                        <div class="notificaciones"><!-- .notificaciones -->
+                            <div class="caja_notifica">
+                                <h3>No tienes Notificaciónes Pendientes<!--<span class="label nuevo">Nuevo</span>--></h3>
+                                <!--<span class="fecha_notifica">9 de Agosto</span>-->
+                                <a class="btn_borra_notifica"><i class="icon-remove"></i> Borrar</a>
+                                <!--<p>Morbi mattis condimentum risus ac varius. In fringilla, purus vel adipiscing dictum, quam sapien dictum sem, quis faucibus leo erat sed justo. Mauris non odio quam.</p>-->
+                            </div>
+                        </div><!-- /.notificaciones -->  
+              
+		{{pass}} 
+
+            </div>
+            <div class="tab-pane" id="tab5">
+                <h3 align = "center">Sugerencias de Conexion con Organizaciones</h3>            
+        {{if len(lista5)!=0:}}               
+			  {{for item in lista5:}}
+          		<div class="accordion-heading clearfix caja_notifica">
+        				<a class="accordion-toggle" data-toggle="collapse" data-parent="#organizacion{{=item.sugerirConexion.id}}" href="#organizacion{{=item.sugerirConexion.id}}">
+           				<h3>{{=item.Organizacion.alias}} con {{=item.sugerirConexion.name}} <span class="label nuevo">Nuevo</span><span class="fecha_notifica">{{=item.sugerirConexion.created_on}}</span></h3>
+        				</a> 
+					</div>
+                 	<div id="organizacion{{=item.sugerirConexion.id}}" class="accordion-body collapse">
+                        <div class="accordion-inner">
+            				 <p>{{=item.sugerirConexion.texto}}</p>
+               			</div>
+               		</div>
+
+              {{pass}}
+       {{else:}}
+
+                        <div class="notificaciones"><!-- .notificaciones -->
+                            <div class="caja_notifica">
+                                <h3>No tienes Notificaciónes Pendientes<!--<span class="label nuevo">Nuevo</span>--></h3>
+                                <!--<span class="fecha_notifica">9 de Agosto</span>-->
+                                <a class="btn_borra_notifica"><i class="icon-remove"></i> Borrar</a>
+                                <!--<p>Morbi mattis condimentum risus ac varius. In fringilla, purus vel adipiscing dictum, quam sapien dictum sem, quis faucibus leo erat sed justo. Mauris non odio quam.</p>-->
+                            </div>
+                        </div><!-- /.notificaciones -->  
+              
+		{{pass}} 
+            </div> 
+               
+      
+        </div>
+    </div>	
+    <!--Fin de Tabs-->
+</div>

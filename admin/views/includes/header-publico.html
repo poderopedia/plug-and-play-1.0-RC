@@ -1,0 +1,83 @@
+<!-- top -->
+            <div class="container">
+                <h1 class="logo">
+                    <a href="{{=URL('default','index')}}">Poderopedia</a>
+                </h1>
+
+                <!-- primaryNav -->
+                <nav class="primary-nav">
+                    <div class="btn-group">
+                        <a href="{{=URL('directorio','general')}}" class="ddown-toggle sin-drop">a/z</a>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <a href="{{=URL('directorio','general',args='persona')}}" class="ddown-toggle sin-drop" >Personas</a>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <a href="{{=URL('directorio','general',args='empresa')}}" class="ddown-toggle sin-drop" >Empresas</a>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <a href="{{=URL('directorio','general',args='organizacion')}}" class="ddown-toggle sin-drop" >Organizaciones</a>
+                    </div>
+                </nav>
+                <!-- /primaryNav -->
+
+                <!-- loginPreview -->
+                <div id="desplegable" class="login-preview">
+                    <a href="#" class="avatar">
+                        {{ if auth.user['thumbnail']:}}
+                        <img src="{{ =URL('default','default','fast_download',args=auth.user.thumbnail) }}" alt="{{=auth.user.user_name}}" />
+                        {{else:}}
+                        <img src="{{ =URL('static','tmp/avatar-36.gif') }}" alt="{{=auth.user.user_name}}" />
+                        {{pass}}
+                    </a>
+                    <!--<div class="bubble">23</div>-->
+                    <div class="btn-group">
+                        <a href="#" rel="tooltip" data-original-title="23" class="username ddown-toggle" data-toggle="dropdown">{{=auth.user.user_name}}<span class="caret"></span></a>
+
+                        <ul class="dropdown-menu">
+                            {{if (auth.has_membership('editor')) | (auth.has_membership('administrator')):}}
+                            <li><a href="{{=URL('default','mis_publicaciones',args='todas')}}">Mis Publicaciones</a></li>
+                            <li><a href="#">Mis Colaboraciones</a></li>
+                            <li><a href="{{=URL('default','notificacionesgenerales')}}">Mis Notificaciones</a></li>
+                            {{pass}}
+                            <li><a href="{{=URL('default','configuracion')}}">Mi Cuenta</a></li>
+                            <li><a href="{{=URL('default','logout')}}">Salir</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /loginPreview -->
+
+								<!-- about -->    
+                <div class="about">
+                    <a href="{{=URL('acercade','index')}}" class="ddown-toggle last-nav" >Sobre Poderopedia</a>
+                </div>
+								<!-- /about -->
+                
+
+            </div>
+            <!-- /top -->
+						
+            <!-- sub-tool -->
+            <div class="sub-tool">
+                <div class="container">
+
+                    <!-- search -->
+                <form class="form-inline" method="get" action="{{=URL('search','podersearch')}}">
+                    <div class="input-append">
+                        <input class="span4" id="appendedInputButton" size="16" name="q" type="text" placeholder="Buscar en todo Poderopedia" 
+						{{if request.vars['q']:}} value="{{=request.vars['q']}}" {{pass}}><button class="btn" type="button" onclick="this.form.submit()"></button>
+                    </div>
+                </form>
+                <!-- /search -->
+
+                    <!-- popular -->
+                    <span class="tit-sub">Popular Ahora:</span>
+
+                    <!-- /popular -->
+
+                </div>
+            </div>
+            <!-- /sub-tool -->

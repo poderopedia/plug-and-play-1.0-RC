@@ -1,0 +1,11 @@
+<hgroup class="widget-heading heading clearfix">
+    <h5>↓ Poderopedia en Números</h5>
+</hgroup>
+<div class="widget clearfix">
+    <ul class="ennumeros">
+        <li class="personas">Tenemos <span><a href="{{=URL('directorio','persona', extension=False)}}">{{=personas}}</a></span><b>personas</b></li>
+        <li class="empresas">Tenemos <span><a href="{{=URL('directorio','empresa', extension=False)}}">{{=empresas}}</a></span><b>empresas</b></li>
+        <li class="casos">Tenemos <span><a href="{{=URL('directorio','caso', extension=False)}}">{{=casos}}</a></span><b>casos</b></li>
+        <li class="organizaciones">Tenemos <span><a href="{{=URL('directorio','organizacion', extension=False)}}">{{=organizaciones}}</a></span><b>organizaciones</b></li>
+    </ul>
+</div>

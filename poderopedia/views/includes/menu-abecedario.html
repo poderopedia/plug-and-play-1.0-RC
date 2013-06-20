@@ -1,0 +1,35 @@
+<ul class="websites-sources AlphabeticResourse">
+	<li>
+		Filtrar por letra:
+	</li>
+    {{for i in range(26):}}
+    {{if letter==chr(ord('a')+i):}}
+	<li class="selected">
+    {{else:}}
+    <li>
+    {{pass}}
+        {{=A(chr(ord('A')+i),_href=URL(args=[_id,0,sort,chr(ord('a')+i),target]),cid=request.cid)}}
+
+	</li>
+	{{pass}}
+    {{if letter=='0':}}
+    <li class="selected">
+    {{else:}}
+    <li>
+    {{pass}}
+        {{=A('sin filtro',_href=URL(args=[_id,0,sort,'0',target]),cid=request.cid)}}
+    </li>
+</ul>
+<script type="text/javascript">
+    function filtrar(letra) {
+        $.ajax({
+            url: '{{=URL(args=[_id,0,sort])}}'+'/'+letra+'/{{=target}}',
+            success: function(data) {
+
+                $('li').addClass('selected');
+                $('#{{=target}}').html(data);
+            }
+        })
+    }
+</script>
+

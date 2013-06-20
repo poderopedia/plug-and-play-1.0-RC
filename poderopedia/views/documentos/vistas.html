@@ -1,0 +1,10 @@
+{{extend 'visualizacionLayout.html'}}
+<script type="text/javascript" src="http://s3.documentcloud.org/viewer/loader.js"></script>
+<script type="text/javascript">
+    DV.load('http://www.documentcloud.org/documents/{{=dc_id}}.js', {
+        container : '#doc',
+        embedded  : true
+    });
+</script>
+
+<div id="doc"></div>

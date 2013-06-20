@@ -1,0 +1,119 @@
+{{if tabla == 'organizacion':}}
+                {{if item.tipoOrg != 2:}}
+                        {{if item.haslogo == None:}}<img src="{{ =URL('static','tmp/avatar-organizacion45.gif') }}" width="45" />
+                        {{else:}}<img src="{{=URL('default','fast_download', args=item.haslogo)}}" class="modal-avatar"  width="45"/>{{pass}}
+                {{else:}}
+                        {{if item.haslogo == None:}}<img src="{{ =URL('static','tmp/avatar-empresa45.gif') }}" width="45" />
+                        {{else:}}<img src="{{=URL('default','fast_download', args=item.haslogo)}}" class="modal-avatar" width="45" />{{pass}}
+                {{pass}}
+          {{else:}}
+                        {{if item.depiction == None:}}<img src="{{ =URL('static','tmp/avatar-45.gif') }}" width="45" />
+                        {{else:}}<img src="{{=URL('default','fast_download', args=item.depiction)}}" class="modal-avatar" width="45" />{{pass}}
+          {{pass}}
+          <h3>{{=item.alias}}</h3>
+
+      {{if me:}}
+            <div id="thanksContenido">
+            <h2>{{=title_message}}</h2><h4>Gracias por tu colaboración, es muy importante para mantener y <br> mejorar la calidad de nuestros contenidos.  Poderopedia lo hacemos todos.</h4>
+            {{=form.custom.begin}}
+            {{=response.flash}}
+            {{if form.errors:}}
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="alert">
+                            <img src="{{ =URL('static','img/img_warning.gif') }}" class="img_warning"/>
+                                        <span class="txt_alert">
+                                            {{=T('Se han encontado errores al procesar su Regitro')}}
+
+                                                {{for fieldname in form.errors:}}
+                                                 <p>{{=fieldname}} error: {{=form.errors[fieldname]}}</p>
+                                                {{pass}}
+
+
+
+                                        </span>
+                        </div>
+                    </div>
+                    <div class="controls">
+                    </div>
+                </div>
+            {{pass}}
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">{{=title_message}} en:</label>
+                    <div class="controls">
+                        <strong>{{=item.alias}}</strong>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{=form.custom.label.contenido}}<br><span>Opcional máximo 500 caracteres</span></label>
+                    <div class="controls">
+                        <!--<textarea class="input-xlarge span4" rows="3"></textarea>-->
+                        {{=form.custom.widget.contenido}}
+                        <p id="tipoinadecuadoNum" class="help-block">Quedan 500 caracteres</p>
+                    </div>
+                </div>
+                <br>
+                <div class="control-group">
+                    <label class="control-label">{{=form.custom.label.URL}}</label>
+                    <div class="controls input-prepend">
+                        <span class="add-on">http://</span><!--<input type="text" class="span3" placeholder="Ingresa url" size="16">-->{{=form.custom.widget.URL}}
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+            {{=form.custom.end}}
+            </div>
+      
+
+{{else:}}
+             <div class="control-group">
+                <div class="controls">
+                            <div class="alert2">
+                                <img src="{{ =URL('static','img/img_warning.gif') }}"/>
+                                <span class="txt_alert">
+                                    Para Reportar {{=title_message}} debes estar registrado<br />
+                                    <strong>Por Favor {{=A(T('Registrate'),_href=URL('default','registrogeneral',extension=False))}} o {{=A(T('accede a tu cuenta'),_href=URL('default','ingresogeneral',extension=False))}}</strong>.
+                                </span>
+                            </div>
+                </div>
+             </div>
+        {{pass}}
+
+
+<script type="text/javascript">
+var res = '{{=request.vars.success}}';
+if (res=='ok') {
+
+              htm='<img src="{{=URL('static','img/icon_gracias.png')}}" class="thanksIco"><h2>¡Gracias!</h2><p class="text-thanks">Tu reporte fue recibido satisfactoriamente.<br> Será incluido una vez que haya sido confirmado y aprobado</p>'
+              $('#thanksContenido').html(htm);
+
+
+ }
+</script>
+
+<script type="text/javascript">
+$('#tipoinadecuado_contenido').keyup(function(){
+        var max = 500;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#tipoinadecuadoNum').text(' Ha alcanzado el límite');
+            $(this).val($(this).val().slice(0, max));
+        }else {
+            var char = max - len;
+            $('#tipoinadecuadoNum').text('Quedan ' + char + ' caracteres');
+        }
+    });
+$('#actualizacion_contenido').keyup(function(){
+        var max = 500;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#tipoinadecuadoNum').text(' Ha alcanzado el límite');
+            $(this).val($(this).val().slice(0, max));
+        }else {
+            var char = max - len;
+            $('#tipoinadecuadoNum').text('Quedan ' + char + ' caracteres');
+        }
+    });
+</script>

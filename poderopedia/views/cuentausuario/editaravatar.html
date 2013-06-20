@@ -1,0 +1,63 @@
+{{extend 'visualizacionLayoutCuentas.html'}}
+{{block sidebar}}
+{{include 'includes/sidebar-cuenta.html'}}
+{{end}}
+
+{{block leftcol}}
+{{include 'includes/tertiary-nav-conf.html'}}
+{{end}}
+
+
+<hgroup class="search-results historial-head clearfix">
+                      <h3 class="search-awnser">
+                        <img src="{{ =URL('static','tmp/avatar-45.gif') }}" class="imagen-perfil-ch" />
+                        <span class="perfil-results">Carolina Sandoval</span>
+                        <button href="#" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Guardar</button>
+                     </h3>
+                    </hgroup>
+                    <div class="row-division clearfix forms"><!-- .row-division -->
+
+                    <!--hgroup-->
+                   <hgroup class="box-heading clearfix">
+                    <h3>Imagen de Perfil ↓</h3>
+                   </hgroup>
+                   <!--hgroup-->
+                
+                                    <div class="cambio_img">
+
+                                        <form class="form-search">
+                                            <fieldset>
+                                                
+                                                <div class="soporte_imgp">
+                                                    <div class="soporte_borde">
+                                                    
+                                                    <div class="detalle_img">
+                                                        <h6>Cargar una foto </h6>
+                                                        <p>Fotografí,a JPG, GIF o PNG</p>
+                                                        <p> Tamaño máximo de 4MB.</p>
+                                                    </div>
+                                                    <span class="soporte_img_perfil">
+                                                        <img class="thumb_perfil" src="{{ =URL('static','tmp/imagen-face-72.gif') }}"  />
+                                                    </span>
+                                                
+                                                <button type="submit" class="btn btn-base">Seleccionar archivo</button>
+                                                    <div class="alerta">No se ha seleccionado ningún archivo</div>
+                                                    <div class="controles">
+                                                        <button type="submit" class="btn btn-base">Cargar otra foto</button>
+                                                        <span class="sop_condiciones">Acepto las <a>Condiciones de uso</a></span>
+                                                    </div>
+                                                </div>
+                                                
+                                                </div>
+                                                
+                                          <div class="soporte-accion">
+                                          <button href="#" class="btn btn-primary btn_save"><i class="icon-check icon-white"></i> Guardar</button>
+                                          </div>
+                                            </fieldset>
+                                    </form>
+                                
+                                
+                                    </div>
+
+
+                    </div><!-- .row-division -->

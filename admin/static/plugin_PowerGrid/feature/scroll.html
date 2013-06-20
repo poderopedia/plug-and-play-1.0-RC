@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Expires" content="-1">
+
+		<title>jQuery Gridy - A Grid Plugin [scroll]</title>
+
+		<!-- This CSS does not belong to the plugin. -->
+		<link type="text/css" rel="stylesheet" href="../css/stylesheet.css"/>
+
+		<link type="text/css" rel="stylesheet" href="../css/jquery.gridy.css"/>
+
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.tmpl.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.gridy.min.js"></script>
+
+		<script type="text/javascript">
+			// This code does not belong to the plugin. See the example code at the bottom of this page.
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-194992347-9']);
+			_gaq.push(['_trackPageview']);
+			
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+	</head>
+	<body>
+		<div id="header">
+			<div id="title">
+				<a href="http://wbotelhos.com/gridy">jQuery Gridy - A Grid Plugin</a>
+				<span>(current version: 0.2.0)</span>
+			</div>
+
+			<div id="menu">
+				<a href="http://github.com/downloads/wbotelhos/gridy/jquery.gridy-0.2.0.zip" target="_blank">Download</a> |
+				<a href="http://github.com/wbotelhos/gridy" target="_blank">Github</a> |
+				<a href="http://wbotelhos.com/gridy/changelog.txt" target="_blank">Change Log</a> |
+				<a href="http://wbotelhos.com/gridy/README.txt" target="_blank">Readme</a> |
+				<a href="http://www.wbotelhos.com/2011/06/26/jquery-gridy-a-grid-plugin/" target="_blank">Article</a> |
+				<a href="http://wbotelhos.com/gridy/LICENSE.txt" target="_blank">Licence</a> |
+				<a href="http://www.wbotelhos.com/gridy/who.html" target="_blank">Who is using</a> |
+				<a href="http://www.wbotelhos.com/2011/06/26/jquery-gridy-a-grid-plugin/#comments" target="_blank" style="color: #2C8CBD;">Doubt</a> |
+				<a href="http://www.wbotelhos.com/lab" target="_blank" style="color: #000;">yLab</a>
+			</div>
+
+			<a id="coffee" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=X8HEP2878NDEG&amp;item_name=jQuery%20Gridy" target="_blank">buy me a coffee</a>
+
+			<div class="description">jQuery <strong>Gridy</strong> is a plugin that generates a highly customizable grid automatically.</div>
+		</div>
+
+		<div id="content">
+			<div id="default-demo" class="session-first">Features:</div>
+
+			<div id="menu-feature">
+				<a href="http://wbotelhos.com/gridy/index.html">home</a>
+				<a href="javascript:void(0);" class="selected">scroll</a>
+				<a href="javascript:void(0);">arrowDown</a>
+				<a href="javascript:void(0);">arrowNone</a>
+				<a href="javascript:void(0);">arrowUp</a>
+				<a href="javascript:void(0);">before</a>
+				<a href="javascript:void(0);">buttonBackTitle</a>
+				<a href="javascript:void(0);">buttonMax</a>
+				<a href="javascript:void(0);">buttonNextTitle</a>
+				<a href="javascript:void(0);">buttonOption</a>
+				<a href="javascript:void(0);">buttonsWidth</a>
+				<a href="javascript:void(0);">buttonTitle</a>
+				<a href="javascript:void(0);">cache</a>
+				<a href="javascript:void(0);">clickFx</a>
+				<a href="javascript:void(0);">colsWidth</a>
+				<a href="javascript:void(0);">complete</a>
+				<a href="javascript:void(0);">contentType</a>
+				<a href="javascript:void(0);">dataType</a>
+				<a href="javascript:void(0);">debug</a>
+				<a href="javascript:void(0);">error</a>
+				<a href="javascript:void(0);">find</a>
+				<a href="javascript:void(0);">findsName</a>
+				<a href="javascript:void(0);">findTarget</a>
+				<a href="javascript:void(0);">headersName</a>
+				<a href="javascript:void(0);">headersWidth</a>
+				<a href="javascript:void(0);">height</a>
+				<a href="javascript:void(0);">hoverFx</a>
+				<a href="javascript:void(0);">jsonp</a>
+				<a href="javascript:void(0);">jsonpCallback</a>
+				<a href="javascript:void(0);">loadingIcon</a>
+				<a href="javascript:void(0);">loadingOption</a>
+				<a href="javascript:void(0);">loadingText</a>
+				<a href="javascript:void(0);">messageOption</a>
+				<a href="javascript:void(0);">messageTimer</a>
+				<a href="javascript:void(0);">noResultOption</a>
+				<a href="javascript:void(0);">noResultText</a>
+				<a href="javascript:void(0);">page</a>
+				<a href="javascript:void(0);">params</a>
+				<a href="javascript:void(0);">resultOption</a>
+				<a href="javascript:void(0);">resultText</a>
+				<a href="javascript:void(0);">rows</a>
+				<a href="javascript:void(0);">rowsNumber</a>
+				<a href="javascript:void(0);">rowsTarget</a>
+				<a href="javascript:void(0);">scroll</a>
+				<a href="javascript:void(0);">search</a>
+				<a href="javascript:void(0);">searchButtonLabel</a>
+				<a href="javascript:void(0);">searchButtonTitle</a>
+				<a href="javascript:void(0);">searchFocus</a>
+				<a href="javascript:void(0);">searchOption</a> 
+				<a href="javascript:void(0);">searchText</a>
+				<a href="javascript:void(0);">sortersName</a>
+				<a href="javascript:void(0);">sorterWidth</a>
+				<a href="javascript:void(0);">sortName</a>
+				<a href="javascript:void(0);">sortOrder</a>
+				<a href="javascript:void(0);">success</a>
+				<a href="javascript:void(0);">template</a>
+				<a href="javascript:void(0);">templateStyle</a>
+				<a href="javascript:void(0);">type</a>
+				<a href="javascript:void(0);">url</a>
+				<a href="javascript:void(0);">width</a>
+				<a href="javascript:void(0);">.reload()</a>
+			</div>
+
+			<div id="grid"></div>
+
+			<div class="session">TIP:</div>
+
+			<span class="comment">
+				 - When using the scroll option, always specify a height to better adjust your grid.
+			</span>
+		</div>
+
+		<div id="footer">
+			<div id="copy">&copy; 2011 <a href="http://www.wbotelhos.com/" target="_blank">wbotelhos.com</a></div>
+		</div>
+
+		<script type="text/javascript">
+			$(function() {
+
+				$('#grid').gridy({
+					colsWidth:		[100, 105, 550, 40, 100, 100],
+					dataType:		'jsonp',
+					find:			'attribute',
+					height:			200,
+					jsonp:			true,
+					loadingOption:	false,
+					resultOption:	false,
+					rows:			90,
+					rowsNumber:		[],
+					scroll:			true,
+					searchOption:	false,
+					url:			'http://www.moviecollection.com.br/gridy',
+					width:			1070
+				});
+
+			});
+		</script>
+
+		<script id="template" type="text/x-jquery-tmpl">
+			<div>
+				<div>${attribute}</div>
+				<div>${value}</div>
+				<div>${description}</div>
+				<div>${version}</div>
+
+				<div class="gridy-button">
+					<a href="javascript:void(0);">remove</a>
+				</div>
+
+				<div class="gridy-button">
+					<a href="javascript:void(0);">edit</a>
+				</div>
+			</div>
+		</script>
+	</body>
+</html>

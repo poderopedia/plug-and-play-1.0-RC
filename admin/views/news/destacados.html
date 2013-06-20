@@ -1,0 +1,94 @@
+{{response.files.append(URL('static','css/smoothness/jquery-ui-1.10.3.custom.min.css'))}}
+{{response.files.append(URL('static','js/jquery-ui-1.10.3.custom.min.js'))}}
+{{extend 'layout.html'}}
+
+<style scoped>
+    .ui-autocomplete-loading {
+        background: white url('{{=URL('static','loading.gif')}}') right center no-repeat;
+    }
+    #destacados_alias { width: 19em; }
+    .controls textarea {margin-left:0; width:300; height:150px;}
+    .largeHorizontal input {margin-left:0;}
+</style>
+
+<div class="ui-widget">
+{{=grid}}
+</div>
+<div id="results"></div>
+<script>
+    function encode(alias) {
+        alias=alias.replace(/ /g,'_');
+        alias=alias.replace(/á/g,'a');
+        alias=alias.replace(/é/g,'e');
+        alias=alias.replace(/í/g,'i');
+        alias=alias.replace(/ó/g,'o');
+        alias=alias.replace(/ú/g,'u');
+        alias=alias.replace(/ñ/g,'n');
+        alias=alias.replace(/\./g,'-');
+        alias=alias.replace(/Á/g,'A');
+        alias=alias.replace(/É/g,'E');
+        alias=alias.replace(/Í/g,'I');
+        alias=alias.replace(/Ó/g,'O');
+        alias=alias.replace(/Ú/g,'U');
+        return alias;
+    }
+    $(function() {
+        function log( message ) {
+            $( "<div>" ).text( message ).prependTo( "#log" );
+            $( "#log" ).scrollTop( 0 );
+        }
+
+
+
+        $( "#destacados_alias" ).autocomplete({
+            appendTo: "#results",
+
+            source: function( request, response ) {
+                $.ajax({
+                    url: "{{=URL('news','call/json/entity_autocomplete')}}",
+                    dataType: "json",
+                    data: {
+                        entity: $('#destacados_referenceEntity').val(),
+                        maxRows: 12,
+                        alias_startsWith: request.term
+                    },
+                    success: function( data ) {
+                        response( $.map( data, function( item ) {
+                            return {
+                                label: item.alias,
+                                value: item.alias,
+                                entity: item.id
+                            }
+                        }));
+                    }
+                });
+            },
+            minLength: 2,
+            select: function( event, ui ) {
+                this.form.destacados_reference.value=ui.item.entity;
+                alias=encode(ui.item.value);
+                switch ($('#destacados_referenceEntity').val()) {
+                    case 'persona':
+                        this.form.destacados_url.value='http://www.poderopedia.org/personas/'+alias;
+                        break;
+                    case 'empresa': this.form.destacados_url.value='http://www.poderopedia.org/empresas/'+alias;
+                        break;
+                    case 'organizacion': this.form.destacados_url.value='http://www.poderopedia.org/organizaciones/'+alias;
+                        break;
+                }
+
+            },
+            open: function() {
+                var position = $("#results").position(),
+                        left = position.left, top = position.top;
+
+                $("#results > ul").css({left: left + 180 + "px",
+                    top: top + -100 + "px" });
+
+            },
+            close: function() {
+                $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+            }
+        });
+    });
+</script>

@@ -1,0 +1,101 @@
+{{extend  'visualizacionLayoutEstaticas.html'}}
+
+{{block breadcrumbs}}
+<div class="quick-breadcrumbs">
+    <span><strong>Poderopedia</strong></span>
+</div>
+{{end}}
+<div class="row">
+
+ 	<div id="content">
+       <div class="estaticas">               
+                <!-- centerCol -->
+                <section class="center-col span9">
+                    <hgroup class="search-results historial-head clearfix">
+                      <h3 class="search-awnser"><span class="perfil-results">Crea Poderopedia en tu país</span></h3>
+                    </hgroup>
+                	<div id="subindex" class="width-complete"><!-- .width-complete -->
+                    	<div class="row-division clearfix"><!-- .row-division -->
+                          <!--  <div class="row-division clearfix">
+                                <img src="{{=URL('static','img/mapa_poderopedia.png')}}"/>
+                    		</div><!-- .row-division -->
+                            <p>Aún estamos trabajando en los detalles técnicos y legales para poder ofrecer toda la asistencia que podamos para que puedas crear un Capítulo de Poderopedia en tu país. Sin perjuicio de lo anterior hemos preparado esta guía explicativa breve. Te pedimos que la tomes como un trabajo en desarrollo, flexible, que se irá actualizando y mejorando con tus aportes. </p>
+                            <br>
+                            <h5>LO QUE DEBES SABER</h5>
+                            <p>Esta guía pretende ser una introducción sencilla para crear un capítulo de Poderopedia en tu país. Aunque probablemente no sea exhaustiva y no tome en cuenta algunas diferencias territoriales, es el primer acercamiento para cualquiera que quiera poner en marcha un capítulo de Poderopedia en su país y, de ser posible, mejorar la plataforma para todos/as.</p>
+
+                            <p>Esta guía no cubre todos los aspectos técnicos de la adición de un capítulo de Poderopedia. Para obtener esta información debemos sostener una reunión técnica. Sin embargo, queremos que la creación de un capítulo de Poderopedia sea lo más fácil posible. Pensamos que la mejor manera de establecer un capítulo local sería la creación de un subdominio del capítulo en nuestro sitio web y ofrecer cuentas para el capítulo y sus administradores, que permitan a cada capítulo crear entidades, editar información, validar colaboraciones, etc, relacionados con el capítulo.</p>
+
+							<p>En relación con el código, vamos a poner el código de Poderopedia en Github y cada capítulo podrá hacer “fork” o crear su “branch” para que puedan hacer mejoras, que más tarde puedan ser aplicadas por el resto de los capítulos. </p>
+                            <br>
+                            <h5>¿Qué es Poderopedia?</h5>
+                            <p>Es una plataforma de periodismo de datos que mapea quién es quién en los negocios y la política en Chile. Poderopedia busca ser una herramienta que facilite el trabajo de periodistas y que ofrezca grandes volúmenes de inofrmación y conexiones para que los ciudadanos puedan tomar decisiones mejor informados.</p>
+
+                            <p>Poderopedia promueve la transparencia y accountabiliy en Chile y el mundo a través de la creación de un sistema editorial de bases de datos participativo, que permite visualizar las relaciones entre los líderes políticos, civiles y del ámbito de negocios de cada país. </p>
+
+                            <p>Poderopedia es gratuito y completamente Open Source. Es una plataforma sin fines de lucro y su contenido está licenciado bajo la licencia Creative Commons 3.0.</p>
+
+                            <p>Poderopedia cuenta con el apoyo de <a href="http://www.knightfoundation.org/">Knight Foundation</a> y <a href="http://startupchile.org/">Start-Up Chile</a>.</p>
+                            
+                            <br>
+                            <h5>Para crear un Capitulo de Poderopedia en tu país antes de todo debes estar de acuerdo con lo indicado arriba y debes haber leído y estar de acuerdo con: </h5>
+                            <ol>
+                                <li><span>1.</span> Política de privacidad </li>
+ 								<li><span>2.</span> Términos y condiciones de uso </li>
+ 								<li><span>3.</span> Manual de Lineamientos Editoriales Poderopedia </li>
+                            </ol>
+                            <br>
+                            <h5>¿Qué son los Capítulos Locales de Poderopedia?</h5>
+                            
+                            <p>Los capítulos locales de Poderopedia son organizaciones independientes entre sí que adscriben a un mismo objetivo: promover la transparencia para todos a través del mapeo del quién es quién en la política y los negocios (registrando información pública de las personas, empresas e instituciones más influyentes de su país)</p>
+
+                            <p>Cada capítulo representa y registra la información de su país.</p>
+                            
+                            <br>
+                            <h5>Sobre la relación entre los Capítulos de Poderopedia y la Fundación Poderomedia</h5>
+                            <p>Los encargados de la Fundación Poderomedia - creadores de Poderopedia- deben ser el primer punto de contacto para todas las materias relacionadas con la creación de los capítulos locales.</p> 
+
+                            <p>Los capítulos locales representan a Poderopedia en su país y son entidades separadas e independientes entre sí. <strong>Cada capítulo es responsables ante la ley del trabajo que lleva a cabo en su jurisdicción (país).</strong> </p>
+
+							<p>Fundación Poderomedia no se responsabiliza legalmente del trabajo realizado por los capítulos locales de Poderopedia.</p>
+                    	
+                            <br>
+                            <h5>Requisitos iniciales</h5>
+                            <p>Una clara comprensión de lo que significa el proyecto Poderopedia es crucial para su éxito. Si no has profundizado en él te invitamos a informarte más en nuestro <a href="www.poderopedia.org">sitio web</a> o escribirnos con tus preguntas.</p>
+                            <ol>
+                                <li><span>1.-</span> Un aspecto muy importante del éxito de un Capítulo de Poderopedia es que tenga una base sólida. Por lo tanto, necesitarás contar con un equipo o un grupo de voluntarios de al menos dos a tres personas, con los conocimientos técnicos necesarios para llevar a cabo el proyecto. Ideal será que cuentes con colaboradores activos de tu país interesados en participar en todo el trabajo de investigación que conlleva la creación y administración de tu Capítulo.
+
+                                    Además, para la sustentabilidad a largo plazo de tu proyecto, se recomienda que tu Capítulo reúna una comunidad de personas interesadas en aportar contenidos o en mejorar la herramienta. <strong>Tener una base de miembros estable es ideal para hacer crecer tu Poderopedia</strong>.</li>
+                                
+                                <li><span>2.-</span> Los objetivos principales de la organización o del equipo debe estar en consonancia con los de la Fundación Poderomedia, es decir: <strong>promover la información libre y de código abierto, promover la transparencia, el accountability y la democracia.</strong></li>
+                                
+                                <li><span>3.-</span> Cada Capítulo debe establecer sus objetivos específicos. Se espera que cada uno defina sus prioridades en función de sus necesidades y contexto locales.</li>
+                                
+                                <li><span>4.-</span> Cada Capítulo debe definir los contenidos y hoja de ruta del trabajo en su país.</li>
+                                
+                                <li><span>5.-</span> Es necesario que tu capítulo local de Poderopedia esté vinculado con algún medio de comunicación, universidad, centro de investigación u organización civil. <strong>Este apoyo te ayudará a que tu capítulo de Poderopedia sea sustentable en el tiempo.</strong> </li>
+                                
+                                <li><span>6.-</span> Cada Capítulo local tendrá su propia portada de Poderopedia y accesos a crear y editar información de personas, empresas e instituciones de su país.</li>
+                                
+                                <li><span>7.</span> Los requerimientos técnicos aún los estamos viendo. No obstante, estaremos encantados de recibir tus sugerencias sobre esto.</li>
+                                
+                            </ol>
+                            
+                            <br>
+                            <h5>¿Dónde puedo hacer más preguntas?</h5>
+                            <p>Si tienes preguntas que no se encuentran en este documento, por favor comunícate con team@poderopedia.com</p>
+                            
+                            <h5>ESTOY INTERESADO</h5>
+
+                            <p>¡Excelente!</p>
+
+                            <p>Entonces por favor</p>
+                            
+                            <h3><a href="https://docs.google.com/a/poderopedia.com/spreadsheet/viewform?formkey=dC05bGhlTzlVTzMyNE9aYTZ0clpzeXc6MA#gid=0" target="_blank">COMPLETA ESTE FORMULARIO</a></h3>
+                            
+                    	</div>
+                	</div>                    
+           		</section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+{{response.title='Podersearch/'+search+ '- Poderopedia'}}
+{{extend 'visualizacionLayout.html'}}
+{{block breadcrumbs}}
+
+{{end}}
+
+
+{{block sidebar}}
+{{ include 'search/sidebar-filtro.html' }}
+{{end}}
+
+{{block socialBar}}
+
+{{end}}
+{{from urllib2 import quote}}
+<hgroup class="search-results clearfix">
+    <p class="search-awnser">Hemos encontrado <strong>{{=len(results)}}/{{=results.hits}}</strong> Resultados en <strong>{{=results.qtime/1000}} segundos</strong>{{if search!='*:*':}} de: <span class="word-result">{{=search}}</span>{{pass}}</p>
+
+</hgroup>
+<div class="row-division clearfix ancho">
+    <!--hgroup-->
+    <hgroup class="box-heading clearfix">
+        <h3>
+            Resultados de la Búsqueda ({{=results.hits}}) &darr; {{if fq!='':}}<button class="btn"><a href="{{=URL('search','podersearch', vars=dict(q=quote(search.encode('utf-8'))))}}">Borrar Filtro</a></button>{{pass}}
+            {{if search!='*:*':}}<button class="btn"><a href="{{=URL('search','podersearch')}}">Borrar Búsqueda</a></button>{{pass}}
+        </h3>
+    </hgroup>
+    <!--hgroup-->
+
+
+    <div id="orderMenu">
+        <div id="listDisplay">
+            <a href="#" id="list">
+                <img src="{{ =URL('static','img/ico-list.gif') }}" />
+            </a>
+            <a href="#" id="box">
+                <img src="{{ =URL('static','img/ico-block.gif') }}" />
+            </a>
+        </div>
+    </div>
+
+
+    <ul class="faces-ul">
+
+        {{for i,result in enumerate(results):}}
+            {{if (result['doc_type']=='Organizacion') | (result['doc_type']=='Empresa'):}}
+                <li class="listas">
+                    <a class="avatar" href="{{=URL('visualizacion','caso_organizacion',args=result['id'])}}">
+                        {{if ('depiction' in result):}}
+                            {{if result['depiction']!='':}}
+                                <img src="{{=URL('default','fast_download',args=result['depiction'])}}" alt="{{=result['alias']}}" width="50">
+                            {{elif result['tipoOrganizacion']=='Empresa Privada':}}
+                                <img src="{{=URL('static','tmp/avatarempresa.png')}}" alt="{{=result['alias']}}" width="50">
+                            {{else:}}
+                                <img src="{{=URL('static','img/icono-organizaciones.png')}}" alt="{{=result['alias']}}" width="50">
+                            {{pass}}
+                        {{elif result['tipoOrganizacion']=='Empresa Privada':}}
+                            <img src="{{=URL('static','tmp/avatarempresa.png')}}" alt="{{=result['alias']}}" width="50">
+                        {{else:}}
+                            <img src="{{=URL('static','img/icono-organizaciones.png')}}" alt="{{=result['alias']}}" width="50">
+                        {{pass}}
+                    </a>
+                    <ul class="info">
+                        <li class="listas">
+                            <h5><a href="{{=URL('visualizacion','caso_organizacion',args=result['id'])}}" title="{{=result['alias']}}">{{=result['alias']}}</a></h5>
+                            <p>{{ if 'shortBio' in result:
+                                sub=p.sub('',result['shortBio'])
+                                =XML(sub)[:125]}} ...{{pass}}</p>
+                        </li>
+                    </ul>
+                </li>
+            {{elif result['doc_type']=='Persona':}}
+                <li class="listas">
+                    <a class="avatar" href="{{=URL('visualizacion','caso_perfil',args=result['id'])}}">
+                        {{if ('depiction' in result):}}
+                            <img src="{{=URL('default','fast_download',args=result['depiction'])}}" alt="{{=result['alias']}}" width="50">
+                        {{else:}}
+                            <img src="{{=URL('static','tmp/avatar-45.gif')}}" alt="{{=result['alias']}}" width="50">
+                        {{pass}}
+                    </a>
+                    <ul class="info">
+                        <li class="listas">
+                            <h5><a href="{{=URL('visualizacion','caso_perfil',args=result['id'])}}" title="{{=result['alias']}}">{{=result['alias']}}</a></h5>
+                            <p>{{ if 'shortBio' in result:
+                                sub=p.sub('',result['shortBio'])
+                                =XML(sub)[:125]}} ...{{pass}}</p>
+                        </li>
+                    </ul>
+                </li>
+            {{pass}}
+        {{pass}}
+    </ul>
+
+
+    <!--Pagination-->
+
+    <!--Pagination end-->
+
+

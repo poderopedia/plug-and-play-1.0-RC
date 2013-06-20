@@ -1,0 +1,16 @@
+{{extend 'layout.html'}}
+
+{{block footer}}
+{{end}}
+{{block header}}
+{{end}}
+<script type="text/javascript" src="http://s3.documentcloud.org/viewer/loader.js"></script>
+<script type="text/javascript">
+    DV.load('http://www.documentcloud.org/documents/{{=dc_id}}.js', {
+        container : '#doc',
+        embedded  : true
+    });
+</script>
+<br>
+<h3>{{=title}}</h3>
+<div id="doc" style="padding-top:10px"></div>

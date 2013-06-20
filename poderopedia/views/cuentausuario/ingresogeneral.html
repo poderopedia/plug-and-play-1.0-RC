@@ -1,0 +1,136 @@
+{{extend 'visualizacionLayoutCuentas2.html'}}
+
+{{block header}}
+{{ include 'includes/header-login.html' }}
+{{end}}
+
+{{block sidebar}}
+
+{{end}}
+
+{{block leftcol}}
+
+{{end}}
+
+
+<div class="row-division-center"><!-- .row-division -->
+                        
+                        <hgroup class="search-results historial-head clearfix">
+                          <h3 class="search-awnser">
+                            <span class="perfil-results">Ingresar a Poderopedia</span>
+                         </h3>
+                        </hgroup>
+                        
+                        <div class="preguntas_registro">
+                            ¿Ya estas registrado? <a href="#">Ingresa acá</a>
+                        </div>
+                        
+                        <ul class="btns_sociales">
+                            <li><a href="#" class="btn_facebook">Facebook</a></li>
+                            <li><a href="#" class="btn_twitter">Twitter</a></li>
+                        </ul>
+
+                        {{=form}}
+                        
+                        <form class="form-horizontal">
+                            <fieldset class="ingresogeneral">
+
+                              <div class="control-group">
+                                <label for="focusedInput" class="control-label">Email<span class="req">*</span></label>
+                                <div class="controls">
+                                  <input type="text" value="" id="focusedInput" class="input-xlarge focused">
+                                </div>
+                              </div>
+                    
+                              <div class="control-group">
+                                <label for="focusedInput" class="control-label">Contraseña<span class="req">*</span></label>
+                                <div class="controls">
+                                  <input type="password" value="" id="focusedInput" class="input-xlarge focused">
+                                </div>
+                              </div>
+                    
+                              <div class="control-group">
+                                <div class="controls">
+                                    <label class="checkbox inline">
+                                    <input class="checkbox" id="auth_user_remember" name="remember" type="checkbox" value="on">
+                                    Recordar mi ingreso
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="soporte-accion">
+                                {{form.custom.submit}}
+                                <button href="#" class="btn btn-primary btn_save">Regístrate</button>
+                                <a href="#Lightbox_cuentausuario1" data-toggle="modal" class="modales btn_lostpass">¿Olvidaste tu contraseña?</a>
+                              </div>
+                            
+                            </fieldset>
+                        </form>                        
+                        
+
+                    </div><!-- .row-division -->
+
+
+<!-- Cuenta Usuario -->
+<div class="modal hide fade" id="Lightbox_cuentausuario1">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+            <h2>¿Olvidaste tu contraseña? </h2>
+                <h4>Introduce tu dirección de correo electrónico<br /> para ayudarnos a encontrar tu cuenta Poderopedia.</h4>
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Email:</label>
+                        <div class="controls">
+                 <input type="text" value="" id="focusedInput" name="nombre-mail" class="input-xlarge focused" placeholder="usuario@mail.com">
+                        </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Dirección</button>
+            </form>
+      </div>
+</div>
+
+<div class="modal hide fade" id="Lightbox_cuentausuario2">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+            <h2>¿Olvidaste tu contraseña? </h2>
+                <h4>Introduce tu dirección de correo electrónico<br /> para ayudarnos a encontrar tu cuenta Poderopedia.</h4>
+            <form class="form-horizontal">
+                <div class="control-group warning">
+                    <label class="control-label" for="inputWarning">Email:</label>
+                        <div class="controls">
+                            <input type="text" value="" id="focusedInput inputWarning" name="nombre-mail" class="input-xlarge focused" placeholder="usuario@mail.com">
+                        </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                                <div class="alert">
+                                    <img src="{{ =URL('static','img/img_warning.gif') }}" class="img_warning"/>
+                                    <span class="txt_alert">
+                                        El e-mail que ingresas es incorrecto<br />
+                                        o no existe en nuestro registro.</span>
+                                </div>
+                            </div>
+          </div>
+                <button type="submit" class="btn btn-primary">Enviar Dirección</button>
+            </form>
+      </div>
+</div>
+
+<!--Gracias-->
+<div class="modal hide fade" id="gracias_cuentausuario">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+            <img src="{{ =URL('static','img/icon_gracias.png') }}" class="thanksIco" />
+            <h2>Por favor revisa tu correo electrónico</h2>
+            <p class="text-thanks">Te enviamos un mensaje por correo electrónico que te permitirá restablecer tu contraseña de manera rápida y fácil.</p>
+      </div>
+      <div class="modal-footer">
+            <a href="#" class="btn btn-primary " data-dismiss="modal">Ir a mi correo</a>
+      </div>
+</div>

@@ -1,0 +1,90 @@
+{{extend 'visualizacionLayoutEstaticas.html'}}
+{{block leftcol}}
+
+{{end}}
+{{block breadcrumbs}}
+<div class="breadcrumbs-list">
+    <ul>
+        <li> <a href="#">Perfiles</a> <span class="divider">&raquo;</span> </li>
+       
+        {{if page == 'caso_perfil':}}
+		<li> <a href="#">Persona</a> <span class="divider">&raquo;</span> </li>
+        <li> <a href="{{=URL('visualizacion','caso_perfil',args=entity.id)}}">
+        {{elif page=='caso_organizacion':}}
+			 <li> <a href="#">Organizacion</a> <span class="divider">&raquo;</span> </li>
+            <li> <a href="{{=URL('visualizacion','caso_organizacion',args=entity.id)}}">
+        {{pass}}
+            {{=entity.alias}}</a> <span class="divider">&raquo;</span> </li>
+    </ul>
+    <ul class="tools">
+        <!--<li><i class="icon-envelope"></i> <a href="#">Enviar a un amigo</a></li>
+        <li><i class="icon-print"></i> <a href="#">Imprimir</a></li>-->
+    </ul>
+</div>
+{{end}}
+
+  
+ <div class="row width-complete"> 
+  
+  <!-- centerCol -->
+  <section class="center-col span12">
+    
+    <hgroup class="search-results historial-head clearfix">
+      <h3 class="search-awnser">
+      
+{{if page == 'caso_perfil':}}
+	{{if entity.depiction != None:}}
+       		<img src="{{=URL('default','fast_download',args=entity.depiction) }}" class="imagen-perfil-ch" width="45"/>
+	{{else:}}
+       		<img src="{{=URL('static','tmp/avatar-45.gif') }}" class="imagen-perfil-ch" />
+	{{pass}}
+
+{{else:}}
+    {{if entity.haslogo != None:}}
+
+    <img src="{{=URL('default','fast_download',args=entity.haslogo) }}" class="imagen-perfil-ch" width="45"/>
+    {{elif entity.tipoOrg != 2:}}
+		<img src="{{=URL('static','tmp/avatar-organizacion45.gif')}} " class="imagen-perfil-ch" width="45"/>
+	{{else:}}
+        <img src="{{=URL('static','tmp/avatar-empresa45.gif')}} " class="imagen-perfil-ch" width="45"/>
+	{{pass}}
+{{pass}}
+        <span class="perfil-results">Historial de "{{=entity.alias}}"</span>
+     </h3>
+    <div class="info-title">
+       Creado por 
+       {{if entity.created_by != None:}}<span class="autor"> {{=creador.first_name}} {{=creador.last_name}}</span>{{else:}}<span class="autor">Equipo Poderopedia</span>{{pass}}
+       <span>{{=entity.created_on.strftime('%d-%m-%Y')}}</span>
+    </div>
+    </hgroup>
+
+    <div class="row-division clearfix ancho"><!-- .row-division -->
+    
+
+        <table class="table historial">
+                <thead>
+                  <tr class="box-heading">
+                    <th class="tablehead">↓ Fecha</th>
+                    <th>↓ Usuario</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {{for histo in historial:}}
+                  <tr>
+                    <td><span>{{=histo.modified_on.strftime('%d-%m-%Y')}}</span><span> </span></td>
+                    <td>{{if histo.modified_by:}}{{=db.auth_user(histo.modified_by).first_name}} {{=db.auth_user(histo.modified_by).last_name}}{{pass}}</td>
+                  </tr>
+                {{pass}}
+                </tbody>
+              </table>
+
+    </div><!-- .row-division -->
+    
+    <!--Pagination-->
+
+    <!--Pagination end--> 
+
+  </section>
+  <!-- /centerCol --> 
+  
+</div>

@@ -1,0 +1,81 @@
+{{extend 'visualizacionLayout.html'}}
+
+{{block header}}
+{{ include 'includes/header-privado.html' }}
+{{end}}
+
+{{block sidebar}}
+{{ if (auth.has_membership('administrator')) | (auth.has_membership('editor')):}}
+{{=LOAD('default','sidebar_cuenta.load',target='sidebar_cuenta',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{pass}}
+{{end}}
+
+{{block socialBar}}
+{{end}}
+
+{{block modales}}
+
+<!--Lightbox_sugerirconexion-->
+<div class="modal hide fade" id="Lightbox_sugerirperfil">
+    <div class="modal-header clearfix">
+        <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+    </div>
+    <div class="modal-body">
+        <div id="sugerir_perfil"></div>
+    </div>
+</div>
+<!--Fin Sugerencia Perfil-->
+{{end}}
+
+{{block breadcrumbs}}
+<div class="quick-breadcrumbs">
+    <span>Administrar: <strong>Mis publicaciones</strong></span>
+</div>
+{{end}}
+
+<hgroup class="search-results clearfix">
+    <h3 class="search-awnser">{{if auth.user.thumbnail:}}<img src="{{ =URL('default','fast_download',args=auth.user.thumbnail) }}" class="imagen-perfil-ch" />{{else:}}<img src="{{ =URL('static','tmp/avatar-36.gif') }}" class="imagen-perfil-ch" />{{pass}}<span class="perfil-results">{{=auth.user.user_name}}</span></h3>
+</hgroup>
+
+<div class="row-division clearfix"><!-- .row-division -->
+
+<div class="tabbable">
+<ul class="nav nav-tabs">
+    <li {{if activo=='todas':}}class="active"{{pass}}><a href="#tab1" data-toggle="tab">Todas( )</a></li>
+    <li {{if activo=='personas':}}class="active"{{pass}}><a href="#tab2" data-toggle="tab">Personas( )</a></li>
+    <li {{if activo=='empresas':}}class="active"{{pass}}><a href="#tab3" data-toggle="tab">Empresas( )</a></li>
+    <li {{if activo=='organizaciones':}}class="active"{{pass}}><a href="#tab4" data-toggle="tab">Organizaciones( )</a></li>
+    <!--<li><a href="#tab5" data-toggle="tab">Mapas(8)</a></li>-->
+    <!--<li><a href="#tab5" data-toggle="tab">Casos(132)</a></li>-->
+</ul>
+<div class="tab-content listaz relacionaz">
+<div class="tab-pane {{if activo=='todas':}}active{{pass}}" id="tab1"><!-- #tab1 -->
+    {{=LOAD('default','mis_personas.load',target='todos_personas',vars=dict(activo='todos'),ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+    {{=LOAD('default','mis_empresas.load',target='todos_empresas',vars=dict(activo='todos'),ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+    {{=LOAD('default','mis_organizaciones.load',target='todos_organizaciones',vars=dict(activo='todos'),ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+</div><!-- /#tab1 -->
+
+<div class="tab-pane  {{if activo=='personas':}}active{{pass}}" id="tab2"><!-- #tab2 -->
+    {{=LOAD('default','mis_personas.load',target='mis_personas',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+
+<!--Pagination-->
+<!--se saco paginacion para poder hacer funcionar el sitio y revisar sus componentes-->
+<!--Pagination end-->
+</div><!-- /#tab2 -->
+
+<div class="tab-pane {{if activo=='empresas':}}active{{pass}}" id="tab3"><!-- #tab3 -->
+    {{=LOAD('default','mis_empresas.load',target='mis_empresas',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+</div><!-- /#tab3 -->
+
+<div class="tab-pane {{if activo=='organizaciones':}}active{{pass}}" id="tab4"><!-- #tab4 -->
+    {{=LOAD('default','mis_organizaciones.load',target='mis_organizaciones',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+</div><!-- /#tab4 -->
+
+<div class="tab-pane" id="tab5"><!-- #tab5 -->
+    CONTENIDO5
+</div><!-- /#tab5 -->
+
+</div>
+</div>
+
+</div><!-- /.row-division -->

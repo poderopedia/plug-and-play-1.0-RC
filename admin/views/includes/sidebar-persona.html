@@ -1,0 +1,5 @@
+{{=LOAD('services','relation_persona_sidebar.load',args=_id,target='sidebar_persona',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{=LOAD('services','relation_privateOrg.load',args=[_id,2],target='persona_empresa',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{=LOAD('services','relation_privateOrg.load',args=[_id,1],target='persona_organizacion',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+
+

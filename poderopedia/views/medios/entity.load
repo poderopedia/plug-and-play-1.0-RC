@@ -1,0 +1,12 @@
+    {{from datetime import datetime}}
+
+<ul class="faces-ul referen-ul clearfix fuentes">
+    {{for i,item in enumerate(feeds['items']):}}
+	<li class="listas">
+		<div class="box-docref">
+			<h4><span class="number">{{=i+1}}</span><a href="{{=item.link}}" title="{{=item.title}}" target="_blank">"{{=item.title}}"</a></h4> <p>{{=datetime.strftime(datetime.strptime(item.published,'%a, %d %b %Y %H:%M:%S GMT'),'%d-%m-%Y')}}</p>
+
+		</div>
+	</li>
+	{{pass}}
+</ul>

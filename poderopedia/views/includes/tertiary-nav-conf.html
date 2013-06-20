@@ -1,0 +1,13 @@
+<!-- tertiaryNav -->
+                    <nav class="tertiary-nav">
+                        <ul>
+                            <li {{if conf=='configuracion':}}class="current"{{pass}}>{{=A(T('Configuración'), _href=URL('default', 'configuracion'))}}</li>
+                            <li {{if conf=='perfil':}}class="current"{{pass}}><a href="{{=URL('default','editarperfil')}}">Perfil</a></li>
+                            <li {{if conf=='avatar':}}class="current"{{pass}}><a href="{{=URL('default','editaravatar')}}">Avatar</a></li>
+                            <!--<li {{if conf=='conexiones':}}class="current"{{pass}}><a href="{{=URL('default','editarconexiones_fb_twitter')}}">Conexiones</a></li>-->
+                            {{ if (auth.has_membership(role='administrator'))|(auth.has_membership(role='editor')):}}
+                            <li {{if conf=='notificaciones':}}class="current"{{pass}}><a href="{{=URL('default','notificacionesgenerales')}}">Notificaciones</a></li>
+                            {{pass}}
+                        </ul>
+                    </nav>
+                    <!-- /tertiaryNav -->

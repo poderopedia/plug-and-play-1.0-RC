@@ -1,0 +1,192 @@
+# -*- coding: utf-8 -*-
+# this file is released under public domain and you can use without limitations
+
+#########################################################################
+## This is a samples controller
+## - index is the default action of any application
+## - user is required for authentication and authorization
+## - download is for downloading files uploaded in the db (does streaming)
+## - call exposes all registered services (none by default)
+#########################################################################
+
+#def index():
+#    """
+#    example action using the internationalization operator T and flash
+#    rendered by views/default/index.html or views/generic.html
+
+#    if you need a simple wiki simple replace the two lines below with:
+#    return auth.wiki()
+#    """
+#    response.flash = T("Welcome to web2py!")
+#    return dict(message=T('Hello World'))
+
+def index():
+    return dict(_id=1,page=0, sort=0, target=0, entity=0)
+
+def user():
+    """
+    exposes:
+    http://..../[app]/default/user/login
+    http://..../[app]/default/user/logout
+    http://..../[app]/default/user/register
+    http://..../[app]/default/user/profile
+    http://..../[app]/default/user/retrieve_password
+    http://..../[app]/default/user/change_password
+    use @auth.requires_login()
+        @auth.requires_membership('group name')
+        @auth.requires_permission('read','table name',record_id)
+    to decorate functions that need access control
+    """
+    return dict(form=auth(),conf=request.args(0),_id=0)
+
+
+def download():
+    """
+    allows downloading of uploaded files
+    http://..../[app]/default/download/[filename]
+    """
+    return response.download(request,db)
+
+
+def call():
+    """
+    exposes services. for example:
+    http://..../[app]/default/call/jsonrpc
+    decorate with @services.jsonrpc the functions to expose
+    supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
+    """
+    return service()
+
+
+@auth.requires_signature()
+def data():
+    """
+    http://..../[app]/default/data/tables
+    http://..../[app]/default/data/create/[table]
+    http://..../[app]/default/data/read/[table]/[id]
+    http://..../[app]/default/data/update/[table]/[id]
+    http://..../[app]/default/data/delete/[table]/[id]
+    http://..../[app]/default/data/select/[table]
+    http://..../[app]/default/data/search/[table]
+    but URLs must be signed, i.e. linked with
+      A('table',_href=URL('data/tables',user_signature=True))
+    or with the signed load operator
+      LOAD('default','data.load',args='tables',ajax=True,user_signature=True)
+    """
+    return dict(form=crud())
+
+
+def list_items():
+    if len(request.args): page=int(request.args[0])
+    else: page=0
+    items_per_page=20
+    limitby=(page*items_per_page,(page+1)*items_per_page+1)
+    rows=db().select(limitby=limitby)
+    return dict(rows=rows,page=page,items_per_page=items_per_page)
+
+
+#TODO _id=1,page=0, sort=0, target=0, entity=0
+def configuracion():
+    conf='configuracion'
+    form=auth.change_password()
+    return dict(form=form,conf=conf)
+
+def configuracion_ok():
+    conf='configuracion'
+    return dict(conf=conf)
+
+def logout():
+    return dict(form=auth.logout())
+
+# Version1
+def notificaciones():
+    
+    row1 = db(db.notificaciones).select(db.notificaciones.contenido,db.notificaciones.id,db.notificaciones.tipoError,db.notificaciones.URL,db.notificaciones.created_on,orderby="notificaciones.id DESC")
+    row2 = db(db.sugerirPersona).select(db.sugerirPersona.id,db.sugerirPersona.name,db.sugerirPersona.texto,db.sugerirPersona.created_on,orderby="sugerirPersona.id DESC")
+    if db(db.sugerurConexion.referenceEntyti == 'persona')
+        row3 = db(db.sugerirConexion).select(db.sugerirConexion.id,db.sugerirConexion.texto,db.sugerirConexion.created_on,orderby="sugerirConexion.id DESC")
+    
+    return dict(lista=row1,lista2=row2,lista3=row3)
+
+
+#TODO _id=1,page=0, sort=0, target=0, entity=0
+def registrogeneral():
+    form=auth.register()
+    return dict(form=form)
+
+#TODO _id=1,page=0, sort=0, target=0, entity=0
+def ingresogeneral():
+    form=auth.login()
+    return dict(form=form)
+
+def retrieve_password():
+    form=auth.retrieve_password()
+    return dict(form=form,target="retrieve")
+
+#TODO _id=1,page=0, sort=0, target=0, entity=0
+def registrogeneral_cuentacreada():
+    return dict(_id=1,page=0, sort=0, target=0, entity=0)
+
+#TODO _id=1,page=0, sort=0, target=0, entity=0
+def registrogeneral_mensajecontrasenaerrada():
+    return dict(_id=1,page=0, sort=0, target=0, entity=0)
+
+#TODO _id=1,page=0, sort=0, target=0, entity=0
+def editarconexiones_fb_twitter():
+    conf='conexiones'
+    return dict(_id=1,page=0, sort=0, target=0, entity=0,conf=conf)
+
+#TODO _id=1,page=0, sort=0, target=0, entity=0
+def notificacionesgenerales():
+    conf='notificaciones'
+    return dict(_id=1,page=0, sort=0, target=0, entity=0,conf=conf)
+
+#TODO _id=1,page=0, sort=0, target=0, entity=0
+def notificacionesindividual():
+    return dict(_id=1,page=0, sort=0, target=0, entity=0)
+
+def make_thumbnail(table, image_id, size=(72, 72)):
+    return locals()
+
+
+def editaravatar():
+    conf='avatar'
+    user=db.auth_user(me)
+    db.auth_user.email.readable=db.auth_user.email.writable=False
+    db.auth_user.user_name.readable=db.auth_user.user_name.writable=False
+    form=SQLFORM(db.auth_user,user)
+    if(request.vars.file==None):
+        form=auth.profile()
+
+    return dict(form=form,conf=conf,user=user)
+
+@auth.requires_login()
+def editarperfil():
+    conf='perfil'
+
+    db.auth_user.email.readable=db.auth_user.email.writable=False
+    db.auth_user.user_name.readable=db.auth_user.user_name.writable=False
+    user=db.auth_user(me)
+    form=SQLFORM(db.auth_user,user)
+
+
+    return dict(form=form,conf=conf)
+
+def editarperfil_ok():
+    conf='perfil'
+    return dict(conf=conf)
+
+
+def upload_callback():
+    if 'qqfile' in request.vars:
+        filename = request.vars.qqfile
+        newfilename = db.auth_user.thumbnail.store(request.body, filename)
+        authuser=db.auth_user(me)
+        authuser.update_record(thumbnail=newfilename)
+    return response.json({'success': 'true','filename':newfilename})
+
+
+##barra derecha
+@auth.requires_login()
+def person_created():
+    return locals()

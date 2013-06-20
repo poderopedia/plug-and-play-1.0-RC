@@ -1,0 +1,144 @@
+{{extend 'visualizacionLayoutCuentas2.html'}}
+
+
+
+{{block sidebar}}
+
+{{end}}
+
+{{block leftcol}}
+
+{{end}}
+{{block tittle}}<title>Poderopedia - Ingreso General</title>{{end}}
+<div class="row-division-center"><!-- .row-division -->
+                        
+                        <hgroup class="search-results historial-head clearfix">
+                          <h3 class="search-awnser">
+                            <span class="perfil-results">Ingresar a Poderopedia</span>
+                         </h3>
+                        </hgroup>
+                        
+                        <div class="preguntas_registro">
+                            ¿No estas registrado? <a href="{{=URL('default','registrogeneral')}}">Ingresa acá</a>
+                        </div>
+                        <!--
+                        <ul class="btns_sociales" align="center">
+                            <li><a href="#" class="btn_facebook">Facebook</a></li>
+                            <li><a href="#" class="btn_twitter">Twitter</a></li>
+                            {{=rpx}}
+                        </ul>-->
+
+
+                        
+                        <div class="form-horizontal" id="ingresogeneral">
+                            {{=form.custom.begin}}
+                           
+                            <fieldset class="ingresogeneral">
+
+                                {{if form.errors['email']!=None:}}<div class="control-group warning">{{form.errors['email']=""}}
+                                {{else:}}<div class="control-group">
+                                    {{pass}}
+                                    <label for="focusedInput" class="control-label">Email<span class="req">*</span></label>
+                                    <div class="controls">
+                                        {{=form.custom.widget.email}}
+                                    </div>
+                                </div>
+
+                                {{if form.errors['password']!=None:}}<div class="control-group warning">{{form.errors['password']=""}}
+                                    {{else:}}<div class="control-group">
+                                        {{pass}}
+                                        <label for="focusedInput" class="control-label">Contraseña<span class="req">*</span></label>
+                                        <div class="controls">
+                                            {{=form.custom.widget.password}}
+
+                                        </div>
+                                    </div>
+
+ 						{{if response.flash:}}
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="alert">
+                                        <img src="{{ =URL('static','img/img_warning.gif') }}" class="img_warning"/>
+                                            <span class="txt_alert">
+                                                 <div class="flash warning" align="justify">{{=response.flash or ''}}</div>
+                                            </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {{pass}}
+                    
+                              <div class="control-group">
+                                <div class="controls">
+                                    <label class="checkbox inline">
+                                    <input class="checkbox" id="auth_user_remember" name="remember" type="checkbox" value="on">
+                                    Recordar mi ingreso
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="soporte-accion">
+                                <button href="#" class="btn btn-primary btn_save" onclick="this.form.submit()">Ingresar</button>
+                                <a href="{{=URL('default','retrieve_password')}}" id="retrieve_pass" data-toggle="modal" class="modales btn_lostpass">¿Olvidaste tu contraseña?</a>
+                              </div>
+                              </div>
+                            </div>
+                           </fieldset> 
+                        {{=form.custom.end}}
+
+
+                    </div><!-- .row-division -->
+
+
+<!-- Cuenta Usuario -->
+<div class="modal hide fade" id="Lightbox_cuentausuario1">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+    {{=LOAD('default','retrieve_password.load',ajax=True,target='retrieve',content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+
+</div>
+
+<div class="modal hide fade" id="Lightbox_cuentausuario2">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+            <h2>¿Olvidaste tu contraseña? </h2>
+                <h4>Introduce tu dirección de correo electrónico<br /> para ayudarnos a encontrar tu cuenta Poderopedia.</h4>
+            <form class="form-horizontal">
+                <div class="control-group warning">
+                    <label class="control-label" for="inputWarning">Email:</label>
+                        <div class="controls">
+                            <input type="text" value="" id="focusedInput inputWarning" name="nombre-mail" class="input-xlarge focused" placeholder="usuario@mail.com">
+                        </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                                <div class="alert">
+                                    <img src="{{ =URL('static','img/img_warning.gif') }}" class="img_warning"/>
+                                    <span class="txt_alert">
+                                        El e-mail que ingresas es incorrecto<br />
+                                        o no existe en nuestro registro.</span>
+                                </div>
+                            </div>
+          </div>
+                <button type="submit" class="btn btn-primary">Enviar Dirección</button>
+            </form>
+      </div>
+</div>
+
+<!--Gracias-->
+<div class="modal hide fade" id="gracias_cuentausuario">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+            <img src="{{ =URL('static','img/icon_gracias.png') }}" class="thanksIco" />
+            <h2>Por favor revisa tu correo electrónico</h2>
+            <p class="text-thanks">Te enviamos un mensaje por correo electrónico que te permitirá restablecer tu contraseña de manera rápida y fácil.</p>
+      </div>
+      <div class="modal-footer">
+            <a href="#" class="btn btn-primary " data-dismiss="modal">Ir a mi correo</a>
+      </div>
+</div>

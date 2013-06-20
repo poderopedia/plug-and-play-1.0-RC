@@ -1,0 +1,78 @@
+{{extend 'visualizacionLayout.html'}}
+
+{{block modales}}
+{{=LOAD('visualizacion','tipoerror.load',args=[_id,'persona'],target='reportarError', ajax=True, content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}{{=LOAD('visualizacion','tipoinadecuado.load',args=[_id,'persona'],target='contenidoInadecuado',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{=LOAD('persona','sugerir_persona.load',args=_id,target='sugerir_persona',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{=LOAD('visualizacion','sugerir_perfil.load',args=_id,target='sugerir_perfil',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+{{end}}
+
+{{block breadcrumbs}}
+<!--<span>Búsqueda general</span>-->
+{{end}}
+
+{{block tittle}}
+<title>Poderopedia - {{=persona.alias}}</title>
+{{end}}
+{{from datetime import datetime}}
+<hgroup class="search-results clearfix">
+
+    {{if persona.depiction!=None:}}<img src="{{ =URL('download',args=persona.depiction) }}" class="imagen-perfil-ch" />{{else:}}<img src="{{ =URL('static','tmp/imagen-face.gif') }}" class="imagen-perfil-ch" />{{pass}}
+
+
+    <h3 class="perfil-name ">{{=persona.alias}}</h3>
+    {{if (persona.birth==None)|(persona.birth==''):}} {{else:}}<h5 class="perfil-details">{{=persona.birth}}</h5>{{pass}}
+    {{if (persona.shortBio == None)|(persona.shortBio == ''):}} {{else:}}<p class="perfil-details">{{=XML(persona.shortBio)}}</p>{{pass}}
+    <div class="botonera-perfil">
+        <div class="botonera-perfil">
+            <a href="#Lightbox_sugerirperfil" data-toggle="modal">[ <span>sugerir otro perfil</span> ]</a>
+            <a href="#Lightbox_sugerirconexion" data-toggle="modal">[ <span>sugerir conexiones</span> ]</a>
+            <a href="#Lightbox_reportarerror" data-toggle="modal">[ <span>reportar error</span> ] </a>
+         	<a href="#Lightbox_contenidoinadecuado" data-toggle="modal">[ <span>reportar contenido inadecuado</span> ]</a>
+            <a href="{{=URL('visualizacion','historial',args=[_id,'caso_perfil'])}}">[ <span>ver historial</span> ] </a>
+            <!--<a href="#" class="vermas"><span>Ver todo en una p&aacute;gina &gt;</span></a>-->
+            {{if persona.modified_on!=None:}}
+            <br><span class="actualizado">Actualizado el {{=persona.modified_on}}</span>{{pass}}
+        </div>
+    </div>
+</hgroup>
+                
+          <!-- centerCol -->
+<div class="row-division clearfix">
+    <!--Tabs-->
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1" data-toggle="tab">Conexiones</a></li>
+            {{if (persona.longBio != '')&(persona.longBio != None):}}<li><a href="#tab2" data-toggle="tab">Perfil</a></li>{{pass}}
+            <li><a href="{{=URL('visualizacion','MapasAll',args=_id)}}" target="_blank">Mapa de Relaciones</a></li>
+            <li><a href="#tab4" data-toggle="tab">Documentos</a></li>
+            <li><a href="#tab5" data-toggle="tab">Fuentes</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab1">
+               {{ include 'visualizacion/datos_duros.html' }}
+            </div>
+            <div class="tab-pane" id="tab2">
+                <h4>{{=T('Perfil')}}</h4>
+                <p>{{=XML(persona.longBio)}}</p>
+            </div>
+            <!--<div class="tab-pane" id="tab3">
+                <a href="{{=URL('visualizacion','MapasAll',args=_id)}}" target="_blank">Ir a Mapa</a>
+            </div>-->
+            <div class="tab-pane" id="tab4">
+                {{ include 'includes/perfDocumentos.html' }}
+            </div>
+            <div class="tab-pane" id="tab5">
+                {{ include 'includes/perfFuentes.html' }}
+            </div>
+        </div>
+    </div>
+    <!--Fin de Tabs-->
+</div>
+
+
+<div class="modal hide fade" id="Lightbox_reportarerror">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      
+</div>

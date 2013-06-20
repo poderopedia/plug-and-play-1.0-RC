@@ -1,0 +1,29 @@
+{{extend 'visualizacionLayoutCuentas2.html'}}
+
+{{block sidebar}}
+{{=LOAD('default','sidebar_cuenta.load',target='sidebar_cuenta',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50 px',_height='50 px'))}}
+{{end}}
+
+
+{{block sidebar}}
+
+{{end}}
+
+{{block leftcol}}
+
+{{end}}
+
+ <!-- centerCol -->
+
+<div class="row-division-center"><!-- .row-division -->
+
+	  <div class="modal-body">
+          <img src="{{=URL('static','img/icon_gracias.png')}}" class="thanksIco" />
+	    	<h2>Por favor revisa tu correo electr&oacute;nico</h2>
+			<p class="text-thanks">Te enviamos un mensaje por correo electr&oacute;nico que te permitir&aacute; restablecer tu contrase&ntilde;a de manera r&aacute;pida y f&aacute;cil.</p>
+	  </div>
+	  <div class="modal-footer">
+	   	 	<!--<a href="#" class="btn btn-primary " data-dismiss="modal">Ir a mi correo</a>-->
+	  </div>
+
+</div><!-- .row-division -->

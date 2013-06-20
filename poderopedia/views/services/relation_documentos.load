@@ -1,0 +1,25 @@
+{{from conversion import convert_latin_chars}}
+<!--botones de selección-->
+{{ include 'includes/botones-list-documentos.html' }}
+<!--boones de selección-->
+
+<ul class="faces-ul">
+{{for document in documentCloud:}}
+    <li> <img src="{{ =URL('static','tmp/img-pdf.gif') }}" />
+      <ul class="info ancholistas">
+       
+          <li>
+          <h4><a href="{{=URL(controller,'documentos',args=[alias,convert_latin_chars(document.title)], extension=False)}}">{{=document.title.replace('_',' ')}}</a></h4>
+        </li>
+        <li>
+            <p><span>Publicado: {{=document.created_on}}</span></p>
+        </li>
+        <li>
+          <p><span class="source">Fuente: {{=document.source}}</span></p>
+        </li>
+
+    
+      </ul>
+    </li>
+{{pass}}
+  </ul>

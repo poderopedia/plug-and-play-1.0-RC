@@ -1,0 +1,40 @@
+<hgroup class="widget-heading widget-filter widget-persona heading clearfix">
+  <h5>&darr; <span>{{=total}} {{=Organizationtype}}{{=page}}</span> Relacionadas</h5>
+</hgroup>
+<div class="widget widget-sources clearfix">
+  <ul class="widget-images">
+    {{for i,private in enumerate(Org):}}
+    {{if i==items_per_page: break}}
+    <li><a href="{{=URL('default','data/read/Organizacion',args=private.id,user_signature=True,extension=False)}}">
+    {{if (private.depiction!=None)&(private.depiction!=''):}}<img src="{{ =URL('default','fast_download',args=private.depiction) }}" rel="tooltip" title="{{=private.alias}}" />{{else:}}<img src="{{ =URL('static','tmp/avatar-45.gif') }}" rel="tooltip" title="{{=private.alias}}" />{{pass}}</a></li>
+    {{pass}}
+  </ul>
+  <a href="#" class="sugest">[Sugerir otra {{=Organizationtype}}]</a>
+  <!--  {{if page:}}
+    <div href="#" class="sugest" id="prevpage{{=target}}">Anterior</div>
+    {{pass}}-->
+  {{if len(Org)>items_per_page:}}
+    <!--<div class="sugest-right" id="addpage{{=target}}">Ver más &gt;</div>-->
+    <a href="{{=URL(controller,'personasrelacionadas',args=_id,extension=False)}}"><span class="sugest-right">Ver más &gt; </span></a>
+  {{pass}}
+</div>
+
+  <script>
+  $("#addpage{{=target}}").click(function () {
+    $.ajax({
+        url: '{{=URL(args=[_id,tipoOrg,page+1])}}',
+        success: function(data) {
+        $('#{{=target}}').html(data);
+    }
+  })
+  });
+
+  $("#prevpage{{=target}}").click(function () {
+      $.ajax({
+          url: '{{=URL(args=[_id,tipoOrg,page-1])}}',
+          success: function(data) {
+          $('#{{=target}}').html(data);
+      }
+    })
+    });
+  </script>

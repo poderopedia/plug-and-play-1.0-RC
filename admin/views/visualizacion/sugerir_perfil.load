@@ -1,0 +1,80 @@
+<h2>Sugerir un Perfil</h2>
+{{if me:}}
+    <div id="thanksPerfil">
+            <h4>Gracias por tu colaboración, es muy importante para mantener y <br> mejorar la calidad de nuestros contenidos.  Poderopedia lo hacemos todos.</h4>
+
+
+          <!--Formulario echo con form-->
+          {{=form.custom.begin}}
+          {{=response.flash}}
+          <div class="form-horizontal">
+                <div class="control-group">
+                    <div class="largeHorizontal">
+
+                        {{=form.custom.label['name']}} {{=form.custom.widget.name}}
+
+                    </div>
+           </div>
+                <div class="control-group">
+                    <label class="control-label">{{=form.custom.label['texto']}} <br><span>Máximo 300 caracteres</span></label>
+                    <div class="controls">
+                        <div class="input-xlarge span4" rows="3">
+                        
+                            {{=form.custom.widget.texto}}
+                            <p id="sugerirPersonaNum" class="help-block">Quedan 300 caracteres</p>
+                        
+                        </div>
+                       
+                    </div>
+                </div>
+				<br>
+                <div class="control-group">
+                    <label class="control-label">Obtuve esta información de</label>
+                    <div class="controls input-prepend">
+                        <span class="add-on">http://</span>{{=form.custom.widget.documentURL}}
+                    </div>
+                </div>
+
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+          {{=form.custom.end}}
+    </div>
+{{else:}}
+             <div class="control-group">
+                <div class="controls">
+                            <div class="alert2">
+                                <img src="{{ =URL('static','img/img_warning.gif') }}"/>
+                                <span class="txt_alert">
+                                    Para Sugerir debe estar registrado<br />
+                                    <strong>Por Favor {{=A(T('Registrate'),_href=URL('default','registrogeneral',extension=False))}} o {{=A(T('accede a tu cuenta'),_href=URL('default','ingresogeneral',extension=False))}}</strong>.
+                                </span>
+                            </div>
+                </div>
+             </div>
+{{pass}}
+        
+<script type="text/javascript">
+
+var res = '{{=request.vars.success}}';
+if (res=='ok') {
+
+              htm='<img src="{{=URL('static','img/icon_gracias.png')}}" class="thanksIco"><h2>¡Gracias!</h2><p class="text-thanks">Tu reporte fue recibido satisfactoriamente.<br> Será incluido una vez que haya sido confirmado y aprobado</p>'
+              $('#thanksPerfil').html(htm);
+
+
+ }
+</script>
+
+<script type="text/javascript">
+$('#sugerirPersona_texto').keyup(function(){
+        var max = 300;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#sugerirPersonaNum').text(' Ha alcanzado el límite');
+            $(this).val($(this).val().slice(0, max));
+        }else {
+            var char = max - len;
+            $('#sugerirPersonaNum').text('Quedan ' + char + ' caracteres');
+        }
+    });
+</script>

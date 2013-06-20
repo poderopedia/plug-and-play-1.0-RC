@@ -1,0 +1,34 @@
+<!--botones de selección-->
+{{ include 'includes/botones-list-personas-alternativa-az.html' }}
+<div class="toogleabc">
+    {{ include 'includes/menu-abecedario.html' }}
+</div>
+<!--boones de selección-->
+
+<div class="row-division clearfix">
+<ul class="faces-ul">
+{{for i,empresa in enumerate(empresas):}}
+{{if i==items_per_page: break}}
+<li>{{if empresa.haslogo!=None:}} <img src="{{ =URL('default','fast_download',args=empresa.haslogo) }}" width="120" />{{else:}}<img src="{{ =URL('static','tmp/avatar-empresa.png') }}" width="120"/>{{pass}}
+    <ul class="info">
+        <li>
+            <h4><a href="" title="{{=empresa.alias}}">{{=empresa.alias}}</a></h4>
+        </li>
+        <li>
+            <p><span>(creado {{=empresa.created_on}})</span></p>
+        </li>
+        <li>
+            <span class="publicado">Publicado</span> <a href="#">[ Editar ]</a>
+        </li>
+        <li class="vermas">
+            <p><a href="#">ver m&aacute;s &gt;</a></p>
+        </li>
+    </ul>
+</li>
+{{pass}}
+{{pass}}
+</ul>
+</div>
+<!--Pagination-->
+     {{ include 'includes/pagination.html' }}
+<!--Pagination end-->

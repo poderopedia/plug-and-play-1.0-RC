@@ -1,0 +1,255 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]><html class="ie ie6 ie-lte9 ie-lte8 ie-lte7 no-js" lang="{{=T.accepted_language or 'es'}}"> <![endif]-->
+<!--[if IE 7]><html class="ie ie7 ie-lte9 ie-lte8 ie-lte7 no-js" lang="{{=T.accepted_language or 'es'}}"> <![endif]-->
+<!--[if IE 8]><html class="ie ie8 ie-lte9 ie-lte8 no-js" lang="{{=T.accepted_language or 'es'}}"> <![endif]-->
+<!--[if IE 9]><html class="ie9 ie-lte9 no-js" lang="{{=T.accepted_language or 'es'}}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{=T.accepted_language or 'es'}}"> <!--<![endif]-->
+<html lang="{{=T.accepted_language or 'es'}}">
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1"><![endif]-->
+
+
+    <title>{{=response.title or request.application}}</title>
+
+    <link rel="icon" type="image/x-icon" href="{{=URL('static','img/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{=URL('static','img/favicon.ico')}}" />
+
+    <!-- other head content -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        var pluginUrl =
+                '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+        _gaq.push(['_setAccount', 'UA-34219926-1']);
+        _gaq.push(['_setDomainName', 'poderopedia.org']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    <!-- end other head content -->
+
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ =URL('static','css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ =URL('static','lib/ui-smoothness/jquery-ui-1.8.22.css') }}" />
+    <link rel="stylesheet/less" href="{{ =URL('static','css/structure.less') }}" />
+    <!-- /styles -->
+
+    <!-- scripts -->
+    <script src="{{ =URL('static','js/jquery-1.7.1.min.js') }}"></script>
+    <script src="{{ =URL('static','js/jquery-ui-1.8.22.min.js') }}"></script>
+    <script src="{{ =URL('static','js/bootstrap.js') }}"></script>
+    <script src="{{ =URL('static','js/less-1.3.0.min.js') }}"></script>
+    <script src="{{ =URL('static','js/jquery.media.js') }}"></script>
+    <script src="{{=URL('static','js/web2py.js')}}"></script>
+
+    <!--[if lt IE 9 ]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <link rel="stylesheet" href="{{ =URL('static','css/iex.css') }}" />
+    <![endif]-->
+    <!--[if lt IE 7 ]>
+    <script src="{{ =URL('static','js/dd_belatedpng.js?v=1') }}"></script>
+    <![endif]-->
+    <!-- /scripts -->
+    {{response.include_meta()}}
+    {{response.include_files()}}
+</head>
+
+<body class>
+    <!-- header -->
+    <header>
+        {{block header}}
+        {{if (auth.has_membership('editor')) | (auth.has_membership('administrator')):}}
+		<!-- top -->
+            <div class="container">
+                <h1 class="logo">
+                    <a href="{{=URL('default','index')}}">Poderopedia</a>
+                </h1>
+
+                <!-- primaryNav -->
+                <nav id="desplegable" class="primary-nav">
+                    <div class="btn-group">
+                        <a href="#" class="ddown-toggle con-drop" data-toggle="dropdown">Explorar <span class="caret"></span></a>
+                        
+                        <ul class="dropdown-menu">
+                            <li><a href="{{=URL('directorio','general',args='persona')}}">Personas</a></li>
+                            <li><a href="{{=URL('directorio','general',args='empresa')}}">Empresas</a></li>
+                            <li><a href="{{=URL('directorio','general',args='organizacion')}}">Organizaciones</a></li>
+                            <li><a href="#">Casos</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <a href="#" class="ddown-toggle con-drop" data-toggle="dropdown">Crear <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><span class="icono persona"></span> Persona</a></li>
+                            <li><a href="#"><span class="icono empresa"></span> Empresa</a></li>
+                            <li><a href="#"><span class="icono organizacion"></span> Organización</a></li>
+                                                        <li><a href="#"><span class="icono caso"></span> Caso</a></li>
+                                                        <li><a href="#"><span class="icono dato"></span> Enviar un Dato</a></li>
+                                                        <li><a href="#"><span class="icono perfil"></span> Sugerir Perfil</a></li>
+                                                        <li><a href="#"><span class="icono conexion"></span> Sugerir conexión</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- /primaryNav -->
+                
+                <!-- loginPreview -->
+                <div id="desplegable" class="login-preview">
+                    <a href="#" class="avatar">{{if auth.user.thumbnail: }}<img class="thumb_perfil" src="{{=URL('download',args=auth.user.thumbnail)}}"  />{{else:}}<img src="{{=URL('static','tmp/avatar-36.gif')}}" alt="{{=auth.user.user_name}}" />{{pass}}</a>
+                                        <div class="bubble">23</div>
+                    <div class="btn-group">
+                        <a href="#" rel="tooltip" data-original-title="23" class="username ddown-toggle" data-toggle="dropdown">{{=auth.user.user_name}}<span class="caret"></span></a>
+
+                        <ul class="dropdown-menu">
+                            {{if (auth.has_membership('editor')) | (auth.has_membership('administrator')):}}
+                            <li><a href="{{=URL('default','mis_publicaciones',args='todas')}}">Mis Publicaciones</a></li>
+                            <li><a href="#">Mis Colaboraciones</a></li>
+                            {{pass}}
+                            <li><a href="{{=URL('default','notificacionesgenerales')}}">Mis Notificaciones</a></li>
+                            <li>{{=A(T('Mi Cuenta'), _href=URL('default', 'configuracion'))}}</li>
+                            <li><a href="{{=URL('default','logout')}}">Salir</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /loginPreview -->
+
+                                <!-- about -->    
+                <div class="about">
+                    <a href="{{=URL('acercade','index')}}" class="ddown-toggle last-nav" >Sobre Poderopedia</a>
+                </div>
+                                <!-- /about -->
+                
+
+            </div>
+            <!-- /top -->
+
+        <!-- sub-tool -->
+        <div class="sub-tool">
+            <div class="container">
+
+                <!-- search -->
+                <form class="form-inline" method="get" action="{{=URL('search','podersearch')}}">
+                    <div class="input-append">
+                        <input class="span4" id="appendedInputButton" size="16" name="q" type="text" placeholder="Buscar en todo Poderopedia"><button class="btn" type="button" onclick="this.form.submit"></button>
+                    </div>
+                </form>
+                <!-- /search -->
+
+                <!-- popular -->
+                <span class="tit-sub">Popular Ahora:</span>
+                {{=LOAD('services','mas_popular.load',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='25',_height='25'))}}
+                <!-- /popular -->
+
+            </div>
+        </div>
+        <!-- /sub-tool -->
+
+        {{elif me:}}
+        {{ include 'includes/header-publico.html'}}
+        {{else:}}
+        {{ include 'includes/header-login.html'}}
+        {{pass}}
+        <!--TODO sobre poderomedia eliminado por espacio-->
+        <!-- about -->
+        <!--<div class="about">
+             <a href="#" class="ddown-toggle last-nav" >Sobre Poderopedia</a>
+         </div> -->
+         <!-- /about -->
+
+
+
+        <!-- /top -->
+
+
+
+
+        {{end}}
+    </header>
+    <!-- /header -->
+     
+    
+            
+    <!-- container -->
+    <div id="content" class="container">
+        <div class="quick-breadcrumbs">
+            {{block breadcrumbs}}
+           	<div class="quick-breadcrumbs">
+    			<span><strong>Mi cuenta</strong></span>
+			</div>
+            {{end}}
+        </div>
+        <div class="row">
+			 <!-- leftCol -->
+               <section class="left-col span2">
+                {{block leftcol}}
+                {{ include 'includes/tertiary-nav-conf.html' }} 
+                {{end}}
+            </section>
+             <!-- /leftCol -->
+            <!-- centerCol -->
+             <section class="center-col span6_4">
+                {{include}}
+               </section>
+            <!-- /centerCol -->
+
+            <!-- rightCol -->
+            <section class="right-col span3 persona-col">
+                {{block sidebar}}
+
+                {{end}}
+            </section>
+            <!-- /rightCol -->
+        </div>
+
+    </div>
+    <!-- /container -->
+    <!-- inlineScripts -->
+    <link rel="stylesheet" href="{{ =URL('static','lib/jwysiwyg/jquery.wysiwyg.css') }}">
+    <script src="{{ =URL('static','lib/jwysiwyg/jquery.wysiwyg.js') }}"></script>
+
+    <script>
+        /*
+         * This Page Related
+         */
+        $('body').addClass('page-person page-person-profile');
+
+        /*
+         * Append 'other' input field when specific
+         * option selected (in dropdown).
+         *
+         * Change root selector for more accuracy.
+         */
+        $('select[data-interact-id="person-sector"]').change(function() {
+            var target = $(this).attr('data-interact-append-id');
+
+            if($(this).val() === 'Otro') {
+                $('div[data-interact-id="' + target + '"]').fadeIn();
+            }
+            else {
+                $('div[data-interact-id="' + target + '"]').fadeOut();
+            }
+
+        }).change();
+
+        /*
+         * WYSIWYG
+         */
+        $('.input-tarea').wysiwyg({
+            autoGrow: true,
+            controls: 'bold,italic,underline,strikeThrough,justifyLeft,justifyCenter,justifyRight,insertOrderedList,insertUnorderedList,insertHorizontalRule,cut,copy,paste,html,|,undo,redo',
+            initialContent: ''
+        });
+    </script>
+    <!-- /inlineScripts -->
+    {{ include 'includes/footer.html' }}
+    <script type="text/javascript"> var uvOptions = {}; (function() { var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true; uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/kMY34WqQ9ISn7U4rHocGSA.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s); })(); </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!--hgroup-->
+      <hgroup class="box-heading clearfix">
+        <h3><a name="{{=chr(ord('a')+key)}}"><span>{{=chr(ord('a')+key)}}</span> ({{=total}}) &darr;</a></h3>
+        {{if alphapage:}}
+            {{=A('  Anterior',_href=URL(args=[alphapage-1,key]),cid=request.cid)}}
+        {{pass}}
+        {{if len(organizaciones)>alpha_length:}}
+            {{=A('Ver Más ',_href=URL(args=[alphapage+1,key]),cid=request.cid,_class="hint")}}
+        {{pass}}
+      </hgroup>
+      <!--hgroup-->
+
+      <ul class="faces-ul">
+            {{for i,organizacion in enumerate(organizaciones):}}
+            {{if i==alpha_length: break}}
+              <li>{{if organizacion.haslogo!=None:}}<img src="{{ =URL('default','fast_download',args=organizacion.haslogo) }}" width="44" />{{else:}} <img src="{{ =URL('static','img/icono-organizaciones.png') }}" />{{pass}}
+                <ul class="info">
+                  <li>
+                    <h4><a href="{{=URL('visualizacion','caso_organizacion',args=organizacion.id,extension=False)}}" title="{{=organizacion.alias}}">{{=organizacion.alias}}</a></h4>
+                  </li>
+                  <li>
+                        <!--<p><span>Padre (1922 - 2011)</span></p>-->
+                  </li>
+                  <li class="vermas">
+                    <p><a href="{{=URL('visualizacion','caso_organizacion',args=organizacion.id,extension=False)}}">ver m&aacute;s &gt;</a></p>
+                  </li>
+                </ul>
+              </li>
+            {{pass}}
+      </ul>
+
+
+

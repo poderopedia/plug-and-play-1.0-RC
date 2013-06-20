@@ -1,0 +1,255 @@
+{{extend 'visualizacionLayoutIndex.html'}}
+<script type="text/javascript" src="//www.hellobar.com/hellobar.js"></script>
+<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+<script type="text/javascript">
+    //new HelloBar(58706,84889);
+</script>
+{{block breadcrumbs}}
+{{end}}
+
+{{block socialBar}}
+{{end}}
+
+{{block sidebar}}
+{{end}}
+
+{{block modales}}
+<!--Sugerir Conexion-->
+<script type="text/javascript">
+jQuery('#Lightbox_sugerirconexion').on('hidden', function () {
+
+})
+
+$('#sugerirconexionButton').click(function() {
+    web2py_component("{{=URL('persona','sugerir_persona.load',args=_id,vars=dict(desde='portada'))}}","sugerir_persona")
+});
+
+$('#tengoDatoButton').click(function() {
+    web2py_component("{{=URL('portada','tengo_datos.load')}}","tengoDato")
+});
+
+$('#sugerirPerfilButton').click(function() {
+    web2py_component("{{=URL('visualizacion','sugerir_perfil.load')}}","sugerir_perfil")
+});
+
+</script>
+
+<!--Lightbox_sugerirconexion-->
+<div class="modal hide fade" id="Lightbox_sugerirconexion">
+<div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+	<div class="modal-body">
+        <div id="sugerir_persona"></div>
+    </div>
+ </div>
+<!--Fin Sugerir Conexion--> 
+
+<!--Tengo un Dato-->
+<div class="modal hide fade" data-backdrop="true" id="Lightbox_tengoundato">
+      <div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+
+      <div class="modal-body">
+          <div id="tengoDato"></div>
+     </div>
+</div>
+
+<!--Fin Tengo un Dato-->
+
+<!--Sugerir Perfil-->
+<script type="text/javascript">
+
+jQuery('#Lightbox_sugerirperfil').on('hidden', function () {
+  // ajax call to refresh data grid
+})
+</script>
+<!--Lightbox_sugerirconexion-->
+<div class="modal hide fade" id="Lightbox_sugerirperfil">
+<div class="modal-header clearfix">
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-body">
+        <div id="sugerir_perfil"></div>
+    </div>
+</div>
+<!--Fin Sugerencia Perfil-->
+
+{{end}}
+
+
+
+ 
+ <div id="index" class="width-complete"><!-- .width-complete -->
+
+	<div id="intro" class="clearfix"><!-- #intro -->
+		<div class="inner"><!-- .inner -->
+			<h2>Bienvenido a Poderopedia - Quién es Quién en los negocios y la política en Chile</h2>
+			<div class="vid">
+				<iframe src="http://player.vimeo.com/video/50626558?badge=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			</div>
+			<div class="cont">
+				<p>Poderopedia es una plataforma colaborativa que ayuda a entender las relaciones entre las personas, empresas y organizaciones que se convierten en noticia e influyen en nuestra vida diaria. Usando visualizaciones de datos y tecnología semántica, muestra quién es quién en los negocios y la política.</p>
+                <a href="{{=URL('directorio','general/persona')}}" class="enlace">&rarr; Revisa mapas de relaciones de políticos y empresarios</a>
+				<a href="{{=URL('directorio','general')}}" class="enlace">&rarr; Descubre información relevante de manera fácil y rápida</a>
+				<a href="#Lightbox_tengoundato" data-toggle="modal" class="enlace">&rarr; Colabora con datos, sugiere perfiles y conexiones</a>
+                <a href="{{=URL('default','registrogeneral')}}" class="btn">Regístrate gratis &rarr;</a> <a href="{{=URL('ayuda','index')}}" class="btn">Guía paso a paso &rarr;</a>
+			</div>
+		</div><!-- /.inner -->
+		<span class="cierre"></span>
+		<a href="#" id="btn_cerrar">X</a>
+	</div><!-- /#intro -->
+
+	<section class="center-col span7"><!-- .center-col -->
+
+		<div class="row-division clearfix"><!-- .row-division -->
+
+			{{=LOAD('news','news.load',target='news',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+
+	    	
+		</div><!-- /.row-division -->
+
+  </section><!-- /.center-col -->
+
+  <!-- rightCol -->
+  <section class="right-col span3">
+     <hgroup class="widget-heading heading clearfix">
+    <h5>↓ Colaborar</h5>
+</hgroup>
+<div class="widget widget-sources clearfix">
+    <p>Poderopedia lo hacemos todos. Tu también puedes aportar información:</p>
+    <a href="#Lightbox_tengoundato" data-toggle="modal" class="btn wide" id="tengoDatoButton">¿Tienes un dato? Cuéntanos</a>
+    <a href="#Lightbox_sugerirconexion" data-toggle="modal" class="btn wide" id="sugerirconexionButton">Sugiere una relación</a>
+    <a href="#Lightbox_sugerirperfil" data-toggle="modal" class="btn wide" id="sugerirPerfilButton">Sugiere un perfil</a>
+    <p>¿Tienes Dudas? Revisa la <a href="{{=URL('ayuda','index')}}">Guía Paso a Paso</a></p>
+
+</div>
+
+<hgroup class="widget-heading heading clearfix">
+    <h5>↓ Suscríbete a Poderopedia</h5>
+</hgroup>
+<div class="widget widget-sources clearfix">
+    <!-- facebook -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb-like" data-href="http://www.poderopedia.com/" data-send="false" data-width="300" data-show-faces="true"></div>
+    <!-- twitter -->
+    <hr>
+    <a href="https://twitter.com/poderopedia" class="twitter-follow-button" data-show-count="true" data-lang="es">Seguir a @poderopedia</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <hr>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <g:plusone size="medium"></g:plusone>
+    <hr>
+
+    <form action="http://poderopedia.us2.list-manage1.com/subscribe/post?u=8ffe6b3fc24c46859f72f857f&id=7cd77f082c" method="post" target="_blank">
+    	<p>Poderopedia en tu email 1 vez por semana:</p>
+    	<fieldset>
+    		<div class="input-append">
+      			<input class="span2" id="appendedInputButton" size="16" type="text" placeholder="Ingresa tu dirección de e-mail"><button class="btn" type="submit">Ahora</button>
+    		</div>
+    	</fieldset>
+    </form>    
+
+</div>
+
+      {{=LOAD('portada','last_inserts.load',target='last_inserts',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+      {{=LOAD('portada','count_entity.load',target='count_entity',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+      {{=LOAD('portada','last_update.load',target='last_update',ajax=True,content=IMG(_src=URL('static','images/loading.gif'),_alt='loading',_width='50',_height='50'))}}
+
+  </section>
+  <!-- /rightCol -->
+</div><!-- /.width-complete -->
+
+<div id="subindex" class="width-complete"><!-- .width-complete -->
+	<div class="row-complete clearfix"><!-- .row-complete -->
+		<hgroup class="box-heading clearfix">
+			<h3><span>&darr;</span> Poderopedia en la Prensa</h3>
+		</hgroup>
+		<blockquote class="span4">
+			<img src="{{=URL('static','img/tnw_logo.png')}}">
+			<p>Poderopedia puede ayudar a los medios y el público a entender las conexiones entre políticos, sus intereses y las decisiones que toman. Su audiencia puede incluir... <a href="http://thenextweb.com/media/2012/03/16/poderopedia-a-data-journalism-project-to-map-the-chilean-elite/" target="_blank">Más &gt;</a></p>
+		</blockquote>
+		<blockquote class="span4">
+			<img src="{{=URL('static','img/logo_fayerwayer.png')}}">
+			<p>Proyecto chileno “Poderopedia” está entre los más innovadores del observatorio Netexplo. Cada año, el observatorio de innovaciones digitales Netexplo identifica a los últimos ... <a href="http://www.fayerwayer.com/2012/02/poderopedia-fue-incluida-entre-los-proyectos-digitales-innovadores-de-netexplo/" target="_blank">Más &gt;</a></p>
+		</blockquote>
+		<blockquote class="span4">
+			<img src="{{=URL('static','img/TwitterNgood.png')}}" width="95"> <!--solo para esta imagen se agrego el width para dejarla a razon de las demas-->
+			<p>Piensa Wikipedia + Klout para el gobierno: Poderopedia es un índice de los más poderosos de Chile. <a href="http://www.niemanlab.org/2011/06/think-wikipedia-klout-for-government-poderopedia-is-an-index-of-chiles-most-powerful/" target="_blank">Más &gt;</a></p>
+		</blockquote>
+		<blockquote class="span4">
+			<img src="{{=URL('static','img/elmercurio.jpg')}}">
+			<p>Poderopedia es uno de los dos casos “muy destacables” de la “armada chilena” en SXSW Interactive. <a href="http://poderopedia.tumblr.com/post/19783843037/el-mercurio-dice-que-poderopedia-es-uno-de-los-dos" target="_blank">Más &gt;</a></p>
+		</blockquote>
+	</div><!-- /.row-complete -->
+
+	<div class="row-complete clearfix"><!-- .row-complete -->
+		<div class="span6 apoyan">
+			<hgroup class="box-heading clearfix">
+				<h3><span>&darr;</span> Nos Apoyan</h3>
+			</hgroup>
+
+			<div class="span2 apoyan">
+                <a href="http://www.knightfoundation.org/grants/20110953/" target="_blank" style="margin-left: 10px;"><img src="{{=URL('static','img/index-logo_knight.jpg')}}" width="172" height="112"></a>
+				<!--<p>Lorem ipsum dolor sit amet.</p>
+				<p><a href="#">www.com</a></p>-->
+			</div>
+			<div class="span2 apoyan">
+                <a href="http://startupchile.org/congrats-ya%C2%B4ll/" target="_blank" style="margin-left: 10px;"><img src="{{=URL('static','img/index-logo_startupchile.jpg')}}" width="172" height="112"></a>
+				<!--<p>Lorem ipsum dolor sit amet.</p>
+				<p><a href="#">www.com</a></p>-->
+			</div>
+            <div class="span2 apoyan">
+                <a href="http://www.icfj.org/" target="_blank" style="margin-left: 10px;"><img src="{{=URL('static','img/ICFJ.jpg')}}" width="172" height="112"></a>
+				<!--<p>Lorem ipsum dolor sit amet.</p>
+				<p><a href="#">www.com</a></p>-->
+			</div>
+		</div>
+		<div class="span5 reconocimientos">
+			<hgroup class="box-heading clearfix">
+				<h3><span>&darr;</span> Reconocimientos</h3>
+			</hgroup>
+			<div class="span2 apoyan">
+                <a href="http://en.www.netexplo.org/laureat/poderopedia" target="_blank"><img src="{{=URL('static','img/index-logo_netexplo.jpg')}}" width="172" height="112"></a>
+				<!--<p>Lorem ipsum dolor sit amet.</p>
+				<p><a href="#">www.com</a></p>-->
+			</div>
+			<div class="span2 apoyan">
+                <a href="http://awards.thenextweb.com/chile" target="_blank"><img src="{{=URL('static','img/index-logo_tnw.jpg')}}" width="172" height="112"></a>
+				<!--<p>Lorem ipsum dolor sit amet.</p>
+				<p><a href="#">www.com</a></p>-->
+			</div>
+		</div>
+		<div class="span11">
+			<!--<form id="registrocorreo"> #registrocorreo 
+				<h3>¡Quiero más Poderopedia!</h3>
+				<p>Registra tu correo y recibe actualizaciones semanales y novedades</p>
+				<div class="input-append">
+				  <input class="span4" id="appendedInputButton" size="16" type="text" placeholder="Ingresa tu dirección de e-mail"><button class="btn" type="button">Registrarme Ahora &rarr;</button>
+				</div>
+			</form>--><!-- /#registrocorreo -->
+             <div id="registrocorreo">
+                <form action="http://poderopedia.us2.list-manage1.com/subscribe/post?u=8ffe6b3fc24c46859f72f857f&id=7cd77f082c" method="post" target="_blank">
+                            <h3>¡Quiero más Poderopedia!</h3>
+							<p>Registra tu correo y recibe actualizaciones semanales y novedades</p>
+                            <fieldset>
+                                <div class="input-append">
+                                <input class="span4" id="appendedInputButton1" size="16" type="text" placeholder="Ingresa tu dirección de e-mail"><button class="btn" type="submit">Registrarme Ahora &rarr;</button>
+                                </div>
+                            </fieldset>
+            	</form>
+             </div>
+		</div>
+	</div><!-- /.row-complete -->
+
+</div><!-- /.width-complete -->
+
+<!-- /container -->

@@ -1,0 +1,13 @@
+<div id="paginate">
+    <div class="pagination">
+        <ul>
+            {{if page:}}
+            <li id="mainprevpage{{=target}}">&larr; {{=A('  Anterior',_href=URL(args=[_id,page-1,sort,letter,target]),cid=request.cid)}}</li>
+            {{pass}}
+
+            {{if len(entity)>items_per_page:}}
+            <li id="mainaddpage{{=target}}">{{=A('Siguiente   ',_href=URL(args=[_id,page+1,sort,letter,target]),cid=request.cid)}} &rarr;</li>
+            {{pass}}
+        </ul>
+    </div>
+</div>

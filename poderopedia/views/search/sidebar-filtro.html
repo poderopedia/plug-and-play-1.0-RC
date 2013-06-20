@@ -1,0 +1,61 @@
+{{from urllib2 import quote}}
+<hgroup class="widget-heading widget-filter">
+    <h5>&darr; Filtrar información por</h5>
+</hgroup>
+<div class="widget widget-sources">
+
+
+    {{for k,fields in enumerate(facetsFields):}}
+
+    <div class="accordion-group">
+        <div class="accordion-heading clearfix">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseF{{=k}}">
+                {{=facetsName[fields]}} <span>({{=sum((results.facets['facet_fields'][fields][i]>0 ) for i in range(1,len(results.facets['facet_fields'][fields]),2))}})</span>
+            </a>
+            <div class="buttonsColapse">
+                <!--TODO requiere permiso de administracion-->
+                <!--<a href="#">Editar</a>-->
+                <!--<a href="#" class="showIco">Mostrar</a>-->
+            </div>
+        </div>
+        <div id="collapseF{{=k}}" class="accordion-body collapse">
+            <div class="accordion-inner">
+
+                <ul class="websites-sources">
+                    {{for i in range(0,len(results.facets['facet_fields'][fields]),2):}}
+                        {{tmp={}
+                        num=results.facets['facet_fields'][fields][i+1]}}
+                        {{if num>0:}}
+                            {{tmp[quote(fields.encode('utf-8'))]=''}}
+                            {{fq+="+"+quote(fields.encode('utf-8'))}}
+                            {{
+                            for field in request.vars:
+                                    tmp[quote(field.encode('utf-8'))]=quote(request.vars[field].encode('utf-8'))}}
+                            {{pass}}
+                            {{if tmp[quote(fields.encode('utf-8'))]!='':}}
+
+                                {{temp_str=tmp[quote(fields.encode('utf-8'))].replace(quote('("'), '').replace(quote('")'), '')
+                                tmp[quote(fields.encode('utf-8'))]=temp_str}}
+
+                                {{tmp[quote(fields.encode('utf-8'))]='("'+tmp[quote(fields.encode('utf-8'))]+ '" AND "'+ quote(results.facets['facet_fields'][fields][i].encode('utf-8'))+'")'}}
+
+                            {{else: }}
+                                {{tmp[quote(fields.encode('utf-8'))]=quote(results.facets['facet_fields'][fields][i].encode('utf-8'))}}
+                            {{pass}}
+
+
+
+                            <li><a href="{{=URL('search','podersearch', vars=tmp)}}">{{=results.facets['facet_fields'][fields][i]}}
+                            <span class="badgeNum">({{=num}})</span></a></li>
+                        {{pass}}
+                    {{pass}}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    {{pass}}
+
+</div>
+<!-- /sourcesWidget -->

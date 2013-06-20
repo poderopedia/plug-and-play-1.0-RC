@@ -1,0 +1,44 @@
+{{extend 'visualizacionLayoutCuentas.html'}}
+
+{{block sidebar}}
+{{include 'includes/sidebar-cuenta.html'}}
+{{end}}
+
+{{block leftcol}}
+{{include 'includes/tertiary-nav-conf-notificaciones.html'}}
+{{end}}
+
+
+<hgroup class="search-results historial-head clearfix">
+                      <h3 class="search-awnser">
+                        <img src="{{ =URL('static','tmp/avatar-45.gif') }}" class="imagen-perfil-ch" />
+                        <span class="perfil-results">Mis Notificaciones</span>
+                     </h3>
+                    </hgroup>
+                    <div class="row-division clearfix forms"><!-- .row-division -->
+
+                        <!--hgroup-->
+                        <hgroup class="box-heading clearfix">
+                            <h3>Mensajes Recientes ↓</h3>
+                            <ul class="nav_notifica">
+                                <li><a>« Anterior</a></li>
+                                <li><a>Siguiente »</a></li>
+                            </ul>
+                        </hgroup>
+                        <!--hgroup-->
+    
+                        <div class="notificaciones"><!-- .notificaciones -->
+                            <div class="caja_notifica_individual">
+                                <h3>Titulo de la Notificación Individual</h3>
+                                <div class="auxiliar_notifica">
+                                    <span class="fecha_notifica">9 de Agosto</span>
+                                    <a class="btn_borra_notifica"><i class="icon-remove"></i> Borrar</a>
+                                </div>
+                                <p>Quisque sed tortor nisl; eget ultricies tortor. Fusce sed ipsum ut neque ultrices euismod. Integer mauris mauris, aliquam in auctor in; sodales et elit. Praesent pretium dignissim ultrices! Curabitur eu dui est. Praesent non dui vitae dolor tristique mattis eget vel eros. Nullam pellentesque malesuada commodo. Aenean quam est, fermentum sed tempus nec, sagittis et neque. Ut ac sem nec ipsum iaculis adipiscing in nec orci. Suspendisse porttitor consequat erat, id tempus lectus scelerisque vitae. Aliquam in dui sed urna <a>ultrices</a> tincidunt. Proin sit amet justo metus.</p>
+                                <p>Quisque sed tortor nisl; eget ultricies tortor. Fusce sed ipsum ut neque ultrices euismod. Integer mauris mauris, aliquam in auctor in; sodales et elit. Praesent pretium dignissim ultrices! Curabitur eu dui est. Praesent non dui vitae dolor tristique mattis eget vel eros. Nullam pellentesque malesuada commodo. Aenean quam est, fermentum sed tempus nec, sagittis et neque. Ut ac sem nec ipsum iaculis adipiscing in nec orci. Suspendisse porttitor consequat erat, id tempus lectus scelerisque vitae. Aliquam in dui sed urna ultrices tincidunt. Proin sit amet justo metus.</p>
+                                <p>Quisque sed tortor nisl; eget ultricies tortor. Fusce sed ipsum ut neque ultrices euismod. Integer mauris mauris, aliquam in auctor in; sodales et elit. Praesent pretium dignissim ultrices! Curabitur eu dui est. Praesent non dui vitae dolor tristique mattis eget vel eros. Nullam pellentesque malesuada commodo. Aenean quam est, fermentum sed tempus nec, sagittis et neque. Ut ac sem nec ipsum iaculis adipiscing in nec orci. Suspendisse porttitor consequat erat, id tempus lectus scelerisque vitae. Aliquam in dui sed urna ultrices tincidunt. Proin sit amet justo metus.</p>
+                            </div>
+                        </div><!-- /.notificaciones -->
+                                                
+
+                    </div><!-- .row-division -->

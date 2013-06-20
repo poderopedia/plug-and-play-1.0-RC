@@ -1,0 +1,125 @@
+{{extend 'visualizacionLayoutCuentas2.html'}}
+
+{{block sidebar}}
+
+{{end}}
+
+{{block leftcol}}
+
+{{end}}
+
+{{block tittle}}<title>Poderopedia - Registro General</title>{{end}}                 
+<div class="row-division-center"><!-- .row-division -->
+
+            <hgroup class="search-results historial-head clearfix">
+              <h3 class="search-awnser">
+                <span class="perfil-results">Regístrate en Poderopedia</span>
+             </h3>
+            </hgroup>
+
+            <div class="preguntas_registro">
+                ¿Ya estas registrado? <a href="{{=URL('default','ingresogeneral')}}">Ingresa acá</a>
+            </div>
+
+          <!--  <ul class="btns_sociales">
+             <li><a href="#" class="btn_facebook">Facebook</a></li>
+             <li><a href="#" class="btn_twitter">Twitter</a></li>
+             {{=rpx}}
+            </ul>-->
+
+            <div class="form-horizontal">
+
+                {{=form.custom.begin}}
+                <fieldset>
+                    {{if form.errors:}}
+                    <div class="control-group">
+                        <div class="controls">
+                            <div class="alert">
+                                <img src="{{ =URL('static','img/img_warning.gif') }}" class="img_warning"/>
+                                <span class="txt_alert">
+                                    {{=T('Se han encontado errores al procesar su Regitro')}}
+
+                                        {{for fieldname in form.errors:}}
+                                         <p>{{=fieldname}} error: {{=form.errors[fieldname]}}</p>
+                                        {{pass}}
+
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="controls">
+                        </div>
+                    </div>
+                    {{pass}}
+                  <div class="control-group">
+                    <h4 class="head_registro">Regístrate ahora:</h4>
+                  </div>
+                    {{if form.errors['user_name']!=None:}}<div class="control-group warning">{{form.errors['username']=""}}
+                    {{else:}}<div class="control-group">
+                    {{pass}}
+
+                        <label for="focusedInput" class="control-label">Nombre de Usuario<span class="req">*</span></label>
+                        <div class="controls">
+                        {{=form.custom.widget.user_name}}
+                        </div>
+                    </div>
+
+
+                    {{if form.errors['email']!=None:}}<div class="control-group warning">{{form.errors['email']=""}}
+                    {{else:}}<div class="control-group">
+                    {{pass}}
+                    <label for="focusedInput" class="control-label">Email<span class="req">*</span></label>
+                    <div class="controls">
+                      {{=form.custom.widget.email}}
+                    </div>
+                  </div>
+
+                    {{if form.errors['password']!=None:}}<div class="control-group warning">{{form.errors['password']=""}}
+                    {{else:}}<div class="control-group">
+                        {{pass}}
+                    <label for="focusedInput" class="control-label">Contraseña<span class="req">*</span></label>
+                        <div class="controls">
+                            {{=form.custom.widget.password}}
+							<p><span class="detalle">Minimo 6 Caracteres</span></p>
+                        </div>
+                    </div>
+
+                    {{if form.errors['password_two']!=None:}}<div class="control-group warning">{{form.errors['password_two']=""}}
+                        {{else:}}<div class="control-group">
+                            {{pass}}
+                            <label for="focusedInput" class="control-label">Repite tu Contraseña<span class="req">*</span></label>
+                            <div class="controls">
+                                {{=form.custom.widget.password_two}}
+
+                            </div>
+                        </div>
+
+                    {{if form.errors['country']!=None:}}<div class="control-group warning">{{form.errors['country']=""}}
+                            {{else:}}<div class="control-group">
+                                {{pass}}
+                                <label for="focusedInput" class="control-label">País<span class="req">*</span></label>
+                                <div class="controls">
+                                    {{=form.custom.widget.country}}
+                                </div>
+                            </div>
+
+                  <div class="control-group">
+                    <div class="controls">
+                        <span class="detalle">Al hacer click en Regístrate, muestras tu conformidad con nuestras <a href="{{=URL('acercade','condiciones_de_uso')}}">Condiciones</a> y aceptas haber leído nuestra <a href="{{=URL('acercade','politica_de_privacidad')}}">Política de uso de datos</a></span>
+                    </div>
+                  </div>
+
+                  <div class="soporte-accion">
+                    <span class="sop_req"><span class="req">*</span> Campos Obligatorios</span>
+                    <button href="#" class="btn btn-primary btn_save" onclick="this.form.submit()">Regístrate</button>
+                  </div>
+
+                </fieldset>
+
+
+                {{=form.custom.end}}
+            </div>
+
+
+        </div><!-- .row-division -->
