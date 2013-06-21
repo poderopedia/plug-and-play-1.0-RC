@@ -1,9 +1,9 @@
 __author__ = 'Evolutiva'
 from documentCloud import document_cloud
 
-#document settings
-dc_username='team@poderopedia.com'
-dc_password='tirateunfile-548ireneariztia'
+#documentCloud settings
+dc_username='documentCloud_username'
+dc_password='documentCloud_password'
 
 entityList=['persona','empresa','organizacion']
 access_list=['public','private','organization']
