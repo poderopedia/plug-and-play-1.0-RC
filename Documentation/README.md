@@ -39,29 +39,28 @@ project editors in the Plug & Play Management system.
 
 **INDEX**
 
-1.- [What is Plug & Play?](Documentation/1.-What%20is%20Plug%20%26%20Play.md)
+1.- [What is Plug & Play?](1.-What%20is%20Plug%20%26%20Play.md)
 
-2.- [Features](Documentation/2.-Features.md "Features")
+2.- [Features](2.-Features.md "Features")
 
-3.- [Technology](Documentation/3.-Technology.md "Technology")
+3.- [Technology](3.-Technology.md "Technology")
 
-4.- [Installing
-](Documentation/4.-Installing.md "Installing")
+4.- [Installing](4.-Installing.md "Installing")
 
-5.-[ Web server configuration](Documentation/5.-%20Web%20Server%20Configuration.md "Web Server")
+5.-[ Web server configuration](5.-%20Web%20Server%20Configuration.md "Web Server")
 
-6.- [Settings](Documentation/6.-%20Settings.md "Settings")
+6.- [Settings](6.-%20Settings.md "Settings")
 
 * Setting up Plug & Play
 * Setting up PoderVocabulary
 * Setting up Solr
 * Setting up Documentcloud 
 
-7.- [Customizing your Plug&Play appearance](Documentation/7.-%20Customizing%20your%20Plug%26Play%20appearance.md "Customizing")
+7.- [Customizing your Plug&Play appearance](7.-%20Customizing%20your%20Plug%26Play%20appearance.md "Customizing")
 
-8.- [API Documentation](Documentation/8.-%20Api%20Documentation.md "Api Documentation")
+8.- [API Documentation](8.-%20Api%20Documentation.md "Api Documentation")
 
-9.- [User Manual Plug & Play](Documentation/USER%20MANUAL.%20tools%20v.0.1.pdf)
+9.- [User Manual Plug & Play](USER%20MANUAL.%20tools%20v.0.1.pdf)
 
-10.- [Supporters and License](Documentation/10.-%20Supporters%20and%20License.md "License")
+10.- [Supporters and License](10.-%20Supporters%20and%20License.md "License")
 
