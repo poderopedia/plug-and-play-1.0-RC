@@ -110,9 +110,9 @@ auth.define_tables(username=False, signature=False, migrate=False)
 
 ## configure email
 mail=auth.settings.mailer
-mail.settings.server = 'smtp.sendgrid.net'
-mail.settings.sender = 'mailman@poderopedia.com'
-mail.settings.login = 'poderopedia:generalisimo'
+mail.settings.server = settings.email_server
+mail.settings.sender = settings.email_sender
+mail.settings.login = settings.email_login
 
 ## configure auth policy
 auth.settings.registration_requires_verification = True
