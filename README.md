@@ -8,9 +8,8 @@ and news mentions of entities, displaying all the information in a public or pri
 that can work as a standalone product or as a public searchable database that can interoperate 
 with a Newsroom website providing rich contextual information for news content using it`s archive.
 
-Poderopedia Plug & Play Platform is a free open source software (see License) developed 
-by the Poderomedia Foundation, thanks to the generous support of a Knight News Challenge 2011 
-grant by the Knight Foundation, a Startup Chile 2012 grant and a 2013 fellowship grant by the 
+Poderopedia Plug & Play Platform is a free open source software (see [LICENSE])(https://github.com/poderopedia/plug-and-play-1.0-RC/blob/master/Documentation/10.-%20Supporters%20and%20License.md) 
+developed by the Poderomedia Foundation, thanks to the generous support of a Knight News Challenge 2011 grant by the Knight Foundation, a Startup Chile 2012 grant and a 2013 fellowship grant by the 
 International Center for Journalists (ICFJ), to: 
 a) Develop Poderopedia.org, a collaborative data journalism website that maps who is who 
 in politics and business, and... 
