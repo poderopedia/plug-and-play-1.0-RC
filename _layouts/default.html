@@ -1,0 +1,22 @@
+{% include top.html %}
+
+<body>
+
+    {% include header.html %}
+    <div id="content" class="container">
+        <div class="row width-complete">
+            <div class="span9">
+                {{ content }}
+            </div>
+            <div class="span3">
+                {% include docs_contents.html %}
+            </div>
+        </div>
+
+    </div>
+
+    {% include footer.html %}
+    {% include analytics.html %}
+
+</body>
+</html>
