@@ -16,6 +16,12 @@ a) Develop Poderopedia.org, a collaborative data journalism website that maps wh
 in politics and business, and... 
 b) Develop the Plug & Play Platform and release it for anyone to use it.
 
+You can fork this project and deploy it with your own modifications. Please see the [LICENSE](https://github.com/poderopedia/plug-and-play-1.0-RC/blob/master/Documentation/10.-%20Supporters%20and%20License.md) file for details.
+
+#Getting help
+If you'd like to contribute to Poderopedia Plug & Play Platform or need some assistance, please open an [issue](https://github.com/poderopedia/plug-and-play-1.0-RC/issues) or do a [pull request](https://github.com/poderopedia/PoderVocabulary/pull/new/master). We will do our best to answer and include your changes when possible.
+
+
 What's included in this Documentation
 =============
 
