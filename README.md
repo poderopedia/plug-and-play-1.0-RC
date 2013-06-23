@@ -8,14 +8,14 @@ and news mentions of entities, displaying all the information in a public or pri
 that can work as a standalone product or as a public searchable database that can interoperate 
 with a Newsroom website providing rich contextual information for news content using it`s archive.
 
-Poderopedia Plug & Play Platform is a free open source software (see [LICENSE])(https://github.com/poderopedia/plug-and-play-1.0-RC/blob/master/Documentation/10.-%20Supporters%20and%20License.md) 
+Poderopedia Plug & Play Platform is a free open source software [(see License)](https://github.com/poderopedia/plug-and-play-1.0-RC/blob/master/Documentation/10.-%20Supporters%20and%20License.md) 
 developed by the Poderomedia Foundation, thanks to the generous support of a Knight News Challenge 2011 grant by the Knight Foundation, a Startup Chile 2012 grant and a 2013 fellowship grant by the 
 International Center for Journalists (ICFJ), to: 
 a) Develop Poderopedia.org, a collaborative data journalism website that maps who is who 
 in politics and business, and... 
 b) Develop the Plug & Play Platform and release it for anyone to use it.
 
-You can fork this project and deploy it with your own modifications. Please see the [LICENSE](https://github.com/poderopedia/plug-and-play-1.0-RC/blob/master/Documentation/10.-%20Supporters%20and%20License.md) file for details.
+You can fork this project and deploy it with your own modifications. Please see the [License](https://github.com/poderopedia/plug-and-play-1.0-RC/blob/master/Documentation/10.-%20Supporters%20and%20License.md) file for details.
 
 #Getting help
 If you'd like to contribute to Poderopedia Plug & Play Platform or need some assistance, please open an [issue](https://github.com/poderopedia/plug-and-play-1.0-RC/issues) or do a [pull request](https://github.com/poderopedia/PoderVocabulary/pull/new/master). We will do our best to answer and include your changes when possible.
