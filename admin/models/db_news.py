@@ -12,7 +12,7 @@ db.define_table('destacados',
     Field('reference', 'integer', writable=True,readable=False,required=True, requires=IS_NOT_EMPTY(error_message=T('complete este campo!'))),
     Field('alias', 'string', writable=True,readable=True,required=True, requires=IS_NOT_EMPTY(T('complete este campo!'))),
     auth.signature,
-    migrate=False
+    migrate=settings.migrate
 )
 
 

@@ -2,6 +2,7 @@ __author__ = 'Evolutiva'
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # cache resolved
+
 def index():
     id=""
     alias=request.args(0)or redirect(URL('error','error404'))

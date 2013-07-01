@@ -1,9 +1,9 @@
 __author__ = 'Evolutiva'
 from documentCloud import document_cloud
 
-#documentCloud settings
-dc_username='documentCloud_username'
-dc_password='documentCloud_password'
+#document settings
+dc_username='username'
+dc_password='password'
 
 entityList=['persona','empresa','organizacion']
 access_list=['public','private','organization']

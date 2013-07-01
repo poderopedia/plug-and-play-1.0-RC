@@ -66,7 +66,7 @@ db.define_table('auth_user',
           label=T('Username')),
    Field('first_name', length=128, default='',label=T('Nombre(s)')),
     Field('last_name', length=128, default='',label=T('Apellido')),
-    Field('user_name', length=128, default='',label=T('Nombre de usuario'), required=True),
+    Field('user_name', length=128, default='',label=T('Nombre de usuario'), readable=False, writable=False),
     Field('email', length=128, default='', unique=True), # required
     Field('password', 'password', length=512,            # required
         readable=False, label=T('Clave'),requires=IS_LENGTH(minsize=6)),
@@ -77,7 +77,7 @@ db.define_table('auth_user',
         update=request.now),
     Field('shortbio','text',label=T('Perfil'), required=False),
     Field('address',label=T('Dirección')),
-    Field('country',db.country,label=T('País'),requires=IS_IN_DB(db, 'country.id', '%(name)s'),default=44),
+    Field('country',db.country,label=T('País'),requires=IS_IN_DB(db, 'country.id', '%(name)s')),
     Field('city',label=T('Ciudad')),
     Field('sector',label=T('Sector')),
     Field('web',label=T('Sitio Web'),required=False),
@@ -131,7 +131,7 @@ auth.settings.reset_password_requires_verification = True
 ## More API examples for controllers:
 ##
 ## >>> db.mytable.insert(myfield='value')
-## >>> rows=db(db.mytable.myfield=='value').select(db.mytable.ALL)
+## >>> rows=db(db.mytable.myfieldauth=='value').select(db.mytable.ALL)
 ## >>> for row in rows: print row.id, row.myfield
 #########################################################################
 
@@ -148,43 +148,7 @@ db.rdf_namespaces = {'_xmlns:rdf':"http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 
 
 
-def select_datewidget(field,value):
-    MINYEAR = 1900
-    MAXYEAR = 2040
-    import datetime
-    now = datetime.date.today()
-    dtval = value or now.isoformat()
-    year,month,day= str(dtval).split("-")
-    dt = SQLFORM.widgets.string.widget(field,value)
-    id = dt['_id']
-    dayid = id+'__day'
-    monthid = id+'__month'
-    yearid = id+'__year'
-    wrapperid = id+'__wrapper'
-    wrapper = DIV(_id=wrapperid)
-    day = SELECT([OPTION(str(i).zfill(2)) for i in range(1,32)],
-                 value=day,_id=dayid)
-    month = SELECT([OPTION(datetime.date(2008,i,1).strftime('%B'),
-                           _value=str(i).zfill(2)) for i in range(1,13)],
-                 value=month,_id=monthid)
-    year = SELECT([OPTION(i) for i in range(MINYEAR,MAXYEAR)],
-                 value=year,_id=yearid)
-    jqscr = SCRIPT("""
-      jQuery('#%s').hide();
-      var curval = jQuery('#%s').val();
-      if(curval) {
-        var pieces = curval.split('-');
-        jQuery('#%s').val(pieces[0]);
-        jQuery('#%s').val(pieces[1]);
-        jQuery('#%s').val(pieces[2]);
-      }
-      jQuery('#%s select').change(function(e) {
-        jQuery('#%s').val(
-           jQuery('#%s').val()+'-'+jQuery('#%s').val()+'-'+jQuery('#%s').val());
-      });
-    """ % (id,id,yearid,monthid,dayid,wrapperid,id,yearid,monthid,dayid))
-    wrapper.components.extend([day,month,year,dt,jqscr])
-    return wrapper
+
 
 
 

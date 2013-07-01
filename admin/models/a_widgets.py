@@ -93,5 +93,43 @@ class SELECT_OR_ADD_OPTION(object):
         wrapper.components.extend([select_widget, form_loader_div, activator_button, jq_script])
         return wrapper
 
+def select_datewidget(field,value):
+    MINYEAR = 1900
+    MAXYEAR = 2040
+    import datetime
+    now = datetime.date.today()
+    dtval = value or now.isoformat()
+    year,month,day= str(dtval).split("-")
+    dt = SQLFORM.widgets.string.widget(field,value)
+    id = dt['_id']
+    dayid = id+'__day'
+    monthid = id+'__month'
+    yearid = id+'__year'
+    wrapperid = id+'__wrapper'
+    wrapper = DIV(_id=wrapperid)
+    day = SELECT([OPTION(str(i).zfill(2)) for i in range(1,32)],
+                 value=day,_id=dayid)
+    month = SELECT([OPTION(datetime.date(2008,i,1).strftime('%B'),
+                           _value=str(i).zfill(2)) for i in range(1,13)],
+                 value=month,_id=monthid)
+    year = SELECT([OPTION(i) for i in range(MINYEAR,MAXYEAR)],
+                 value=year,_id=yearid)
+    jqscr = SCRIPT("""
+      jQuery('#%s').hide();
+      var curval = jQuery('#%s').val();
+      if(curval) {
+        var pieces = curval.split('-');
+        jQuery('#%s').val(pieces[0]);
+        jQuery('#%s').val(pieces[1]);
+        jQuery('#%s').val(pieces[2]);
+      }
+      jQuery('#%s select').change(function(e) {
+        jQuery('#%s').val(
+           jQuery('#%s').val()+'-'+jQuery('#%s').val()+'-'+jQuery('#%s').val());
+      });
+    """ % (id,id,yearid,monthid,dayid,wrapperid,id,yearid,monthid,dayid))
+    wrapper.components.extend([day,month,year,dt,jqscr])
+    return wrapper
+
 
 

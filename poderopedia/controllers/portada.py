@@ -19,10 +19,16 @@ def last_inserts():
         pretty_d = item.created_on.strftime('%d-%m-%Y')
         lista1.append((item.id, item.alias, item.created_on,item.haslogo,'Organizacion',pretty_d))
     
-    row3 = db((db.caso.created_on != None)&(db.caso.is_active == True)).select(db.casos.id,db.casos.label,db.casos.created_on,db.caso.depiction,orderby="casos.created_on DESC",limitby=(0,15),cache=(cache.ram,3600))
+    row3 = db((db.caso.created_on != None)&(db.caso.is_active == True)).select(
+        db.caso.id,
+        db.caso.name,
+        db.caso.created_on,
+        db.caso.depiction,
+        orderby="caso.created_on DESC",limitby=(0,15),cache=(cache.ram,3600))
+
     for item in row3:
         pretty_d = item.created_on.strftime('%d-%m-%Y')
-        lista1.append((item.id, item.alias, item.created_on,item.depiction,'Caso', pretty_d))
+        lista1.append((item.id, item.name, item.created_on,item.depiction,'Caso', pretty_d))
 
     row4 = db((db.Organizacion.created_on != None)&(db.Organizacion.tipoOrg == '2')&(db.Organizacion.shortBio != '')&(db.Organizacion.is_active == True)).select(db.Organizacion.id,db.Organizacion.alias,db.Organizacion.created_on,db.Organizacion.haslogo,orderby="Organizacion.created_on DESC",limitby=(0,15),cache=(cache.ram,3600))
     for item in row4:
@@ -48,10 +54,16 @@ def last_update():
         pretty_d = item.modified_on.strftime('%d-%m-%Y')
         lista1.append((item.id, item.alias, item.modified_on,item.haslogo,'Organizacion', pretty_d))
     
-    row3 = db((db.caso.modified_on != None)&(db.caso.is_active == 'T')).select(db.casos.id,db.casos.label,db.casos.modified_on,db.caso.depiction,orderby="casos.modified_on DESC",limitby=(0,15),cache=(cache.ram,3600))
+    row3 = db((db.caso.modified_on != None)&(db.caso.is_active == 'T')).select(
+        db.caso.id,
+        db.caso.name,
+        db.caso.modified_on,
+        db.caso.depiction,
+        orderby="caso.modified_on DESC",limitby=(0,15),cache=(cache.ram,3600))
+
     for item in row3:
         pretty_d = item.modified_on.strftime('%d-%m-%Y')
-        lista1.append((item.id, item.alias, item.modified_on,item.depiction,'Caso', pretty_d))
+        lista1.append((item.id, item.name, item.modified_on,item.depiction,'Caso', pretty_d))
 
     row4 = db((db.Organizacion.modified_on != None)&(db.Organizacion.tipoOrg == '2')&(db.Organizacion.shortBio != '')&(db.Organizacion.is_active == 'T')).select(db.Organizacion.id,db.Organizacion.alias,db.Organizacion.modified_on,db.Organizacion.haslogo,orderby="Organizacion.created_on DESC",limitby=(0,15),cache=(cache.ram,3600))
     for item in row4:
@@ -95,7 +107,7 @@ def last_month():
 def count_entity():
     personas = db(db.persona.is_active==True).count()
     empresas = db((db.Organizacion.tipoOrg == '2') & (db.Organizacion.is_active==True)).count()
-    casos = db(db.casos.is_active==True).count()
+    casos = db(db.caso.is_active==True).count()
     organizaciones = db((db.Organizacion.tipoOrg != '2') & (db.Organizacion.is_active==True)).count()
     return dict(personas=personas, empresas=empresas, casos=casos, organizaciones=organizaciones)
 

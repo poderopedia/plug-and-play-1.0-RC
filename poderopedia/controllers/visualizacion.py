@@ -280,7 +280,7 @@ def relOrgs():
     parsedDoc=[]
 
     for doc in doctmp:
-        if (doc!=[]) & (doc!=None):
+        if (doc!=[]) & (doc is not None):
             for item in doc:
                 parsedDoc.append(item)
 
