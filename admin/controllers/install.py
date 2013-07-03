@@ -6,7 +6,8 @@ def index():
 
     :return:
     """
-    from setup import SetupPopulate
+    from setup.setup import SetupPopulate
+    next=''
 
     try:
         install_return = SetupPopulate(db=db,request=request)

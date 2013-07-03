@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from gluon import DAL
 from gluon import languages
 
