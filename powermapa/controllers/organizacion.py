@@ -9,12 +9,12 @@ def call(): return service()
 def index():
     class Virtual(object):
         @virtualsettings(label=T('Relaciones'))
-        def editar(self):
-            picture=A('editar', _href=URL('default','Organizacion_edit', args=self.Organizacion.id))
+        def edit(self):
+            picture=A('editar', _href=URL('default','organization_edit', args=self.Organizacion.id))
             return picture
         @virtualsettings(label=T('Conexion'))
-        def conexiones(self):
-            ref=A('ver', _href=URL('organizacion','conexiones', args=self.Organizacion.id))
+        def connections(self):
+            ref=A('ver', _href=URL('organizacion','connections', args=self.Organizacion.id))
             return ref
     if(request.args(0)>0):
         datasource=db(db.Organizacion.id==request.args(0)).select()
@@ -27,7 +27,7 @@ def index():
     table.uitheme = 'redmond'
     table.virtualfields = Virtual()
     table.keycolumn = 'Organizacion.id'
-    table.columns = ['Organizacion.alias','virtual.editar','virtual.conexiones']
+    table.columns = ['Organizacion.alias','virtual.edit','virtual.connections']
     table.showkeycolumn = False
     table.extra = dict(autoresize={},
         tooltip={},
@@ -71,13 +71,13 @@ def relorgs_create():
     from fechas import fechas
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.RelPersOrg.documentSource.widget = add_option.widget
 
     id = request.args(0)
 
-    persona = db.Organizacion(id) or redirect(URL('default','Organizacion'))
+    persona = db.Organizacion(id) or redirect(URL('default','organization'))
 
 
 
@@ -138,27 +138,27 @@ def relorgs_create():
     return dict(form=form, option_tree=json(tree), default=pordefecto, _id=persona.id, back_button=back_button)
 
 def organizacion_relation_create():
-    relP2P = db.relPersona(request.args(0)) or redirect(URL('default','perfil'))
-    tiporelacion = request.args(1) or redirect(URL('perfil'))
+    relP2P = db.relPersona(request.args(0)) or redirect(URL('organization','index'))
+    tiporelacion = request.args(1) or redirect(URL('organization','index'))
 
     ##permite crear entidad a partir del autocomplete
     db.RelPersOrg.destinoO.requires=None
 
 
-    ##filter_args = request.args(1) or redirect(URL('perfil'))
+    ##filter_args = request.args(1) or redirect(URL('profile'))
     personaO=db(db.persona.id==relP2P.origenP).select().first()
     personaD=db(db.persona.id==relP2P.destinoP).select().first()
 
-    db.organization_relation.relationOrg.default=tiporelacion
-    db.organization_relation.relacionP2P.default=request.args(0)
+    db.Organizacion.relationOrg.default=tiporelacion
+    db.Organizacion.relacionP2P.default=request.args(0)
 
     tipoRel=db.tipoRelacionP2P(relP2P.relacion)
-    db.organization_relation.nexo.default=tipoRel.name
+    db.Organizacion.nexo.default=tipoRel.name
 
     parent = T("Relación:")+ " "+personaO.alias+" "+T("es/fue (")+\
              tipoRel.name+") en/con "+personaD.alias
 
-    form=SQLFORM(db.organization_relation, formstyle = 'divs')
+    form=SQLFORM(db.Organizacion, formstyle = 'divs')
 
     if form.validate():
         form.vars.relacionP2P=relP2P.id
@@ -191,7 +191,7 @@ def organizacion_relation_create():
                     ##relP2P.update_record(transitive=idrel)
 
                     response.flash=T('Formulario aceptado')
-                    redirect(URL('default','perfil'))
+                    redirect(URL('default','profile'))
             else:
                 response.flash=T('Debe Ingresar una Organización/Empresa ')
         else:
@@ -210,7 +210,7 @@ def organizacion_relation_create():
             ##update transitive
             ##relPersona2Org.update_record(transitive=idrel)
 
-            redirect(URL('default','perfil'))
+            redirect(URL('default','profile'))
 
     elif form.errors:
         response.flash = T('Hay errores en el formulario')
@@ -231,7 +231,7 @@ def relOrg2Org_create():
     from fechas import fechas
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.relOrg2Org.documentSource.widget = add_option.widget
 
@@ -239,7 +239,7 @@ def relOrg2Org_create():
 
 
 
-    organizacion=db.Organizacion(request.args(0)) or redirect(URL('default','Organizacion'))
+    organizacion=db.Organizacion(request.args(0)) or redirect(URL('default','organization'))
     _id=request.args(0); filter_arg=request.args(1) or 1
     tree={}
     options=db(db.tipoRelacionOrg2Org.parent==0).select(orderby=db.tipoRelacionOrg2Org.name)
@@ -296,10 +296,10 @@ def relOrg2Org_edit():
     from gluon.serializers import json
     from fechas import fechas
     response.view='organizacion/relOrg2Org_create.html'
-    record=db.relOrg2Org(request.args(0)) or redirect(URL('default','Organizacion'))
+    record=db.relOrg2Org(request.args(0)) or redirect(URL('default','organization'))
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.relOrg2Org.documentSource.widget = add_option.widget
 
@@ -360,7 +360,7 @@ def relOrg2Org_edit():
     return dict(form=form, option_tree=json(tree), default=pordefecto, _id=_id, back_button=back_button)
 
 def perfil():
-    redirect(URL('default','Organizacion',args=request.args(0)))
+    redirect(URL('default','organization',args=request.args(0)))
 
 @service.json
 def get_relacion(id):
@@ -370,11 +370,5 @@ def get_relacion(id):
         tree[str(option.id)]=T(option.name)
     return tree
 
-def listar():
-    fields=(db.Organizacion.id, db.Organizacion.alias,db.Organizacion.name,db.Organizacion.hasSocialReason,db.Organizacion.tipoOrg,
-            db.Organizacion.haslogo,db.Organizacion.hasSocialReason,db.Organizacion.shortBio,
-            db.Organizacion.longBio
-        )
-    grid=SQLFORM.grid((db.Organizacion.is_active==True),fields=fields)
-    return dict(grid=grid)
+
 

@@ -171,7 +171,7 @@ def index():
         links = [dict(header=T('Conexiones'),_class='w2p_trap',
                       body=lambda row: A(IMG(_src=URL('static','plugin_powertable/images/details_open.png'),
                                             _alt=T('Ver Conexiones'),_id='image'+str(row.id)),
-                                         #callback=URL('personas','conexiones',args=row.id),, target='t'
+                                         #callback=URL('personas','connections',args=row.id),, target='t'
                                          _onclick='addConnections(event,'+str(row.id)+')'))]
     grid = SQLFORM.grid(query, fields = fields, orderby=db.documentCloud.title,
                         csv=False,formargs={'active':'persona'},links=links)

@@ -1,0 +1,13 @@
+{{extend 'layout.html'}}
+<h1>{{=T('Persona')}}</h1>
+{{=BEAUTIFY(response._vars)}}
+<link rel="stylesheet" href="{{ =URL('static','lib/jwysiwyg/jquery.wysiwyg.css') }}">
+<script src="{{ =URL('static','lib/jwysiwyg/jquery.wysiwyg.js') }}"></script>
+<script src="{{ =URL('static','lib/jwysiwyg/controls/wysiwyg.link.js') }}"></script>
+<script type="text/javascript">
+    (function($) {
+        $(document).ready(function() {
+            $('.text').wysiwyg();
+        });
+    })(jQuery);
+</script>

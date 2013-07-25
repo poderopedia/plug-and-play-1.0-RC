@@ -40,11 +40,11 @@ def delete(table,id):
     return data
 
 @auth.requires_login()
-def perfil():
+def profile():
     class Virtual(object):
         @virtualsettings(label=T('Editar Perfil'))
         def editar(self):          
-            picture=A('editar', _href=URL('persona', args=self.persona.id))
+            picture=A('editar', _href=URL('person', args=self.persona.id))
             return picture
         @virtualsettings(label=T('Eliminar'))
         def delete(self):
@@ -78,7 +78,7 @@ def perfil():
     return dict(table=table)
 
 @auth.requires_login()
-def perfil_listar():
+def profile_list():
     fields=(db.persona.id,db.persona.alias,db.persona.depiction,db.persona.firstName,
             db.persona.firstLastName, db.persona.otherLastName,db.persona.shortBio,db.persona.longBio)
     grid=SQLFORM.grid((db.persona.is_active==True),fields=fields)
@@ -94,7 +94,7 @@ def manage_users():
 
 @auth.requires_login()
 @service.json
-def persona_eliminar(id):
+def person_delete(id):
     if auth.has_membership('administrator'):
         record=db.persona(id)
         return record.update_record(is_active=False)
@@ -137,27 +137,27 @@ def formwizard():
     return dict(form=form)
 
 @auth.requires_login()
-def perfil_create():
+def profile_create():
     db.perfiles.dueno.default=auth.user.id
     db.perfiles.postedon.default=request.now
-    form = crud.create(db.perfiles, next='perfil')
+    form = crud.create(db.perfiles, next='profile')
     form[0][-1][1].append(TAG.BUTTON('Cancel', _onclick="document.location='%s';"%URL('index')))
     return locals()
 
 @auth.requires_login()
-def mapa():
+def map():
     mapa = db(db.mapas.is_active==True).select(orderby=db.mapas.label)
     return locals()
 
 @auth.requires_login()
-def caso():
+def case():
     caso = SQLFORM.grid(db.caso)
     return locals()
 
 @auth.requires_login()
-def casos_create():
+def case_create():
 
-    form = SQLFORM(db.casos)
+    form = SQLFORM(db.caso)
     if form.process().accepted:
         response.flash = T('Formulario aceptado')
     elif form.errors:
@@ -165,8 +165,8 @@ def casos_create():
     return dict(form=form)
 
 @auth.requires_login()
-def casos_edit():
-    record = db.casos(request.args(0)) or redirect(URL('perfil'))
+def case_edit():
+    record = db.caso(request.args(0)) or redirect(URL('profile'))
     form = SQLFORM(db.persona, record)
     if form.process().accepted:
         response.flash = T('Formulario aceptado')
@@ -175,10 +175,10 @@ def casos_edit():
     return dict(form=form)
 
 @auth.requires_login()
-def persona():
+def person():
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.persona.documentSource.widget = add_option.widget
 
@@ -189,20 +189,13 @@ def persona():
     #assign widget to field
     db.persona.documentCloud.widget = add_option_document.widget
 
-    record = db.persona(request.args(0)) or redirect(URL('perfil'))
+    record = db.persona(request.args(0)) or redirect(URL('profile'))
 
 
 
     form = SQLFORM(db.persona, record)
-    if record.shortBio!=None:
-        form.vars.shortBio=record.shortBio.replace('&nbsp_place_holder;','').replace('_place_holder;', '')
-    if record.longBio!=None:
-        form.vars.longBio=record.longBio.replace('&nbsp_place_holder;','').replace('_place_holder;', '')
+
     if form.validate():
-        if form.vars.shortBio!=None:
-            form.vars.shortBio = form.vars.shortBio.replace('&nbsp_place_holder;','').replace('\n', '').replace('_place_holder;', '')
-        if form.vars.longBio!=None:
-            form.vars.longBio = form.vars.longBio.replace('&nbsp_place_holder;','').replace('\n', '').replace('_place_holder;', '')
         id = record.update_record(**db.persona._filter_fields(form.vars))
         form.vars.id=record.id
         auth.archive(form)
@@ -215,15 +208,15 @@ def persona():
     return dict(form=form, _id=request.args(0))
 
 @auth.requires_login()
-def conexiones():
-    record = db.persona(request.args(0)) or redirect(URL('perfil'))
+def connections():
+    record = db.persona(request.args(0)) or redirect(URL('profile'))
     form = SQLFORM(db.persona, record)
     if form.process().accepted:
         response.flash = T('Formulario aceptado')
     elif form.errors:
         response.flash = T('Hay errores en el formulario')
         
-    #conexiones economicas
+    #connections economicas
     class VirtualEco(object):
         @virtualsettings(label=T('Editar'))
         def editar(self):          
@@ -253,10 +246,10 @@ def relorgs_edit():
 
     db.RelPersOrg.destinoO.requires=None
     
-    record = db.RelPersOrg(request.args(0)) or redirect(URL('perfil'))
+    record = db.RelPersOrg(request.args(0)) or redirect(URL('profile'))
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.RelPersOrg.documentSource.widget = add_option.widget
 
@@ -301,7 +294,7 @@ def relorgs_edit():
             auth.archive(form)
             id = record.update_record(**db.RelPersOrg._filter_fields(form.vars))
             response.flash=T('Formulario aceptado')
-        ##redirect(URL('perfil'))
+        ##redirect(URL('profile'))
     elif form.errors:
         response.flash = T('Hay errores en el formulario')
         
@@ -332,7 +325,7 @@ def relorgs_create():
     db.RelPersOrg.destinoO.requires=None
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.RelPersOrg.documentSource.widget = add_option.widget
 
@@ -406,7 +399,7 @@ def relorgs_delete(id):
     return json
     
 @auth.requires_login()
-def persona_create():
+def person_create():
 
    form = SQLFORM(db.persona)
    if form.validate():
@@ -469,7 +462,7 @@ def place_create():
 
 @auth.requires_login()
 def relPersona():
-    persona = db.persona(request.args(0)) or redirect(URL('persona'))
+    persona = db.persona(request.args(0)) or redirect(URL('person'))
     relPersona = db((db.relPersona.is_active==True)&(db.relPersona.origenP==persona.id)).select(
                orderby=~db.relPersona.relacion, limitby=(0, 25))
     return locals()
@@ -480,14 +473,14 @@ def relPersona_create():
     from fechas import fechas
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.relPersona.documentSource.widget = add_option.widget
 
-    #quita validación en destinoP para el caso en que el autocomplete no coincida con una persona creando el registro
+    #quita validación en destinoP para el case en que el autocomplete no coincida con una persona creando el registro
     db.relPersona.destinoP.requires=None
 
-    ##persona = db.persona(request.args(0)) or redirect(URL('perfil'))
+    ##persona = db.persona(request.args(0)) or redirect(URL('profile'))
     filter_arg=request.args(1) or 11
     response.view='default/relPersona_create.html' 
     db.relPersona.origenP.default = request.args(0)
@@ -573,14 +566,14 @@ def relPersona_create():
 def relPersona_edit():
     from gluon.serializers import json
     from fechas import fechas
-    relPersona = db.relPersona(request.args(0)) or redirect(URL('perfil'))
+    relPersona = db.relPersona(request.args(0)) or redirect(URL('profile'))
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.relPersona.documentSource.widget = add_option.widget
 
-    ##filter_arg=request.args(1) or redirect(URL('perfil'))
+    ##filter_arg=request.args(1) or redirect(URL('profile'))
     response.view='default/relPersona_create.html'
     _id=relPersona.origenP; perfil='persona'; back_controller='personas'
     if(request.args(1)=='org'):
@@ -633,7 +626,7 @@ def relPersona_edit():
                 response.flash=T('Archivo aceptado')
             id = relPersona.update_record(**db.relPersona._filter_fields(form.vars))
             response.flash+=T('Formulario aceptado')
-        ##redirect(URL('perfil'))
+        ##redirect(URL('profile'))
     elif form.errors:
         response.flash = T('Hay errores en el formulario')
         
@@ -671,7 +664,7 @@ def country():
 
 @auth.requires_login()
 @service.json
-def Organizacion_eliminar(id):
+def organization_delete(id):
     data=None
     if(auth.has_membership('administrator')):
         if(table in ('Organizacion','relPersona','RelPersOrg','relOrg2Org')):
@@ -691,12 +684,12 @@ def Organizacion_eliminar(id):
     return data
 
 @auth.requires_login()
-def Organizacion():
+def organization():
 
     class Virtual(object):
         @virtualsettings(label=T('Editar'))
         def editar(self):          
-            picture=A('editar', _href=URL('Organizacion_edit', args=self.Organizacion.id))
+            picture=A('editar', _href=URL('organization_edit', args=self.Organizacion.id))
             return picture
         @virtualsettings(label=T('Document Cloud'))
         def documento(self):
@@ -729,7 +722,7 @@ def Organizacion():
     return dict(table=table)
 
 @auth.requires_login()
-def Organizacion_create():
+def organization_create():
 
     form = SQLFORM(db.Organizacion)
     db.Organizacion.alias.required=True
@@ -745,10 +738,10 @@ def Organizacion_create():
     return dict(form=form)
 
 @auth.requires_login()    
-def Organizacion_edit():
+def organization_edit():
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.Organizacion.documentSource.widget = add_option.widget
 
@@ -759,7 +752,7 @@ def Organizacion_edit():
     #assign widget to field
     db.Organizacion.documentCloud.widget = add_option_document.widget
 
-    record = db.Organizacion(request.args(0)) or redirect(URL('Organizacion'))
+    record = db.Organizacion(request.args(0)) or redirect(URL('organization'))
 
 
     form = SQLFORM(db.Organizacion, record)
@@ -777,23 +770,23 @@ def Organizacion_edit():
     return dict(form=form)
     
 @auth.requires_login()    
-def relFamiliar():
-    persona = db.persona(request.args(0)) or redirect(URL('persona'))
-    relFamiliar = db(((db.relFamiliar.origenP==persona.id) | (db.relFamiliar.destinoP==persona.id)) (db.relFamiliar.is_active==True)).select(
+def family_relation():
+    persona = db.persona(request.args(0)) or redirect(URL('person'))
+    relFamiliar = db(((db.relFamiliar.origenP==persona.id) | (db.relFamiliar.destinoP==persona.id)) & (db.relFamiliar.is_active==True)).select(
                orderby=db.relFamiliar.parentesco, limitby=(0, 25))
     return locals()
 
 @auth.requires_login()
-def relFamiliar_create():
+def family_relation_create():
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.relFamiliar.documentSource.widget = add_option.widget
 
     #se quita la validacion en el campo autocomplete para permitir el ingreso inmediato cuando no existe la persona
     db.relFamiliar.destinoP.requires=None
 
-    persona = db.persona(request.args(0)) or redirect(URL('persona','index'))
+    persona = db.persona(request.args(0)) or redirect(URL('person','index'))
     db.relFamiliar.origenP.default = request.args(0)
 
 
@@ -837,7 +830,7 @@ def relFamiliar_create():
         ##response.flash = T('form accepted'+form.vars.destinoO)
         if form.process().accepted:
             response.flash = T('formulario aceptado')
-            redirect(URL('persona','index'))
+            redirect(URL('person','index'))
     elif form.errors:
         response.flash = T('Hay errores en el formulario')
     ##form = crud.create(db.relFamiliar,next='relFamiliar/[id]')
@@ -847,11 +840,11 @@ def relFamiliar_create():
 
 
 @auth.requires_login()
-def relFamiliar_edit():
-    record=db.relFamiliar(request.args(0)) or redirect(URL('perfil'))
+def family_relation_edit():
+    record=db.relFamiliar(request.args(0)) or redirect(URL('profile'))
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.relFamiliar.documentSource.widget = add_option.widget
 
@@ -907,7 +900,7 @@ def wizard():
     STEPS = {0: ('firstName', 'firstLastName','otherLastName','alias','shortBio','countryofResidence','depiction'), # fields for 1st page
              1: ('longBio', 'hasdocumentation'), # fields for 2nd page
              ##2: ('field5', 'field6'), # fields for 2nd page
-             2: URL('persona_done')} # url when wizard completed
+             2: URL('person_done')} # url when wizard completed
     step = int(request.args(0) or 0)
     if not step in STEPS: redirect(URL(args=0))
     fields = STEPS[step]
@@ -926,7 +919,7 @@ def wizard():
     return dict(form=form,step=step)
 
 @auth.requires_login()
-def persona_done():
+def person_done():
     return dict(message=T('Fin de Asistente'), back=A(T('New wizard'), _href=URL("wizard")))
     
 def consumer():
@@ -948,7 +941,7 @@ def get_visual():
     return visual
     
 @service.json
-def get_persona_relfamiliar(alias):
+def person_get_familiy_relation(alias):
     lista = []; visual={}
     rows = db((db.persona.alias.like('%'+alias+'%'))&(db.persona.is_active==True)).select()
     if(rows!=None):
@@ -965,7 +958,7 @@ def get_persona_relfamiliar(alias):
     return visual
 
 @service.json
-def get_relacionP2P(alias):
+def get_relationP2P(alias):
     lista = []; visual={}
     rows = db((db.persona.alias.like('%'+alias+'%'))&(db.persona.is_active==True)).select()
     if(rows!=None):
@@ -982,7 +975,7 @@ def get_relacionP2P(alias):
     return visual
     
 @service.json
-def get_persona_relEconomica(alias):
+def get_person_economic_relation(alias):
     lista = []
     for row in db((db.persona.alias.like('%'+alias+'%'))&(db.persona.is_active==True)).select():
         listaparents=[]
@@ -997,7 +990,7 @@ def get_persona_relEconomica(alias):
     return visual
     
 @service.json
-def get_relacion(id):
+def get_relation(id):
     tree={}
     options=db(db.tipoRelacionP2P.parent==id).select(orderby=db.tipoRelacionP2P.name)
     for option in options:
@@ -1043,10 +1036,19 @@ def familydetails():
 
             ##Origen
             parientes=db((db.relFamiliar.origenP==_id) & (db.relFamiliar.parentesco==db.tipoParentesco.id) & (db.relFamiliar.is_active==True) &
-                         (db.relFamiliar.destinoP==db.persona.id) & (db.persona.is_active==True)).select(db.relFamiliar.id,db.tipoParentesco.name,db.persona.alias,db.relFamiliar.destinoP,cache=(cache.ram,10))
+                         (db.relFamiliar.destinoP==db.persona.id) & (db.persona.is_active==True)).select(
+                db.relFamiliar.id,db.tipoParentesco.name,
+                db.persona.alias,
+                db.relFamiliar.destinoP,cache=(cache.ram,10))
+
             ##Destino
             parientesD=db((db.relFamiliar.destinoP==_id) & (db.relFamiliar.parentesco==db.tipoParentesco.id) & (db.relFamiliar.is_active==True) &
-                          (db.relFamiliar.origenP==db.persona.id) & (db.persona.is_active==True)).select(db.relFamiliar.id,db.tipoParentesco.nameInverso,db.persona.alias,db.relFamiliar.origenP,cache=(cache.ram,10))
+                          (db.relFamiliar.origenP==db.persona.id) & (db.persona.is_active==True)).select(
+                db.relFamiliar.id,
+                db.tipoParentesco.nameInverso,
+                db.persona.alias,
+                db.relFamiliar.origenP,
+                cache=(cache.ram,10))
 
             conexionO={}; conexionD={}; selectP2P={}
 
@@ -1063,6 +1065,7 @@ def familydetails():
                      &(db.relPersona.is_active==True) ).select(groupby=db.relPersona.extraO)
             for org in orgs:
                 Org[org.relPersona.extraO]=org.Organizacion.alias
+
             ##rel Persona a Persona
             for parents in parentsP2P:
                 conexionO[parents.name]=db((db.relPersona.origenP==_id) &
@@ -1109,10 +1112,10 @@ def familydetails():
     )
 
 @auth.requires_login()
-def conyuge_create():
+def spouse_create():
     from gluon.serializers import json
-    persona = db.persona(request.args(0)) or redirect(URL('perfil')) 
-    filter_args = request.args(1) or redirect(URL('perfil')) 
+    persona = db.persona(request.args(0)) or redirect(URL('profile'))
+    filter_args = request.args(1) or redirect(URL('profile'))
     response.view='default/relPersona_create.html' 
     db.relPersona.origenP.default = request.args(0)
     
@@ -1135,12 +1138,12 @@ def conyuge_create():
                     form.vars.destinoP=idP
                     id = db.relPersona.insert(**db.relPersona._filter_fields(form.vars))
                     response.flash=T('Formulario aceptado')
-                    redirect(URL('default','persona'))
+                    redirect(URL('default','person'))
             else:
                 response.flash=T('Debe Ingresar una Persona ')  
         else:
             id = db.relPersona.insert(**db.relPersona._filter_fields(form.vars))
-            redirect(URL('default','persona'))
+            redirect(URL('default','person'))
 
     elif form.errors:
         response.flash = T('Hay errores en el formulario')
@@ -1158,18 +1161,18 @@ def conyuge_create():
 
 ##companeros de estudios
 @auth.requires_login()
-def companeros_create():
+def mates_create():
     from gluon.serializers import json
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.companeros.fuente.widget = add_option.widget
 
-    record = db.persona(request.args(0)) or redirect(URL('perfil'))
-    relPersona2Org = db.RelPersOrg(request.args(0)) or redirect(URL('perfil'))
-    tiporelacion = request.args(1) or redirect(URL('perfil'))
+    record = db.persona(request.args(0)) or redirect(URL('profile'))
+    relPersona2Org = db.RelPersOrg(request.args(0)) or redirect(URL('profile'))
+    tiporelacion = request.args(1) or redirect(URL('profile'))
 
-    ##filter_args = request.args(1) or redirect(URL('perfil'))
+    ##filter_args = request.args(1) or redirect(URL('profile'))
     organizacion=db(db.Organizacion.id==relPersona2Org.destinoO).select().first()
     persona=db(db.persona.id==relPersona2Org.origenP).select().first()
 
@@ -1210,7 +1213,7 @@ def companeros_create():
                     relPersona2Org.update_record(transitive=idrel)
 
                     response.flash=T('Formulario aceptado')
-                    redirect(URL('default','perfil'))
+                    redirect(URL('default','profile'))
             else:
                 response.flash=T('Debe Ingresar una Persona ')
         else:
@@ -1222,7 +1225,7 @@ def companeros_create():
             ##update transitive
             relPersona2Org.update_record(transitive=idrel)
 
-            redirect(URL('default','perfil'))
+            redirect(URL('default','profile'))
 
     elif form.errors:
         response.flash = T('Hay errores en el formulario')
@@ -1231,9 +1234,9 @@ def companeros_create():
     return dict(form=form, parent=parent)
 
 @auth.requires_login()
-def companeros_edit():
+def mates_edit():
 
-    record= db.companeros(request.args(0)) or redirect(URL('perfil'))
+    record= db.companeros(request.args(0)) or redirect(URL('profile'))
     persona=db.persona(record.destinoP)
 
     relacion=db.RelPersOrg(record.relacionP2O)
@@ -1274,7 +1277,7 @@ def companeros_edit():
 
                     response.flash=T('Formulario aceptado')
 
-                    redirect(URL('default','perfil'))
+                    redirect(URL('default','profile'))
             else:
                 response.flash=T('Debe Ingresar una Persona ')
         else:
@@ -1282,7 +1285,7 @@ def companeros_edit():
             auth.archive(form)
             id = record.update_record(**db.companeros._filter_fields(form.vars))
 
-            redirect(URL('default','perfil'))
+            redirect(URL('default','profile'))
 
     elif form.errors:
         response.flash = T('Hay errores en el formulario')

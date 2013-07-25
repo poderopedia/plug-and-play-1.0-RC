@@ -1,9 +1,9 @@
 __author__ = 'Evolutiva'
 
-
+@auth.requires_login()
 def index():
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes",
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source",
                                       button_text = T("Nueva Fuente"))
     #assign widget to field
     db.persona.documentSource.widget = add_option.widget
@@ -20,7 +20,7 @@ def index():
     elif request.args(0)=='new':
         redirect(URL('personas','new'))
     elif request.args(0)=='edit':
-        redirect(URL('default','persona',args=request.args(2)))
+        redirect(URL('default','person',args=request.args(2)))
 
 
     query = (db.persona.is_active==True)
@@ -31,12 +31,13 @@ def index():
         links = [dict(header=T('Conexiones'),_class='w2p_trap',
                       body=lambda row: A(IMG(_src=URL('static','plugin_powertable/images/details_open.png'),
                                             _alt=T('Ver Conexiones'),_id='image'+str(row.id)),
-                                         #callback=URL('personas','conexiones',args=row.id),, target='t'
+                                         #callback=URL('personas','connections',args=row.id),, target='t'
                                          _onclick='addConnections(event,'+str(row.id)+')'))]
     grid = SQLFORM.grid(query, fields = fields, orderby=db.persona.alias,
                         csv=False,formargs={'active':'persona'},links=links)
     return dict(persona_grid=grid)
 
+@auth.requires_login()
 def person():
     query = (db.persona.is_active==True)
     fields=(db.persona.id,db.persona.alias,db.persona.depiction,db.persona.firstName,
@@ -46,7 +47,7 @@ def person():
 
 
 @auth.requires_login()
-def conexiones():
+def connections():
     response.view = 'default/familydetails.html'
     _id=""; parientes=parientesD=conexiones=selectP2P=conexionO=conexionD=seleccionP20=P2O=companeros=companerosD=conyuges=conyugesD=None; borrar=None; grid=""
     if(request.ajax):
@@ -126,9 +127,10 @@ def conexiones():
         Org=Org
     )
 
+@auth.requires_login()
 def new():
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.persona.documentSource.widget = add_option.widget
 

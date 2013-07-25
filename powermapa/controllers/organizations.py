@@ -3,7 +3,7 @@ __author__ = 'Evolutiva'
 def index():
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.Organizacion.documentSource.widget = add_option.widget
 
@@ -22,13 +22,13 @@ def index():
     elif request.args(0)=='new':
         redirect(URL('organizations','new'))
     elif request.args(0)=='edit':
-        redirect(URL('default','Organizacion_edit',args=request.args(2)))
+        redirect(URL('default','organization_edit',args=request.args(2)))
 
     if auth.user_id:
         links = [dict(header=T('Conexiones'),_class='w2p_trap',
                       body=lambda row: A(IMG(_src=URL('static','plugin_powertable/images/details_open.png'),
                                             _alt=T('Ver Conexiones'),_id='image'+str(row.id)),
-                                         #callback=URL('personas','conexiones',args=row.id),, target='t'
+                                         #callback=URL('personas','connections',args=row.id),, target='t'
                                          _onclick='addConnections(event,'+str(row.id)+')'))]
 
     query = (db.Organizacion.is_active==True) & (db.Organizacion.tipoOrg!=2)
@@ -44,7 +44,7 @@ def organization():
 def new():
     response.view = 'personas/new.html'
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.Organizacion.documentSource.widget = add_option.widget
 

@@ -53,7 +53,7 @@
     var options = {
         indexed: true,
         select_class: 'vertical',
-        on_each_change: "{{=URL('default','call',args=['json','get_relacion'])}}",
+        on_each_change: "{{=URL('default','call',args=['json','get_relation'])}}",
         preselect: {
             'relacion': [{{ response.write(default, escape=False) }}]
         },

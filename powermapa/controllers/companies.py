@@ -3,7 +3,7 @@ __author__ = 'Evolutiva'
 def index():
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.Organizacion.documentSource.widget = add_option.widget
 
@@ -22,13 +22,13 @@ def index():
     elif request.args(0)=='new':
         redirect(URL('companies','new'))
     elif request.args(0)=='edit':
-        redirect(URL('default','Organizacion_edit',args=request.args(2)))
+        redirect(URL('default','organization_edit',args=request.args(2)))
 
     if auth.user_id:
         links = [dict(header=T('Conexiones'),_class='w2p_trap',
                       body=lambda row: A(IMG(_src=URL('static','plugin_powertable/images/details_open.png'),
                                             _alt=T('Ver Conexiones'),_id='image'+str(row.id)),
-                                         #callback=URL('personas','conexiones',args=row.id),, target='t'
+                                         #callback=URL('personas','connections',args=row.id),, target='t'
                                          _onclick='addConnections(event,'+str(row.id)+')'))]
 
     query = (db.Organizacion.is_active==True) & (db.Organizacion.tipoOrg==2)
@@ -42,7 +42,7 @@ def company():
     return dict()
 
 
-def conexiones():
+def connections():
     response.view = 'organizacion/Organizationdetails.html'
     if(request.ajax):
         _id=request.args(0)
@@ -59,12 +59,14 @@ def conexiones():
             origenP=db.persona.with_alias('origenP')
             destinoP=db.persona.with_alias('destinoP')
             relacion=db.tipoRelacionP2P.with_alias('relacion')
-            aRelPersonas=db((db.relPersona.is_active==True)&(db.relPersona.extraO==_id) & (db.tipoRelacionP2P.id==db.relPersona.relacion)
-                            &(db.relacion.id==db.tipoRelacionP2P.parent)).\
-                            select(db.tipoRelacionP2P.name,origenP.alias, destinoP.alias,db.relPersona.id,db.relPersona.origenP,
-                                    db.relPersona.destinoP,relacion.name,
-                            join=[origenP.on(db.origenP.id==db.relPersona.origenP),
-                                  destinoP.on(db.destinoP.id==db.relPersona.destinoP)])
+            aRelPersonas=db((db.relPersona.is_active==True)&(db.relPersona.extraO==_id) &
+                            (db.tipoRelacionP2P.id==db.relPersona.relacion)
+                            &(relacion.id==db.tipoRelacionP2P.parent)
+                            &(db.persona.id==origenP.id)
+                            &(origenP.id==db.relPersona.origenP)
+                            &(destinoP.id==db.relPersona.destinoP)
+                            ).select()
+
 
     borrar=auth.has_membership('administrator')
     return dict(aPersonas=aPersonas, _id=_id, aOrganizaciones=aOrganizaciones,
@@ -73,7 +75,7 @@ def conexiones():
 def new():
     response.view = 'personas/new.html'
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.Organizacion.documentSource.widget = add_option.widget
 

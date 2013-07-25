@@ -4,7 +4,7 @@ def create():
     #This is the main function, the one your users go to
 
     #Initialize the widget
-    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_fuentes", button_text = T("Nueva Fuente"))
+    add_option = SELECT_OR_ADD_OPTION(form_title=T("Agregar Fuentes"), controller="fuentes", function="add_source", button_text = T("Nueva Fuente"))
     #assign widget to field
     db.persona.documentSource.widget = add_option.widget
 
@@ -22,7 +22,7 @@ def create():
     return dict(message="Create your product",
             form = form)
 
-def add_fuentes():
+def add_source():
     #this is the controller function that will appear in our dialog
     form = SQLFORM(db.document)
 

@@ -1,0 +1,34 @@
+{{response.files.append(URL('static','css/smoothness/jquery-ui-1.10.3.custom.min.css'))}}
+{{response.files.append(URL('static','js/jquery-ui-1.10.3.custom.min.js'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.css'))}}
+{{response.files.append(URL('static','js/jquery.multiselect.js'))}}
+{{response.files.append(URL('static','js/jquery.multiselect.filter.js'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.css'))}}
+{{response.files.append(URL('static','css/jquery.multiselect.filter.css'))}}
+{{extend 'layout.html'}}
+<h1>{{=T('Familia')}}</h1>
+{{=form.custom.begin}}
+<table>
+    <tr><td>Persona</td><td></td><td>Parentesco</td><td></td><td>Persona</td></tr>
+    
+    <tr><td>{{=form.custom.widget.origenP}}</td><td>{{=T('es')}}</td><td>{{=form.custom.widget.parentesco}}</td><td>{{=T('de')}}</td><td>{{=form.custom.widget.destinoP}}</td></tr>
+    <tr><td colspan="5">{{=db.relPersona.documentSource.label}}{{=form.custom.widget.documentSource}}</td></tr>
+    <tr><td></td><td></td><td></td><td></td><td>  </td></tr>
+    
+    <tr><td colspan="4"></td><td style="text-align: right">{{=form.custom.submit}}  </td></tr>
+
+</table>
+{{=form.custom.end}}
+{{=A(TAG.BUTTON(T('Volver'),_class='button'),_href=URL('personas','index',vars=dict(keywords='persona.id="'+request.args(0)+'"')))}}
+<script type="text/javascript">
+
+
+    $("#relFamiliar_documentSource").multiselect({minWidth:800}).multiselectfilter({width:300});
+    $("#relFamiliar_documentCloud").multiselect({minWidth:800}).multiselectfilter({width:300});
+</script>
+
+
+
+
+
+

@@ -41,7 +41,7 @@ def data():
 
 @auth.requires_login()
 @auth.requires_membership('administrator')
-def destacados():
+def headlines():
     grid = SQLFORM.grid(db.destacados,orderby=~db.destacados.fecha,formstyle = 'table3cols')
     return dict(grid=grid)
    

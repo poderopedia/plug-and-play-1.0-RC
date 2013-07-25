@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+<h1>{{=T('Grupo')}}</h1>
+{{=table}}
+<script>
+    function deleteRow(event,table,id) {
+        if(confirm(' {{ =T('Está seguro de querer borrar la Organización?') }} ')) {
+            jQuery.ajax({
+                url: "{{=URL('default','call',args=['json','delete'])}}/"+table+"/"+id,
+                success: function(data) {
+                    if(data!="") {
+                        if(data==""+id) {
+                            $('.datatabledetail').fadeOut().hide();
+                        }
+                        $('#'+data).fadeOut().hide();
+                    }
+                }
+
+            });
+        }
+
+    }
+</script>

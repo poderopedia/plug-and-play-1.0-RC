@@ -733,7 +733,7 @@ def mas_popular():
     result=[]; active={}; args=''
     active['hoy']=active['semana']=active['mes']=''
     imagen=None
-    function='conexiones'
+    function='connections'
     if request.args(0)=='portada':
         active['hoy']='active'
         query=(db.plugin_stats.dia==request.now)
@@ -744,12 +744,12 @@ def mas_popular():
             active['semana']='active'; active['hoy']=''
             query=(db.plugin_stats.week==int(request.now.strftime('%W')))& (db.plugin_stats.year==request.now.strftime('%Y'))
         sum = db.plugin_stats.hits.sum()
-        popular=db(db.plugin_stats.page_key.like('%conexiones%') & query).select(db.plugin_stats.hits,db.plugin_stats.page_key,sum,
+        popular=db(db.plugin_stats.page_key.like('%connections%') & query).select(db.plugin_stats.hits,db.plugin_stats.page_key,sum,
             orderby=~sum,limitby=(0,5),groupby=db.plugin_stats.page_key,cache=(cache.ram,3600))
 
         response.view='services/mas_visto.load'
     else:
-        popular=db((db.plugin_stats.page_key.like('%conexiones%')) & (db.plugin_stats.dia==request.now)).select(
+        popular=db((db.plugin_stats.page_key.like('%connections%')) & (db.plugin_stats.dia==request.now)).select(
             orderby=~db.plugin_stats.hits,limitby=(0,4),cache=(cache.ram,3600))
 
     for most in popular:
@@ -815,7 +815,7 @@ def mas_popular_rss():
     )
     query=(db.plugin_stats.month==int(request.now.strftime('%m')))& (db.plugin_stats.year==request.now.strftime('%Y'))
     sum = db.plugin_stats.hits.sum()
-    popular=db(db.plugin_stats.page_key.like('%conexiones%') & query).select(db.plugin_stats.hits,db.plugin_stats.page_key,sum,
+    popular=db(db.plugin_stats.page_key.like('%connections%') & query).select(db.plugin_stats.hits,db.plugin_stats.page_key,sum,
                              orderby=~sum,limitby=(0,2),groupby=db.plugin_stats.page_key,cache=(cache.ram,3600))
 
     for most in popular:
@@ -851,7 +851,7 @@ def mas_popular_rss():
                 args=convert_latin_chars(entity.alias)
 
         media=dict(url='http://'+request.env.http_host + imagen,medium='image',width='140')
-        results=dict(title=alias,link=URL(controller,'conexiones',args=args, extension=False),
+        results=dict(title=alias,link=URL(controller,'connections',args=args, extension=False),
                      description=entity.shortBio[:184], created_on=entity.modified_on)
         results['media:content']=media
         entradas.append(results)
@@ -903,7 +903,7 @@ def lo_ultimo_rss():
         if persona.depiction!='':
             imagen=URL('default','fast_download',args=persona.depiction)
         media=dict(url='http://'+request.env.http_host + imagen,medium='image',width='140')
-        results=dict(title=persona.alias,link=URL('personas','conexiones',args=convert_latin_chars(persona.alias)),
+        results=dict(title=persona.alias,link=URL('personas','connections',args=convert_latin_chars(persona.alias)),
                      description=persona.shortBio[:184],created_on=persona.modified_on)
         results['media:content']=media
         entradas.append(results)
@@ -917,10 +917,10 @@ def lo_ultimo_rss():
     for org in organizacion:
         args=convert_latin_chars(org.alias)
         imagen=URL('static','tmp/avatar-organizacion45.gif')
-        link=URL('organizaciones','conexiones',args=args)
+        link=URL('organizaciones','connections',args=args)
         if org.tipoOrg==2:
             imagen=URL('static','tmp/avatar-empresa.png')
-            link=URL('empresas','conexiones',args=args)
+            link=URL('empresas','connections',args=args)
         if org.haslogo!='':
             imagen=URL('default','fast_download',args=org.haslogo)
         media=dict(url='http://'+request.env.http_host + imagen,medium='image',width='140')

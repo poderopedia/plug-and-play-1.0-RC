@@ -1,5 +1,5 @@
 <h4>{{=T('Familia')}}</h4>
-{{=A(T('Agregar Conexión'), _href=URL('default','relFamiliar_create', args=_id ))}}
+{{=A(T('Agregar Conexión'), _href=URL('default','family_relation_create', args=_id ))}}
 <table class="table table-striped table-bordered">
     {{for pariente in parientes:}}
     <tr id="fam{{=pariente.relFamiliar.id}}" class="success">
@@ -7,7 +7,7 @@
         <td>{{=T(pariente.tipoParentesco.name)}}</td>
         <td>{{=T('de')}}</td>
         <td>{{=A(pariente.persona.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=pariente.relFamiliar.destinoP))}}</td>
-        <td>{{=A(T('editar conexión'), _href=URL('default','relFamiliar_edit', args=pariente.relFamiliar.id))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','family_relation_edit', args=pariente.relFamiliar.id))}}</td>
         {{if borrar:}}
         <td>{{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relFamiliar",%s);' % pariente.relFamiliar.id)}}</td>
         {{pass}}
@@ -19,7 +19,7 @@
         <td>{{=T(pariente.tipoParentesco.nameInverso)}}</td>
         <td>{{=T('de')}}</td>
         <td>{{=A(pariente.persona.alias+T(' (editar Perfil)'), _href=URL('default','persona', args=pariente.relFamiliar.origenP))}}</td>
-        <td>{{=A(T('editar conexión'), _href=URL('default','relFamiliar_edit', args=pariente.relFamiliar.id))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','family_relation_edit', args=pariente.relFamiliar.id))}}</td>
         {{if borrar:}}
         <td>{{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"relFamiliar",%s);' % pariente.relFamiliar.id)}}</td>
         {{pass}}
@@ -88,7 +88,7 @@
         <td>{{=T('por')}}</td>
         <td>{{=T(conyuge.tipoRelacionP2P.name)}}</td>
         {{if conyuge.relPersona.extraO>0:}}
-            <td>{{=A(Org[conyuge.relPersona.extraO],_href=URL('default','Organizacion_edit',args=conyuge.relPersona.extraO))}}</td>
+            <td>{{=A(Org[conyuge.relPersona.extraO],_href=URL('default','organization_edit',args=conyuge.relPersona.extraO))}}</td>
         {{else:}}
             <td></td>
         {{pass}}
@@ -106,7 +106,7 @@
         <td>{{=T('por')}}</td>
         <td>{{=T(conyuge.tipoRelacionP2P.name)}}</td>
         {{if conyuge.relPersona.extraO>0:}}
-            <td>{{=A(Org[conyuge.relPersona.extraO],_href=URL('default','Organizacion_edit',args=conyuge.relPersona.extraO))}}</td>
+            <td>{{=A(Org[conyuge.relPersona.extraO],_href=URL('default','organization_edit',args=conyuge.relPersona.extraO))}}</td>
         {{else:}}
             <td></td>
         {{pass}}
@@ -128,8 +128,8 @@
         <td>{{=T(compas.companeros.nexo)}} de</td>
         <td>{{=A(str(compas.persona.alias)+T(' (editar Perfil)'), _href=URL('default','persona', args=compas.companeros.destinoP))}}</td>
         <td>en</td>
-        <td>{{=A(str(compas.Organizacion.alias)+T(' (editar Grupo)'), _href=URL('default','Organizacion_edit', args=compas.RelPersOrg.destinoO))}}</td>
-        <td>{{=A(T('editar conexión'), _href=URL('default','companeros_edit', args=compas.companeros.id))}}</td>
+        <td>{{=A(str(compas.Organizacion.alias)+T(' (editar Grupo)'), _href=URL('default','organization_edit', args=compas.RelPersOrg.destinoO))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','mates_edit', args=compas.companeros.id))}}</td>
     </tr>
     {{pass}}
     {{for compas in companerosD:}}
@@ -137,8 +137,8 @@
         <td>{{=A(str(compas.persona.alias)+T(' (editar Perfil)'), _href=URL('default','persona', args=compas.companeros.destinoP))}}</td>
         <td>{{=T('es/fue')}} {{=T(compas.companeros.nexo)}}</td>
         <td>{{=T('en')}}</td>
-        <td>{{=A(str(compas.Organizacion.alias)+T(' (editar Grupo)'), _href=URL('default','Organizacion_edit', args=compas.RelPersOrg.destinoO))}}</td>
-        <td>{{=A(T('editar conexión'), _href=URL('default','companeros_edit', args=compas.companeros.id))}}</td>
+        <td>{{=A(str(compas.Organizacion.alias)+T(' (editar Grupo)'), _href=URL('default','organization_edit', args=compas.RelPersOrg.destinoO))}}</td>
+        <td>{{=A(T('editar conexión'), _href=URL('default','mates_edit', args=compas.companeros.id))}}</td>
     </tr>
     {{pass}}
 </table>
@@ -158,9 +158,9 @@
             {{pass}}
         </td>
         <td>{{=T('en')}}</td>
-        <td>{{=A(str(conexion.Organizacion.alias)+T(' (editar Grupo)'), _href=URL('default','Organizacion_edit', args=conexion.RelPersOrg.destinoO))}}</td>
+        <td>{{=A(str(conexion.Organizacion.alias)+T(' (editar Grupo)'), _href=URL('default','organization_edit', args=conexion.RelPersOrg.destinoO))}}</td>
         <td>{{=A(T('editar conexión'), _href=URL('default','relorgs_edit', args=conexion.RelPersOrg.id))}}</td>
-        <!--<td>{{=A(T('Agregar Persona a Relacion'), _href=URL('default','companeros_create', args=[conexion.RelPersOrg.id,key] ))}}</td>-->
+        <!--<td>{{=A(T('Agregar Persona a Relacion'), _href=URL('default','mates_create', args=[conexion.RelPersOrg.id,key] ))}}</td>-->
         {{if borrar:}}
         <td>
             {{=TAG.BUTTON(T('Eliminar'),_class='deletebutton',_onclick='deleteRow(event,"RelPersOrg",%s);' % conexion.RelPersOrg.id)}}

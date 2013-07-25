@@ -17,7 +17,7 @@ response.menu = [
     (T('Administrar'),False,False,[
     (T('Portada'), False, False,[
             (T('Nueva'), False, URL('news','news_insert'),[]),
-            (T('Listar'), False, URL('news','destacados'),[]),
+            (T('Listar'), False, URL('news','headlines'),[]),
         ]),
     (T('Mis Fuentes'), False, URL('default','document'),[]),
     (T('Document Cloud'), False, False,[
@@ -27,10 +27,10 @@ response.menu = [
         ]),
     ]),
     (T('Sugerencias'),False,False,[
-        (T('Conexiones'), False, URL('crowdsourcing','sugerirConexion'),[]),
-        (T('Tengo Dato'), False, URL('crowdsourcing','tengoDato'),[]),
-        (T('Persona'), False, URL('crowdsourcing','sugerirPersona'),[]),
-        (T('Error'), False, URL('crowdsourcing','tipoerror'),[]),
-        (T('Contenido Inadecuado'), False, URL('crowdsourcing','tipoinadecuado'),[]),
+        (T('Conexiones'), False, URL('crowdsourcing','suggest_connection'),[]),
+        (T('Tengo Dato'), False, URL('crowdsourcing','have_info'),[]),
+        (T('Persona'), False, URL('crowdsourcing','suggest_person'),[]),
+        (T('Error'), False, URL('crowdsourcing','have_error'),[]),
+        (T('Contenido Inadecuado'), False, URL('crowdsourcing','inappropiate_content'),[]),
         ]),
     ]

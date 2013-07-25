@@ -40,7 +40,7 @@ def caso_perfil():
     url =request.env.http_host + request.env.request_uri
     person=db.persona(request.args(0)) or redirect(URL('error','error404'))
 
-    #redirect(URL('personas','conexiones',args=convert_latin_chars(person.alias)))
+    #redirect(URL('personas','connections',args=convert_latin_chars(person.alias)))
 
     _id=request.args(0)
     db.persona.id.readable=False
@@ -653,7 +653,7 @@ def persona2all(_id=0):
                 if persona.id==int(_id):
                     relevance=56
                     root='true'
-                nodes.append(dict(name=persona.alias,shortBio=shortBio,group='persona',id="P"+str(persona.id),relevance=relevance,url=URL('personas','conexiones',args=convert_latin_chars(persona.alias)),root=root,imagen=imagen))
+                nodes.append(dict(name=persona.alias,shortBio=shortBio,group='persona',id="P"+str(persona.id),relevance=relevance,url=URL('personas','connections',args=convert_latin_chars(persona.alias)),root=root,imagen=imagen))
 
         if listaNodosOrgs!=[]:
             c = Counter(listaNodosOrgs)
@@ -662,11 +662,11 @@ def persona2all(_id=0):
             for org in orgs:
                 imagen=URL('static','img/icono-organizaciones56.png')
                 shortBio=''
-                url=URL('organizaciones','conexiones',args=convert_latin_chars(org.alias))
+                url=URL('organizaciones','connections',args=convert_latin_chars(org.alias))
                 if org.tipoOrg==2:
                     imagen=URL('static','img/icono-empresas56.png')
                     group1='empresa'
-                    url=URL('empresas','conexiones',args=convert_latin_chars(org.alias))
+                    url=URL('empresas','connections',args=convert_latin_chars(org.alias))
                 else:
                     group1='organizacion'
                 if org.haslogo:
@@ -774,7 +774,7 @@ def orgs2all(_id=0,user_key='xxxxxxxx'):
                     imagen=URL('default','fast_download',args=persona.depiction)
                 if persona.shortBio:
                     shortBio=persona.shortBio.decode('utf-8')[:180]+'...'
-                nodes.append(dict(name=persona.alias,shortBio=shortBio,group='persona',id="P"+str(persona.id),relevance=relevance,url=URL('personas','conexiones',args=convert_latin_chars(persona.alias)),root=root,imagen=imagen))
+                nodes.append(dict(name=persona.alias,shortBio=shortBio,group='persona',id="P"+str(persona.id),relevance=relevance,url=URL('personas','connections',args=convert_latin_chars(persona.alias)),root=root,imagen=imagen))
 
         if listaNodosOrgs!=[]:
             c = Counter(listaNodosOrgs)
@@ -784,11 +784,11 @@ def orgs2all(_id=0,user_key='xxxxxxxx'):
                 relevance = 56
                 imagen=URL('static','img/icono-organizaciones56.png')
                 shortBio=''
-                url=URL('organizaciones','conexiones',args=convert_latin_chars(org.alias))
+                url=URL('organizaciones','connections',args=convert_latin_chars(org.alias))
                 if org.tipoOrg==2:
                     imagen=URL('static','img/icono-empresas56.png')
                     group1='empresa'
-                    url=URL('empresas','conexiones',args=convert_latin_chars(org.alias))
+                    url=URL('empresas','connections',args=convert_latin_chars(org.alias))
                 else:
                     group1='organizacion'
                 if org.haslogo:
@@ -868,7 +868,7 @@ def notificaciones():
             # If reply_to is omitted, then mail.settings.sender is used
             #reply_to='us@example.com',
             message=var+'Un usuario sugirio el perfil de "'+form.vars['contenido']+'" la importancia de este perfil es  y obtuvo la informacion desde la siguiente URL '+form.vars['URL']+'.' )
-        #redirect(URL('notificaciones', args=[_id,tipos,tabla],vars={'success':'ok'}))
+        #redirect(URL('notification', args=[_id,tipos,tabla],vars={'success':'ok'}))
     elif form.errors:
         response.flash = 'Error en el Formulario'
 
@@ -906,7 +906,7 @@ def tipoerror():
             message='El usuario "'+nombre+'" de email "'+email+'", reporto un Error en '+var+', el contenido con error es el siguiente: '+form.vars['contenido']+'" y obtuvo la informacion desde la siguiente URL '+form.vars['URL']+'.',
             headers = {'Content-Type' : 'text/plain; charset="utf-8"'})
 
-        redirect(URL('tipoerror',args=[_id,tabla],vars={'success':'ok'}))
+        redirect(URL('have_error',args=[_id,tabla],vars={'success':'ok'}))
     elif form.errors:
         response.flash = 'Error en el Formulario'
     return dict(item=rows,form=form,tabla=tabla)
@@ -943,7 +943,7 @@ def tipoinadecuado():
             #reply_to='us@example.com',
             message='El usuario "'+nombre+'" de email "'+email+'", reporto un Contenido Inadecuado en '+var+', el contenido con inadecuado es el siguiente: '+form.vars['contenido']+'" y obtuvo la informacion desde la siguiente URL '+form.vars['URL']+'.',
             headers = {'Content-Type' : 'text/plain; charset="utf-8"'})
-        redirect(URL('tipoinadecuado',args=[_id,tabla],vars={'success':'ok'}))
+        redirect(URL('inappropiate_content',args=[_id,tabla],vars={'success':'ok'}))
     elif form.errors:
         response.flash = 'Error en el Formulario'
 
@@ -965,7 +965,7 @@ def sugerir_perfil():
             subject='Sugerencia de Perfil de'+form.vars['name'],
             # If reply_to is omitted, then mail.settings.sender is used
             #reply_to='us@example.com',
-            message='El usuario "'+nombre+'" de email "'+email+'", sugirio el perfil de "'+form.vars['name']+'" la importancia de este perfil es "'+form.vars['texto']+'" y obtuvo la informacion desde la siguiente URL '+form.vars['documentURL']+'.',
+            message='El usuario "'+nombre+'" de email "'+email+'", sugirió el perfil de "'+form.vars['name']+'" la importancia de este perfil es "'+form.vars['texto']+'" y obtuvo la informacion desde la siguiente URL '+form.vars['documentURL']+'.',
             headers = {'Content-Type' : 'text/plain; charset="utf-8"'})
         redirect(URL('sugerir_perfil',vars={'success':'ok'}))
     elif form.errors:
@@ -985,7 +985,7 @@ def compartir():
             message='Un usuario de nuestro sitio web te sugire que revises el siguiente link "http://beta.poderopedia.org/visualizacion/'+url1+'/'+_id+'" para él, la importancia de este perfil es "'+form.vars['contenido'],
             headers = {'Content-Type' : 'text/plain; charset="utf-8"'})
 
-        redirect(URL('compartir',vars={'success':'ok'}))
+        redirect(URL('share',vars={'success':'ok'}))
     elif form.errors:
         response.flash = 'Error en el Formulario'
 
