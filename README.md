@@ -1,4 +1,3 @@
-
 About Plug & Play
 =============
 
@@ -67,7 +66,7 @@ project editors in the Plug & Play Management system.
 
 8.- [API Documentation](Documentation/8.-%20Api%20Documentation.md "Api Documentation")
 
-9.- [User Manual Plug & Play](Documentation/USER%20MANUAL.%20tools%20v.0.1.pdf)
+9.- [User Manual Plug & Play](wiki/User-Manual)
 
 10.- [Supporters and License](Documentation/10.-%20Supporters%20and%20License.md "License")
 
