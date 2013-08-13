@@ -66,7 +66,7 @@ project editors in the Plug & Play Management system.
 
 8.- [API Documentation](Documentation/8.-%20Api%20Documentation.md "Api Documentation")
 
-9.- [User Manual Plug & Play](wiki/User-Manual)
+9.- [User Manual Plug & Play](https://github.com/poderopedia/plug-and-play-1.0-RC/wiki/User-Manual)
 
 10.- [Supporters and License](Documentation/10.-%20Supporters%20and%20License.md "License")
 
