@@ -1,0 +1,493 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]><html class="ie ie6 ie-lte9 ie-lte8 ie-lte7 no-js" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="ie ie7 ie-lte9 ie-lte8 ie-lte7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="ie ie8 ie-lte9 ie-lte8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9]><html class="ie9 ie-lte9 no-js" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html lang="en">
+<head>
+	<!--  -->
+	<meta charset="utf-8">
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1"><![endif]-->
+
+	<title>Create an Entity</title>
+	<link rel="icon" type="image/x-icon" href="http://www.poderopedia.com/static/img/favicon.ico" />
+	<link rel="shortcut icon" href="http://www.poderopedia.com/static/img/favicon.ico" />
+
+	<!-- other head content -->
+	<script type="text/javascript">
+
+	var _gaq = _gaq || [];
+	var pluginUrl =
+		'//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+	_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+	_gaq.push(['_setAccount', 'UA-34219926-1']);
+	_gaq.push(['_setDomainName', 'poderopedia.org']);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+
+	</script>
+	<!-- end other head content -->
+
+	<!-- styles -->
+	<link rel="stylesheet" href="http://www.poderopedia.com/static/css/bootstrap.css" />
+	<link rel="stylesheet" href="http://www.poderopedia.com/static/lib/ui-smoothness/jquery-ui-1.8.22.css" />
+	<link rel="stylesheet/less" href="/css/structure.less" />
+	<!-- /styles -->
+
+	<!-- scripts -->
+	<script src="http://www.poderopedia.com/static/js/jquery-1.7.1.min.js"></script>
+	<script src="http://www.poderopedia.com/static/js/jquery-ui-1.8.22.min.js"></script>
+	<script src="http://www.poderopedia.com/static/js/bootstrap.js"></script>
+	<script src="http://www.poderopedia.com/static/js/less-1.3.0.min.js"></script>
+	<script src="http://www.poderopedia.com/static/js/jquery.media.js"></script>
+	<script src="http://www.poderopedia.com/static/js/web2py.js"></script>
+
+	<!--[if lt IE 9 ]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<link rel="stylesheet" href="http://www.poderopedia.com/static/css/iex.css" />
+	<![endif]-->
+	<!--[if lt IE 7 ]>
+	<script src="http://www.poderopedia.com/static/js/dd_belatedpng.js%3Fv%3D1"></script>
+	<![endif]-->
+	<!-- /scripts -->
+	<meta name="keywords" content="Redes, Poder, Negocios, Política" />
+	<meta name="description" content="Redes de Poder en la Política y Negocios" />
+	<meta name="generator" content="Equipo Poderopedia" />
+	<meta name="author" content="Equipo Poderopedia" />
+</head>
+
+
+<body>
+
+    <header>
+
+
+    <div class="container">
+        <h1 class="logo">
+            <a href="http://www.poderopedia.com/">Poderopedia</a>
+        </h1>
+
+        <!-- primaryNav -->
+        <nav class="primary-nav">
+            
+
+        </nav>
+
+        <!-- /primaryNav -->
+
+        <!-- loginPreview -->
+        <div class="login-top">
+            <a href="http://www.poderopedia.com/default/registrogeneral" class="tit_registro">Registrarse</a>
+            <button class="btn btn-danger" onclick="location.href = 'http://www.poderopedia.com/default/ingresogeneral'">Ingresar</button>
+        </div><!-- top -->
+        <!-- about -->
+        <div class="about">
+            <a href="http://www.poderopedia.com/acercade/index" class="ddown-toggle last-nav">Sobre Poderopedia</a>
+        </div>
+        <!-- /about -->
+    </div>
+
+
+    <!-- sub-tool -->
+    <div class="sub-tool">
+        <div class="container">
+
+            <!-- search -->
+            <form class="form-inline" method="get" action="http://www.poderopedia.com/search/podersearch">
+                <div class="input-append">
+                    <input class="span4" id="appendedInputButton" size="16" name="q" type="text" placeholder="Buscar en todo Poderopedia"><button class="btn" type="button" onclick="this.form.submit()"></button>
+                </div>
+            </form>
+            <!-- /search -->
+
+            <!-- popular -->
+            <span class="tit-sub">Documentación:</span>
+            <div id="c147963953226"><ul class="popular">
+
+                    <li><a href="http://poderopedia.github.io" title="Documentation">Plug and Play</a></li>
+
+                </ul>
+            </div>
+            <!-- /popular -->
+
+        </div>
+    </div>
+    <!-- /sub-tool -->
+
+</header>
+
+    <div id="content" class="container">
+        <div class="row width-complete">
+            <div class="span9">
+                <section class="docs">
+    <div class="grid">
+
+        <div class="unit four-fifths">
+            <article>
+                <h1>Create an Entity</h1>
+                <p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">For
+  purposes of this manual we will use as an example the creation of a
+  &ldquo;PERSON&rdquo; entity. COMPANIES and ORGANIZATIONS entities
+  operate in the same way.</span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">1.
+  - Go to &ldquo;Create&rdquo; in the menu, select the entity you want
+  to enter. (Fig. 03). </span> </p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US">In our
+  example we will enter a PERSON entity.</p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><b>(Fig.03)</b></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><img src="index_html_215baf60.jpg" alt="" name="gráficos3" width="331" height="225" border="0" align="bottom" id="gráficos3" /></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">2.
+  - This will display a grid with the previously added ENTITIES </span><span lang="en-US" xml:lang="en-US"><b>(Fig
+    04)</b></span><span lang="en-US" xml:lang="en-US">.</span><span lang="en-US" xml:lang="en-US"><b> </b></span><span lang="en-US" xml:lang="en-US">If
+      you have not added any ENTITY, you will only see the button <img src="index_html_m1d3eaec8.jpg" alt="" name="gráficos4" width="55" height="29" border="0" align="bottom" id="gráficos4" /></span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><b>(Fig.
+  04)</b></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><img src="index_html_4fbf046d.png" alt="" name="gráficos5" width="578" height="325" border="0" align="bottom" id="gráficos5" /></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><br />
+  <br />
+</p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">These
+  are the elements that the grid contains </span><span lang="en-US" xml:lang="en-US"><b>(Fig.
+    04)</b></span></p>
+<table width="584" border="1" bordercolor="#000000" cellpadding="7" cellspacing="0">
+  <col width="299" />
+  <col width="255" />
+  <tr valign="top">
+    <td width="299"><p class="western" lang="en-US" xml:lang="en-US"><img src="index_html_m1d3eaec8.jpg" alt="" name="gráficos6" width="84" height="44" border="0" align="bottom" id="gráficos6" /></p></td>
+    <td width="255"><p class="western" lang="en-US" xml:lang="en-US">Add ENTITY FORM</p></td>
+  </tr>
+  <tr valign="top">
+    <td width="299"><p class="western" lang="en-US" xml:lang="en-US"><img src="index_html_62d3f87c.jpg" alt="" name="gráficos7" width="300" height="36" border="0" align="bottom" id="gráficos7" /></p></td>
+    <td width="255"><p class="western" lang="en-US" xml:lang="en-US">ENTITY search box</p></td>
+  </tr>
+  <tr valign="top">
+    <td width="299"><p class="western" lang="en-US" xml:lang="en-US"><img src="index_html_c99f340.jpg" alt="" name="gráficos8" width="29" height="32" border="0" align="bottom" id="gráficos8" /></p></td>
+    <td width="255"><p class="western" lang="en-US" xml:lang="en-US">Show CONECTIONS</p></td>
+  </tr>
+  <tr valign="top">
+    <td width="299"><p class="western" lang="en-US" xml:lang="en-US"><img src="index_html_m7e0ada47.jpg" alt="" name="gráficos9" width="70" height="51" border="0" align="bottom" id="gráficos9" /></p></td>
+    <td width="255"><p class="western" lang="en-US" xml:lang="en-US">Preview ENTITY FORM</p></td>
+  </tr>
+  <tr valign="top">
+    <td width="299"><p class="western" lang="en-US" xml:lang="en-US"><img src="index_html_6adb119f.jpg" alt="" name="gráficos10" width="52" height="42" border="0" align="bottom" id="gráficos10" /></p></td>
+    <td width="255"><p class="western" lang="en-US" xml:lang="en-US">Edit ENTITY FORM</p></td>
+  </tr>
+  <tr valign="top">
+    <td width="299"><p class="western" lang="en-US" xml:lang="en-US"><img src="index_html_m6ca46e0b.jpg" alt="" name="gráficos11" width="71" height="50" border="0" align="bottom" id="gráficos11" /></p></td>
+    <td width="255"><p class="western" lang="en-US" xml:lang="en-US">Delete ENTITY FORM</p></td>
+  </tr>
+</table>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">3.
+  - To add a new </span><span lang="en-US" xml:lang="en-US"><b>ENTITY </b></span><span lang="en-US" xml:lang="en-US">FORM
+    you should use the following button: </span><span lang="en-US" xml:lang="en-US"> <img src="index_html_m1d3eaec8.jpg" alt="" name="gráficos12" width="70" height="37" border="0" align="bottom" id="gráficos12" /> </span><span lang="en-US" xml:lang="en-US"><b>(Fig.05)</b></span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><b>(Fig.05)</b></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><img src="index_html_m279cb493.jpg" alt="" name="gráficos13" width="567" height="224" border="0" align="bottom" id="gráficos13" /></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><br />
+  <span lang="en-US" xml:lang="en-US">4.-
+  It will display the Person entity Form, where you can enter the Basic
+  Profile Information (</span><span lang="en-US" xml:lang="en-US"><b>Fig. 06</b></span><span lang="en-US" xml:lang="en-US">)
+    , Summary (</span><span lang="en-US" xml:lang="en-US"><b>Fig. 08</b></span><span lang="en-US" xml:lang="en-US">),
+      Long Profile (</span><span lang="en-US" xml:lang="en-US"><b>Fig.0 9</b></span><span lang="en-US" xml:lang="en-US">),
+        Sources (</span><span lang="en-US" xml:lang="en-US"><b>Fig.10</b></span><span lang="en-US" xml:lang="en-US">),
+  &ldquo;Document Cloud&rdquo; Sources (</span><span lang="en-US" xml:lang="en-US"><b>12a</b></span><span lang="en-US" xml:lang="en-US">),
+if he is deceased or not (</span><span lang="en-US" xml:lang="en-US"><b>Step</b></span><span lang="en-US" xml:lang="en-US"><b> 6</b></span><span lang="en-US" xml:lang="en-US">) and the Social Network (</span><span lang="en-US" xml:lang="en-US"><b>Step</b></span><span lang="en-US" xml:lang="en-US"><b> 7</b></span><span lang="en-US" xml:lang="en-US">). </span> </p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"> <span lang="en-US" xml:lang="en-US">4.1. - Basic data </span><span lang="en-US" xml:lang="en-US"><b>(Fig.
+  06)</b></span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><b>(Fig.
+  06)</b></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><img src="index_html_48583519.jpg" alt="" name="gráficos14" width="500" height="320" border="0" align="bottom" id="gráficos14" /></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">You
+  must enter the required Basic Information </span><span lang="en-US" xml:lang="en-US"><b>(Fig.
+    07)</b></span><span lang="en-US" xml:lang="en-US">. The required fields are Name,
+      Surname, Short Name and Country. All the other fields are optional.</span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">The
+  Date of Birth should be written in the DD/MM/YYYY format, the Home
+  Country should be picked from the Menu, the Sector should be picked
+  from the Menu, and the profile picture should be 140 x 140 Pixels
+  (JPG or PNG formats).</span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><b>(Fig.
+  07)</b></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><b>Example:
+  We will add the data from the PERSON entity &ldquo;M&oacute;nica
+  Ventura Alca&iacute;no&rdquo;</b></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><img src="index_html_1465869d.jpg" alt="" name="gráficos15" width="471" height="362" border="0" align="bottom" id="gráficos15" /></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><br />
+  <br />
+</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"> <span lang="en-US" xml:lang="en-US">4.2. - We enter her Review (Summary Profile) </span><span lang="en-US" xml:lang="en-US"><b>(Fig.
+  08)</b></span><span lang="en-US" xml:lang="en-US"> and the Long Profile </span><span lang="en-US" xml:lang="en-US"><b>(Fig.09)</b></span><span lang="en-US" xml:lang="en-US">,
+    which contains a rich text editor where you can put links, bold,
+    subtitle, etc. . . . </span> </p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><b>(Fig.
+  08)</b></p>
+<p class="western" style="text-indent: 1.25cm; margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"> <img src="index_html_1d2c80a8.jpg" alt="" name="gráficos16" width="567" height="148" border="0" align="bottom" id="gráficos16" /></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><b>(Fig.09)</b></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><img src="index_html_m24e5f4ea.jpg" alt="" name="gráficos17" width="567" height="213" border="0" align="bottom" id="gráficos17" /></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><br />
+  <br />
+</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"> <span lang="en-US" xml:lang="en-US">4.3. - </span><span lang="en-US" xml:lang="en-US"><b>Add</b></span><span lang="en-US" xml:lang="en-US"><b> one or more Sources (Fig. 10)</b></span><span lang="en-US" xml:lang="en-US">.  To add
+  a Source you must click on the button</span><span lang="en-US" xml:lang="en-US"> </span><span lang="en-US" xml:lang="en-US"> <img src="index_html_79d452e3.png" alt="" name="gráficos18" width="104" height="32" border="0" align="bottom" id="gráficos18" /></span></p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"> <b>Use of the source tool</b></p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"> <span lang="en-US" xml:lang="en-US">To use the source tool, simply click on the <img src="index_html_37a294d.png" alt="" name="gráficos19" width="118" height="33" border="0" align="bottom" id="gráficos19" /> button to see a list of available sources. There, you can check any
+  sources you want to include, and search for sources in the search
+  box.</span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US">.<img src="index_html_m1d2bc13f.png" alt="" name="gráficos20" width="567" height="210" border="0" align="left" id="gráficos20" /></p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"> <br />
+  <br />
+</p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><br />
+  <br />
+</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"> <br />
+  <br />
+</p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><br />
+  <br />
+</p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><br />
+  <br />
+</p>
+<p class="western" style="margin-left: 2.5cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"> <span lang="en-US" xml:lang="en-US">4.3.1.-It will display the Source Form </span><span lang="en-US" xml:lang="en-US"><b>(Fig.
+  11)</b></span><span lang="en-US" xml:lang="en-US"> (It only allows Sources form
+    websites). Then you have to enter the required data. The date is
+    entered in format DD/MM/YYYY.</span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><b>(Fig.
+  11)</b></p>
+<p align="center" class="western" style="margin-left: 0.64cm; margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"> <img src="index_html_m2d2121d7.jpg" alt="" name="gráficos21" width="410" height="224" border="0" align="bottom" id="gráficos21" /></p>
+<p class="western" style="margin-left: 2.5cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"> <span lang="en-US" xml:lang="en-US">4.3.2. - The Source Form will close itself when
+  you save it. The Source will be added to the alphabetically ordered
+  list. </span><span lang="en-US" xml:lang="en-US"><b>(Fig. 12).</b></span><span lang="en-US" xml:lang="en-US"> You will have to choose it then. To choose more than one Source, you
+    can pick them by keeping pressed the </span><span lang="en-US" xml:lang="en-US"><b>CTRL</b></span><span lang="en-US" xml:lang="en-US"> button on your keyboard and clicking the Title of the Sources you
+      want.</span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><b>(Fig.
+  12)</b></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><img src="index_html_5e1771bb.jpg" alt="" name="gráficos22" width="513" height="99" border="0" align="bottom" id="gráficos22" /></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><br />
+  <br />
+</p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US"><b>5.
+  - Use of the Document tool</b></span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">Upload
+  PDF Document associated with Document Cloud </span><span lang="en-US" xml:lang="en-US"><b>(Fig.
+    12 a)</b></span><span lang="en-US" xml:lang="en-US">.  You can upload PDF documents
+      linked with the Document Cloud tool (</span><font color="#0000ff"><U><a href="http://www.documentcloud.org/"><span lang="en-US" xml:lang="en-US">www.documentcloud.org</span></a></U></font><span lang="en-US" xml:lang="en-US">)
+        from Poderopedia. </span> </p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">You
+  can only upload them in the Poderopedia Admin interface, to modify
+  documents you must do so directly from the Document Cloud tool.</span></p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"> <span lang="en-US" xml:lang="en-US">5.1. - To use the document tool; click the <img src="index_html_37a294d.png" alt="" name="gráficos23" width="118" height="33" border="0" align="bottom" id="gráficos23" /> button to see a list of documents available on Document Cloud. There,
+  you can check all the documents you want to include, or search for
+  documents in the search box.</span><br />
+</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES">&nbsp;</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm"><img src="index_html_m216d2f0.png" alt="" name="gráficos24" width="567" height="192" border="0" align="left" id="gráficos24" /></span></p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES">&nbsp;</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES">&nbsp;</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES">&nbsp;</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES">&nbsp;</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES">&nbsp;</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES">&nbsp;</p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">5.2.
+  - To add a new Document to Document cloud click the <img src="index_html_3ea49ec4.png" alt="" name="gráficos25" width="124" height="34" border="0" align="bottom" id="gráficos25" /> button and fill the required data.</span></p>
+<p class="western" style="margin-left: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"> <span lang="en-US" xml:lang="en-US">The </span><span lang="en-US" xml:lang="en-US"><b>Entry Form </b></span><span lang="en-US" xml:lang="en-US">of
+  a new PDF document will be displayed </span><span lang="en-US" xml:lang="en-US"><b>(Fig.
+    12 b)</b></span><span lang="en-US" xml:lang="en-US"> you must complete the required
+      data. The required fields are </span><span lang="en-US" xml:lang="en-US"><b>File</b></span><span lang="en-US" xml:lang="en-US"> (Select File) and </span><span lang="en-US" xml:lang="en-US"><b>Document Title</b></span><span lang="en-US" xml:lang="en-US">.
+        You can set the </span><span lang="en-US" xml:lang="en-US"><b>Source of the Document</b></span><span lang="en-US" xml:lang="en-US"> (Example: World Bank), </span><span lang="en-US" xml:lang="en-US"><b>Document
+          Description</b></span><span lang="en-US" xml:lang="en-US">, </span><span lang="en-US" xml:lang="en-US"><b>Associated
+            Document URL</b></span><span lang="en-US" xml:lang="en-US">. </span><span lang="en-US" xml:lang="en-US"><b>Access</b></span><span lang="en-US" xml:lang="en-US"> option is mandatory (if you want to publish the document to all the
+              public, you must choose the Public option, otherwise you must choose
+              Private). Finally, you must choose a Project (mandatory). Poderopedia
+              Chile has three Projects: People, Enterprises and Organizations,
+              which we upload PDF documents related to each of them. You must
+              create these projects from the Document Cloud tool.</span><br />
+  <br />
+</p>
+<p class="western" style="text-indent: 1.25cm; margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"> <span lang="en-US" xml:lang="en-US"><b>(Fig. 12 b)</b></span><span lang="en-US" xml:lang="en-US"> </span> </p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><img src="index_html_m56fce2f4.jpg" alt="" name="gráficos26" width="646" height="298" border="0" align="bottom" id="gráficos26" /></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><br />
+  <br />
+</p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">6.
+  - Is deceased. If the person is deceased you must check this option</span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><img src="index_html_f0a54ec.jpg" alt="" name="gráficos27" width="208" height="34" border="0" align="bottom" id="gráficos27" /></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">7.
+  - Social Networks. Fill the form with the following data (optional)</span></p>
+<p class="western" style="margin-bottom: 0.35cm" lang="en-US" xml:lang="en-US"><img src="index_html_646fc23e.jpg" alt="" name="gráficos28" width="516" height="173" border="0" align="bottom" id="gráficos28" /><br />
+</p>
+<p class="western" style="margin-bottom: 0.35cm" lang="es-ES" xml:lang="es-ES"><span lang="en-US" xml:lang="en-US">8.
+  - Save the Profile Form with the Button </span><span lang="en-US" xml:lang="en-US"> <img src="index_html_m4517ff07.jpg" alt="" name="gráficos29" width="97" height="41" border="0" align="bottom" id="gráficos29" /></span></p>
+
+            </article>
+        </div>
+
+        <div class="clear"></div>
+        <div class="section-nav row">
+  <div class="pull-left text-left span4">
+    
+      <a href="/entities.html" class="prev">
+        Back
+      </a>
+    
+  </div>
+  <div class="pull-right text-right span4 offset1">
+    
+      <a href="/connections.html" class="next">
+        Next
+      </a>
+    
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+
+    </div>
+</section>
+
+            </div>
+            <div class="span3">
+                <div class="sidebar">
+  <aside>
+    <br/>
+    <h4>Index</h4>
+    <ul>
+      <li class="">
+        <a href="/register.html">Register</a>
+      </li>
+      <li class="">
+        <a href="/entities.html">Entities</a>
+      </li>
+      <li class="active">
+        <a href="/create_entity.html">Create an Entity</a>
+      </li>
+      <li class="">
+        <a href="/connections.html">Add Connections to the Profile</a>
+      </li>
+      <li class="">
+        <a href="/manage_frontpage.html">Manage the Front Page</a>
+      </li>
+      <li class="">
+        <a href="/create_cases.html">Create Cases</a>
+      </li>
+      <li class="">
+        <a href="/manage_sources.html">Manage Sources</a>
+      </li>
+      <li class="">
+        <a href="/managing_documentcloud.html">Managing Sources in Document Cloud</a>
+      </li>
+      <li class="">
+        <a href="/suggestions.html">Suggestions</a>
+      </li>
+    </ul>
+  </aside>
+</div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+    <div class="container">
+        <div class="contents row">
+            <div class="col span">
+                <h5>Acerca De</h5>
+                <ul>
+                    <li><a href="http://www.poderopedia.com/acercade/index">Qué es Poderopedia</a></li>
+                    <li><a href="http://www.poderopedia.com/acercade/equipo">Equipo</a></li>
+                    <li><a href="http://www.poderopedia.com/acercade/prensa">Prensa</a></li>
+                    <li><a href="http://blog.poderopedia.org">Blog</a></li>
+                    <li><a href="http://www.poderopedia.com/acercade/contactanos">Contacto</a></li>
+                </ul>
+            </div>
+
+            <div class="col span">
+                <h5>Comunidad</h5>
+                <ul>
+                    <li><a href="http://www.poderopedia.com/comunidad/index">Crea Poderopedia en tu país</a></li>
+                    <li><a href="http://www.poderopedia.com/comunidad/sumate_a_nosotros">Súmate a nosotros</a></li>
+                    <li><a href="http://www.poderopedia.com/comunidad/sugiere_perfil">Sugiere un perfil</a></li>
+                    <li><a href="http://www.poderopedia.com/comunidad/sugiere_conexion">Sugiere una conexión</a></li>
+                    <li><a href="http://www.poderopedia.com/comunidad/apoyanos">Apóyanos</a></li>
+                </ul>
+            </div>
+
+            <div class="col span">
+                <h5>Desarrolladores</h5>
+                <ul>
+                    <li><a href="http://www.poderopedia.com/desarrolladores/index">API</a></li>
+                    <li><a href="http://www.poderopedia.com/desarrolladores/ontologia">Ontología</a></li>
+                    <li><a href="http://www.poderopedia.com/desarrolladores/usa_nuestro_codigo">Usa nuestro código</a></li>
+                    <li><a href="http://www.poderopedia.com/desarrolladores/documentacion">Documentación</a></li>
+                    <li><a href="http://www.poderopedia.com/desarrolladores/foro_dev">Foro Dev</a></li>
+                </ul>
+            </div>
+
+            <div class="col span">
+                <h5>Ayuda</h5>
+                <ul>
+                    <li><a href="http://www.poderopedia.com/ayuda/index">Guía paso a paso</a></li>
+                    <li><a href="http://www.poderopedia.com/ayuda/preguntas_frecuentes">Preguntas Frecuentes</a></li>
+                    <li><a href="http://www.poderopedia.com/ayuda/lineamientos_editoriales">Lineamientos editoriales</a></li>
+                    <li><a href="http://www.poderopedia.com/ayuda/reportar_error">Reportar errores</a></li>
+                    <li><a href="http://www.poderopedia.com/ayuda/reportar_contenido_inadecuado">Reportar contenido inadecuado</a></li>
+                </ul>
+            </div>
+
+            <div class="col span sociales">
+                <h5>Seguir</h5>
+                <ul>
+                    <li class="icon_tw"><a href="https://twitter.com/poderopedia" target="_blank">Twitter</a></li>
+                    <li class="icon_fb"><a href="http://www.facebook.com/poderopedia" target="_blank">Facebook</a></li>
+                    <li class="icon_gp"><a href="#">Google +</a></li>
+                    <li class="icon_gh"><a href="https://github.com/poderopedia" target="_blank">Github</a></li>
+                    <li class="icon_rss"><a href="http://www.poderopedia.com/default/call/rss/destacados_rss">RSS</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="final">
+        <div class="container">
+            <div class="row">
+                <div class="brand span6 clearfix">
+                    <!--<img src="/static/img/footer_logopoderopedia.gif" alt="Poderopedia">-->
+                    <a href="http://www.poderopedia.com"><img src="/plug-and-play-1.0-RC/img/logo-beta.png" alt="Poderopedia"></a>
+                    <p><a href="http://www.poderopedia.com/acercade/condiciones_de_uso">Términos de uso</a> | <a href="http://www.poderopedia.comacercade/politica_de_privacidad">Políticas de privacidad</a></p>
+
+                </div>
+
+                <div class="misc-links txt-r span6">
+                    <p>Con el apoyo de: <a href="http://www.knightfoundation.org/" target="_blank" class="logoknight">Knight Foundation</a> <a href="http://startupchile.org/" target="_blank" class="logostartup">Startup Chile</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="final-end">
+        <div class="container">
+            <div class="row">
+                <p>Un proyecto de <a href="#">Fundación Poderomedia 2012</a>. Todo el contenido, a menos que se indique lo contrario, bajo licencia Creative Commons 3.0. Hecho en Chile.</p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+    <!-- TODO: Agregar codigos de seguimiento -->
+
+
+
+</body>
+</html>
