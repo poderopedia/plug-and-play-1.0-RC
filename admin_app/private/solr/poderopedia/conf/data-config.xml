@@ -1,0 +1,118 @@
+<dataConfig>
+<dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/test" user="test" password="test"/>
+    <document name="poderopedia">
+        <entity name="persona" transformer="TemplateTransformer" pk="doc_id" query="select * from persona where is_active='T'" 
+		deltaImportQuery="SELECT * FROM persona WHERE id = '${dataimporter.delta.id}' and is_active='T'" 
+		deltaQuery="select id from persona where modified_on > '${dih.last_index_time}' and is_active='T'">
+			<field column="doc_id" template="P_${persona.id}" />
+			<field column="doc_type" template="Persona" />
+            <field column="id" name="id" />
+            <field column="ICN" name="ICN" />
+            <field column="firstName" name="firstName" />
+            <field column="firstLastName" name="firstLastName" />
+            <field column="otherLastName" name="otherLastName" />
+            <field column="alias" name="alias" />
+			<field column="depiction" name="depiction" />
+            <field column="shortBio" name="shortBio" />
+            <field column="longBio" name="longBio" />
+			<field column="modified_on" name="modified_on" />
+			<entity name="tipoCountry" query="select name from country where id = '${persona.countryofResidence}'">
+				<field name="pais" column="name" />	
+            </entity>
+			<entity name="props" query="select distinct relationship from RelPersOrg as r, tipoRelacionP20 as t where r.specificRelation=t.id and t.generalizacion='Propiedad' and r.is_active='T' and r.origenP='${persona.id}'">
+                <field name="propiedad" column="relationship" />	
+            </entity>
+			<entity name="cargos" query="select distinct relationship from RelPersOrg as r, tipoRelacionP20 as t where r.specificRelation=t.id and (t.generalizacion!='Propiedad') and t.parent=3 and r.is_active='T' and r.origenP='${persona.id}'">
+                <field name="cargosgobierno" column="relationship" />	
+            </entity>
+			<entity name="trabajo" query="select distinct relationship from RelPersOrg as r, tipoRelacionP20 as t where r.specificRelation=t.id and (t.generalizacion!='Propiedad') and t.parent!=3 and t.parent!=1 and t.parent!=4 and parent!=11 and r.is_active='T' and r.origenP='${persona.id}'">
+                <field name="cargostrabajo" column="relationship" />	
+            </entity>
+			<entity name="Mainsector" query="SELECT s.name from persona as p, sector as s where CAST(replace(substring(substring_index(Mainsector, '|', 2), length(substring_index(Mainsector, '|', 2 - 1)) + 1), '|', '') AS UNSIGNED)=s.id and  Mainsector is not null and Mainsector!='||' and LENGTH(Mainsector) - LENGTH(REPLACE(Mainsector, '|', ''))-1='1' and p.id = '${persona.id}'">
+                <field name="sector" column="name" />	
+            </entity>
+			<entity name="emp_relacionadas" query="select distinct o.alias from RelPersOrg as r, Organizacion as o where r.destinoO=o.id and o.is_active='T' and o.tipoOrg=2 and r.is_active='T' and r.origenP='${persona.id}'">
+                <field name="empresas_relacionadas" column="alias" />	
+            </entity>
+			<entity name="org_relacionadas" query="select distinct o.alias from RelPersOrg as r, Organizacion as o where r.destinoO=o.id and o.is_active='T' and o.tipoOrg!=2 and r.is_active='T' and r.origenP='${persona.id}'">
+                <field name="organizaciones_relacionadas" column="alias" />	
+            </entity>
+        </entity>
+		<entity name="empresa" transformer="TemplateTransformer" pk="doc_id" query="select * from Organizacion where tipoOrg=2 and is_active='T'"
+			deltaImportQuery="SELECT * FROM Organizacion WHERE id = '${dataimporter.delta.id}' and tipoOrg=2 and is_active='T'" 
+			deltaQuery="select id from Organizacion where modified_on > '${dih.last_index_time}' and tipoOrg=2 and is_active='T'">
+			<field column="doc_id" template="O_${empresa.id}" />
+			<field column="doc_type" template="Empresa" />
+            <field column="id" name="id" />
+			<field column="tipoOrg" name="tipoOrg" />
+			<field column="hasSocialReason" name="hasSocialReason" />
+			<field column="hasTaxId" name="hasTaxId" />
+			<field column="alias" name="alias" />
+			<field column="countryOfResidence" name="countryOfResidence" />
+			<field column="haslogo" name="depiction" />
+			<field column="shortBio" name="shortBio" />
+			<field column="longBio" name="longBio" />
+			<field column="birth" name="birth" />
+			<field column="modified_on" name="modified_on" />
+			<entity name="tipo" query="select name from tipoOrganizacion where id = '${empresa.tipoOrg}'">
+				<field name="tipoOrganizacion" column="name" />	
+            </entity>
+			<entity name="tipoCountry" query="select name from country where id = '${empresa.countryOfResidence}'">
+				<field name="pais" column="name" />	
+            </entity>
+			<entity name="props" query="select distinct relationship from RelPersOrg as r, tipoRelacionP20 as t where r.specificRelation=t.id and t.generalizacion='Propiedad' and r.is_active='T' and r.destinoO='${empresa.id}'">
+                <field name="propiedad" column="relationship" />	
+            </entity>
+			<entity name="cargos" query="select distinct relationship from RelPersOrg as r, tipoRelacionP20 as t where r.specificRelation=t.id and (t.generalizacion!='Propiedad') and t.parent=3 and r.is_active='T' and r.destinoO='${empresa.id}'">
+                <field name="cargosgobierno" column="relationship" />	
+            </entity>
+			<entity name="trabajo" query="select distinct relationship from RelPersOrg as r, tipoRelacionP20 as t where r.specificRelation=t.id and (t.generalizacion!='Propiedad') and t.parent!=3 and t.parent!=1 and t.parent!=4 and parent!=11 and r.is_active='T' and  r.destinoO='${empresa.id}'">
+                <field name="cargostrabajo" column="relationship" />	
+            </entity>
+			<entity name="pers_relacionadas" query="select distinct p.alias from RelPersOrg as r, persona as p where r.origenP=p.id and p.is_active='T' and r.destinoO='${empresa.id}' and r.is_active='T'">
+                <field name="personas_relacionadas" column="alias" />	
+            </entity>
+			<entity name="Mainsector" query="SELECT s.name from Organizacion as o, sector as s where CAST(replace(substring(substring_index(Mainsector, '|', 2), length(substring_index(Mainsector, '|', 2 - 1)) + 1), '|', '') AS UNSIGNED)=s.id and Mainsector is not null and Mainsector!='||' and LENGTH(Mainsector) - LENGTH(REPLACE(Mainsector, '|', ''))-1='1' and o.id = '${empresa.id}'">
+                <field name="sector" column="name" />	
+            </entity>
+        </entity>
+		<entity name="organizacion" transformer="TemplateTransformer" pk="doc_id" query="select * from Organizacion where tipoOrg!=2 and is_active='T'"
+			deltaImportQuery="SELECT * FROM Organizacion WHERE id = '${dataimporter.delta.id}' and tipoOrg!=2 and is_active='T'" 
+			deltaQuery="select id from Organizacion where modified_on > '${dih.last_index_time}' and tipoOrg!=2 and is_active='T'">
+			<field column="doc_id" template="O_${organizacion.id}" />
+			<field column="doc_type" template="Organizacion" />
+            <field column="id" name="id" />
+			<field column="tipoOrg" name="tipoOrg" />
+			<field column="hasSocialReason" name="hasSocialReason" />
+			<field column="hasTaxId" name="hasTaxId" />
+			<field column="alias" name="alias" />
+			<field column="countryOfResidence" name="countryOfResidence" />
+			<field column="haslogo" name="depiction" />
+			<field column="shortBio" name="shortBio" />
+			<field column="longBio" name="longBio" />
+			<field column="birth" name="birth" />
+			<field column="modified_on" name="modified_on" />
+			<entity name="tipo" query="select name from tipoOrganizacion where id = '${organizacion.tipoOrg}'">
+				<field name="tipoOrganizacion" column="name" />	
+            </entity>
+			<entity name="tipoCountry" query="select name from country where id = '${organizacion.countryOfResidence}'">
+				<field name="pais" column="name" />	
+            </entity>
+			<entity name="props" query="select distinct relationship from RelPersOrg as r, tipoRelacionP20 as t where r.specificRelation=t.id and t.generalizacion='Propiedad' and r.is_active='T' and r.destinoO='${organizacion.id}'">
+                <field name="propiedad" column="relationship" />	
+            </entity>
+			<entity name="cargos" query="select distinct relationship from RelPersOrg as r, tipoRelacionP20 as t where r.specificRelation=t.id and (t.generalizacion!='Propiedad') and t.parent=3 and r.is_active='T' and r.destinoO='${organizacion.id}'">
+                <field name="cargosgobierno" column="relationship" />	
+            </entity>
+			<entity name="trabajo" query="select distinct relationship from RelPersOrg as r, tipoRelacionP20 as t where r.specificRelation=t.id and (t.generalizacion!='Propiedad') and t.parent!=3 and t.parent!=1 and t.parent!=4 and parent!=11 and r.is_active='T' and  r.destinoO='${organizacion.id}'">
+                <field name="cargostrabajo" column="relationship" />	
+            </entity>
+			<entity name="pers_relacionadas" query="select distinct p.alias from RelPersOrg as r, persona as p where r.origenP=p.id and p.is_active='T' and r.destinoO='${organizacion.id}' and r.is_active='T'">
+                <field name="personas_relacionadas" column="alias" />	
+            </entity>
+			<entity name="Mainsector" query="SELECT s.name from Organizacion as o, sector as s where CAST(replace(substring(substring_index(Mainsector, '|', 2), length(substring_index(Mainsector, '|', 2 - 1)) + 1), '|', '') AS UNSIGNED)=s.id and Mainsector is not null and Mainsector!='||' and LENGTH(Mainsector) - LENGTH(REPLACE(Mainsector, '|', ''))-1='1' and o.id = '${organizacion.id}'">
+                <field name="sector" column="name" />	
+            </entity>
+        </entity>
+    </document>
+</dataConfig>
