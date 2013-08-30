@@ -42,7 +42,7 @@ def company():
     return dict()
 
 
-def connections():
+def conexiones():
     response.view = 'organizacion/Organizationdetails.html'
     if(request.ajax):
         _id=request.args(0)

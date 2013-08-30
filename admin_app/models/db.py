@@ -177,6 +177,7 @@ db.define_table('mapas',
 
 db.country.rdf= {
     'type': 'poder:Country',
+    '_rdf:about': '$VALUE',
     'namespaces': {
         '_xmlns:foaf':'http://xmlns.com/foaf/0.1/',
         '_xmlns:poder':'http://poderopedia.com/vocab/'

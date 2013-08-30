@@ -47,7 +47,7 @@ def person():
 
 
 @auth.requires_login()
-def connections():
+def conexiones():
     response.view = 'default/familydetails.html'
     _id=""; parientes=parientesD=conexiones=selectP2P=conexionO=conexionD=seleccionP20=P2O=companeros=companerosD=conyuges=conyugesD=None; borrar=None; grid=""
     if(request.ajax):
