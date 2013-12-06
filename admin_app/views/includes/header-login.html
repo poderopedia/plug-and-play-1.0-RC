@@ -1,24 +1,24 @@
 <div class="container">
     <h1 class="logo">
-        <a href="{{=URL('default','index')}}">Poderopedia</a>
+        <a href="{{=URL('template_app','default','index')}}">Poderopedia</a>
     </h1>
 
     <!-- primaryNav -->
     <nav class="primary-nav">
         <div class="btn-group">
-            <a href="{{ =URL('directorio','general') }}" class="ddown-toggle sin-drop">a/z</a>
+            <a href="{{ =URL('template_app','directorio','general') }}" class="ddown-toggle sin-drop">a/z</a>
         </div>
 
         <div class="btn-group">
-            <a href="{{=URL('directorio','general',args='persona')}}" class="ddown-toggle sin-drop" >Personas</a>
+            <a href="{{=URL('template_app','directorio','general',args='persona')}}" class="ddown-toggle sin-drop" >Personas</a>
         </div>
 
         <div class="btn-group">
-            <a href="{{=URL('directorio','general',args='empresa')}}" class="ddown-toggle sin-drop" >Empresas</a>
+            <a href="{{=URL('template_app','directorio','general',args='empresa')}}" class="ddown-toggle sin-drop" >Empresas</a>
         </div>
 
         <div class="btn-group">
-            <a href="{{=URL('directorio','general',args='organizacion')}}" class="ddown-toggle sin-drop" >Organizaciones</a>
+            <a href="{{=URL('template_app','directorio','general',args='organizacion')}}" class="ddown-toggle sin-drop" >Organizaciones</a>
         </div>
 
     </nav>
@@ -27,12 +27,12 @@
 
     <!-- loginPreview -->
     <div class="login-top">
-        <a href="{{=URL('default','registrogeneral')}}" class="tit_registro">Registrarse</a>
+        <a href="{{=URL('template_app','default','registrogeneral')}}" class="tit_registro">Registrarse</a>
         <button class="btn btn-danger" onclick="location.href='{{=URL('default','ingresogeneral')}}'">Ingresar</button>
     </div><!-- top -->
     <!-- about -->
     <div class="about">
-        <a href="{{=URL('acercade','index')}}" class="ddown-toggle last-nav" >Sobre Poderopedia</a>
+        <a href="{{=URL('template_app','acercade','index')}}" class="ddown-toggle last-nav" >Sobre Poderopedia</a>
     </div>
     <!-- /about -->
 </div>
