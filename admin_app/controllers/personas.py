@@ -16,7 +16,7 @@ def index():
 
     if request.args(0)=='view':
         #response.new_window = URL('visualizacion','caso_perfil',args=[request.args(1),request.args(1)])
-        redirect(URL('visualizacion','caso_perfil',args=[request.args(2),request.args(1)]))
+        redirect(URL('template_app','visualizacion','caso_perfil',args=[request.args(2),request.args(1)]))
     elif request.args(0)=='new':
         redirect(URL('personas','new'))
     elif request.args(0)=='edit':
