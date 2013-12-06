@@ -83,9 +83,9 @@
                     <a href="#" class="ddown-toggle con-drop" data-toggle="dropdown">Explorar <span class="caret"></span></a>
 
                     <ul class="dropdown-menu">
-                        <li><a href="{{=URL('directorio','general',args='persona')}}">Personas</a></li>
-                        <li><a href="{{=URL('directorio','general',args='empresa')}}">Empresas</a></li>
-                        <li><a href="{{=URL('directorio','general',args='organizacion')}}">Organizaciones</a></li>
+                        <li><a href="{{=URL('template_app','directorio','general',args='persona')}}">Personas</a></li>
+                        <li><a href="{{=URL('template_app','directorio','general',args='empresa')}}">Empresas</a></li>
+                        <li><a href="{{=URL('template_app','directorio','general',args='organizacion')}}">Organizaciones</a></li>
                         <li><a href="#">Casos</a></li>
                     </ul>
                 </div>
@@ -116,11 +116,11 @@
                     <a href="#" rel="tooltip" data-original-title="23" class="username ddown-toggle" data-toggle="dropdown">{{=auth.user.username}}<span class="caret"></span></a>
 
                     <ul class="dropdown-menu">
-                        <li><a href="{{=URL('default','mis_publicaciones',args='todas')}}">Mis Publicaciones</a></li>
+                        <li><a href="{{=URL('template_app','default','mis_publicaciones',args='todas')}}">Mis Publicaciones</a></li>
                         <li><a href="#">Mis Colaboraciones</a></li>
-                        <li><a href="{{=URL('default','notificacionesgenerales')}}">Mis Notificaciones</a></li>
-                        <li>{{=A(T('Mi Cuenta'), _href=URL('default', 'configuracion'))}}</li>
-                        <li><a href="{{=URL('default','logout')}}">Salir</a></li>
+                        <li><a href="{{=URL('template_app','default','notificacionesgenerales')}}">Mis Notificaciones</a></li>
+                        <li>{{=A(T('Mi Cuenta'), _href=URL('template_app','default', 'configuracion'))}}</li>
+                        <li><a href="{{=URL('template_app','default','logout')}}">Salir</a></li>
                     </ul>
                 </div>
             </div>
@@ -128,7 +128,7 @@
 
             <!-- about -->
             <div class="about">
-                <a href="{{=URL('acercade','index')}}" class="ddown-toggle last-nav" >Sobre Poderopedia</a>
+                <a href="{{=URL('template_app','acercade','index')}}" class="ddown-toggle last-nav" >Sobre Poderopedia</a>
             </div>
             <!-- /about -->
 
@@ -140,7 +140,7 @@
             <div class="container">
 
                 <!-- search -->
-                <form class="form-inline" method="get" action="{{=URL('search','podersearch')}}">
+                <form class="form-inline" method="get" action="{{=URL('template_app','search','podersearch')}}">
                     <div class="input-append">
                         <input class="span4" id="appendedInputButton" size="16" name="q" type="text" placeholder="Buscar en todo Poderopedia"><button class="btn" type="button" onclick="this.form.submit"></button>
                     </div>
